@@ -1,4 +1,4 @@
-package main.java.home;;
+package com.JKX.Mysql;
 
 import jdk.nashorn.internal.codegen.types.Type;
 
@@ -10,8 +10,8 @@ public class MysqlConnect {
     static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
     static final String DB_URL = "jdbc:mysql://cdb-9mi11dym.bj.tencentcdb.com:10229/FoodManage";
     Connection conn;
-    String USER;
-    String PASS;
+    public String USER;
+    public String PASS;
 
     public MysqlConnect(String USER, String PASS) {
         this.PASS = PASS;
@@ -35,17 +35,20 @@ public class MysqlConnect {
     }
 
     public String[][] Search(String sql) throws SQLException {
-        String[][] ans;
         Statement stmt = conn.createStatement();
         ResultSet rs = stmt.executeQuery(sql);
         ResultSetMetaData rsmd = rs.getMetaData();
-        ans = new String[rs.getRow()][rsmd.getColumnCount()];
-        for (int i = 0; i < rsmd.getColumnCount(); i++)
-            ans[0][i] = rsmd.getColumnName(i);
+        int len = rsmd.getColumnCount();
+        rs.last();
+        String[][] ans = new String[rs.getRow() + 1][len];
+        for (int i = 0; i < len; i++) {
+            ans[0][i] = rsmd.getColumnLabel(i + 1);
+        }
         int cnt = 1;
+        rs.beforeFirst();
         while (rs.next()) {
-            for (int i = 0; i < rsmd.getColumnCount(); i++)
-                ans[cnt][i] = rs.getString(i);
+            for (int i = 0; i < len; i++)
+                ans[cnt][i] = rs.getString(i + 1);
             cnt++;
         }
         stmt.close();
@@ -55,18 +58,19 @@ public class MysqlConnect {
 
     public String[][] ExcuteSearch(String sql) throws SQLException
     {
-        String[][] ans;
         CallableStatement cs = conn.prepareCall(sql);
 //      cs.setString(1, id);
         ResultSet rs = cs.executeQuery();
         ResultSetMetaData rsmd = rs.getMetaData();
-        ans = new String[rs.getRow()][rsmd.getColumnCount()];
+        rs.last();
+        String[][] ans = new String[rs.getRow() + 1][rsmd.getColumnCount()];
         for (int i = 0; i < rsmd.getColumnCount(); i++)
-            ans[0][i] = rsmd.getColumnName(i);
+            ans[0][i] = rsmd.getColumnName(i + 1);
         int cnt = 1;
+        rs.beforeFirst();
         while (rs.next()) {
             for (int i = 0; i < rsmd.getColumnCount(); i++)
-                ans[cnt][i] = rs.getString(i);
+                ans[cnt][i] = rs.getString(i + 1);
             cnt++;
         }
         cs.close();

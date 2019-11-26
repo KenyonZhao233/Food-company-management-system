@@ -1,0 +1,316 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXPasswordField?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="576.0" prefWidth="1115.0" style="-fx-background-color: #02030A;" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.JKX.Controller.UserManageContorller">
+   <children>
+      <VBox alignment="TOP_CENTER" prefHeight="576.0" prefWidth="256.0" style="-fx-background-color: #05071F;" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <ImageView fitHeight="73.0" fitWidth="67.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../img/jimmy-fallon.png" />
+               </image>
+               <VBox.margin>
+                  <Insets bottom="10.0" top="50.0" />
+               </VBox.margin></ImageView>
+            <Label text="BOSS" textFill="#e7e5e5">
+               <VBox.margin>
+                  <Insets bottom="20.0" />
+               </VBox.margin>
+            </Label>
+            <Label />
+            <Button fx:id="userSearch" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onMouseClicked="#handleClicks" prefHeight="42.0" prefWidth="259.0" stylesheets="@../css/style.css" text="员工信息查询" textFill="#e7e5e5">
+               <graphic>
+                  <ImageView fitHeight="23.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../icon/icons8_Search_52px.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
+               <padding>
+                  <Insets left="50.0" />
+               </padding>
+            </Button>
+            <Label />
+            <Button fx:id="userAdd" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onMouseClicked="#handleClicks" prefHeight="42.0" prefWidth="259.0" stylesheets="@../css/style.css" text="添加员工信息">
+               <graphic>
+                  <ImageView fitHeight="23.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../icon/icons8_Search_52px.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <padding>
+                  <Insets left="50.0" />
+               </padding>
+            </Button>
+            <Label />
+            <Button fx:id="userChange" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onMouseClicked="#handleClicks" prefHeight="42.0" prefWidth="259.0" stylesheets="@../css/style.css" text="修改员工信息">
+               <graphic>
+                  <ImageView fitHeight="23.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../icon/icons8_Search_52px.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <padding>
+                  <Insets left="50.0" />
+               </padding>
+            </Button>
+            <Label />
+            <Label />
+            <Label />
+            <Label />
+            <Label />
+            <Label />
+            <Button fx:id="btnSignout" alignment="TOP_LEFT" graphicTextGap="50.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="266.0" stylesheets="@../css/style.css" text="返回">
+               <graphic>
+                  <ImageView fitHeight="23.0" fitWidth="35.0" nodeOrientation="RIGHT_TO_LEFT" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../icon/icons8_Search_52px.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <padding>
+                  <Insets left="50.0" />
+               </padding>
+            </Button>
+         </children>
+      </VBox>
+      <StackPane layoutX="258.0" prefHeight="576.0" prefWidth="858.0" style="-fx-background-color: #02030A;">
+         <children>
+            <Pane fx:id="pnlChange" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #000000;">
+               <children>
+                  <Label layoutX="63.0" layoutY="24.0" prefHeight="42.0" prefWidth="144.0" text="修改员工信息" textFill="#fcf8f8">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="uidSearchC" layoutX="29.0" layoutY="82.0" prefHeight="32.0" prefWidth="311.0" promptText="search" style="-fx-background-color: #02030A; -fx-border-color: #B7C3D7; -fx-border-radius: 2em;" />
+                  <ImageView fx:id="searchChange" fitHeight="17.0" fitWidth="16.0" layoutX="355.0" layoutY="90.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../icon/icons8_Search_52px.png" />
+                     </image>
+                  </ImageView>
+                  <TableView layoutX="11.0" layoutY="132.0" prefHeight="424.0" prefWidth="372.0" style="-fx-background-color: #000000;" stylesheets="@../css/fullpackstyling.css">
+                    <columns>
+                      <TableColumn fx:id="ChangeTable" prefWidth="112.0" style="-fx-background-color: #000000;" text="          工号" />
+                      <TableColumn prefWidth="121.0" style="-fx-background-color: #000000;" text="          姓名" />
+                        <TableColumn prefWidth="138.0" style="-fx-background-color: #000000;" text="           部门" />
+                    </columns>
+                  </TableView>
+                  <JFXTextField fx:id="uidC" layoutX="532.0" layoutY="94.0" prefHeight="30.0" prefWidth="210.0" />
+                  <JFXTextField fx:id="nameC" layoutX="532.0" layoutY="167.0" prefHeight="30.0" prefWidth="210.0" />
+                  <JFXTextField fx:id="sexC" layoutX="532.0" layoutY="237.0" prefHeight="30.0" prefWidth="210.0" />
+                  <JFXTextField fx:id="idnumC" layoutX="532.0" layoutY="303.0" prefHeight="30.0" prefWidth="210.0" />
+                  <Label layoutX="473.0" layoutY="104.0" text="工号：" textFill="#e4e4e4">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="473.0" layoutY="170.0" text="姓名：" textFill="#e4e4e4">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="437.0" layoutY="306.0" text="身份证号：" textFill="#e4e4e4">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="437.0" layoutY="373.0" text="所在部门：" textFill="#e4e4e4">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="473.0" layoutY="240.0" text="性别：" textFill="#e4e4e4">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <Button fx:id="btnChange" layoutX="454.0" layoutY="477.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="98.0" styleClass="button4" stylesheets="@../css/fullpackstyling2.css" text="修改" />
+                  <Button fx:id="btnDelete" layoutX="666.0" layoutY="477.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="98.0" styleClass="button4" stylesheets="@../css/fullpackstyling2.css" text="删除" />
+                  <JFXComboBox fx:id="sectionC" layoutX="532.0" layoutY="370.0" prefHeight="30.0" prefWidth="210.0" />
+               </children></Pane>
+            <Pane fx:id="pnlSearch" prefHeight="576.0" prefWidth="857.0" style="-fx-background-color: #000000;">
+               <children>
+                  <Label layoutX="63.0" layoutY="29.0" text="员工信息查询" textFill="#e7e5e5">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Label>
+                  <HBox alignment="CENTER_LEFT" layoutX="74.0" layoutY="72.0" prefHeight="92.0" prefWidth="757.0" spacing="100.0">
+                     <children>
+                        <VBox alignment="CENTER" prefHeight="92.0" prefWidth="115.0">
+                           <children>
+                              <Label prefHeight="34.0" prefWidth="82.0" text="22000" textFill="#2a73ff">
+                                 <font>
+                                    <Font name="System Bold" size="26.0" />
+                                 </font>
+                              </Label>
+                              <Label text="Total Orders" textFill="#e7e5e5" />
+                           </children>
+                        </VBox>
+                        <VBox alignment="CENTER" prefHeight="92.0" prefWidth="149.0">
+                           <children>
+                              <Label text="1500" textFill="#26bfbc">
+                                 <font>
+                                    <Font name="System Bold" size="26.0" />
+                                 </font>
+                              </Label>
+                              <Label prefHeight="20.0" prefWidth="108.0" text="Total delivered" textFill="#e7e5e5" />
+                           </children>
+                        </VBox>
+                        <VBox alignment="CENTER" prefHeight="92.0" prefWidth="125.0">
+                           <children>
+                              <Label prefHeight="34.0" prefWidth="72.0" text="1000" textFill="#fa5f7e">
+                                 <font>
+                                    <Font name="System Bold" size="26.0" />
+                                 </font>
+                              </Label>
+                              <Label prefHeight="20.0" prefWidth="139.0" text="Peding Orders" textFill="#e7e5e5" />
+                           </children>
+                        </VBox>
+                        <VBox alignment="CENTER" prefHeight="92.0" prefWidth="137.0">
+                           <children>
+                              <Label prefHeight="34.0" prefWidth="68.0" text="780" textFill="#de0000">
+                                 <font>
+                                    <Font name="System Bold" size="26.0" />
+                                 </font>
+                              </Label>
+                              <Label prefHeight="20.0" prefWidth="128.0" text="Orders on Hold" textFill="#e7e5e5" />
+                           </children>
+                        </VBox>
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER_LEFT" layoutX="4.0" layoutY="166.0" prefHeight="42.0" prefWidth="852.0" spacing="50.0" style="-fx-background-color: #02030A;">
+                     <children>
+                        <Label prefHeight="20.0" prefWidth="105.0" text="工号" textFill="#e7e5e5">
+                           <HBox.margin>
+                              <Insets left="50.0" />
+                           </HBox.margin>
+                        </Label>
+                        <Label prefHeight="20.0" prefWidth="60.0" text="姓名" textFill="#e7e5e5">
+                           <HBox.margin>
+                              <Insets />
+                           </HBox.margin>
+                        </Label>
+                        <Label prefHeight="20.0" prefWidth="73.0" text="性别" textFill="#e7e5e5">
+                           <HBox.margin>
+                              <Insets />
+                           </HBox.margin>
+                        </Label>
+                        <Label prefHeight="20.0" prefWidth="106.0" text="身份证号" textFill="#e7e5e5">
+                           <HBox.margin>
+                              <Insets />
+                           </HBox.margin>
+                        </Label>
+                        <Label prefHeight="20.0" prefWidth="79.0" text="职务" textFill="#e7e5e5">
+                           <HBox.margin>
+                              <Insets />
+                           </HBox.margin>
+                        </Label>
+                        <Label prefHeight="20.0" prefWidth="105.0" text="入职日期" textFill="#e7e5e5" />
+                     </children>
+                  </HBox>
+                  <ScrollPane layoutX="14.0" layoutY="208.0" prefHeight="362.0" prefWidth="840.0" stylesheets="@../../../../../../JavaFX/project4/RestaurantMgtSampleUI-master/src/home/style.css">
+                     <content>
+                        <VBox fx:id="pnItems" prefHeight="360.0" prefWidth="838.0" spacing="5.0" style="-fx-background-color: #02030A;">
+                           <padding>
+                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                           </padding>
+                        </VBox>
+                     </content>
+                  </ScrollPane>
+                  <ImageView fx:id="search" fitHeight="17.0" fitWidth="16.0" layoutX="821.0" layoutY="33.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../icon/icons8_Search_52px.png" />
+                     </image>
+                  </ImageView>
+                  <TextField fx:id="uidSearch" layoutX="627.0" layoutY="25.0" prefHeight="27.0" prefWidth="183.0" promptText="search" style="-fx-background-color: #02030A; -fx-border-color: #B7C3D7; -fx-border-radius: 2em;" />
+               </children>
+            </Pane>
+            <Pane fx:id="pnlAdd" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #000000;">
+               <children>
+                  <Label layoutX="63.0" layoutY="25.0" prefHeight="42.0" prefWidth="153.0" text="添加员工信息" textFill="#fcf8f8">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Label>
+                  <Button fx:id="addUser" layoutX="377.0" layoutY="471.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="144.0" styleClass="button4" stylesheets="@../css/fullpackstyling2.css" text="添加" />
+                  <Label layoutX="326.0" layoutY="210.0" text="性别：" textFill="#e4e4e4">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="290.0" layoutY="310.0" text="所在部门：" textFill="#e4e4e4">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="290.0" layoutY="261.0" text="身份证号：" textFill="#e4e4e4">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="326.0" layoutY="161.0" text="姓名：" textFill="#e4e4e4">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="326.0" layoutY="112.0" text="工号：" textFill="#e4e4e4">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <JFXTextField fx:id="uid" layoutX="377.0" layoutY="109.0" />
+                  <JFXTextField fx:id="sex" layoutX="377.0" layoutY="207.0" />
+                  <JFXTextField fx:id="name" layoutX="377.0" layoutY="158.0" />
+                  <JFXTextField fx:id="idNumber" layoutX="377.0" layoutY="258.0" />
+                  <Label layoutX="323.0" layoutY="356.0" text="密码：" textFill="#e4e4e4">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <JFXPasswordField fx:id="password" layoutX="377.0" layoutY="353.0" />
+                  <Label layoutX="290.0" layoutY="402.0" text="确认密码：" textFill="#e4e4e4">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <JFXPasswordField fx:id="passwordConfir" layoutX="377.0" layoutY="399.0" />
+                  <JFXComboBox fx:id="section" layoutX="377.0" layoutY="307.0" prefHeight="30.0" prefWidth="183.0" />
+                  <Button fx:id="createUid" layoutX="583.0" layoutY="111.0" mnemonicParsing="false" text="生成员工编号" />
+               </children></Pane>
+            <Pane fx:id="paneEmpty" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #000000;" />
+         </children>
+      </StackPane>
+   </children>
+   <effect>
+      <DropShadow color="#1b1eeb" />
+   </effect>
+</AnchorPane>
