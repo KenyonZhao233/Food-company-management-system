@@ -1,7 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="cd6bffba-f933-4555-9a18-9be48c95ca33" name="Default Changelist" comment="" />
+    <list default="true" id="cd6bffba-f933-4555-9a18-9be48c95ca33" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SPGL.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/JKX/Controller/LeadContorller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/JKX/Controller/LeadContorller.java" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -19,7 +24,7 @@
   </component>
   <component name="Git.Settings">
     <option name="PATH_TO_GIT" value="C:\Program Files\Git\cmd\git.exe" />
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../OnlineP" />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
     <option name="ROOT_SYNC" value="DONT_SYNC" />
   </component>
   <component name="JsFlowSettings">
@@ -39,9 +44,10 @@
   <component name="ProjectId" id="1TZBZoNF2oNbzvr4iXJFDHWaP1W" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="PropertiesComponent">
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../OnlineP" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="project.structure.last.edited" value="SDKs" />
     <property name="project.structure.proportion" value="0.15" />
@@ -128,10 +134,22 @@
       <workItem from="1574682428572" duration="2305000" />
       <workItem from="1574694432680" duration="991000" />
       <workItem from="1574751635782" duration="1102000" />
+      <workItem from="1574753373149" duration="98000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
 </project>

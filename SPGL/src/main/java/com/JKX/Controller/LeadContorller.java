@@ -49,7 +49,7 @@ public class LeadContorller implements Initializable {
         {
 
         }
-        else if()
+        else if(actionBtn == btnCW)
         {
 
         }
@@ -65,6 +65,9 @@ public class LeadContorller implements Initializable {
         this.staff = staff;
         for (String str : staff.zw) {
             if(str == "财务业务人员")
+            {
+
+            }
         }
     }
 }
