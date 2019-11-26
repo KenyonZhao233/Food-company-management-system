@@ -2,11 +2,18 @@ package com.JKX.Controller;
 
 import com.JKX.Model.Staff;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -16,6 +23,9 @@ public class SectionController implements Initializable {
 
     @FXML
     private Pane mainPane, xsPane, cwPane, cpkPane, ylkPane, sccjPane, scjhPane, emptyPane, pnlTime, pnlName;
+
+    @FXML
+    private AnchorPane SectionPane;
 
     @FXML
     private Button btnXs;
@@ -117,7 +127,7 @@ public class SectionController implements Initializable {
     private Button btnSeachTh;
 
     @FXML
-    public void handleClicks(MouseEvent event) {
+    public void handleClicks(MouseEvent event) throws IOException {
         Button actionBtn = (Button) event.getSource();
         emptyPane.toFront();
         if(actionBtn == btnXs)
@@ -156,6 +166,22 @@ public class SectionController implements Initializable {
         if(actionBtn == btnSeachTh || actionBtn == btnSearchKh || actionBtn == btnSearchXl || actionBtn == btnSearchXl2 || actionBtn == btnSearchKc || actionBtn == btnSearchKc2 || actionBtn == btnSearchCK || actionBtn == btnSearchYl || actionBtn == btnSearchYl2 || actionBtn == btnSearchCp2 || actionBtn == btnSearchCp || actionBtn == btnSearchCj)
         {
             pnlName.toFront();
+        }
+        if(actionBtn == btnSignout)
+        {
+            FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("view/Lead.fxml"));
+
+            Stage stage = new Stage(StageStyle.UNDECORATED);
+            stage.setScene(new Scene((Parent) loader.load()));
+
+            LeadContorller controller = loader.<LeadContorller>getController();
+
+            controller.initData(staff);
+
+            stage.show();
+
+            Stage index = (Stage)SectionPane.getScene().getWindow();
+            index.close();
         }
     }
 

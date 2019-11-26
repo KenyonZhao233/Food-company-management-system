@@ -67,12 +67,12 @@ public class LoginController implements Initializable {
             _alert.setHeaderText("登录成功");
             _alert.setContentText("欢迎您： " + staff.Name);
             _alert.showAndWait();
-            FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("view/Section.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("view/Lead.fxml"));
 
             Stage stage = new Stage(StageStyle.UNDECORATED);
             stage.setScene(new Scene((Parent) loader.load()));
 
-            SectionController controller = loader.<SectionController>getController();
+            LeadContorller controller = loader.<LeadContorller>getController();
 
             controller.initData(staff);
 

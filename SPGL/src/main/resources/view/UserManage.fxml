@@ -20,7 +20,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="576.0" prefWidth="1115.0" style="-fx-background-color: #02030A;" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.JKX.Controller.UserManageContorller">
+<AnchorPane fx:id="UserManagePane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="576.0" prefWidth="1115.0" style="-fx-background-color: #02030A;" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.JKX.Controller.UserManageContorller">
    <children>
       <VBox alignment="TOP_CENTER" prefHeight="576.0" prefWidth="256.0" style="-fx-background-color: #05071F;" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -87,7 +87,7 @@
             <Label />
             <Label />
             <Label />
-            <Button fx:id="btnSignout" alignment="TOP_LEFT" graphicTextGap="50.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="266.0" stylesheets="@../css/style.css" text="返回">
+            <Button fx:id="btnSignout" alignment="TOP_LEFT" graphicTextGap="50.0" mnemonicParsing="false" onMouseClicked="#handleClicks" prefHeight="26.0" prefWidth="266.0" stylesheets="@../css/style.css" text="返回">
                <graphic>
                   <ImageView fitHeight="23.0" fitWidth="35.0" nodeOrientation="RIGHT_TO_LEFT" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -237,7 +237,7 @@
                         <Label prefHeight="20.0" prefWidth="105.0" text="入职日期" textFill="#e7e5e5" />
                      </children>
                   </HBox>
-                  <ScrollPane layoutX="14.0" layoutY="208.0" prefHeight="362.0" prefWidth="840.0" stylesheets="@../../../../../../JavaFX/project4/RestaurantMgtSampleUI-master/src/home/style.css">
+                  <ScrollPane layoutX="14.0" layoutY="208.0" prefHeight="362.0" prefWidth="840.0" stylesheets="@../css/style.css">
                      <content>
                         <VBox fx:id="pnItems" prefHeight="360.0" prefWidth="838.0" spacing="5.0" style="-fx-background-color: #02030A;">
                            <padding>
@@ -254,7 +254,7 @@
                   <TextField fx:id="uidSearch" layoutX="627.0" layoutY="25.0" prefHeight="27.0" prefWidth="183.0" promptText="search" style="-fx-background-color: #02030A; -fx-border-color: #B7C3D7; -fx-border-radius: 2em;" />
                </children>
             </Pane>
-            <Pane fx:id="pnlAdd" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #000000;">
+            <Pane fx:id="pnlAdd" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #000000;" visible="false">
                <children>
                   <Label layoutX="63.0" layoutY="25.0" prefHeight="42.0" prefWidth="153.0" text="添加员工信息" textFill="#fcf8f8">
                      <font>
@@ -306,7 +306,7 @@
                   <JFXComboBox fx:id="section" layoutX="377.0" layoutY="307.0" prefHeight="30.0" prefWidth="183.0" />
                   <Button fx:id="createUid" layoutX="583.0" layoutY="111.0" mnemonicParsing="false" text="生成员工编号" />
                </children></Pane>
-            <Pane fx:id="paneEmpty" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #000000;" />
+            <Pane fx:id="paneEmpty" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #000000;" visible="false" />
          </children>
       </StackPane>
    </children>
