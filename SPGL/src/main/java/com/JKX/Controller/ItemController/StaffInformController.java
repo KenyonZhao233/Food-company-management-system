@@ -10,15 +10,16 @@ public class StaffInformController {
     private UserManageContorller userManageContorller;
 
     @FXML
-    private Label uid, name, zw, sfz, sex;
+    private Label uid, name, zw, sfz, sex, date;
 
-    public void setInform(String uid, String name, String zw, String sfz, String sex)
+    public void setInform(String uid, String zw, String name, String sex, String sfz, String date)
     {
         this.uid.setText(uid);
         this.name.setText(name);
         this.zw.setText(zw);
         this.sfz.setText(sfz);
         this.sex.setText(sex);
+        this.date.setText(date);
     }
 
     public void SetContorller(UserManageContorller userManageContorller)

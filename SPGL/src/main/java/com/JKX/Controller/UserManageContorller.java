@@ -1,10 +1,12 @@
 package com.JKX.Controller;
 
+import com.JKX.Controller.ItemController.StaffInformController;
 import com.JKX.Model.Staff;
 import com.jfoenix.controls.JFXTextField;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -44,6 +46,7 @@ public class UserManageContorller implements Initializable {
     private Button btnChange, btnDelete, btnSearch;
     private TextField textInform;
     private JFXTextField uidText, sexText, sfzText, nameText, zwText;
+    private VBox v2;
 
     /*业务实现组件-人员添加*/
     //@FXML
@@ -99,6 +102,11 @@ public class UserManageContorller implements Initializable {
 
     public void handleSearch(MouseEvent mouseEvent) throws IOException
     {
+
+    }
+
+    public void handleChange(MouseEvent mouseEvent) throws IOException
+    {
         Button actionButton = (Button)mouseEvent.getSource();
         if(actionButton == btnChange)
         {
@@ -114,18 +122,17 @@ public class UserManageContorller implements Initializable {
                 String[][] ans = this.getInform(this.textInform.getText());
                 for(int i = 1; i < ans.length; i++)
                 {
-
+                    FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("view/StaffInform.fxml"));
+                    StaffInformController staffInformController = loader.<StaffInformController>getController();
+                    staffInformController.setInform(ans[i][0], ans[i][1], ans[i][2], ans[i][3],ans[i][4], ans[i][5]);
+                    //Node node;
+                    //this.v2.getChildren().add(node);
                 }
             }
             catch (SQLException se){
                 se.printStackTrace();
             }
         }
-    }
-
-    public void handleChange(MouseEvent mouseEvent) throws IOException
-    {
-
     }
 
     public void handleAdd(MouseEvent mouseEvent) throws IOException

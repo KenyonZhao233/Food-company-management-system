@@ -156,15 +156,19 @@
                         </VBox>
                      </content>
                   </ScrollPane>
-                  <ImageView fx:id="doSearch1" fitHeight="17.0" fitWidth="16.0" layoutX="988.0" layoutY="37.0" onMouseClicked="#handleSearch" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../icon/icons8_Search_52px.png" />
-                     </image>
-                  </ImageView>
                   <TextField fx:id="uidSearch" layoutX="794.0" layoutY="29.0" prefHeight="27.0" prefWidth="183.0" promptText="search" style="-fx-background-color: #02030A; -fx-border-color: #B7C3D7; -fx-border-radius: 2em;" />
+                  <Button fx:id="doSearch1" layoutX="977.0" layoutY="30.0" mnemonicParsing="false" onMouseClicked="#handleSearch" style="-fx-background-color: #000000;">
+                     <graphic>
+                        <ImageView fitHeight="17.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../icon/icons8_Search_52px.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
                </children>
             </Pane>
-            <Pane fx:id="pnlChange" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #000000;">
+            <Pane fx:id="pnlChange" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #000000;" visible="false">
                <children>
                   <Label layoutX="63.0" layoutY="24.0" prefHeight="42.0" prefWidth="144.0" text="修改员工信息" textFill="#fcf8f8">
                      <font>
@@ -206,7 +210,7 @@
                   <JFXComboBox fx:id="sectionCombox" layoutX="683.0" layoutY="453.0" prefHeight="30.0" prefWidth="307.0" />
                   <ScrollPane layoutX="33.0" layoutY="135.0" prefHeight="528.0" prefWidth="531.0" style="-fx-background-color: #000000;">
                      <content>
-                        <VBox prefHeight="524.0" prefWidth="534.0" style="-fx-background-color: #000000;" />
+                        <VBox fx:id="v2" prefHeight="524.0" prefWidth="534.0" style="-fx-background-color: #000000;" />
                      </content>
                   </ScrollPane>
                   <Button fx:id="btnSearch" layoutX="528.0" layoutY="82.0" mnemonicParsing="false" style="-fx-background-color: #000000;">
