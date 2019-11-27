@@ -168,7 +168,7 @@
                   </Button>
                </children>
             </Pane>
-            <Pane fx:id="pnlChange" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #000000;" visible="false">
+            <Pane fx:id="pnlChange" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #000000;">
                <children>
                   <Label layoutX="63.0" layoutY="24.0" prefHeight="42.0" prefWidth="144.0" text="修改员工信息" textFill="#fcf8f8">
                      <font>
@@ -207,13 +207,13 @@
                   </Label>
                   <Button fx:id="btnChange" layoutX="652.0" layoutY="579.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="98.0" styleClass="button4" stylesheets="@../css/fullpackstyling2.css" text="修改" />
                   <Button fx:id="btnDelete" layoutX="864.0" layoutY="579.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="98.0" styleClass="button4" stylesheets="@../css/fullpackstyling2.css" text="删除" />
-                  <JFXComboBox fx:id="sectionCombox" layoutX="683.0" layoutY="453.0" prefHeight="30.0" prefWidth="307.0" />
+                  <JFXComboBox fx:id="zwText" editable="true" layoutX="683.0" layoutY="453.0" prefHeight="30.0" prefWidth="307.0" promptText="请选择" visibleRowCount="5" />
                   <ScrollPane layoutX="33.0" layoutY="135.0" prefHeight="528.0" prefWidth="531.0" style="-fx-background-color: #000000;">
                      <content>
                         <VBox fx:id="v2" prefHeight="524.0" prefWidth="534.0" style="-fx-background-color: #000000;" />
                      </content>
                   </ScrollPane>
-                  <Button fx:id="btnSearch" layoutX="528.0" layoutY="82.0" mnemonicParsing="false" style="-fx-background-color: #000000;">
+                  <Button fx:id="btnSearch" layoutX="528.0" layoutY="82.0" mnemonicParsing="false" onMouseClicked="#handleChange" style="-fx-background-color: #000000;">
                      <graphic>
                         <ImageView fitHeight="16.0" fitWidth="54.0" pickOnBounds="true" preserveRatio="true">
                            <image>

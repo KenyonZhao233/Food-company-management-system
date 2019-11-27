@@ -1,7 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="cd6bffba-f933-4555-9a18-9be48c95ca33" name="Default Changelist" comment="" />
+    <list default="true" id="cd6bffba-f933-4555-9a18-9be48c95ca33" name="Default Changelist" comment="未完成版本（我刚才说的功能正在实现中）">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/JKX/Controller/ItemController/StaffInformController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/JKX/Controller/ItemController/StaffInformController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/JKX/Controller/LeadContorller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/JKX/Controller/LeadContorller.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/JKX/Controller/UserManageContorller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/JKX/Controller/UserManageContorller.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/css/StaffInform.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/view/StaffInform.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/view/StaffInform.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/view/UserManage.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/view/UserManage.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/JKX/Controller/SectionController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/JKX/Controller/SectionController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/JKX/Controller/UserManageContorller.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/JKX/Controller/UserManageContorller.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/css/tabel.css" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/css/tabel.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/view/UserManage.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/view/UserManage.fxml" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -135,7 +147,8 @@
       <workItem from="1574751635782" duration="1102000" />
       <workItem from="1574753373149" duration="10558000" />
       <workItem from="1574770056593" duration="5443000" />
-      <workItem from="1574842006027" duration="12540000" />
+      <workItem from="1574842006027" duration="12698000" />
+      <workItem from="1574858420747" duration="3640000" />
     </task>
     <task id="LOCAL-00001" summary="最新版本（Commit测试）">
       <created>1574753611367</created>
@@ -172,7 +185,14 @@
       <option name="project" value="LOCAL" />
       <updated>1574858181156</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="未完成版本（我刚才说的功能正在实现中）">
+      <created>1574858355506</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1574858355506</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

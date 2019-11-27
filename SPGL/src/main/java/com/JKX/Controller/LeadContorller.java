@@ -115,7 +115,6 @@ public class LeadContorller implements Initializable {
     public void initData(Staff staff)
     {
         this.staff = staff;
-        btnXS.setDisable(false);
         for (String str : staff.zw) {
             if(str.equals("财务部"))
             {

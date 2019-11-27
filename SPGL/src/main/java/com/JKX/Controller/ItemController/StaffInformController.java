@@ -22,7 +22,7 @@ public class StaffInformController {
         this.date.setText(date);
     }
 
-    public void SetContorller(UserManageContorller userManageContorller)
+    public void setContorller(UserManageContorller userManageContorller)
     {
         this.userManageContorller = userManageContorller;
     }

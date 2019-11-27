@@ -1,0 +1,4 @@
+.scroll-pane:hover{
+    -fx-border-color: #63f2a1;
+    -fx-border-width: 3;
+}

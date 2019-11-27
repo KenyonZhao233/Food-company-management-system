@@ -2,6 +2,7 @@ package com.JKX.Controller;
 
 import com.JKX.Controller.ItemController.StaffInformController;
 import com.JKX.Model.Staff;
+import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextField;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -21,6 +22,8 @@ import javafx.stage.StageStyle;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class UserManageContorller implements Initializable {
@@ -38,14 +41,21 @@ public class UserManageContorller implements Initializable {
     /*业务实现组件-人员查询*/
     @FXML
     private Button doSearch1;
+    @FXML
     private TextField uidSearch;
+    @FXML
     private VBox pnlInform;
 
     /*业务实现组件-人员修改*/
     @FXML
     private Button btnChange, btnDelete, btnSearch;
+    @FXML
     private TextField textInform;
-    private JFXTextField uidText, sexText, sfzText, nameText, zwText;
+    @FXML
+    private JFXTextField uidText, sexText, sfzText, nameText;
+    @FXML
+    private JFXComboBox<String> zwText;
+    @FXML
     private VBox v2;
 
     /*业务实现组件-人员添加*/
@@ -95,9 +105,9 @@ public class UserManageContorller implements Initializable {
     {
         this.uidText.setText(uid);
         this.nameText.setText(name);
-        this.zwText.setText(zw);
         this.sfzText.setText(sfz);
         this.sexText.setText(sex);
+        this.zwText.setValue(zw);
     }
 
     public void handleSearch(MouseEvent mouseEvent) throws IOException
@@ -118,15 +128,19 @@ public class UserManageContorller implements Initializable {
         }
         else if(actionButton == btnSearch)
         {
+            this.v2.getChildren().clear();
             try {
+                System.out.println(this.textInform.getText() + "222");
                 String[][] ans = this.getInform(this.textInform.getText());
                 for(int i = 1; i < ans.length; i++)
                 {
                     FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("view/StaffInform.fxml"));
+                    Node node = loader.load();
                     StaffInformController staffInformController = loader.<StaffInformController>getController();
                     staffInformController.setInform(ans[i][0], ans[i][1], ans[i][2], ans[i][3],ans[i][4], ans[i][5]);
-                    //Node node;
-                    //this.v2.getChildren().add(node);
+                    staffInformController.setContorller(this);
+
+                    this.v2.getChildren().add(node);
                 }
             }
             catch (SQLException se){
@@ -145,6 +159,7 @@ public class UserManageContorller implements Initializable {
         String[][] ans;
         if(staff.gly[0] == 1)
         {
+            System.out.println("2122");
             if(info.equals(""))
                 ans = staff.Search("select staff.* from staff, staff_gly where staff.staff_zw = '管理员' and staff_gly.staff_id = staff_gly.staff_id group by staff.staff_id");
             else
@@ -178,5 +193,21 @@ public class UserManageContorller implements Initializable {
     public void initData(Staff staff)
     {
         this.staff = staff;
+        List<String> staffBm = new ArrayList<String>();
+        if(staff.gly[0] == 1)
+        {
+            System.out.println("sdsds");
+            for(int i = 1; i < zw.length; i++)
+                staffBm.add(zw[i]);
+        }
+        else
+        {
+            for(int i = 1; i < zw.length; i++)
+            {
+                if(staff.gly[i] == 1)
+                    staffBm.add(zw[i]);
+            }
+        }
+        this.zwText.getItems().addAll(staffBm);
     }
 }
