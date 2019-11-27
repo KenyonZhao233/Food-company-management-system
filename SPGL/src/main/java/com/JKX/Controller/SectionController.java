@@ -27,104 +27,21 @@ public class SectionController implements Initializable {
     @FXML
     private AnchorPane SectionPane;
 
+    /*跳转按钮*/
     @FXML
-    private Button btnXs;
+    private Button btnXs, btnCw, btnCp, btnYl, btnCj, btnJh, btnSignout;
 
+    /*查询（编号or时间）按钮*/
     @FXML
-    private Button btnCw;
+    private Button btnSearchOrder, btnSearchOrder2, btnSearchLs, btnSearchDfk, btnSearchDfk2, btnSearchDth, btnSearchScjh, btnSearchScjh2;
 
+    /*查询（编号or名称）按钮*/
     @FXML
-    private Button btnCp;
+    private Button btnSeachTh, btnSearchKh, btnSearchXl, btnSearchXl2, btnSearchKc, btnSearchKc2, btnSearchCK, btnSearchYl, btnSearchYl2, btnSearchCp2, btnSearchCp, btnSearchCj;
 
+    /*返回按钮*/
     @FXML
-    private Button btnYl;
-
-    @FXML
-    private Button btnCj;
-
-    @FXML
-    private Button btnJh;
-
-    @FXML
-    private Button btnSignout;
-
-    @FXML
-    private Button btnSearchCp;
-
-    @FXML
-    private Button btnSearchOrder;
-
-    @FXML
-    private Button btnSearchXl;
-
-    @FXML
-    private Button btnSearchKc;
-
-    @FXML
-    private Button btnXsReturn;
-
-    @FXML
-    private Button btnSearchLs;
-
-    @FXML
-    private Button btnSearchDfk;
-
-    @FXML
-    private Button btnSearchDfk2;
-
-    @FXML
-    private Button btnCwReturn;
-
-    @FXML
-    private Button btnSearchCK;
-
-    @FXML
-    private Button btnSearchDth;
-
-    @FXML
-    private Button btnCpReturn;
-
-    @FXML
-    private Button btnSearchYl;
-
-    @FXML
-    private Button btnYlReturn;
-
-    @FXML
-    private Button btnSearchScjh;
-
-    @FXML
-    private Button btnCccjReturn;
-
-    @FXML
-    private Button btnSearchScjh2;
-
-    @FXML
-    private Button btnSearchXl2;
-
-    @FXML
-    private Button btnSearchOrder2;
-
-    @FXML
-    private Button btnSearchYl2;
-
-    @FXML
-    private Button btnSearchKc2;
-
-    @FXML
-    private Button btnSearchCp2;
-
-    @FXML
-    private Button btnSearchCj;
-
-    @FXML
-    private Button btnScjhReturn;
-
-    @FXML
-    private Button btnSearchKh;
-
-    @FXML
-    private Button btnSeachTh;
+    private Button btnCccjReturn, btnCpReturn, btnCwReturn, btnScjhReturn, btnXsReturn, btnYlReturn;
 
     @FXML
     public void handleClicks(MouseEvent event) throws IOException {
@@ -136,7 +53,6 @@ public class SectionController implements Initializable {
         }
         if(actionBtn == btnCw)
         {
-            System.out.println("sds");
             cwPane.toFront();
         }
         if(actionBtn == btnCp)
@@ -183,6 +99,15 @@ public class SectionController implements Initializable {
             Stage index = (Stage)SectionPane.getScene().getWindow();
             index.close();
         }
+    }
+
+    public void SetInform()
+    {
+
+    }
+
+    public void handleSearch(MouseEvent event) throws IOException{
+
     }
 
     @Override
