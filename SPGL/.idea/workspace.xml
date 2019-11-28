@@ -3,16 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="cd6bffba-f933-4555-9a18-9be48c95ca33" name="Default Changelist" comment="未完成版本（我刚才说的功能正在实现中）">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/JKX/Controller/ItemController/StaffInformController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/JKX/Controller/ItemController/StaffInformController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/JKX/Controller/LeadContorller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/JKX/Controller/LeadContorller.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/JKX/Controller/UserManageContorller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/JKX/Controller/UserManageContorller.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/css/StaffInform.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/view/StaffInform.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/view/StaffInform.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/view/UserManage.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/view/UserManage.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/JKX/Controller/SectionController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/JKX/Controller/SectionController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/JKX/Controller/UserManageContorller.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/JKX/Controller/UserManageContorller.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/css/tabel.css" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/css/tabel.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/view/UserManage.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/view/UserManage.fxml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -30,7 +21,6 @@
     </option>
   </component>
   <component name="Git.Settings">
-    <option name="PATH_TO_GIT" value="C:\Program Files\Git\cmd\git.exe" />
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
     <option name="ROOT_SYNC" value="DONT_SYNC" />
   </component>
@@ -57,7 +47,7 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="D:/Git/cmd/git.exe" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="project.structure.last.edited" value="SDKs" />
     <property name="project.structure.proportion" value="0.15" />
@@ -149,6 +139,8 @@
       <workItem from="1574770056593" duration="5443000" />
       <workItem from="1574842006027" duration="12698000" />
       <workItem from="1574858420747" duration="3640000" />
+      <workItem from="1574902575434" duration="246000" />
+      <workItem from="1574906993794" duration="242000" />
     </task>
     <task id="LOCAL-00001" summary="最新版本（Commit测试）">
       <created>1574753611367</created>

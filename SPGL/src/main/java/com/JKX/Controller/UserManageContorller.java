@@ -130,7 +130,6 @@ public class UserManageContorller implements Initializable {
         {
             this.v2.getChildren().clear();
             try {
-                System.out.println(this.textInform.getText() + "222");
                 String[][] ans = this.getInform(this.textInform.getText());
                 for(int i = 1; i < ans.length; i++)
                 {
