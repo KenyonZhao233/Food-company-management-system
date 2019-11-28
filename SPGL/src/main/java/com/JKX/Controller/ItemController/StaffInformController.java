@@ -27,7 +27,6 @@ public class StaffInformController {
         this.userManageContorller = userManageContorller;
     }
 
-
     public void handleClick(MouseEvent mouseEvent) {
         userManageContorller.setInform(this.uid.getText(), this.name.getText(), this.zw.getText(), this.sfz.getText(), this.sex.getText());
     }

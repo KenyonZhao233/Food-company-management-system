@@ -112,7 +112,24 @@ public class UserManageContorller implements Initializable {
 
     public void handleSearch(MouseEvent mouseEvent) throws IOException
     {
+        this.pnlSearch.getChildren().clear();
+        try {
+            System.out.println(this.textInform.getText() + "222");
+            String[][] ans = this.getInform(this.textInform.getText());
+            for(int i = 1; i < ans.length; i++)
+            {
+                FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("view/StaffInform.fxml"));
+                Node node = loader.load();
+                StaffInformController staffInformController = loader.<StaffInformController>getController();
+                staffInformController.setInform(ans[i][0], ans[i][1], ans[i][2], ans[i][3],ans[i][4], ans[i][5]);
+                staffInformController.setContorller(this);
 
+                this.pnlSearch.getChildren().add(node);
+            }
+        }
+        catch (SQLException se){
+            se.printStackTrace();
+        }
     }
 
     public void handleChange(MouseEvent mouseEvent) throws IOException
