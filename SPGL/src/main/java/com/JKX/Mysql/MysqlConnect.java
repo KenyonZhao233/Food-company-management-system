@@ -26,6 +26,7 @@ public class MysqlConnect {
             // 打开链接
             System.out.println("连接数据库...");
             conn = DriverManager.getConnection(DB_URL, USER, PASS);
+            System.out.println("sdsdsdsdsd");
             return true;
         } catch (SQLException se) {
             return false;
@@ -53,6 +54,14 @@ public class MysqlConnect {
         }
         stmt.close();
         rs.close();
+        return ans;
+    }
+
+    public int Does(String sql) throws SQLException
+    {
+        Statement stmt = conn.createStatement();
+        int ans = stmt.executeUpdate(sql);
+        stmt.close();
         return ans;
     }
 
@@ -88,8 +97,10 @@ public class MysqlConnect {
                 cs.setFloat(i + 1, Float.parseFloat(b[i]));
             else if(a[i].equals("date"))
                 cs.setDate(i + 1, Date.valueOf(b[i]));
-            else if(a[i].equals("string"))
+            else if(a[i].equals("string")) {
+                System.out.println(i);
                 cs.setString(i + 1, b[i]);
+            }
         }
         ResultSet rs = cs.executeQuery();
         ResultSetMetaData rsmd = rs.getMetaData();

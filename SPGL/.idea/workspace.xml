@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="cd6bffba-f933-4555-9a18-9be48c95ca33" name="Default Changelist" comment="未完成版本（我刚才说的功能正在实现中）">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/JKX/Controller/UserManageContorller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/JKX/Controller/UserManageContorller.java" afterDir="false" />
+    <list default="true" id="cd6bffba-f933-4555-9a18-9be48c95ca33" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/JKX/Controller/LeadContorller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/JKX/Controller/LeadContorller.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -21,6 +20,7 @@
     </option>
   </component>
   <component name="Git.Settings">
+    <option name="PATH_TO_GIT" value="C:\Program Files\Git\cmd\git.exe" />
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
     <option name="ROOT_SYNC" value="DONT_SYNC" />
   </component>
@@ -47,7 +47,7 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="D:/Git/cmd/git.exe" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="project.structure.last.edited" value="SDKs" />
     <property name="project.structure.proportion" value="0.15" />
@@ -138,9 +138,11 @@
       <workItem from="1574753373149" duration="10558000" />
       <workItem from="1574770056593" duration="5443000" />
       <workItem from="1574842006027" duration="12698000" />
-      <workItem from="1574858420747" duration="3640000" />
-      <workItem from="1574902575434" duration="246000" />
-      <workItem from="1574906993794" duration="242000" />
+      <workItem from="1574858420747" duration="3779000" />
+      <workItem from="1574866840098" duration="116000" />
+      <workItem from="1574869346063" duration="793000" />
+      <workItem from="1574932158713" duration="351000" />
+      <workItem from="1574987679863" duration="3849000" />
     </task>
     <task id="LOCAL-00001" summary="最新版本（Commit测试）">
       <created>1574753611367</created>
@@ -184,7 +186,21 @@
       <option name="project" value="LOCAL" />
       <updated>1574858355506</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="完成了关于员工修改的部分">
+      <created>1574862576380</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1574862576380</updated>
+    </task>
+    <task id="LOCAL-00008" summary="Bug Fixed">
+      <created>1574991356273</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1574991356273</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -212,6 +228,8 @@
     <MESSAGE value="最新版本更新：&#10;1.实现界面跳转（可以按我的格式在你们的Contorller里添加Staff成员和initData对象）&#10;2.数据库查询（调用Staff类的方法分别执行查询（返回二维数组）、执行查询的存储过程(带参数和不带参数)、执行增删改的存储过程、执行带返回值的存储过程）其中第一个已经过测试。&#10;3.字符串匹配注意用equal()&#10;4.接下来的任务就是继续设计界面，研究一下如何将数据导入到表格中。&#10;5.还有咱们的数据库方面：各种业务逻辑最后要体现在sql语言上，大家多思考一下自己负责的那一部分。" />
     <MESSAGE value="未完成版本（我刚才说的功能正在实现）" />
     <MESSAGE value="未完成版本（我刚才说的功能正在实现中）" />
-    <option name="LAST_COMMIT_MESSAGE" value="未完成版本（我刚才说的功能正在实现中）" />
+    <MESSAGE value="完成了关于员工修改的部分" />
+    <MESSAGE value="Bug Fixed" />
+    <option name="LAST_COMMIT_MESSAGE" value="Bug Fixed" />
   </component>
 </project>

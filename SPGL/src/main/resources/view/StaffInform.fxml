@@ -6,26 +6,28 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<ScrollPane fx:id="staffPane" hbarPolicy="NEVER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#handleClick" prefHeight="151.0" prefWidth="613.0" stylesheets="@../css/tabel.css" vbarPolicy="NEVER" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.JKX.Controller.ItemController.StaffInformController">
+<ScrollPane fx:id="staffPane" hbarPolicy="NEVER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#handleClick" prefHeight="114.0" prefWidth="938.0" stylesheets="@../css/tabel.css" vbarPolicy="NEVER" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.JKX.Controller.ItemController.StaffInformController">
   <content>
-    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="151.0" prefWidth="605.0">
+    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="113.0" prefWidth="937.0">
          <children>
-            <ImageView fitHeight="76.0" fitWidth="73.0" layoutX="27.0" layoutY="24.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="70.0" fitWidth="70.0" layoutX="66.0" layoutY="11.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../icon/人.png" />
                </image>
             </ImageView>
-            <Label fx:id="uid" alignment="CENTER" layoutX="24.0" layoutY="101.0" prefHeight="20.0" prefWidth="75.0" textAlignment="CENTER" />
-            <Label layoutX="161.0" layoutY="16.0" text="姓名：" />
-            <Label layoutX="131.0" layoutY="64.0" text="身份证号：" />
-            <Label layoutX="377.0" layoutY="16.0" text="性别：" />
-            <Label layoutX="377.0" layoutY="64.0" text="部门：" />
-            <Label fx:id="name" layoutX="203.0" layoutY="16.0" prefHeight="20.0" prefWidth="171.0" />
-            <Label fx:id="sfz" layoutX="203.0" layoutY="64.0" prefHeight="20.0" prefWidth="172.0" />
-            <Label fx:id="sex" layoutX="418.0" layoutY="16.0" prefHeight="20.0" prefWidth="116.0" />
-            <Label fx:id="zw" layoutX="418.0" layoutY="64.0" prefHeight="20.0" prefWidth="116.0" />
-            <Label layoutX="131.0" layoutY="111.0" text="注册时间：" />
-            <Label fx:id="date" layoutX="203.0" layoutY="111.0" prefHeight="20.0" prefWidth="284.0" />
+            <Label fx:id="uid" alignment="CENTER" layoutX="57.0" layoutY="85.0" prefHeight="20.0" prefWidth="87.0" textAlignment="CENTER" />
+            <Label layoutX="211.0" layoutY="18.0" text="姓名：" />
+            <Label layoutX="642.0" layoutY="16.0" text="身份证号：" />
+            <Label layoutX="424.0" layoutY="18.0" text="性别：" />
+            <Label layoutX="211.0" layoutY="70.0" text="部门：" />
+            <Label fx:id="name" layoutX="253.0" layoutY="18.0" prefHeight="20.0" prefWidth="163.0" />
+            <Label fx:id="sfz" layoutX="734.0" layoutY="17.0" prefHeight="20.0" prefWidth="192.0" />
+            <Label fx:id="sex" layoutX="465.0" layoutY="18.0" prefHeight="20.0" prefWidth="142.0" />
+            <Label fx:id="bm" layoutX="252.0" layoutY="70.0" prefHeight="20.0" prefWidth="160.0" />
+            <Label layoutX="642.0" layoutY="70.0" text="注册时间：" />
+            <Label fx:id="date" layoutX="714.0" layoutY="70.0" prefHeight="20.0" prefWidth="213.0" />
+            <Label layoutX="424.0" layoutY="70.0" text="职务：" />
+            <Label fx:id="zw" layoutX="465.0" layoutY="70.0" prefHeight="20.0" prefWidth="142.0" />
          </children></AnchorPane>
   </content>
 </ScrollPane>

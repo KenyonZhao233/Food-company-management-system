@@ -10,13 +10,14 @@ public class StaffInformController {
     private UserManageContorller userManageContorller;
 
     @FXML
-    private Label uid, name, zw, sfz, sex, date;
+    private Label uid, name, zw, sfz, sex, date, bm;
 
-    public void setInform(String uid, String zw, String name, String sex, String sfz, String date)
+    public void setInform(String uid, String bm, String zw, String name, String sfz, String sex, String date)
     {
         this.uid.setText(uid);
         this.name.setText(name);
         this.zw.setText(zw);
+        this.bm.setText(bm);
         this.sfz.setText(sfz);
         this.sex.setText(sex);
         this.date.setText(date);
@@ -27,8 +28,7 @@ public class StaffInformController {
         this.userManageContorller = userManageContorller;
     }
 
-
     public void handleClick(MouseEvent mouseEvent) {
-        userManageContorller.setInform(this.uid.getText(), this.name.getText(), this.zw.getText(), this.sfz.getText(), this.sex.getText());
+        userManageContorller.setInform(this.uid.getText(), this.name.getText(), this.bm.getText(),this.zw.getText(), this.sfz.getText(), this.sex.getText());
     }
 }

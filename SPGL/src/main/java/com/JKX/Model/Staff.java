@@ -1,6 +1,7 @@
 package com.JKX.Model;
 
 import com.JKX.Mysql.MysqlConnect;
+import org.omg.CORBA.PUBLIC_MEMBER;
 
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -13,8 +14,9 @@ public class Staff {
     public String Name;
     public String sex;
     public Date date;
-    public Set<String> zw;
-    public int[] gly, glz;
+    public int[][] zw;
+    public boolean isGly;
+    public boolean isGlz;
     public String password;
     private MysqlConnect mysqlConnect;
     private String sfz;
@@ -23,9 +25,9 @@ public class Staff {
     {
         this.Uid = uid;
         this.password = password;
-        zw = new TreeSet<String>();
-        gly = new int[7];
-        glz = new int[7];
+        zw = new int[7][3];
+        isGly = false;
+        isGlz = false;
         this.mysqlConnect = new MysqlConnect(uid, password);
     }
 
@@ -46,59 +48,39 @@ public class Staff {
             String userInform[][] = mysqlConnect.Search("select * from staff where staff_id = '" + this.Uid + "'");
             if(userInform.length == 1)
                 return false;
-            this.Name = userInform[1][2];
-            this.sex = userInform[1][3];
-            this.sfz = userInform[1][4];
-            this.date = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(userInform[1][5]);
-            for(int i = 1; i < userInform.length; i++)
+            this.Name = userInform[1][3];
+            this.sex = userInform[1][4];
+            this.sfz = userInform[1][5];
+            this.date = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(userInform[1][6]);
+            for(int i  = 1; i < userInform.length; i++)
             {
-                zw.add(userInform[i][1]);
-                if(userInform[i][1].equals("管理员"))
+                int tag = 0;
+                if(userInform[i][2].equals("业务人员"))
+                    tag = 0;
+                else if(userInform[i][2].equals("管理者"))
                 {
-                    String glyInform[][] = mysqlConnect.Search("select * from staff_gly where staff_id = '" + this.Uid + "'");
-                    if(glyInform.length == 1)
-                        return false;
-                    for(int j  = 1; j < glyInform.length; j++)
-                    {
-                        if(glyInform[j][1].equals("财务部"))
-                            gly[1] = 1;
-                        else if(glyInform[i][1].equals("销售部"))
-                            gly[2] = 1;
-                        else if(glyInform[i][1].equals("成品库"))
-                            gly[3] = 1;
-                        else if(glyInform[i][1].equals("原料库"))
-                            gly[4] = 1;
-                        else if(glyInform[i][1].equals("生产车间"))
-                            gly[5] = 1;
-                        else if(glyInform[i][1].equals("生产计划部"))
-                            gly[6] = 1;
-                        else if(glyInform[i][1].equals("系统"))
-                            gly[0] = 1;
-                    }
+                    tag = 1;
+                    isGlz = true;
                 }
-                else if (userInform[i][1].equals("管理者"))
+                else if(userInform[i][2].equals("管理员"))
                 {
-                    String glzInform[][] = mysqlConnect.Search("select * from staff_glz where staff_id = '" + this.Uid + "'");
-                    if(glzInform.length == 1)
-                        return false;
-                    for(int j  = 1; j < glzInform.length; j++)
-                    {
-                        if(glzInform[j][1].equals("财务部"))
-                            gly[1] = 1;
-                        else if(glzInform[i][1].equals("销售部"))
-                            gly[2] = 1;
-                        else if(glzInform[i][1].equals("成品库"))
-                            gly[3] = 1;
-                        else if(glzInform[i][1].equals("原料库"))
-                            gly[4] = 1;
-                        else if(glzInform[i][1].equals("生产车间"))
-                            gly[5] = 1;
-                        else if(glzInform[i][1].equals("生产计划部"))
-                            gly[6] = 1;
-                        else if(glzInform[i][1].equals("系统"))
-                            gly[0] = 1;
-                    }
+                    isGly = true;
+                    tag = 2;
                 }
+                if(userInform[i][1].equals("财务部"))
+                    zw[1][tag] = 1;
+                else if(userInform[i][1].equals("销售部"))
+                    zw[2][tag] = 1;
+                else if(userInform[i][1].equals("成品库"))
+                    zw[3][tag] = 1;
+                else if(userInform[i][1].equals("原料库"))
+                    zw[4][tag] = 1;
+                else if(userInform[i][1].equals("生产车间"))
+                    zw[5][tag] = 1;
+                else if(userInform[i][1].equals("生产计划部"))
+                    zw[6][tag] = 1;
+                else if(userInform[i][1].equals("系统"))
+                    zw[0][tag] = 1;
             }
         }
         catch (SQLException se) {
@@ -115,9 +97,14 @@ public class Staff {
         return mysqlConnect.Search(sql);
     }
 
-    public String[][] ExcuteSearchID(String sql) throws SQLException
+    public String[][] ExcuteSearch(String sql) throws SQLException
     {
         return mysqlConnect.ExcuteSearch(sql);
+    }
+
+    public String[][] ExcuteSearch(String sql, String[] a, String[] b) throws SQLException
+    {
+        return mysqlConnect.ExcuteSearch(sql, a, b);
     }
 
     public int ExcuteDoes(String sql, String[] a, String[] b) throws SQLException

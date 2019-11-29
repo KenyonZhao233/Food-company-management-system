@@ -2,7 +2,9 @@ package com.JKX.Controller;
 
 import com.JKX.Controller.ItemController.StaffInformController;
 import com.JKX.Model.Staff;
+import com.jfoenix.controls.JFXCheckBox;
 import com.jfoenix.controls.JFXComboBox;
+import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -54,13 +56,21 @@ public class UserManageContorller implements Initializable {
     @FXML
     private JFXTextField uidText, sexText, sfzText, nameText;
     @FXML
-    private JFXComboBox<String> zwText;
+    private JFXComboBox<String> zwText, bmText;
     @FXML
     private VBox v2;
 
     /*业务实现组件-人员添加*/
-    //@FXML
-    //private Button
+    @FXML
+    private Button addUser;
+    @FXML
+    private JFXTextField uidAddText, nameAddText, sexAddText, sfzAddText;
+    @FXML
+    private JFXCheckBox glyCheck, glzCheck;
+    @FXML
+    private JFXComboBox<String> sectionCombox;
+    @FXML
+    private JFXPasswordField psw, pswConfir;
 
     @FXML
     private Pane pnlChange, pnlAdd, pnlSearch, paneEmpty;
@@ -101,18 +111,35 @@ public class UserManageContorller implements Initializable {
         }
     }
 
-    public void setInform(String uid, String name, String zw, String sfz, String sex)
+    public void setInform(String uid, String name, String bm, String zw, String sfz, String sex)
     {
         this.uidText.setText(uid);
         this.nameText.setText(name);
         this.sfzText.setText(sfz);
         this.sexText.setText(sex);
         this.zwText.setValue(zw);
+        this.bmText.setValue(bm);
     }
 
     public void handleSearch(MouseEvent mouseEvent) throws IOException
     {
+        this.pnlInform.getChildren().clear();
+        try {
+            String[][] ans = this.getInform(this.textInform.getText());
+            for(int i = 1; i < ans.length; i++)
+            {
+                FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("view/StaffInform.fxml"));
+                Node node = loader.load();
+                StaffInformController staffInformController = loader.<StaffInformController>getController();
+                staffInformController.setInform(ans[i][0], ans[i][1], ans[i][2], ans[i][3],ans[i][4], ans[i][5], ans[i][6]);
+                staffInformController.setContorller(this);
 
+                this.pnlInform.getChildren().add(node);
+            }
+        }
+        catch (SQLException se){
+            se.printStackTrace();
+        }
     }
 
     public void handleChange(MouseEvent mouseEvent) throws IOException
@@ -120,11 +147,23 @@ public class UserManageContorller implements Initializable {
         Button actionButton = (Button)mouseEvent.getSource();
         if(actionButton == btnChange)
         {
-
+//            try {
+//
+//            }
+//            catch (SQLException se)
+//            {
+//
+//            }
         }
         else if(actionButton == btnDelete)
         {
-
+//            try {
+//
+//            }
+//            catch (SQLException se)
+//            {
+//
+//            }
         }
         else if(actionButton == btnSearch)
         {
@@ -136,7 +175,7 @@ public class UserManageContorller implements Initializable {
                     FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("view/StaffInform.fxml"));
                     Node node = loader.load();
                     StaffInformController staffInformController = loader.<StaffInformController>getController();
-                    staffInformController.setInform(ans[i][0], ans[i][1], ans[i][2], ans[i][3],ans[i][4], ans[i][5]);
+                    staffInformController.setInform(ans[i][0], ans[i][1], ans[i][2], ans[i][3],ans[i][4], ans[i][5], ans[i][6]);
                     staffInformController.setContorller(this);
 
                     this.v2.getChildren().add(node);
@@ -156,57 +195,79 @@ public class UserManageContorller implements Initializable {
     public String[][] getInform(String info) throws SQLException
     {
         String[][] ans;
-        if(staff.gly[0] == 1)
+        if(staff.zw[0][2] == 1)
         {
-            System.out.println("2122");
-            if(info.equals(""))
-                ans = staff.Search("select staff.* from staff, staff_gly where staff.staff_zw = '管理员' and staff_gly.staff_id = staff_gly.staff_id group by staff.staff_id");
-            else
-                ans = staff.Search("select staff.* from staff, staff_gly where staff.staff_id = '" + info + "' and staff.staff_zw = '管理员' and staff_gly.staff_id = staff_gly.staff_id group by staff.staff_id");
+            String[] b = {""};
+            String[] a = {"string"};
+            if(info.equals("")) {
+                b[0] = "NULL";
+                ans = staff.ExcuteSearch("Call GLY_Search(?)", a, b);
+                 }
+            else{
+                b[0] = info;
+                ans = staff.ExcuteSearch("Call GLY_Search(?)", a, b);
+            }
         }
         else
         {
             String inform = "";
             boolean flag = true;
-            for(int i = 1; i < staff.gly.length; i++)
+            for(int i = 1; i < 7; i++)
             {
-                if(staff.gly[i] == 1 && flag)
+                if(staff.zw[i][2] == 1 && flag)
                 {
                     inform += zw[i];
                     flag = !flag;
                 }
-                else if(staff.gly[i] == 1)
+                else if(staff.zw[i][2] == 1)
                 {
                     inform += ",";
                     inform += zw[i];
                 }
             }
             if(info.equals(""))
-                ans = staff.Search("select staff.* from staff, staff_gly where staff.staff_zw in (" + inform + ") and staff_gly.staff_id = staff_gly.staff_id group by staff.staff_id");
+                ans = staff.Search("select staff_id, staff_bm, staff_zw, staff_name, staff_sfz, staff_sex, staff_date" +
+                                        " from staff" +
+                                        " where staff_zw in (" + inform + ") and staff_zw = '业务人员'" +
+                                        " group by staff_id, staff_bm, staff_zw, staff_name, staff_sfz, staff_sex, staff_date");
             else
-                ans = staff.Search("select staff.* from staff, staff_gly where staff.staff_id = '" + info + "' and staff.staff_zw in (" + inform + ") and staff_gly.staff_id = staff_gly.staff_id group by staff.staff_id");
+                ans = staff.Search("select staff_id, staff_bm, staff_zw, staff_name, staff_sfz, staff_sex, staff_date" +
+                                        " from staff" +
+                                        " where staff.staff_id = '" + info + "' and staff_zw in (" + inform + ") and staff_zw = '业务人员'" +
+                                        " group by staff_id, staff_bm, staff_zw, staff_name, staff_sfz, staff_sex, staff_date");
         }
         return ans;
+    }
+
+    public void handleCreate(MouseEvent mouseEvent) {
+
     }
 
     public void initData(Staff staff)
     {
         this.staff = staff;
         List<String> staffBm = new ArrayList<String>();
-        if(staff.gly[0] == 1)
+        List<String> staffZw = new ArrayList<String>();
+        if(staff.zw[0][2] == 1)
         {
-            System.out.println("sdsds");
-            for(int i = 1; i < zw.length; i++)
+            for(int i = 1; i < 7; i++)
                 staffBm.add(zw[i]);
+            staffZw.add("管理员");
+            staffZw.add("管理者");
         }
         else
         {
-            for(int i = 1; i < zw.length; i++)
+            this.glyCheck.setVisible(false);
+            this.glzCheck.setVisible(false);
+            for(int i = 1; i < 7; i++)
             {
-                if(staff.gly[i] == 1)
+                if(staff.zw[i][2] == 1)
                     staffBm.add(zw[i]);
             }
+            staffZw.add("业务人员");
         }
-        this.zwText.getItems().addAll(staffBm);
+        this.bmText.getItems().addAll(staffBm);
+        this.zwText.getItems().addAll(staffZw);
+        this.sectionCombox.getItems().addAll(staffBm);
     }
 }
