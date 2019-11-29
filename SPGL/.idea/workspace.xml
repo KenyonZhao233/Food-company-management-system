@@ -2,13 +2,22 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="cd6bffba-f933-4555-9a18-9be48c95ca33" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/JKX/Controller/LeadContorller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/JKX/Controller/LeadContorller.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/JKX/Controller/SectionController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/JKX/Controller/SectionController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/view/Section.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/view/Section.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/view/UserManage.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/view/UserManage.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/JKX/Controller/UserManageContorller.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/JKX/Controller/UserManageContorller.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/view/Section.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/view/Section.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/view/UserManage.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/view/UserManage.fxml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FavoritesManager">
+    <favorites_list name="SPGL" />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -47,24 +56,24 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/java/com/JKX/Controller" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
-    <property name="project.structure.last.edited" value="SDKs" />
+    <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
-    <property name="settings.editor.selected.configurable" value="settings.github" />
+    <property name="settings.editor.selected.configurable" value="reference.projectsettings.compiler.javacompiler" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\asus\Desktop\Java实训\OnlineP\Food-company-management-system\SPGL\src\main\resources\view" />
-      <recent name="C:\Users\asus\Desktop\Java实训\SPGL\src\main\resources" />
-    </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\asus\Desktop\Java实训\OnlineP\Food-company-management-system\SPGL\src\main\java\com\JKX\Controller" />
       <recent name="C:\Users\asus\Desktop\Java实训\SPGL" />
       <recent name="C:\Users\asus\Desktop\Java实训\SPGL\src\main\resources\css" />
       <recent name="C:\Users\asus\Desktop\Java实训\SPGL\src\main\resources\icon" />
       <recent name="C:\Users\asus\Desktop\Java实训\SPGL\src\main\resources\img" />
-      <recent name="C:\Users\asus\Desktop\Java实训\SPGL\src\resources" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\asus\Desktop\Java实训\OnlineP\Food-company-management-system\SPGL\src\main\resources\view" />
+      <recent name="C:\Users\asus\Desktop\Java实训\SPGL\src\main\resources" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -142,7 +151,8 @@
       <workItem from="1574866840098" duration="116000" />
       <workItem from="1574869346063" duration="793000" />
       <workItem from="1574932158713" duration="351000" />
-      <workItem from="1574987679863" duration="3849000" />
+      <workItem from="1574987679863" duration="9873000" />
+      <workItem from="1575009787166" duration="18326000" />
     </task>
     <task id="LOCAL-00001" summary="最新版本（Commit测试）">
       <created>1574753611367</created>
@@ -200,7 +210,21 @@
       <option name="project" value="LOCAL" />
       <updated>1574991356273</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="Bug Fixed">
+      <created>1574991541687</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1574991541687</updated>
+    </task>
+    <task id="LOCAL-00010" summary="人员管理界面基本完工，还差给登录名赋权限，注册。">
+      <created>1575032301242</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1575032301242</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -230,6 +254,7 @@
     <MESSAGE value="未完成版本（我刚才说的功能正在实现中）" />
     <MESSAGE value="完成了关于员工修改的部分" />
     <MESSAGE value="Bug Fixed" />
-    <option name="LAST_COMMIT_MESSAGE" value="Bug Fixed" />
+    <MESSAGE value="人员管理界面基本完工，还差给登录名赋权限，注册。" />
+    <option name="LAST_COMMIT_MESSAGE" value="人员管理界面基本完工，还差给登录名赋权限，注册。" />
   </component>
 </project>

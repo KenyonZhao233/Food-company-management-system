@@ -181,24 +181,25 @@ public class MysqlConnect {
         for(int i = 0; i < lenc; i++)
         {
             if(c[i].equals("int"))
-                cs.registerOutParameter(i + lena, Types.INTEGER);
+                cs.registerOutParameter(i + lena + 1, Types.INTEGER);
             else if(c[i].equals("float"))
-                cs.registerOutParameter(i + lena, Types.FLOAT);
+                cs.registerOutParameter(i + lena + 1, Types.FLOAT);
             else if(c[i].equals("date"))
-                cs.registerOutParameter(i + lena, Types.DATE);
+                cs.registerOutParameter(i + lena + 1, Types.DATE);
             else if(c[i].equals("string"))
-                cs.registerOutParameter(i + lena, Types.VARCHAR);
+                cs.registerOutParameter(i + lena + 1, Types.VARCHAR);
         }
+        cs.execute();
         String[] ans = new String[lenc];
         for(int i = 0; i < lenc; i++){
             if(c[i].equals("int"))
-                ans[i] = String.valueOf(cs.getInt(i + 1));
+                ans[i] = String.valueOf(cs.getInt(lena + i + 1));
             else if(c[i].equals("float"))
-                ans[i] = String.valueOf(cs.getFloat(i + 1));
+                ans[i] = String.valueOf(cs.getFloat(lena + i + 1));
             else if(c[i].equals("date"))
-                ans[i] = String.valueOf(cs.getDate(i + 1));
+                ans[i] = String.valueOf(cs.getDate(lena + i + 1));
             else if(c[i].equals("string"))
-                ans[i] = String.valueOf(cs.getString(i + 1));
+                ans[i] = String.valueOf(cs.getString(lena + i + 1));
         }
         cs.close();
         return ans;
