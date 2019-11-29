@@ -179,7 +179,6 @@
                   <TextField fx:id="textInform" layoutX="469.0" layoutY="29.0" prefHeight="32.0" prefWidth="465.0" promptText="search" style="-fx-background-color: #02030A; -fx-border-color: #B7C3D7; -fx-border-radius: 2em;" />
                   <JFXTextField fx:id="uidText" editable="false" layoutX="116.0" layoutY="468.0" prefHeight="30.0" prefWidth="307.0" />
                   <JFXTextField fx:id="nameText" layoutX="116.0" layoutY="549.0" prefHeight="30.0" prefWidth="307.0" />
-                  <JFXTextField fx:id="sexText" layoutX="116.0" layoutY="626.0" prefHeight="30.0" prefWidth="307.0" />
                   <JFXTextField fx:id="sfzText" layoutX="654.0" layoutY="475.0" prefHeight="30.0" prefWidth="307.0" />
                   <Label layoutX="57.0" layoutY="478.0" text="工号：" textFill="#e4e4e4">
                      <font>
@@ -206,8 +205,8 @@
                         <Font size="18.0" />
                      </font>
                   </Label>
-                  <Button fx:id="btnChange" layoutX="555.0" layoutY="623.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="98.0" styleClass="button4" stylesheets="@../css/fullpackstyling2.css" text="修改" />
-                  <Button fx:id="btnDelete" layoutX="863.0" layoutY="623.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="98.0" styleClass="button4" stylesheets="@../css/fullpackstyling2.css" text="删除" />
+                  <Button fx:id="btnChange" layoutX="555.0" layoutY="623.0" mnemonicParsing="false" onMouseClicked="#handleChange" prefHeight="30.0" prefWidth="98.0" styleClass="button4" stylesheets="@../css/fullpackstyling2.css" text="修改" />
+                  <Button fx:id="btnDelete" layoutX="863.0" layoutY="623.0" mnemonicParsing="false" onMouseClicked="#handleChange" prefHeight="30.0" prefWidth="98.0" styleClass="button4" stylesheets="@../css/fullpackstyling2.css" text="删除" />
                   <JFXComboBox fx:id="bmText" editable="true" layoutX="654.0" layoutY="549.0" prefHeight="30.0" prefWidth="110.0" promptText="请选择" visibleRowCount="5" />
                   <ScrollPane layoutX="14.0" layoutY="78.0" prefHeight="347.0" prefWidth="992.0" style="-fx-background-color: #000000;">
                      <content>
@@ -229,16 +228,17 @@
                      </font>
                   </Label>
                   <JFXComboBox fx:id="zwText" layoutX="852.0" layoutY="549.0" prefHeight="30.0" prefWidth="110.0" />
+                  <JFXComboBox fx:id="sexText" layoutX="116.0" layoutY="626.0" prefHeight="30.0" prefWidth="307.0" />
                </children>
             </Pane>
-            <Pane fx:id="pnlAdd" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #000000;" visible="false">
+            <Pane fx:id="pnlAdd" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #000000;">
                <children>
                   <Label layoutX="63.0" layoutY="25.0" prefHeight="42.0" prefWidth="153.0" text="添加员工信息" textFill="#fcf8f8">
                      <font>
                         <Font size="24.0" />
                      </font>
                   </Label>
-                  <Button fx:id="addUser" layoutX="425.0" layoutY="619.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="144.0" styleClass="button4" stylesheets="@../css/fullpackstyling2.css" text="添加" />
+                  <Button fx:id="addUser" layoutX="425.0" layoutY="619.0" mnemonicParsing="false" onMouseClicked="#handleAdd" prefHeight="30.0" prefWidth="144.0" styleClass="button4" stylesheets="@../css/fullpackstyling2.css" text="添加" />
                   <Label layoutX="355.0" layoutY="247.0" text="性别：" textFill="#e4e4e4">
                      <font>
                         <Font size="18.0" />
@@ -265,7 +265,6 @@
                      </font>
                   </Label>
                   <JFXTextField fx:id="uidAddText" layoutX="407.0" layoutY="109.0" prefHeight="30.0" prefWidth="218.0" />
-                  <JFXTextField fx:id="sexAddText" layoutX="406.0" layoutY="244.0" prefHeight="30.0" prefWidth="218.0" />
                   <JFXTextField fx:id="nameAddText" layoutX="406.0" layoutY="179.0" prefHeight="30.0" prefWidth="218.0" />
                   <JFXTextField fx:id="sfzAddText" layoutX="406.0" layoutY="305.0" prefHeight="30.0" prefWidth="218.0" />
                   <Label layoutX="352.0" layoutY="479.0" text="密码：" textFill="#e4e4e4">
@@ -280,10 +279,13 @@
                      </font>
                   </Label>
                   <JFXPasswordField fx:id="pswConfir" layoutX="406.0" layoutY="533.0" prefHeight="30.0" prefWidth="218.0" />
-                  <JFXComboBox fx:id="sectionCombox" layoutX="406.0" layoutY="364.0" prefHeight="30.0" prefWidth="218.0" />
+                  <JFXComboBox fx:id="sectionCombox" layoutX="406.0" layoutY="364.0" prefHeight="30.0" prefWidth="218.0" promptText="请选择部门" />
                   <Button fx:id="createUid" layoutX="659.0" layoutY="109.0" mnemonicParsing="false" onMouseClicked="#handleCreate" text="生成员工编号" />
-                  <JFXCheckBox fx:id="glyCheck" layoutX="332.0" layoutY="434.0" selected="true" text="部门管理员" />
-                  <JFXCheckBox fx:id="glzCheck" layoutX="553.0" layoutY="434.0" text="部门管理者" />
+                  <JFXCheckBox fx:id="glyCheck" accessibleRole="CHECK_MENU_ITEM" disable="true" layoutX="332.0" layoutY="434.0" onMouseClicked="#handleCheck" selected="true" text="管理员" />
+                  <JFXCheckBox fx:id="glzCheck" accessibleRole="CHECK_MENU_ITEM" layoutX="553.0" layoutY="434.0" onMouseClicked="#handleCheck" text="管理者" />
+                  <Label fx:id="pswConfirTip1" layoutX="655.0" layoutY="538.0" text="两次密码输入不一致！" visible="false" />
+                  <JFXComboBox fx:id="sexAddText" layoutX="407.0" layoutY="244.0" prefHeight="30.0" prefWidth="218.0" />
+                  <Label fx:id="pswConfirTip2" layoutX="655.0" layoutY="538.0" prefHeight="20.0" prefWidth="135.0" text="输入一致！" visible="false" />
                </children>
             </Pane>
             <Pane fx:id="paneEmpty" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #000000;" visible="false" />
