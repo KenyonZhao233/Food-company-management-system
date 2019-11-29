@@ -49,31 +49,31 @@ public class LeadContorller implements Initializable {
     @FXML
     void handleClick(MouseEvent event) throws Exception{
         Button actionBtn = (Button) event.getSource();
-        if(actionBtn == btnCJ)
+        if(actionBtn == btnCJ)  //生产车间
         {
 
         }
-        else if (actionBtn == btnCP)
+        else if (actionBtn == btnCP) //成品库
         {
 
         }
-        else if (actionBtn == btnCW)
+        else if (actionBtn == btnCW) //财务部
         {
 
         }
-        else if (actionBtn == btnJH)
+        else if (actionBtn == btnJH) //生产计划部
         {
 
         }
-        else if (actionBtn == btnYL)
+        else if (actionBtn == btnYL) //原料库
         {
 
         }
-        else if (actionBtn == btnXS)
+        else if (actionBtn == btnXS) //销售部
         {
 
         }
-        else if (actionBtn == btnRY)
+        else if (actionBtn == btnRY) //人员管理
         {
             FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("view/UserManage.fxml"));
 
@@ -89,7 +89,7 @@ public class LeadContorller implements Initializable {
             Stage index = (Stage)LeadPane.getScene().getWindow();
             index.close();
         }
-        else if (actionBtn == btnYW)
+        else if (actionBtn == btnYW) //部门管理
         {
             FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("view/Section.fxml"));
 
