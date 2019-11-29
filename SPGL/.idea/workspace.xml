@@ -4,7 +4,17 @@
     <list default="true" id="cd6bffba-f933-4555-9a18-9be48c95ca33" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/JKX/Controller/ItemController/StaffInformController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/JKX/Controller/ItemController/StaffInformController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/JKX/Controller/LeadContorller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/JKX/Controller/LeadContorller.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/JKX/Controller/UserManageContorller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/JKX/Controller/UserManageContorller.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/JKX/Model/Staff.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/JKX/Model/Staff.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/JKX/Mysql/MysqlConnect.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/JKX/Mysql/MysqlConnect.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/view/StaffInform.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/view/StaffInform.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/view/UserManage.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/view/UserManage.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/JKX/Controller/LeadContorller.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/JKX/Controller/LeadContorller.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/JKX/Controller/UserManageContorller.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/JKX/Controller/UserManageContorller.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/JKX/Model/Staff.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/JKX/Model/Staff.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/JKX/Mysql/MysqlConnect.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/JKX/Mysql/MysqlConnect.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/view/UserManage.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/view/UserManage.fxml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -144,6 +154,7 @@
       <workItem from="1574866840098" duration="116000" />
       <workItem from="1574869346063" duration="793000" />
       <workItem from="1574932158713" duration="351000" />
+      <workItem from="1574987679863" duration="3651000" />
     </task>
     <task id="LOCAL-00001" summary="最新版本（Commit测试）">
       <created>1574753611367</created>

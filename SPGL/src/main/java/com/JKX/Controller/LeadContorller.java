@@ -115,38 +115,35 @@ public class LeadContorller implements Initializable {
     public void initData(Staff staff)
     {
         this.staff = staff;
-        for (String str : staff.zw) {
-            if(str.equals("财务部"))
+        if(staff.isGly)
+            btnRY.setDisable(false);
+        if(staff.isGlz)
+            btnYW.setDisable(false);
+        for (int i = 0; i < 7; i++)
+        {
+            if(staff.zw[1][0] == 1)
             {
                 btnCW.setDisable(false);
             }
-            else if(str.equals("销售部"))
+            else if(staff.zw[2][0] == 1)
             {
                 btnXS.setDisable(false);
             }
-            else if (str.equals("成品库"))
+            else if (staff.zw[3][0] == 1)
             {
                 btnCP.setDisable(false);
             }
-            else if (str.equals( "原料库"))
+            else if (staff.zw[4][0] == 1)
             {
                 btnYL.setDisable(false);
             }
-            else if (str.equals("生产车间"))
+            else if (staff.zw[5][0] == 1)
             {
                 btnCJ.setDisable(false);
             }
-            else if (str.equals("生产计划部"))
+            else if (staff.zw[6][0] == 1)
             {
                 btnJH.setDisable(false);
-            }
-            else if (str.equals( "管理员"))
-            {
-                btnRY.setDisable(false);
-            }
-            else if (str.equals( "管理者"))
-            {
-                btnYW.setDisable(false);
             }
         }
     }
