@@ -1,5 +1,6 @@
 package com.JKX.Controller;
 
+import com.JKX.Model.Raw;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
@@ -7,8 +8,16 @@ import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import java.io.IOException;
+import java.net.URL;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.ResourceBundle;
 
 public class RawController {
+
+    private static Raw raw;
 
     @FXML
     private ResourceBundle resources;
@@ -80,6 +89,13 @@ public class RawController {
         }
     }
 
+    static String[][] getInform() throws SQLException
+    {
+        String[][] ans;
+        ans = raw.Search("select * from raw");
+        return ans;
+    }
+
     @FXML
     void initialize() {
         assert menuHomepage != null : "fx:id=\"menuHomepage\" was not injected: check your FXML file 'DepRaw.fxml'.";
@@ -95,7 +111,17 @@ public class RawController {
         assert pnItems1 != null : "fx:id=\"pnItems1\" was not injected: check your FXML file 'DepRaw.fxml'.";
         assert pageHomepage != null : "fx:id=\"pageHomepage\" was not injected: check your FXML file 'DepRaw.fxml'.";
         assert pnItems32 != null : "fx:id=\"pnItems32\" was not injected: check your FXML file 'DepRaw.fxml'.";
-
+        raw = new Raw("KenyonZ", "123456");
+        if(raw.Login())
+            System.out.println("成功");
+        else
+            System.out.println("失败");
+        String[][] inf_all;
+        try {
+            inf_all = RawController.getInform();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 }
 
