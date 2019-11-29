@@ -23,7 +23,7 @@
    <children>
       <VBox alignment="TOP_CENTER" prefHeight="576.0" prefWidth="256.0" style="-fx-background-color: #05071F;" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <ImageView fitHeight="135.0" fitWidth="152.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="165.0" fitWidth="135.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../img/jimmy-fallon.png" />
                </image>

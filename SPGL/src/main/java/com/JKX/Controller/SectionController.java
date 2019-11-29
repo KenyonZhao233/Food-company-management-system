@@ -106,17 +106,34 @@ public class SectionController implements Initializable {
 
     }
 
-    public void handleSearch(MouseEvent event) throws IOException{
+    public void handleSearch(MouseEvent event) throws IOException
+    {
 
     }
 
     @Override
-    public void initialize(URL location, ResourceBundle resources) {
+    public void initialize(URL location, ResourceBundle resources)
+    {
 
     }
 
     public void initData(Staff staff)
     {
         this.staff = staff;
+        if(staff.zw[0][1] != 1)
+        {
+            if(staff.zw[1][1] != 1)
+                this.btnCw.setDisable(true);
+            if(staff.zw[2][1] != 1)
+                this.btnXs.setDisable(true);
+            if(staff.zw[3][1] != 1)
+                this.btnCp.setDisable(true);
+            if(staff.zw[4][1] != 1)
+                this.btnYl.setDisable(true);
+            if(staff.zw[5][1] != 1)
+                this.btnCj.setDisable(true);
+            if(staff.zw[6][1] != 1)
+                this.btnJh.setDisable(true);
+        }
     }
 }

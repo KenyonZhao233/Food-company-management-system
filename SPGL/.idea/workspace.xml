@@ -1,27 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="cd6bffba-f933-4555-9a18-9be48c95ca33" name="Default Changelist" comment="Bug Fixed">
+    <list default="true" id="cd6bffba-f933-4555-9a18-9be48c95ca33" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/JKX/Controller/LoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/JKX/Controller/LoginController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/JKX/Controller/UserManageContorller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/JKX/Controller/UserManageContorller.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/JKX/Model/Staff.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/JKX/Model/Staff.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/JKX/Mysql/MysqlConnect.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/JKX/Mysql/MysqlConnect.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/JKX/Controller/SectionController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/JKX/Controller/SectionController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/view/Section.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/view/Section.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/view/UserManage.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/view/UserManage.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/JKX/Controller/LeadContorller.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/JKX/Controller/LeadContorller.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/JKX/Controller/LoginController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/JKX/Controller/LoginController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/JKX/Controller/SectionController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/JKX/Controller/SectionController.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/JKX/Controller/UserManageContorller.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/JKX/Controller/UserManageContorller.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/JKX/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/JKX/Main.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/JKX/Model/Cpk.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/JKX/Model/Cpk.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/JKX/Model/Gly.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/JKX/Model/Gly.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/JKX/Model/Glz.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/JKX/Model/Glz.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/JKX/Model/Sccj.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/JKX/Model/Sccj.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/JKX/Model/Scjh.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/JKX/Model/Scjh.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/JKX/Model/Staff.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/JKX/Model/Staff.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/JKX/Model/Xsb.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/JKX/Model/Xsb.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/JKX/Model/Ylk.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/JKX/Model/Ylk.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/JKX/Mysql/MysqlConnect.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/JKX/Mysql/MysqlConnect.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/view/Section.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/view/Section.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/view/UserManage.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/view/UserManage.fxml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -166,7 +152,7 @@
       <workItem from="1574869346063" duration="793000" />
       <workItem from="1574932158713" duration="351000" />
       <workItem from="1574987679863" duration="9873000" />
-      <workItem from="1575009787166" duration="14292000" />
+      <workItem from="1575009787166" duration="18326000" />
     </task>
     <task id="LOCAL-00001" summary="最新版本（Commit测试）">
       <created>1574753611367</created>
@@ -231,7 +217,14 @@
       <option name="project" value="LOCAL" />
       <updated>1574991541687</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="人员管理界面基本完工，还差给登录名赋权限，注册。">
+      <created>1575032301242</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1575032301242</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -261,6 +254,7 @@
     <MESSAGE value="未完成版本（我刚才说的功能正在实现中）" />
     <MESSAGE value="完成了关于员工修改的部分" />
     <MESSAGE value="Bug Fixed" />
-    <option name="LAST_COMMIT_MESSAGE" value="Bug Fixed" />
+    <MESSAGE value="人员管理界面基本完工，还差给登录名赋权限，注册。" />
+    <option name="LAST_COMMIT_MESSAGE" value="人员管理界面基本完工，还差给登录名赋权限，注册。" />
   </component>
 </project>
