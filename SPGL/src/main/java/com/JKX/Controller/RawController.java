@@ -15,8 +15,7 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
+import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
@@ -50,12 +49,6 @@ public class RawController {
     }));
 
     @FXML
-    private ResourceBundle resources;
-
-    @FXML
-    private URL location;
-
-    @FXML
     private Button menuHomepage;
 
     @FXML
@@ -86,7 +79,13 @@ public class RawController {
     private Label label_time2;
 
     @FXML
-    private VBox pnItems3;
+    private VBox raw_items2;
+
+    @FXML
+    private TextField query_text;
+
+    @FXML
+    private ComboBox query_type;
 
     @FXML
     private VBox raw_items1;
@@ -95,13 +94,31 @@ public class RawController {
     private Pane pageStorage;
 
     @FXML
-    private VBox raw_items2;
+    private TextField input_text1;
+
+    @FXML
+    private TextField input_text2;
+
+    @FXML
+    private Button input;
+
+    @FXML
+    private TextField input_text3;
 
     @FXML
     private Pane pageDestroy;
 
     @FXML
     private VBox pnItems1;
+
+    @FXML
+    private TextField destroy_text1;
+
+    @FXML
+    private TextField destroy_text2;
+
+    @FXML
+    private Button search_d;
 
     @FXML
     private VBox raw_items3;
@@ -123,6 +140,96 @@ public class RawController {
 
     @FXML
     private VBox raw_items;
+
+
+    @FXML
+    void click_input(MouseEvent event) {
+        if(input_text1.getText().isEmpty() || input_text1.getText() == null ||
+                input_text2.getText().isEmpty() || input_text2.getText() == null ||
+                input_text3.getText().isEmpty() || input_text3.getText() == null)
+        {
+            Alert _alert = new Alert(Alert.AlertType.WARNING);
+            _alert.setTitle("警告");
+            _alert.setHeaderText("输入错误");
+            _alert.setContentText("信息填写有缺失");
+            _alert.show();
+            return;
+        }
+        Alert _alert = new Alert(Alert.AlertType.CONFIRMATION);
+        _alert.setTitle("确认入库");
+        _alert.setHeaderText("");
+        _alert.setContentText("是否将原料编号为" + input_text1.getText() + "入仓库编号为" + input_text2.getText() + "的仓库" + input_text3.getText() + "件");
+        Optional<ButtonType> result = _alert.showAndWait();
+        if (result.get() == ButtonType.OK){
+            System.out.println("ok");
+        }else{
+            System.out.println("cancel");
+        }
+    }
+
+    @FXML
+    void click_search(MouseEvent event) {
+        try {
+            this.raw_items1.getChildren().clear();
+            String str = "select * from raw, raw_ck where raw.raw_id = raw_ck.raw_id ";
+            if(query_type.getValue() == "原料编号" && (!query_text.getText().isEmpty() || query_text.getText() == null))
+            {
+                str = str + "and raw_ck.raw_id = '" + query_text.getText() + "' ";
+            }
+            if(query_type.getValue() == "仓库编号" && (!query_text.getText().isEmpty() || query_text.getText() == null))
+            {
+                str = str + "and raw_ck.raw_in = '" + query_text.getText() + "' ";
+            }
+            str = str + "order by raw_date DESC";
+            String[][] ans = raw.Search(str);
+            for (int i = 1; i < ans.length; i++) {
+                FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("view/ItemDepRaw.fxml"));
+                Node node = null;
+                try {
+                    node = loader.load();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                ItemDepRawController itemDepRawController = loader.<ItemDepRawController>getController();
+                itemDepRawController.setInform(ans[i][4], ans[i][0], ans[i][1], ans[i][2], ans[i][3], ans[i][6], ans[i][7]);
+                this.raw_items1.getChildren().add(node);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    void click_search_d(MouseEvent event) {
+        try {
+            this.raw_items3.getChildren().clear();
+            String str = "select * from raw, raw_ck where raw.raw_id = raw_ck.raw_id ";
+            if(!destroy_text1.getText().isEmpty() || destroy_text2.getText() == null)
+            {
+                str = str + "and raw_ck.raw_id = '" + destroy_text1.getText() + "' ";
+            }
+            if(!destroy_text2.getText().isEmpty() || destroy_text2.getText() == null)
+            {
+                str = str + "and raw_ck.raw_in = '" + destroy_text2.getText() + "' ";
+            }
+            str = str + "order by raw_date DESC";
+            String[][] ans = raw.Search(str);
+            for (int i = 1; i < ans.length; i++) {
+                FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("view/ItemDepRaw_Destory.fxml"));
+                Node node = null;
+                try {
+                    node = loader.load();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                ItemDepRawDestroyController itemDepRawDestroyController = loader.<ItemDepRawDestroyController>getController();
+                itemDepRawDestroyController.setInform(ans[i][4], ans[i][0], ans[i][1], ans[i][2], ans[i][3], ans[i][6], ans[i][7]);
+                this.raw_items3.getChildren().add(node);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 
     @FXML
     void handleClicks(MouseEvent event) {
@@ -157,31 +264,9 @@ public class RawController {
     }
 
 
+
     @FXML
     void initialize() {
-        assert menuHomepage != null : "fx:id=\"menuHomepage\" was not injected: check your FXML file 'DepRaw.fxml'.";
-        assert menuQuery != null : "fx:id=\"menuQuery\" was not injected: check your FXML file 'DepRaw.fxml'.";
-        assert menuStorage != null : "fx:id=\"menuStorage\" was not injected: check your FXML file 'DepRaw.fxml'.";
-        assert menuDestroy != null : "fx:id=\"menuDestroy\" was not injected: check your FXML file 'DepRaw.fxml'.";
-        assert menuQuit != null : "fx:id=\"menuQuit\" was not injected: check your FXML file 'DepRaw.fxml'.";
-        assert pageQuery != null : "fx:id=\"pageQuery\" was not injected: check your FXML file 'DepRaw.fxml'.";
-        assert label_year2 != null : "fx:id=\"label_year2\" was not injected: check your FXML file 'DepRaw.fxml'.";
-        assert label_month2 != null : "fx:id=\"label_month2\" was not injected: check your FXML file 'DepRaw.fxml'.";
-        assert label_day2 != null : "fx:id=\"label_day2\" was not injected: check your FXML file 'DepRaw.fxml'.";
-        assert label_time2 != null : "fx:id=\"label_time2\" was not injected: check your FXML file 'DepRaw.fxml'.";
-        assert pnItems3 != null : "fx:id=\"pnItems3\" was not injected: check your FXML file 'DepRaw.fxml'.";
-        assert raw_items1 != null : "fx:id=\"raw_items1\" was not injected: check your FXML file 'DepRaw.fxml'.";
-        assert pageStorage != null : "fx:id=\"pageStorage\" was not injected: check your FXML file 'DepRaw.fxml'.";
-        assert raw_items2 != null : "fx:id=\"raw_items2\" was not injected: check your FXML file 'DepRaw.fxml'.";
-        assert pageDestroy != null : "fx:id=\"pageDestroy\" was not injected: check your FXML file 'DepRaw.fxml'.";
-        assert pnItems1 != null : "fx:id=\"pnItems1\" was not injected: check your FXML file 'DepRaw.fxml'.";
-        assert raw_items3 != null : "fx:id=\"raw_items3\" was not injected: check your FXML file 'DepRaw.fxml'.";
-        assert label_year != null : "fx:id=\"label_year\" was not injected: check your FXML file 'DepRaw.fxml'.";
-        assert label_month != null : "fx:id=\"label_month\" was not injected: check your FXML file 'DepRaw.fxml'.";
-        assert label_day != null : "fx:id=\"label_day\" was not injected: check your FXML file 'DepRaw.fxml'.";
-        assert label_time != null : "fx:id=\"label_time\" was not injected: check your FXML file 'DepRaw.fxml'.";
-        assert pageHomepage != null : "fx:id=\"pageHomepage\" was not injected: check your FXML file 'DepRaw.fxml'.";
-        assert raw_items != null : "fx:id=\"raw_items\" was not injected: check your FXML file 'DepRaw.fxml'.";
         animation.setCycleCount(Timeline.INDEFINITE);
         animation.play();
         staff = new Staff("KenyonZ", "123456");
@@ -263,6 +348,8 @@ public class RawController {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        query_type.getItems().addAll("原料编号", "仓库编号");
+        query_type.setValue("原料编号");
     }
 }
 

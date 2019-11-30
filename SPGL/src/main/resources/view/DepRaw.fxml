@@ -157,13 +157,13 @@
                         </VBox>
                      </content>
                   </ScrollPane>
-                  <TextField layoutX="276.0" layoutY="49.0" prefHeight="27.0" prefWidth="324.0" promptText="请输入要查询的信息" style="-fx-background-color: #02030A; -fx-border-color: #B7C3D7; -fx-border-radius: 2em;" />
-                  <ImageView fitHeight="17.0" fitWidth="16.0" layoutX="569.0" layoutY="55.0" pickOnBounds="true" preserveRatio="true">
+                  <TextField fx:id="query_text" layoutX="276.0" layoutY="49.0" prefHeight="27.0" prefWidth="324.0" promptText="请输入要查询的信息" style="-fx-background-color: #02030A; -fx-border-color: #B7C3D7; -fx-border-radius: 2em;" />
+                  <ImageView fitHeight="17.0" fitWidth="16.0" layoutX="569.0" layoutY="55.0" onMouseClicked="#click_search" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../icon/icons8_Search_52px.png" />
                      </image>
                   </ImageView>
-                  <ComboBox cache="true" layoutX="168.0" layoutY="51.0" prefHeight="23.0" prefWidth="92.0" promptText="原料编号" />
+                  <ComboBox fx:id="query_type" cache="true" layoutX="168.0" layoutY="51.0" prefHeight="23.0" prefWidth="92.0" />
                   <HBox alignment="CENTER_LEFT" layoutX="20.0" layoutY="178.0" prefHeight="42.0" prefWidth="746.0" spacing="50.0" style="-fx-background-color: #02030A;">
                      <children>
                         <Label text="入库时间" textFill="#e7e5e5">
@@ -204,15 +204,15 @@
             </Pane>
             <Pane fx:id="pageStorage" prefHeight="554.0" prefWidth="545.0" style="-fx-background-color: #02030A;">
                <children>
-                  <TextField alignment="CENTER" layoutX="172.0" layoutY="108.0" prefHeight="25.0" prefWidth="147.0" promptText="请输入入库原料编号" style="-fx-background-color: #02030A; -fx-border-color: #B7C3D7; -fx-border-radius: 2em;" />
+                  <TextField fx:id="input_text1" alignment="CENTER" layoutX="172.0" layoutY="108.0" prefHeight="25.0" prefWidth="147.0" promptText="请输入入库原料编号" style="-fx-background-color: #02030A; -fx-border-color: #B7C3D7; -fx-border-radius: 2em;" />
                   <Label layoutX="283.0" layoutY="53.0" text="原料入库作业系统" textFill="#e7e5e5">
                      <font>
                         <Font size="24.0" />
                      </font>
                   </Label>
-                  <TextField alignment="CENTER" layoutX="479.0" layoutY="108.0" prefHeight="25.0" prefWidth="92.0" promptText="入库仓库编号" style="-fx-background-color: #02030A; -fx-border-color: #B7C3D7; -fx-border-radius: 2em;" />
-                  <Button layoutX="645.0" layoutY="519.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="72.0" text="入库" />
-                  <TextField alignment="CENTER" layoutX="335.0" layoutY="108.0" prefHeight="25.0" prefWidth="132.0" promptText="原料数量" style="-fx-background-color: #02030A; -fx-border-color: #B7C3D7; -fx-border-radius: 2em;" />
+                  <TextField fx:id="input_text2" alignment="CENTER" layoutX="479.0" layoutY="108.0" prefHeight="25.0" prefWidth="92.0" promptText="入库仓库编号" style="-fx-background-color: #02030A; -fx-border-color: #B7C3D7; -fx-border-radius: 2em;" />
+                  <Button fx:id="input" layoutX="606.0" layoutY="107.0" mnemonicParsing="false" onMouseClicked="#click_input" prefHeight="27.0" prefWidth="72.0" style="-fx-background-color: green;" text="入库" textFill="WHITE" />
+                  <TextField fx:id="input_text3" alignment="CENTER" layoutX="335.0" layoutY="108.0" prefHeight="25.0" prefWidth="132.0" promptText="原料数量" style="-fx-background-color: #02030A; -fx-border-color: #B7C3D7; -fx-border-radius: 2em;" />
                   <HBox alignment="CENTER_LEFT" layoutX="20.0" layoutY="157.0" prefHeight="42.0" prefWidth="746.0" spacing="50.0" style="-fx-background-color: #02030A;">
                      <children>
                         <Label text="入库时间" textFill="#e7e5e5">
@@ -262,14 +262,14 @@
                         </VBox>
                      </content>
                   </ScrollPane>
-                  <TextField layoutX="172.0" layoutY="108.0" prefHeight="25.0" prefWidth="192.0" promptText="请输入销毁原料编号" style="-fx-background-color: #02030A; -fx-border-color: #B7C3D7; -fx-border-radius: 2em;" />
+                  <TextField fx:id="destroy_text1" layoutX="172.0" layoutY="108.0" prefHeight="25.0" prefWidth="192.0" promptText="请输入销毁原料编号" style="-fx-background-color: #02030A; -fx-border-color: #B7C3D7; -fx-border-radius: 2em;" />
                   <Label layoutX="283.0" layoutY="53.0" text="原料销毁作业系统" textFill="#e7e5e5">
                      <font>
                         <Font size="24.0" />
                      </font>
                   </Label>
-                  <TextField layoutX="379.0" layoutY="108.0" prefHeight="25.0" prefWidth="192.0" promptText="请输入销毁原料所在仓库编号" style="-fx-background-color: #02030A; -fx-border-color: #B7C3D7; -fx-border-radius: 2em;" />
-                  <Button layoutX="586.0" layoutY="109.0" mnemonicParsing="false" text="查询" />
+                  <TextField fx:id="destroy_text2" layoutX="379.0" layoutY="108.0" prefHeight="25.0" prefWidth="192.0" promptText="请输入销毁原料所在仓库编号" style="-fx-background-color: #02030A; -fx-border-color: #B7C3D7; -fx-border-radius: 2em;" />
+                  <Button fx:id="search_d" layoutX="586.0" layoutY="109.0" mnemonicParsing="false" onMouseClicked="#click_search_d" text="查询" />
                   <HBox alignment="CENTER_LEFT" layoutX="6.0" layoutY="155.0" prefHeight="42.0" prefWidth="746.0" spacing="50.0" style="-fx-background-color: #02030A;">
                      <children>
                         <Label text="入库时间" textFill="#e7e5e5">
