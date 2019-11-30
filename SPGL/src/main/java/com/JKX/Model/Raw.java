@@ -13,37 +13,17 @@ public class Raw {
     public String raw_name;
     public int raw_bzq;
     public float raw_pri;
-    private MysqlConnect mysqlConnect;
-    public String Uid;
-    public String password;
+    public Staff staff;
 
-    public Raw(String uid, String password)
+    public Raw(Staff staff)
     {
-        this.Uid = uid;
-        this.password = password;
         raw_id = new String();
         raw_name = new String();
         raw_bzq = 0;
         raw_pri = 0;
-        this.mysqlConnect = new MysqlConnect(uid, password);
+        this.staff = staff;
     }
 
-    public boolean Login()
-    {
-        mysqlConnect.USER = Uid;
-        mysqlConnect.PASS = password;
-        if (!mysqlConnect.Connect())
-            return false;
-        try {
-            String rawInform[][] = mysqlConnect.Search("select * from staff where staff_id = '" + this.Uid + "'");
-            if (rawInform.length == 1)
-                return false;
-        } catch (SQLException e) {
-            e.printStackTrace();
-            return false;
-        }
-        return true;
-    }
     public void getInformation()
     {
 
@@ -51,21 +31,21 @@ public class Raw {
 
     public String[][] Search(String sql) throws SQLException
     {
-        return mysqlConnect.Search(sql);
+        return staff.Search(sql);
     }
 
     public String[][] ExcuteSearchID(String sql) throws SQLException
     {
-        return mysqlConnect.ExcuteSearch(sql);
+        return staff.ExcuteSearch(sql);
     }
 
     public int ExcuteDoes(String sql, String[] a, String[] b) throws SQLException
     {
-        return mysqlConnect.ExcuteDoes(sql, a, b);
+        return staff.ExcuteDoes(sql, a, b);
     }
 
     public String[] ExcuteDoesReturn(String sql, String[] a, String[] b, String[] c) throws SQLException
     {
-        return mysqlConnect.ExcuteDoesReturn(sql, a, b, c);
+        return staff.ExcuteDoesReturn(sql, a, b, c);
     }
 }

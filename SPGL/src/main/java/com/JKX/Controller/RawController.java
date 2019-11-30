@@ -1,11 +1,13 @@
 package com.JKX.Controller;
 
+import com.JKX.Controller.ItemController.ItemDepRawDestroyController;
 import com.JKX.Model.Raw;
 import java.net.URL;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
+import com.JKX.Model.Staff;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
@@ -28,6 +30,7 @@ import javafx.util.Duration;
 
 public class RawController {
 
+    private static Staff staff;
     private static Raw raw;
 
     DateFormat df = new SimpleDateFormat("yyyy.MM.dd hh:mm:ss");
@@ -181,9 +184,13 @@ public class RawController {
         assert raw_items != null : "fx:id=\"raw_items\" was not injected: check your FXML file 'DepRaw.fxml'.";
         animation.setCycleCount(Timeline.INDEFINITE);
         animation.play();
-        raw = new Raw("KenyonZ", "123456");
-        if(raw.Login())
+        staff = new Staff("KenyonZ", "123456");
+
+        if(staff.Login()){
             System.out.println("成功");
+            raw = new Raw(staff);
+        }
+
         try {
             this.raw_items.getChildren().clear();
             String[][] ans = this.getInform();
@@ -221,6 +228,24 @@ public class RawController {
             e.printStackTrace();
         }
         try {
+            this.raw_items3.getChildren().clear();
+            String[][] ans = this.getInform();
+            for (int i = 1; i < ans.length; i++) {
+                FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("view/ItemDepRaw_Destory.fxml"));
+                Node node = null;
+                try {
+                    node = loader.load();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                ItemDepRawDestroyController itemDepRawDestroyController = loader.<ItemDepRawDestroyController>getController();
+                itemDepRawDestroyController.setInform(ans[i][4], ans[i][0], ans[i][1], ans[i][2], ans[i][3], ans[i][6], ans[i][7]);
+                this.raw_items3.getChildren().add(node);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        try {
             this.raw_items2.getChildren().clear();
             String[][] ans = this.getInform();
             for (int i = 1; i < ans.length; i++) {
@@ -234,24 +259,6 @@ public class RawController {
                 ItemDepRawController itemDepRawController = loader.<ItemDepRawController>getController();
                 itemDepRawController.setInform(ans[i][4], ans[i][0], ans[i][1], ans[i][2], ans[i][3], ans[i][6], ans[i][7]);
                 this.raw_items2.getChildren().add(node);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        try {
-            this.raw_items3.getChildren().clear();
-            String[][] ans = this.getInform();
-            for (int i = 1; i < ans.length; i++) {
-                FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("view/ItemDepRaw.fxml"));
-                Node node = null;
-                try {
-                    node = loader.load();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-                ItemDepRawController itemDepRawController = loader.<ItemDepRawController>getController();
-                itemDepRawController.setInform(ans[i][4], ans[i][0], ans[i][1], ans[i][2], ans[i][3], ans[i][6], ans[i][7]);
-                this.raw_items3.getChildren().add(node);
             }
         } catch (SQLException e) {
             e.printStackTrace();

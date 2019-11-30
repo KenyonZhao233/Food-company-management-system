@@ -270,8 +270,7 @@
                   </Label>
                   <TextField layoutX="379.0" layoutY="108.0" prefHeight="25.0" prefWidth="192.0" promptText="请输入销毁原料所在仓库编号" style="-fx-background-color: #02030A; -fx-border-color: #B7C3D7; -fx-border-radius: 2em;" />
                   <Button layoutX="586.0" layoutY="109.0" mnemonicParsing="false" text="查询" />
-                  <Button layoutX="649.0" layoutY="523.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="72.0" style="-fx-background-color: red;" text="销毁" textFill="WHITE" />
-                  <HBox alignment="CENTER_LEFT" layoutX="20.0" layoutY="155.0" prefHeight="42.0" prefWidth="746.0" spacing="50.0" style="-fx-background-color: #02030A;">
+                  <HBox alignment="CENTER_LEFT" layoutX="6.0" layoutY="155.0" prefHeight="42.0" prefWidth="746.0" spacing="50.0" style="-fx-background-color: #02030A;">
                      <children>
                         <Label text="入库时间" textFill="#e7e5e5">
                            <HBox.margin>
@@ -298,9 +297,9 @@
                         </Label>
                      </children>
                   </HBox>
-                  <ScrollPane layoutX="14.0" layoutY="197.0" prefHeight="320.0" prefWidth="739.0" stylesheets="@../css/style.css">
+                  <ScrollPane layoutX="14.0" layoutY="197.0" prefHeight="320.0" prefWidth="776.0" stylesheets="@../css/style.css">
                      <content>
-                        <VBox fx:id="raw_items3" prefHeight="318.0" prefWidth="737.0" spacing="5.0" style="-fx-background-color: #02030A;">
+                        <VBox fx:id="raw_items3" prefHeight="318.0" prefWidth="774.0" spacing="5.0" style="-fx-background-color: #02030A;">
                            <padding>
                               <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                            </padding>
