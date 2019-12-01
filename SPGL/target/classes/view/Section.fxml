@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import com.jfoenix.controls.JFXDatePicker?>
-<?import com.jfoenix.controls.JFXTimePicker?>
+<?import com.calendarfx.view.print.TimeRangeView?>
+<?import com.jfoenix.controls.JFXButton?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
@@ -606,21 +606,16 @@
          <children>
             <Pane fx:id="pnlTime" prefHeight="689.0" prefWidth="1029.0" style="-fx-background-color: #000000;">
                <children>
+                  <TimeRangeView fx:id="datePick" layoutX="116.0" layoutY="94.0" prefHeight="100.0" prefWidth="198.0" />
                   <Label layoutX="63.0" layoutY="24.0" prefHeight="42.0" prefWidth="164.0" text="编号/时间查询" textFill="#fcf8f8">
                      <font>
                         <Font size="24.0" />
                      </font>
                   </Label>
-                  <JFXTimePicker layoutX="92.0" layoutY="161.0" prefHeight="30.0" prefWidth="170.0" />
-                  <JFXDatePicker layoutX="91.0" layoutY="113.0" prefHeight="30.0" prefWidth="170.0" />
-                  <Label layoutX="14.0" layoutY="151.0" text="起始时间：" textFill="#e4e4e4" />
-                  <JFXTimePicker layoutX="91.0" layoutY="292.0" prefHeight="30.0" prefWidth="170.0" />
-                  <JFXDatePicker layoutX="90.0" layoutY="244.0" prefHeight="30.0" prefWidth="170.0" />
-                  <Label layoutX="13.0" layoutY="282.0" text="截止时间：" textFill="#e4e4e4" />
-                  <Button layoutX="120.0" layoutY="374.0" mnemonicParsing="false" text="查询" />
-                  <TextField layoutX="13.0" layoutY="474.0" prefHeight="30.0" prefWidth="184.0" />
-                  <Button layoutX="209.0" layoutY="474.0" mnemonicParsing="false" text="查询" />
-                  <TableView fx:id="dateTable" layoutX="328.0" prefHeight="689.0" prefWidth="690.0" style="-fx-background-color: #000000;" stylesheets="@../css/fullpackstyling.css" />
+                  <TextField fx:id="bhD" layoutX="730.0" layoutY="114.0" prefHeight="30.0" prefWidth="184.0" style="-fx-background-color: #02030A; -fx-border-color: #B7C3D7; -fx-border-radius: 2em;" />
+                  <TableView fx:id="dateTable" layoutY="212.0" prefHeight="477.0" prefWidth="1018.0" style="-fx-background-color: #000000;" stylesheets="@../css/fullpackstyling.css" />
+                  <JFXButton fx:id="searchDate" layoutX="352.0" layoutY="114.0" onMouseClicked="#handleDate" text="查询时间" />
+                  <JFXButton fx:id="searchIdD" layoutX="926.0" layoutY="114.0" onMouseClicked="#handleDate" text="查询编号" />
                </children></Pane>
             <Pane fx:id="pnlName" prefHeight="689.0" prefWidth="1023.0" style="-fx-background-color: #000000;">
                <children>
@@ -629,13 +624,13 @@
                         <Font size="24.0" />
                      </font>
                   </Label>
-                  <TextField layoutX="135.0" layoutY="94.0" />
-                  <TextField layoutX="605.0" layoutY="94.0" />
-                  <Button layoutX="365.0" layoutY="94.0" mnemonicParsing="false" text="查询编号" />
-                  <Button layoutX="837.0" layoutY="94.0" mnemonicParsing="false" text="查询名称" />
+                  <TextField fx:id="bhN" layoutX="135.0" layoutY="83.0" onMouseClicked="#handleName" style="-fx-border-radius: 2em; -fx-border-color: #B7C3D7; -fx-background-color: #02030A;" />
+                  <TextField fx:id="name" layoutX="598.0" layoutY="82.0" style="-fx-background-color: #02030A; -fx-border-color: #B7C3D7; -fx-border-radius: 2em;" />
                   <TableView fx:id="nameTable" layoutX="7.0" layoutY="142.0" prefHeight="543.0" prefWidth="1011.0" style="-fx-background-color: #000000;" stylesheets="@../css/fullpackstyling.css" />
+                  <JFXButton fx:id="searchIdN" layoutX="379.0" layoutY="83.0" onMouseClicked="#handleName" text="查询编号" />
+                  <JFXButton fx:id="saerchName" layoutX="827.0" layoutY="82.0" onMouseClicked="#handleName" text="查询名称" />
                </children></Pane>
-            <Pane fx:id="emptyPane" prefHeight="689.0" prefWidth="1046.0" style="-fx-background-color: #000000;" />
+            <Pane fx:id="emptyPane" prefHeight="689.0" prefWidth="1046.0" style="-fx-background-color: #000000;" visible="false" />
          </children>
       </StackPane>
    </children>

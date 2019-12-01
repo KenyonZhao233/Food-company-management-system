@@ -2,11 +2,11 @@ package com.JKX.Model;
 
 import java.sql.SQLException;
 
-public class Glz {
+public class Plan {
     private Staff sta;
     //可以向其中添加你所需要的相应的属性，在初始化中连接数据库，查询出你所需要的属性并将其初始化;
 
-    public Glz(Staff s) throws SQLException
+    public Plan(Staff s) throws SQLException
     {
         this.sta = s;
         if(!sta.Login())
