@@ -231,7 +231,7 @@
                   <JFXComboBox fx:id="sexText" layoutX="116.0" layoutY="626.0" prefHeight="30.0" prefWidth="307.0" />
                </children>
             </Pane>
-            <Pane fx:id="pnlAdd" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #000000;">
+            <Pane fx:id="pnlAdd" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #000000;" visible="false">
                <children>
                   <Label layoutX="63.0" layoutY="25.0" prefHeight="42.0" prefWidth="153.0" text="添加员工信息" textFill="#fcf8f8">
                      <font>

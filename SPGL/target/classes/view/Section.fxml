@@ -211,8 +211,38 @@
                               <Insets left="50.0" />
                            </padding>
                         </Button>
-                        <Label prefHeight="281.0" prefWidth="27.0" />
-                        <Button fx:id="btnYlReturn" alignment="BASELINE_LEFT" graphicTextGap="50.0" mnemonicParsing="false" onMouseClicked="#handleClicks" prefHeight="57.0" prefWidth="256.0" stylesheets="@../css/style.css" text="返回">
+                        <Button fx:id="btnSearchYlKC" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onMouseClicked="#handleClicks" prefHeight="57.0" prefWidth="256.0" stylesheets="@../css/style.css" text="原料库存查询" textFill="#e7e5e5">
+                           <graphic>
+                              <ImageView fitHeight="23.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../icon/icons8_Search_52px.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                           <opaqueInsets>
+                              <Insets />
+                           </opaqueInsets>
+                           <padding>
+                              <Insets left="50.0" />
+                           </padding>
+                        </Button>
+                        <Button fx:id="btnSearchYlREC" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onMouseClicked="#handleClicks" prefHeight="57.0" prefWidth="256.0" stylesheets="@../css/style.css" text="原料记录查询" textFill="#e7e5e5">
+                           <graphic>
+                              <ImageView fitHeight="23.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../icon/icons8_Search_52px.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                           <opaqueInsets>
+                              <Insets />
+                           </opaqueInsets>
+                           <padding>
+                              <Insets left="50.0" />
+                           </padding>
+                        </Button>
+                        <Label prefHeight="174.0" prefWidth="0.0" />
+                        <Button fx:id="btnYlReturn" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onMouseClicked="#handleClicks" prefHeight="57.0" prefWidth="256.0" stylesheets="@../css/style.css" text="返回">
                            <graphic>
                               <ImageView fitHeight="23.0" fitWidth="35.0" nodeOrientation="RIGHT_TO_LEFT" pickOnBounds="true" preserveRatio="true">
                                  <image>
@@ -223,6 +253,9 @@
                            <padding>
                               <Insets left="50.0" />
                            </padding>
+                           <VBox.margin>
+                              <Insets bottom="50.0" />
+                           </VBox.margin>
                         </Button>
                      </children>
                   </VBox>
@@ -316,7 +349,7 @@
                               <Insets left="50.0" />
                            </padding>
                         </Button>
-                        <Button fx:id="btnSearchYl2" alignment="BASELINE_LEFT" graphicTextGap="22.0" layoutX="10.0" layoutY="261.0" mnemonicParsing="false" onMouseClicked="#handleClicks" prefHeight="57.0" prefWidth="256.0" stylesheets="@../css/style.css" text="原料查询">
+                        <Button fx:id="btnSearchYlKC2" alignment="BASELINE_LEFT" graphicTextGap="22.0" layoutX="10.0" layoutY="261.0" mnemonicParsing="false" onMouseClicked="#handleClicks" prefHeight="57.0" prefWidth="256.0" stylesheets="@../css/style.css" text="原料库存查询">
                            <graphic>
                               <ImageView fitHeight="23.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
@@ -328,7 +361,7 @@
                               <Insets left="50.0" />
                            </padding>
                         </Button>
-                        <Button fx:id="btnSearchKc3" alignment="BASELINE_LEFT" graphicTextGap="22.0" layoutX="10.0" layoutY="409.0" mnemonicParsing="false" onMouseClicked="#handleClicks" prefHeight="57.0" prefWidth="256.0" stylesheets="@../css/style.css" text="库存查询">
+                        <Button fx:id="btnSearchKc3" alignment="BASELINE_LEFT" graphicTextGap="22.0" layoutX="10.0" layoutY="409.0" mnemonicParsing="false" onMouseClicked="#handleClicks" prefHeight="57.0" prefWidth="256.0" stylesheets="@../css/style.css" text="成品库存查询">
                            <graphic>
                               <ImageView fitHeight="23.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
@@ -587,7 +620,7 @@
                   <Button layoutX="120.0" layoutY="374.0" mnemonicParsing="false" text="查询" />
                   <TextField layoutX="13.0" layoutY="474.0" prefHeight="30.0" prefWidth="184.0" />
                   <Button layoutX="209.0" layoutY="474.0" mnemonicParsing="false" text="查询" />
-                  <TableView layoutX="328.0" prefHeight="689.0" prefWidth="690.0" style="-fx-background-color: #000000;" stylesheets="@../css/fullpackstyling.css" />
+                  <TableView fx:id="dateTable" layoutX="328.0" prefHeight="689.0" prefWidth="690.0" style="-fx-background-color: #000000;" stylesheets="@../css/fullpackstyling.css" />
                </children></Pane>
             <Pane fx:id="pnlName" prefHeight="689.0" prefWidth="1023.0" style="-fx-background-color: #000000;">
                <children>
@@ -600,7 +633,7 @@
                   <TextField layoutX="605.0" layoutY="94.0" />
                   <Button layoutX="365.0" layoutY="94.0" mnemonicParsing="false" text="查询编号" />
                   <Button layoutX="837.0" layoutY="94.0" mnemonicParsing="false" text="查询名称" />
-                  <TableView layoutX="7.0" layoutY="142.0" prefHeight="543.0" prefWidth="1011.0" style="-fx-background-color: #000000;" stylesheets="@../css/fullpackstyling.css" />
+                  <TableView fx:id="nameTable" layoutX="7.0" layoutY="142.0" prefHeight="543.0" prefWidth="1011.0" style="-fx-background-color: #000000;" stylesheets="@../css/fullpackstyling.css" />
                </children></Pane>
             <Pane fx:id="emptyPane" prefHeight="689.0" prefWidth="1046.0" style="-fx-background-color: #000000;" />
          </children>

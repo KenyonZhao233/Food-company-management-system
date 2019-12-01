@@ -241,6 +241,7 @@ public class UserManageContorller implements Initializable {
         this.glyCheck.setDisable(false);
         this.glyCheck.setDisable(true);
         this.glyCheck.setSelected(true);
+        this.glzCheck.setSelected(false);
         this.sfzAddText.clear();
         this.psw.clear();
         this.pswConfir.clear();
