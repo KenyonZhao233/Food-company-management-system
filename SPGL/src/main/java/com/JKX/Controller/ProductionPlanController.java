@@ -1,7 +1,7 @@
 package com.JKX.Controller;
 
-import com.JKX.Model.Plan;
+import com.JKX.Model.PlanSection;
 
 public class ProductionPlanController {
-    private Plan plan;
+    private PlanSection planSection;
 }

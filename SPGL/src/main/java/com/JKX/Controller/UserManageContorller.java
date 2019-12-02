@@ -147,6 +147,7 @@ public class UserManageContorller implements Initializable {
             {
                 FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("view/StaffInform.fxml"));
                 Node node = loader.load();
+
                 StaffInformController staffInformController = loader.<StaffInformController>getController();
                 staffInformController.setInform(ans[i][0], ans[i][1], ans[i][2], ans[i][3],ans[i][4], ans[i][5], ans[i][6]);
                 staffInformController.setContorller(this);

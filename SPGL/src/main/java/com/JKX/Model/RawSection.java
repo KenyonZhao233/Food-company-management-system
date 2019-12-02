@@ -8,19 +8,11 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
-public class Raw {
-    public String raw_id;
-    public String raw_name;
-    public int raw_bzq;
-    public float raw_pri;
+public class RawSection {
     public Staff staff;
 
-    public Raw(Staff staff)
+    public RawSection(Staff staff)
     {
-        raw_id = new String();
-        raw_name = new String();
-        raw_bzq = 0;
-        raw_pri = 0;
         this.staff = staff;
     }
 

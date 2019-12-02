@@ -1,8 +1,8 @@
 package com.JKX.Controller;
 
 import com.JKX.Controller.ItemController.ItemDepRawDestroyController;
-import com.JKX.Model.Raw;
-import java.net.URL;
+import com.JKX.Model.RawSection;
+
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -20,9 +20,8 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import java.io.IOException;
-import java.net.URL;
 import java.sql.SQLException;
-import java.util.ResourceBundle;
+
 import com.JKX.Controller.ItemController.ItemDepRawController;
 import javafx.util.Duration;
 
@@ -30,7 +29,7 @@ import javafx.util.Duration;
 public class RawController {
 
     private static Staff staff;
-    private static Raw raw;
+    private static RawSection rawSection;
 
     DateFormat df = new SimpleDateFormat("yyyy.MM.dd hh:mm:ss");
     Timeline animation = new Timeline(new KeyFrame(Duration.millis(1000), new EventHandler<ActionEvent>() {
@@ -181,7 +180,7 @@ public class RawController {
                 str = str + "and raw_ck.raw_in = '" + query_text.getText() + "' ";
             }
             str = str + "order by raw_date DESC";
-            String[][] ans = raw.Search(str);
+            String[][] ans = rawSection.Search(str);
             for (int i = 1; i < ans.length; i++) {
                 FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("view/ItemDepRaw.fxml"));
                 Node node = null;
@@ -213,7 +212,7 @@ public class RawController {
                 str = str + "and raw_ck.raw_in = '" + destroy_text2.getText() + "' ";
             }
             str = str + "order by raw_date DESC";
-            String[][] ans = raw.Search(str);
+            String[][] ans = rawSection.Search(str);
             for (int i = 1; i < ans.length; i++) {
                 FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("view/ItemDepRaw_Destory.fxml"));
                 Node node = null;
@@ -259,7 +258,7 @@ public class RawController {
     static String[][] getInform() throws SQLException
     {
         String[][] ans;
-        ans = raw.Search("select * from raw, raw_ck where raw.raw_id = raw_ck.raw_id order by raw_date DESC");
+        ans = rawSection.Search("select * from raw, raw_ck where raw.raw_id = raw_ck.raw_id order by raw_date DESC");
         return ans;
     }
 
@@ -273,7 +272,7 @@ public class RawController {
 
         if(staff.Login()){
             System.out.println("成功");
-            raw = new Raw(staff);
+            rawSection = new RawSection(staff);
         }
 
         try {
@@ -350,6 +349,11 @@ public class RawController {
         }
         query_type.getItems().addAll("原料编号", "仓库编号");
         query_type.setValue("原料编号");
+    }
+
+    public void initData(Staff staff)
+    {
+        rawSection = new RawSection(staff);
     }
 }
 

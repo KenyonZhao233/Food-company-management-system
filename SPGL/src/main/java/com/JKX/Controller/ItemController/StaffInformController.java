@@ -2,6 +2,7 @@ package com.JKX.Controller.ItemController;
 
 import com.JKX.Controller.UserManageContorller;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 
@@ -11,6 +12,7 @@ public class StaffInformController {
 
     @FXML
     private Label uid, name, zw, sfz, sex, date, bm;
+
 
     public void setInform(String uid, String bm, String zw, String name, String sfz, String sex, String date)
     {
@@ -27,6 +29,7 @@ public class StaffInformController {
     {
         this.userManageContorller = userManageContorller;
     }
+
 
     public void handleClick(MouseEvent mouseEvent) {
         userManageContorller.setInform(this.uid.getText(), this.name.getText(), this.bm.getText(),this.zw.getText(), this.sfz.getText(), this.sex.getText());
