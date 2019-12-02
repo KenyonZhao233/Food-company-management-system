@@ -1,21 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="cd6bffba-f933-4555-9a18-9be48c95ca33" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/JKX/Controller/ProductionPlanController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/JKX/Controller/WorkshopController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/view/ProductionPlan.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/view/Workshop.fxml" afterDir="false" />
+    <list default="true" id="cd6bffba-f933-4555-9a18-9be48c95ca33" name="Default Changelist" comment="最新版本">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/JKX/Controller/SalesController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/view/DepSales.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/view/ProductInform.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/JKX/Model/Gly.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/JKX/Model/Glz.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/JKX/Model/Scjh.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/JKX/Model/Plan.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/JKX/Controller/SectionController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/JKX/Controller/SectionController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/JKX/Model/Gly.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/JKX/Model/Glz.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/JKX/Model/Scjh.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/view/Section.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/view/Section.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/view/UserManage.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/view/UserManage.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/JKX/Controller/LeadContorller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/JKX/Controller/LeadContorller.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/JKX/Controller/LeadContorller.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/JKX/Controller/LeadContorller.class" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -36,7 +28,6 @@
     </option>
   </component>
   <component name="Git.Settings">
-    <option name="PATH_TO_GIT" value="C:\Program Files\Git\cmd\git.exe" />
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
     <option name="ROOT_SYNC" value="DONT_SYNC" />
   </component>
@@ -69,7 +60,7 @@
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
-    <property name="settings.editor.selected.configurable" value="reference.projectsettings.compiler.javacompiler" />
+    <property name="settings.editor.selected.configurable" value="vcs.Git" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -165,6 +156,7 @@
       <workItem from="1575108930782" duration="1201000" />
       <workItem from="1575173441974" duration="1109000" />
       <workItem from="1575189252919" duration="11901000" />
+      <workItem from="1575286352948" duration="2613000" />
     </task>
     <task id="LOCAL-00001" summary="最新版本（Commit测试）">
       <created>1574753611367</created>

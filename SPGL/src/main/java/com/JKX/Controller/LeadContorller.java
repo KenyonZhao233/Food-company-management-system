@@ -71,7 +71,19 @@ public class LeadContorller implements Initializable {
         }
         else if (actionBtn == btnXS) //销售部
         {
+            FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("view/DepSales.fxml"));
 
+            Stage stage = new Stage(StageStyle.UNDECORATED);
+            stage.setScene(new Scene((Parent) loader.load()));
+
+            SalesController controller = loader.<SalesController>getController();
+
+            controller.initData(staff);
+
+            stage.show();
+
+            Stage index = (Stage)LeadPane.getScene().getWindow();
+            index.close();
         }
         else if (actionBtn == btnRY) //人员管理
         {

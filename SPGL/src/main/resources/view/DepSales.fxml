@@ -1,0 +1,409 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="SalePanel" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="689.0" prefWidth="1276.0" style="-fx-background-color: #02030A;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.JKX.Controller.SalesController">
+   <children>
+      <VBox alignment="TOP_CENTER" prefHeight="576.0" prefWidth="256.0" style="-fx-background-color: #05071F;" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <ImageView fitHeight="73.0" fitWidth="67.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../img/jimmy-fallon.png" />
+               </image>
+               <VBox.margin>
+                  <Insets bottom="10.0" top="50.0" />
+               </VBox.margin></ImageView>
+            <Label text="李华&#10;工号：100000000" textAlignment="CENTER" textFill="#e7e5e5" />
+            <Button fx:id="menuRegister" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onMouseClicked="#handleClicks" prefHeight="42.0" prefWidth="259.0" stylesheets="@../css/style.css" text="客户注册">
+               <graphic>
+                  <ImageView fitHeight="23.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../icon/icons8_Person_32px.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <padding>
+                  <Insets left="50.0" />
+               </padding>
+            </Button>
+            <Button fx:id="menuCreate" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onMouseClicked="#handleClicks" prefHeight="42.0" prefWidth="259.0" stylesheets="@../css/style.css" text="生成订单">
+               <graphic>
+                  <ImageView fitHeight="23.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../icon/icons8_Xbox_Menu_32px.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <padding>
+                  <Insets left="50.0" />
+               </padding>
+            </Button>
+            <Button fx:id="menuCancel" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onMouseClicked="#handleClicks" prefHeight="42.0" prefWidth="259.0" stylesheets="@../css/style.css" text="取消订单">
+               <graphic>
+                  <ImageView fitHeight="23.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../icon/icons8_Slider__32px.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <padding>
+                  <Insets left="50.0" />
+               </padding>
+            </Button>
+            <Button fx:id="menuReturnGoods" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onMouseClicked="#handleClicks" prefHeight="42.0" prefWidth="259.0" stylesheets="@../css/style.css" text="客户退货">
+               <graphic>
+                  <ImageView fitHeight="23.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../icon/icons8_Box_32px.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <padding>
+                  <Insets left="50.0" />
+               </padding>
+            </Button>
+            <Button fx:id="menuQuit" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onMouseClicked="#handleClicks" prefHeight="42.0" prefWidth="259.0" stylesheets="@../css/style.css" text="退出">
+               <graphic>
+                  <ImageView fitHeight="23.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../icon/icons8_Sign_Out_32px.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <padding>
+                  <Insets left="50.0" />
+               </padding>
+            </Button>
+         </children>
+      </VBox>
+      <StackPane layoutX="258.0" prefHeight="690.0" prefWidth="1020.0" style="-fx-background-color: #02030A;">
+         <children>
+            <Pane fx:id="pageRegister" prefHeight="554.0" prefWidth="793.0" style="-fx-background-color: #02030A;">
+               <children>
+                  <Button layoutX="376.0" layoutY="626.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="80.0" text="注册" />
+                  <Label layoutX="472.0" layoutY="41.0" text="客户注册" textFill="#e7e5e5">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Label>
+                  <HBox alignment="CENTER" layoutX="189.0" layoutY="98.0" prefHeight="92.0" prefWidth="661.0" spacing="50.0">
+                     <children>
+                        <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
+                           <children>
+                              <Label text="2019" textFill="#2a73ff">
+                                 <font>
+                                    <Font name="System Bold" size="26.0" />
+                                 </font>
+                              </Label>
+                              <Label text="年" textFill="#e7e5e5" />
+                           </children>
+                        </VBox>
+                        <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
+                           <children>
+                              <Label text="11" textFill="#26bfbc">
+                                 <font>
+                                    <Font name="System Bold" size="26.0" />
+                                 </font>
+                              </Label>
+                              <Label text="月" textFill="#e7e5e5" />
+                           </children>
+                        </VBox>
+                        <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
+                           <children>
+                              <Label text="14" textFill="#fa5f7e">
+                                 <font>
+                                    <Font name="System Bold" size="26.0" />
+                                 </font>
+                              </Label>
+                              <Label text="日" textFill="#e7e5e5" />
+                           </children>
+                        </VBox>
+                        <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
+                           <children>
+                              <Label text="18：37" textFill="#de0000">
+                                 <font>
+                                    <Font name="System Bold" size="26.0" />
+                                 </font>
+                              </Label>
+                              <Label text="时间" textFill="#e7e5e5" />
+                           </children>
+                        </VBox>
+                     </children>
+                  </HBox>
+                  <ScrollPane layoutX="14.0" layoutY="222.0" prefHeight="382.0" prefWidth="996.0" stylesheets="@../css/style.css">
+                     <content>
+                        <Pane prefHeight="366.0" prefWidth="996.0" style="-fx-background-color: #05071F;">
+                           <children>
+                              <Label layoutX="367.0" layoutY="55.0" text="客户编号：" textFill="#e7e5e5" />
+                              <Label layoutX="367.0" layoutY="134.0" text="客户姓名：" textFill="#e7e5e5" />
+                              <Label layoutX="367.0" layoutY="215.0" text="联系电话：" textFill="#e7e5e5" />
+                              <Label layoutX="367.0" layoutY="290.0" text="客户类型：" textFill="#e7e5e5" />
+                              <TextField layoutX="543.0" layoutY="51.0" />
+                              <TextField layoutX="543.0" layoutY="130.0" />
+                              <TextField layoutX="543.0" layoutY="211.0" />
+                              <ComboBox layoutX="543.0" layoutY="286.0" prefHeight="23.0" prefWidth="160.0" />
+                           </children>
+                        </Pane>
+                     </content>
+                  </ScrollPane>
+                  <Button layoutX="618.0" layoutY="626.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="80.0" text="取消" />
+               </children>
+            </Pane>
+            <Pane fx:id="pageCreate" layoutX="10.0" layoutY="10.0" prefHeight="554.0" prefWidth="793.0" style="-fx-background-color: #02030A;">
+               <children>
+                  <TextField layoutX="157.0" layoutY="62.0" prefHeight="27.0" prefWidth="256.0" promptText="输入联系电话查询客户编号" style="-fx-background-color: #02030A; -fx-border-color: #B7C3D7; -fx-border-radius: 2em;" />
+                  <Label layoutX="504.0" layoutY="14.0" text="生成订单" textFill="#e7e5e5">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Label>
+                  <ScrollPane layoutX="14.0" layoutY="194.0" prefHeight="399.0" prefWidth="530.0" stylesheets="@../css/style.css">
+                     <content>
+                        <Pane prefHeight="398.0" prefWidth="526.0" style="-fx-background-color: #05071F;">
+                           <children>
+                              <Label layoutX="30.0" layoutY="17.0" text="订单编号：" textFill="#e7e5e5" />
+                              <Label layoutX="30.0" layoutY="49.0" text="客户编号：" textFill="#e7e5e5" />
+                              <Label layoutX="30.0" layoutY="268.0" text="付款类型：" textFill="#e7e5e5" />
+                              <Label layoutX="30.0" layoutY="306.0" text="本次付款金额：" textFill="#e7e5e5" />
+                              <Label layoutX="30.0" layoutY="342.0" text="剩余付款金额：" textFill="#e7e5e5" />
+                              <Label layoutX="30.0" layoutY="105.0" text="产品编号：" textFill="#e7e5e5" />
+                              <Label layoutX="30.0" layoutY="142.0" text="产品数量：" textFill="#e7e5e5" />
+                              <Button layoutX="356.0" layoutY="138.0" mnemonicParsing="false" prefHeight="23.0" prefWidth="135.0" style="-fx-background-color: blue;" text="添加到购物车" />
+                              <TextField layoutX="110.0" layoutY="13.0" />
+                              <TextField layoutX="110.0" layoutY="101.0" />
+                              <TextField layoutX="110.0" layoutY="138.0" />
+                              <TextField layoutX="183.0" layoutY="302.0" />
+                              <TextField layoutX="183.0" layoutY="338.0" />
+                              <TextField layoutX="110.0" layoutY="45.0" />
+                              <ComboBox layoutX="183.0" layoutY="264.0" prefHeight="23.0" prefWidth="160.0" />
+                              <TextField layoutX="26.0" layoutY="199.0" prefHeight="23.0" prefWidth="244.0" promptText="输入产品编号从购物车移除" />
+                              <Button layoutX="355.0" layoutY="199.0" mnemonicParsing="false" prefHeight="23.0" prefWidth="136.0" style="-fx-background-color: red;" text="从购物车移除" />
+                           </children>
+                        </Pane>
+                     </content>
+                  </ScrollPane>
+                  <HBox alignment="CENTER" layoutX="214.0" layoutY="102.0" prefHeight="92.0" prefWidth="661.0" spacing="50.0">
+                     <children>
+                        <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
+                           <children>
+                              <Label text="2019" textFill="#2a73ff">
+                                 <font>
+                                    <Font name="System Bold" size="26.0" />
+                                 </font>
+                              </Label>
+                              <Label text="年" textFill="#e7e5e5" />
+                           </children>
+                        </VBox>
+                        <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
+                           <children>
+                              <Label text="11" textFill="#26bfbc">
+                                 <font>
+                                    <Font name="System Bold" size="26.0" />
+                                 </font>
+                              </Label>
+                              <Label text="月" textFill="#e7e5e5" />
+                           </children>
+                        </VBox>
+                        <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
+                           <children>
+                              <Label text="14" textFill="#fa5f7e">
+                                 <font>
+                                    <Font name="System Bold" size="26.0" />
+                                 </font>
+                              </Label>
+                              <Label text="日" textFill="#e7e5e5" />
+                           </children>
+                        </VBox>
+                        <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
+                           <children>
+                              <Label text="18：37" textFill="#de0000">
+                                 <font>
+                                    <Font name="System Bold" size="26.0" />
+                                 </font>
+                              </Label>
+                              <Label text="时间" textFill="#e7e5e5" />
+                           </children>
+                        </VBox>
+                     </children>
+                  </HBox>
+                  <Button layoutX="403.0" layoutY="628.0" mnemonicParsing="false" prefHeight="23.0" prefWidth="96.0" text="生成订单" />
+                  <Button layoutX="616.0" layoutY="628.0" mnemonicParsing="false" prefHeight="23.0" prefWidth="90.0" text="取消操作" />
+                  <Button layoutX="447.0" layoutY="64.0" mnemonicParsing="false" text="查询" />
+                  <TextField layoutX="538.0" layoutY="62.0" prefHeight="27.0" prefWidth="256.0" promptText="输入产品名称查询产品编号" style="-fx-background-color: #02030A; -fx-border-color: #B7C3D7; -fx-border-radius: 2em;" />
+                  <Button layoutX="825.0" layoutY="64.0" mnemonicParsing="false" text="查询" />
+                  <ScrollPane layoutX="547.0" layoutY="232.0" prefHeight="334.0" prefWidth="466.0" stylesheets="@../css/style.css">
+                     <content>
+                        <VBox prefHeight="318.0" prefWidth="466.0" style="-fx-background-color: #05071F;" />
+                     </content>
+                  </ScrollPane>
+                  <Label layoutX="747.0" layoutY="194.0" text="购物车" textFill="#e7e5e5">
+                     <font>
+                        <Font size="22.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="734.0" layoutY="578.0" text="产品总金额：0元" textFill="#e7e5e5" />
+               </children>
+            </Pane>
+            <Pane fx:id="pageCancel" layoutX="10.0" layoutY="10.0" prefHeight="554.0" prefWidth="793.0" style="-fx-background-color: #02030A;">
+               <children>
+                  <TextField layoutX="256.0" layoutY="75.0" prefHeight="27.0" prefWidth="256.0" promptText="输入客户编号查询可取消的订单" style="-fx-background-color: #02030A; -fx-border-color: #B7C3D7; -fx-border-radius: 2em;" />
+                  <Label layoutX="495.0" layoutY="30.0" text="取消订单" textFill="#e7e5e5">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Label>
+                  <HBox alignment="CENTER" layoutX="213.0" layoutY="140.0" prefHeight="92.0" prefWidth="661.0" spacing="50.0">
+                     <children>
+                        <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
+                           <children>
+                              <Label text="2019" textFill="#2a73ff">
+                                 <font>
+                                    <Font name="System Bold" size="26.0" />
+                                 </font>
+                              </Label>
+                              <Label text="年" textFill="#e7e5e5" />
+                           </children>
+                        </VBox>
+                        <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
+                           <children>
+                              <Label text="11" textFill="#26bfbc">
+                                 <font>
+                                    <Font name="System Bold" size="26.0" />
+                                 </font>
+                              </Label>
+                              <Label text="月" textFill="#e7e5e5" />
+                           </children>
+                        </VBox>
+                        <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
+                           <children>
+                              <Label text="14" textFill="#fa5f7e">
+                                 <font>
+                                    <Font name="System Bold" size="26.0" />
+                                 </font>
+                              </Label>
+                              <Label text="日" textFill="#e7e5e5" />
+                           </children>
+                        </VBox>
+                        <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
+                           <children>
+                              <Label text="18：37" textFill="#de0000">
+                                 <font>
+                                    <Font name="System Bold" size="26.0" />
+                                 </font>
+                              </Label>
+                              <Label text="时间" textFill="#e7e5e5" />
+                           </children>
+                        </VBox>
+                     </children>
+                  </HBox>
+                  <Button layoutX="844.0" layoutY="629.0" mnemonicParsing="false" prefHeight="23.0" prefWidth="112.0" style="-fx-background-color: red;" text="取消订单" textFill="WHITE" />
+                  <Button layoutX="611.0" layoutY="77.0" mnemonicParsing="false" text="查询" />
+                  <ScrollPane layoutX="14.0" layoutY="232.0" prefHeight="369.0" prefWidth="996.0" stylesheets="@../css/style.css">
+                     <content>
+                        <Pane prefHeight="368.0" prefWidth="994.0" style="-fx-background-color: #05071F;">
+                           <children>
+                              <Label layoutX="385.0" layoutY="49.0" text="订单编号：" textFill="#e7e5e5" />
+                              <Label layoutX="385.0" layoutY="203.0" text="返还金额：" textFill="#e7e5e5" />
+                              <Label layoutX="385.0" layoutY="127.0" text="订单状态：" textFill="#e7e5e5" />
+                              <TextField layoutX="545.0" layoutY="45.0" />
+                              <TextField layoutX="545.0" layoutY="199.0" />
+                              <ComboBox layoutX="545.0" layoutY="123.0" prefHeight="23.0" prefWidth="161.0" />
+                           </children>
+                        </Pane>
+                     </content>
+                  </ScrollPane>
+               </children>
+            </Pane>
+            <Pane fx:id="pageReturnGoods" layoutX="10.0" layoutY="10.0" prefHeight="576.0" prefWidth="840.0" style="-fx-background-color: #02030A;">
+               <children>
+                  <TextField layoutX="289.0" layoutY="96.0" prefHeight="27.0" prefWidth="256.0" promptText="输入客户编号查询可退货的订单" style="-fx-background-color: #02030A; -fx-border-color: #B7C3D7; -fx-border-radius: 2em;" />
+                  <Label layoutX="497.0" layoutY="31.0" text="客户退货" textFill="#e7e5e5">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Label>
+                  <ScrollPane layoutX="14.0" layoutY="232.0" prefHeight="348.0" prefWidth="968.0" stylesheets="@../css/style.css">
+                     <content>
+                        <Pane prefHeight="332.0" prefWidth="967.0" style="-fx-background-color: #05071F;">
+                           <children>
+                              <Label layoutX="315.0" layoutY="30.0" text="订单编号：" textFill="#e7e5e5" />
+                              <Label layoutX="315.0" layoutY="75.0" text="返还金额：" textFill="#e7e5e5" />
+                              <Label layoutX="315.0" layoutY="123.0" text="退货原因：" textFill="#e7e5e5" />
+                              <TextField layoutX="506.0" layoutY="26.0" />
+                              <TextField layoutX="506.0" layoutY="71.0" />
+                              <TextArea layoutX="506.0" layoutY="123.0" prefHeight="106.0" prefWidth="377.0" />
+                           </children>
+                        </Pane>
+                     </content>
+                  </ScrollPane>
+                  <HBox alignment="CENTER" layoutX="225.0" layoutY="130.0" prefHeight="92.0" prefWidth="661.0" spacing="50.0">
+                     <children>
+                        <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
+                           <children>
+                              <Label text="2019" textFill="#2a73ff">
+                                 <font>
+                                    <Font name="System Bold" size="26.0" />
+                                 </font>
+                              </Label>
+                              <Label text="年" textFill="#e7e5e5" />
+                           </children>
+                        </VBox>
+                        <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
+                           <children>
+                              <Label text="11" textFill="#26bfbc">
+                                 <font>
+                                    <Font name="System Bold" size="26.0" />
+                                 </font>
+                              </Label>
+                              <Label text="月" textFill="#e7e5e5" />
+                           </children>
+                        </VBox>
+                        <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
+                           <children>
+                              <Label text="14" textFill="#fa5f7e">
+                                 <font>
+                                    <Font name="System Bold" size="26.0" />
+                                 </font>
+                              </Label>
+                              <Label text="日" textFill="#e7e5e5" />
+                           </children>
+                        </VBox>
+                        <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
+                           <children>
+                              <Label text="18：37" textFill="#de0000">
+                                 <font>
+                                    <Font name="System Bold" size="26.0" />
+                                 </font>
+                              </Label>
+                              <Label text="时间" textFill="#e7e5e5" />
+                           </children>
+                        </VBox>
+                     </children>
+                  </HBox>
+                  <Button layoutX="886.0" layoutY="622.0" mnemonicParsing="false" prefHeight="23.0" prefWidth="72.0" style="-fx-background-color: red;" text="退货" textFill="WHITE" />
+                  <Button layoutX="635.0" layoutY="98.0" mnemonicParsing="false" text="查询" />
+               </children>
+            </Pane>
+            <Pane prefHeight="614.0" prefWidth="858.0" style="-fx-background-color: #02030A;" />
+         </children>
+      </StackPane>
+   </children>
+   <effect>
+      <DropShadow color="#1b1eeb" />
+   </effect>
+</AnchorPane>

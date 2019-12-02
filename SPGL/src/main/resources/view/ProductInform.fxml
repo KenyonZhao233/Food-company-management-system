@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<ScrollPane fx:id="staffPane" hbarPolicy="NEVER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#handleClick" prefHeight="114.0" prefWidth="938.0" vbarPolicy="NEVER" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.JKX.Controller.ItemController.StaffInformController">
+  <content>
+    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="113.0" prefWidth="937.0">
+         <children>
+            <Label layoutX="211.0" layoutY="18.0" text="产品编号：" />
+            <Label layoutX="424.0" layoutY="18.0" text="产品名称：" />
+            <Label layoutX="211.0" layoutY="70.0" text="产品单价：" />
+            <Label layoutX="277.0" layoutY="16.0" prefHeight="20.0" prefWidth="134.0" />
+            <Label layoutX="642.0" layoutY="70.0" text="产品总价：" />
+            <Label layoutX="424.0" layoutY="70.0" text="产品数量：" />
+            <Label layoutX="484.0" layoutY="68.0" prefHeight="20.0" prefWidth="134.0" />
+            <Label layoutX="277.0" layoutY="68.0" prefHeight="20.0" prefWidth="134.0" />
+            <Label layoutX="712.0" layoutY="68.0" prefHeight="20.0" prefWidth="134.0" />
+            <Label layoutX="484.0" layoutY="16.0" prefHeight="20.0" prefWidth="134.0" />
+         </children></AnchorPane>
+  </content>
+</ScrollPane>
