@@ -4,6 +4,7 @@ import com.JKX.Model.Table.Plan;
 import com.JKX.Model.Table.Production;
 import com.JKX.Model.Table.Raw;
 
+import java.sql.Date;
 import java.sql.SQLException;
 
 public class PlanSection {
@@ -89,64 +90,86 @@ public class PlanSection {
         return raws;
     }
 
-    public void searchPlan(String id)       //存储过程，查询Plan返回计划编号，成品类，计划状态。
+    public void makePlan(String planId, Production production, int num,Date s_date, Date e_date, String planType, String fzr) throws SQLException
     {
+        Plan plan = new Plan(planId, planType, production, num,s_date, e_date, fzr);
+        //Insert
+    }
 
+    public Plan[] searchPlan(String id) throws SQLException      //存储过程，查询Plan返回计划编号，成品类，计划状态。
+    {
+        String[] a = {"string"};
+        String[] b = {id};
+        String[][] ans;
+        ans = staff.ExcuteSearch("Call ", a, b);
+        Plan[] plans = new Plan[ans.length - 1];
+        for(int i = 1; i < ans.length; i++)
+        {
+            Production[] production = this.searchCpOnID(ans[i - 1][2]);
+            plans[i - 1] = new Plan(ans[i - 1][0], ans[i - 1][1], production[0], Integer.valueOf(ans[i - 1][3]), Date.valueOf(ans[i - 1][4]), Date.valueOf(ans[i - 1][5]), ans[i - 1][6]);
+        }
+        return plans;
     }
 
     public void changePlanOnnum(String id, String num)       //修改待执行的计划的成品数量
     {
-
-    }
-
-    public void changePlanOnZt(String id)
-    {
-
+        //直接写个存储过程
     }
 
     public void deletePlan(String id)       //删除这个编号的
     {
-
+        //让小界面自己解决这个问题，如果是待执行是可以删除的。
     }
 
     public void confirmPlan(String id)
     {
-
+        //将待审核的计划进行审核，同时修改为已完成， 添加个结束时间
     }
 
-    public void addCp()
+    public void addCp(Production production) //构造时先添加成品， 然后再添加原料
     {
 
     }
 
-    public void deleteCp()
+    public void addCpRaws(String id, Raw raw)    //添加完成品之后，想特定的一个成品添加原料
     {
 
+    }
+
+    public void deleteCpRaws(String id, Raw raw)
+    {
+        //根据成品编号，删除相应的原料
+    }
+
+    public void deleteCp(String id)
+    {
+        //同样是小界面来解决问题，按编号来删除
     }
 
     public void changeCp()
     {
-
+        //删除该成品的所有原料信息，逐个添加
     }
 
-    public void addRaw()
+    public void addRaw(Raw raw)
     {
 
     }
 
     public void changeRaw()
     {
-
+        //可修改原料的单价， 名称， 保质期
     }
 
-    public void deleteRaw()
+    public void deleteRaw(String id)
     {
-
+        //同样是小界面来解决问题，按编号来删除
     }
 
-    public void searchXl()
+    public void searchXl(Date d1, Date d2)
     {
-
+        //根据时间来查询，希望能做成柱状图，用大到小排序
+        //从订单表里统计数据
     }
 
     public String[][] Search(String sql) throws SQLException

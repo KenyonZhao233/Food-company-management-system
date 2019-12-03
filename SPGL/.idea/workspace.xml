@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="cd6bffba-f933-4555-9a18-9be48c95ca33" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/JKX/Model/Table/Plan.java" afterDir="false" />
+    <list default="true" id="cd6bffba-f933-4555-9a18-9be48c95ca33" name="Default Changelist" comment="正在写生产计划部">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/JKX/Controller/ItemController/StaffInformController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/JKX/Controller/ItemController/StaffInformController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/JKX/Model/PlanSection.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/JKX/Model/PlanSection.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/JKX/Model/Table/Production.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/JKX/Model/Table/Production.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/JKX/Model/Table/Raw.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/JKX/Model/Table/Raw.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/JKX/Model/Table/Plan.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/JKX/Model/Table/Plan.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/JKX/Mysql/MysqlConnect.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/JKX/Mysql/MysqlConnect.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/JKX/Controller/UserManageContorller.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/JKX/Controller/UserManageContorller.class" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -158,6 +159,10 @@
       <workItem from="1575189252919" duration="11901000" />
       <workItem from="1575299271056" duration="2450000" />
       <workItem from="1575303586646" duration="1364000" />
+      <workItem from="1575338479541" duration="1717000" />
+      <workItem from="1575346547710" duration="985000" />
+      <workItem from="1575354019765" duration="5351000" />
+      <workItem from="1575370638138" duration="1923000" />
     </task>
     <task id="LOCAL-00001" summary="最新版本（Commit测试）">
       <created>1574753611367</created>
@@ -250,7 +255,14 @@
       <option name="project" value="LOCAL" />
       <updated>1575293504942</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="正在写生产计划部">
+      <created>1575338695395</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1575338695395</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -282,6 +294,7 @@
     <MESSAGE value="Bug Fixed" />
     <MESSAGE value="人员管理界面基本完工，还差给登录名赋权限，注册。" />
     <MESSAGE value="最新版本" />
-    <option name="LAST_COMMIT_MESSAGE" value="最新版本" />
+    <MESSAGE value="正在写生产计划部" />
+    <option name="LAST_COMMIT_MESSAGE" value="正在写生产计划部" />
   </component>
 </project>
