@@ -24,7 +24,7 @@ public class Production {
         this.production_kc = 0;
     }
 
-    public Production(String id, String name, float p1, float p2, float p3, int bzq, Raw[] raws, int kc)
+    public Production(String id, String name, float p1, float p2, float p3, int bzq, int kc, Raw[] raws)
     {
         this.raws = raws;
         this.production_id = id;

@@ -5,6 +5,8 @@ public class Raw {
     private String raw_name;
     private int raw_bzq;
     public float raw_price;
+    public float raw_kc;
+    public float raw_num;
 
     public Raw(String id, String name, int bzq, float price)
     {
@@ -12,6 +14,32 @@ public class Raw {
         this.raw_name = name;
         this.raw_bzq = bzq;
         this.raw_price = price;
+        this.raw_kc = 0;
+        this.raw_num = 0;
+    }
+
+    public Raw(String id, String name, int bzq, float price, float raw_kc)
+    {
+        this.raw_id = id;
+        this.raw_name = name;
+        this.raw_bzq = bzq;
+        this.raw_price = price;
+        this.raw_kc = 0;
+        this.raw_num = 0;
+        this.raw_kc = raw_kc;
+        this.raw_num = 0;
+    }
+
+    public Raw(String id, String name, int bzq, float price, float raw_kc, float raw_num)
+    {
+        this.raw_id = id;
+        this.raw_name = name;
+        this.raw_bzq = bzq;
+        this.raw_price = price;
+        this.raw_kc = 0;
+        this.raw_num = 0;
+        this.raw_kc = raw_kc;
+        this.raw_num = raw_num;
     }
 
     public String getRaw_id()

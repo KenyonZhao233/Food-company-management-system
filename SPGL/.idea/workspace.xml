@@ -1,30 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="cd6bffba-f933-4555-9a18-9be48c95ca33" name="Default Changelist" comment="最新版本">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/JKX/Model/PlanSection.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/JKX/Model/Table/Production.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/JKX/Model/Table/Raw.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/JKX/Model/WorkshopSection.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/icon/food.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/view/ProductItem.fxml" afterDir="false" />
+    <list default="true" id="cd6bffba-f933-4555-9a18-9be48c95ca33" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/JKX/Model/Table/Plan.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/JKX/Controller/ItemController/StaffInformController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/JKX/Controller/ItemController/StaffInformController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/JKX/Controller/ProductionPlanController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/JKX/Controller/ProductionPlanController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/JKX/Controller/RawController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/JKX/Controller/RawController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/JKX/Controller/UserManageContorller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/JKX/Controller/UserManageContorller.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/JKX/Model/Cpk.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/JKX/Model/ProductionSection.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/JKX/Model/Plan.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/JKX/Model/Raw.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/JKX/Model/RawSection.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/JKX/Model/Sccj.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/JKX/Model/Xsb.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/JKX/Model/Ylk.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/view/DepSales.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/view/DepSales.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/JKX/Controller/UserManageContorller.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/JKX/Controller/UserManageContorller.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/JKX/Model/Cpk.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/JKX/Model/Sccj.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/JKX/Model/Xsb.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/JKX/Model/Ylk.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/JKX/Model/PlanSection.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/JKX/Model/PlanSection.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/JKX/Model/Table/Production.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/JKX/Model/Table/Production.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/JKX/Model/Table/Raw.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/JKX/Model/Table/Raw.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -174,6 +156,8 @@
       <workItem from="1575108930782" duration="1201000" />
       <workItem from="1575173441974" duration="1109000" />
       <workItem from="1575189252919" duration="11901000" />
+      <workItem from="1575299271056" duration="2450000" />
+      <workItem from="1575303586646" duration="1364000" />
     </task>
     <task id="LOCAL-00001" summary="最新版本（Commit测试）">
       <created>1574753611367</created>
@@ -259,7 +243,14 @@
       <option name="project" value="LOCAL" />
       <updated>1575195747599</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="最新版本">
+      <created>1575293504941</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1575293504942</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
