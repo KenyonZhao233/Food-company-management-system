@@ -1,20 +1,45 @@
 package com.JKX.Controller;
 
-import java.net.URL;
-import java.util.ResourceBundle;
+import com.JKX.Controller.ItemController.ItemUnpaidController;
+import com.JKX.Model.OrderSection;
+import com.JKX.Model.Staff;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import javafx.util.Duration;
+
+import java.io.IOException;
+import java.sql.SQLException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class FinanceController {
 
-    @FXML
-    private ResourceBundle resources;
+    private static Staff staff;
+    private OrderSection orderSection;
 
-    @FXML
-    private URL location;
+    DateFormat df = new SimpleDateFormat("yyyy.MM.dd hh:mm:ss");
+    Timeline animation = new Timeline(new KeyFrame(Duration.millis(1000), new EventHandler<ActionEvent>() {
+        @Override
+        public void handle(ActionEvent event) {
+            String timet = df.format(new Date());
+            year.setText(timet.substring(0,4));
+            month.setText(timet.substring(5,7));
+            day.setText(timet.substring(8,10));
+            time.setText(timet.substring(11,19));
+        }
+    }));
 
     @FXML
     private Button menuHomepage;
@@ -35,28 +60,89 @@ public class FinanceController {
     private Button menuQuit;
 
     @FXML
-    private Pane pageHomepage;
-
-    @FXML
-    private VBox pnItems3;
-
-    @FXML
     private Pane pageReceivables;
 
     @FXML
-    private VBox pnItems1;
+    private VBox ItemsReceive;
+
+    @FXML
+    private TextField receive;
 
     @FXML
     private Pane pageRefund;
 
     @FXML
-    private VBox pnItems2;
+    private TextField refund;
+
+    @FXML
+    private VBox ItemsRefund;
 
     @FXML
     private Pane pagePay;
 
     @FXML
+    private TextField in_text1;
+
+    @FXML
+    private TextField in_text2;
+
+    @FXML
     private Pane pageIncome;
+
+    @FXML
+    private TextField out_text1;
+
+    @FXML
+    private TextField out_text2;
+
+    @FXML
+    private Button out;
+
+    @FXML
+    private Pane pageHomepage;
+
+    @FXML
+    private TextField qurey;
+
+    @FXML
+    private Label year;
+
+    @FXML
+    private Label month;
+
+    @FXML
+    private Label day;
+
+    @FXML
+    private Label time;
+
+    @FXML
+    private VBox ItemsHome;
+
+    @FXML
+    void click_in(MouseEvent event) {
+
+    }
+
+    @FXML
+    void click_out(MouseEvent event) {
+
+    }
+
+    @FXML
+    void click_query(MouseEvent event) {
+
+    }
+
+    @FXML
+    void click_receive(MouseEvent event) {
+
+    }
+
+    @FXML
+    void click_refund(MouseEvent event) {
+
+    }
 
     @FXML
     void handleClicks(MouseEvent event) {
@@ -88,22 +174,36 @@ public class FinanceController {
         }
     }
 
+
     @FXML
     void initialize() {
-        assert menuHomepage != null : "fx:id=\"menuHomepage\" was not injected: check your FXML file 'Home.fxml'.";
-        assert menuReceivables != null : "fx:id=\"menuReceivables\" was not injected: check your FXML file 'Home.fxml'.";
-        assert menuRefund != null : "fx:id=\"menuRefund\" was not injected: check your FXML file 'Home.fxml'.";
-        assert menuPay != null : "fx:id=\"menuPay\" was not injected: check your FXML file 'Home.fxml'.";
-        assert menuIncome != null : "fx:id=\"menuIncome\" was not injected: check your FXML file 'Home.fxml'.";
-        assert menuQuit != null : "fx:id=\"menuQuit\" was not injected: check your FXML file 'Home.fxml'.";
-        assert pageHomepage != null : "fx:id=\"pageHomepage\" was not injected: check your FXML file 'Home.fxml'.";
-        assert pnItems3 != null : "fx:id=\"pnItems3\" was not injected: check your FXML file 'Home.fxml'.";
-        assert pageReceivables != null : "fx:id=\"pageReceivables\" was not injected: check your FXML file 'Home.fxml'.";
-        assert pnItems1 != null : "fx:id=\"pnItems1\" was not injected: check your FXML file 'Home.fxml'.";
-        assert pageRefund != null : "fx:id=\"pageRefund\" was not injected: check your FXML file 'Home.fxml'.";
-        assert pnItems2 != null : "fx:id=\"pnItems2\" was not injected: check your FXML file 'Home.fxml'.";
-        assert pagePay != null : "fx:id=\"pagePay\" was not injected: check your FXML file 'Home.fxml'.";
-        assert pageIncome != null : "fx:id=\"pageIncome\" was not injected: check your FXML file 'Home.fxml'.";
+        animation.setCycleCount(Timeline.INDEFINITE);
+        animation.play();
+        try {
+            orderSection = new OrderSection(new Staff("KenyonZ", "123456"));
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        try {
+            this.ItemsReceive.getChildren().clear();
+            String[][] ans = orderSection.unpaidSearch();
+            for (int i = 1; i < ans.length; i++) {
+                FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("view/ItemUnpaid.fxml"));
+                Node node = null;
+                try {
+                    node = loader.load();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                ItemUnpaidController itemUnpaidController = loader.<ItemUnpaidController>getController();
+                itemUnpaidController.setInform(ans[i][0], ans[i][1].substring(0,19), ans[i][2], ans[i][3]);
+                this.ItemsReceive.getChildren().add(node);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
 
     }
 }

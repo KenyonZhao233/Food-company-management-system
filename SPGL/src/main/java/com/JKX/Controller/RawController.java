@@ -28,8 +28,7 @@ import javafx.util.Duration;
 
 public class RawController {
 
-    private static Staff staff;
-    private static RawSection rawSection;
+    private RawSection rawSection;
 
     DateFormat df = new SimpleDateFormat("yyyy.MM.dd hh:mm:ss");
     Timeline animation = new Timeline(new KeyFrame(Duration.millis(1000), new EventHandler<ActionEvent>() {
@@ -255,29 +254,20 @@ public class RawController {
         }
     }
 
-    static String[][] getInform() throws SQLException
-    {
-        String[][] ans;
-        ans = rawSection.Search("select * from raw, raw_ck where raw.raw_id = raw_ck.raw_id order by raw_date DESC");
-        return ans;
-    }
-
-
 
     @FXML
     void initialize() {
         animation.setCycleCount(Timeline.INDEFINITE);
         animation.play();
-        staff = new Staff("KenyonZ", "123456");
-
-        if(staff.Login()){
-            System.out.println("成功");
-            rawSection = new RawSection(staff);
+        try {
+            rawSection = new RawSection(new Staff("KenyonZ", "123456"));
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
 
         try {
             this.raw_items.getChildren().clear();
-            String[][] ans = this.getInform();
+            String[][] ans = rawSection.getInform();
             for (int i = 1; i < ans.length; i++) {
                 FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("view/ItemDepRaw.fxml"));
                 Node node = null;
@@ -295,7 +285,7 @@ public class RawController {
         }
         try {
             this.raw_items1.getChildren().clear();
-            String[][] ans = this.getInform();
+            String[][] ans = rawSection.getInform();
             for (int i = 1; i < ans.length; i++) {
                 FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("view/ItemDepRaw.fxml"));
                 Node node = null;
@@ -313,7 +303,7 @@ public class RawController {
         }
         try {
             this.raw_items3.getChildren().clear();
-            String[][] ans = this.getInform();
+            String[][] ans = rawSection.getInform();
             for (int i = 1; i < ans.length; i++) {
                 FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("view/ItemDepRaw_Destory.fxml"));
                 Node node = null;
@@ -331,7 +321,7 @@ public class RawController {
         }
         try {
             this.raw_items2.getChildren().clear();
-            String[][] ans = this.getInform();
+            String[][] ans = rawSection.getInform();
             for (int i = 1; i < ans.length; i++) {
                 FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("view/ItemDepRaw.fxml"));
                 Node node = null;
@@ -351,9 +341,5 @@ public class RawController {
         query_type.setValue("原料编号");
     }
 
-    public void initData(Staff staff)
-    {
-        rawSection = new RawSection(staff);
-    }
 }
 

@@ -6,6 +6,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 
 public class ItemDepRawDestroyController {
 
@@ -35,6 +36,19 @@ public class ItemDepRawDestroyController {
 
     @FXML
     private Label num;
+
+    @FXML
+    private AnchorPane pane;
+
+    @FXML
+    void enter(MouseEvent event) {
+        pane.setStyle("-fx-background-color : #22A7F0");
+    }
+
+    @FXML
+    void exit(MouseEvent event) {
+        pane.setStyle("-fx-background-color : #02030A");
+    }
 
     @FXML
     void click_destroy(MouseEvent event) {
