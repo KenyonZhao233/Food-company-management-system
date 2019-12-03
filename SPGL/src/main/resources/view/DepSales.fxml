@@ -1,7 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import com.jfoenix.controls.JFXButton?>
-<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.paint.*?>
+<?import com.jfoenix.controls.*?>
+<?import java.lang.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
@@ -19,7 +26,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="SalePanel" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="689.0" prefWidth="1276.0" style="-fx-background-color: #02030A;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.JKX.Controller.SalesController">
+<AnchorPane fx:id="SalePanel" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="689.0" prefWidth="1276.0" style="-fx-background-color: #02030A;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.JKX.Controller.SalesController">
    <children>
       <VBox alignment="TOP_CENTER" prefHeight="576.0" prefWidth="256.0" style="-fx-background-color: #05071F;" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -31,7 +38,7 @@
                   <Insets bottom="10.0" top="50.0" />
                </VBox.margin></ImageView>
             <Label text="李华&#10;工号：100000000" textAlignment="CENTER" textFill="#e7e5e5" />
-            <Button fx:id="menuRegister" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onMouseClicked="#handleClicks" prefHeight="42.0" prefWidth="259.0" stylesheets="@../css/style.css" text="客户注册">
+            <JFXButton fx:id="menuRegister" onMouseClicked="#handleClicks" text="客户注册" textFill="WHITE">
                <graphic>
                   <ImageView fitHeight="23.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -39,11 +46,8 @@
                      </image>
                   </ImageView>
                </graphic>
-               <padding>
-                  <Insets left="50.0" />
-               </padding>
-            </Button>
-            <Button fx:id="menuCreate" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onMouseClicked="#handleClicks" prefHeight="42.0" prefWidth="259.0" stylesheets="@../css/style.css" text="生成订单">
+            </JFXButton>
+            <JFXButton fx:id="menuCreate" onMouseClicked="#handleClicks" text="生成订单" textFill="WHITE">
                <graphic>
                   <ImageView fitHeight="23.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -51,11 +55,8 @@
                      </image>
                   </ImageView>
                </graphic>
-               <padding>
-                  <Insets left="50.0" />
-               </padding>
-            </Button>
-            <Button fx:id="menuCancel" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onMouseClicked="#handleClicks" prefHeight="42.0" prefWidth="259.0" stylesheets="@../css/style.css" text="取消订单">
+            </JFXButton>
+            <JFXButton fx:id="menuCancel" onMouseClicked="#handleClicks" text="取消订单" textFill="WHITE">
                <graphic>
                   <ImageView fitHeight="23.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -63,11 +64,8 @@
                      </image>
                   </ImageView>
                </graphic>
-               <padding>
-                  <Insets left="50.0" />
-               </padding>
-            </Button>
-            <Button fx:id="menuReturnGoods" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onMouseClicked="#handleClicks" prefHeight="42.0" prefWidth="259.0" stylesheets="@../css/style.css" text="客户退货">
+            </JFXButton>
+            <JFXButton fx:id="menuReturnGoods" onMouseClicked="#handleClicks" text="客户退货" textFill="WHITE">
                <graphic>
                   <ImageView fitHeight="23.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -75,29 +73,22 @@
                      </image>
                   </ImageView>
                </graphic>
-               <padding>
-                  <Insets left="50.0" />
-               </padding>
-            </Button>
-            <Button fx:id="menuQuit" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onMouseClicked="#handleClicks" prefHeight="42.0" prefWidth="259.0" stylesheets="@../css/style.css" text="退出">
+            </JFXButton>
+            <JFXButton fx:id="menuQuit" onMouseClicked="#handleClicks" text="退出" textFill="WHITE">
                <graphic>
-                  <ImageView fitHeight="23.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="23.0" fitWidth="27.0" onMouseClicked="#handleClicks" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../icon/icons8_Sign_Out_32px.png" />
                      </image>
                   </ImageView>
                </graphic>
-               <padding>
-                  <Insets left="50.0" />
-               </padding>
-            </Button>
+            </JFXButton>
          </children>
       </VBox>
       <StackPane layoutX="258.0" prefHeight="690.0" prefWidth="1020.0" style="-fx-background-color: #02030A;">
          <children>
             <Pane fx:id="pageRegister" prefHeight="554.0" prefWidth="793.0" style="-fx-background-color: #02030A;">
                <children>
-                  <Button layoutX="376.0" layoutY="626.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="80.0" text="注册" />
                   <Label layoutX="472.0" layoutY="41.0" text="客户注册" textFill="#e7e5e5">
                      <font>
                         <Font size="24.0" />
@@ -147,123 +138,79 @@
                         </VBox>
                      </children>
                   </HBox>
-                  <ScrollPane layoutX="14.0" layoutY="222.0" prefHeight="382.0" prefWidth="996.0" stylesheets="@../css/style.css">
+                  <ScrollPane hbarPolicy="NEVER" layoutX="14.0" layoutY="222.0" prefHeight="382.0" prefWidth="996.0" stylesheets="@../css/style.css" vbarPolicy="NEVER">
                      <content>
-                        <Pane prefHeight="366.0" prefWidth="996.0" style="-fx-background-color: #05071F;">
+                        <Pane prefHeight="384.0" prefWidth="996.0" style="-fx-background-color: #05071F;">
                            <children>
                               <Label layoutX="367.0" layoutY="55.0" text="客户编号：" textFill="#e7e5e5" />
                               <Label layoutX="367.0" layoutY="134.0" text="客户姓名：" textFill="#e7e5e5" />
                               <Label layoutX="367.0" layoutY="215.0" text="联系电话：" textFill="#e7e5e5" />
                               <Label layoutX="367.0" layoutY="290.0" text="客户类型：" textFill="#e7e5e5" />
-                              <TextField layoutX="543.0" layoutY="51.0" />
-                              <TextField layoutX="543.0" layoutY="130.0" />
-                              <TextField layoutX="543.0" layoutY="211.0" />
-                              <ComboBox layoutX="543.0" layoutY="286.0" prefHeight="23.0" prefWidth="160.0" />
+                              <ComboBox fx:id="RegisterType" layoutX="543.0" layoutY="286.0" prefHeight="30.0" prefWidth="203.0" />
+                              <JFXTextField fx:id="RegisterID" focusColor="RED" layoutX="542.0" layoutY="50.0" prefHeight="30.0" prefWidth="203.0" style="-fx-background-color: white;" />
+                              <JFXTextField fx:id="RegisterName" focusColor="RED" layoutX="542.0" layoutY="129.0" prefHeight="30.0" prefWidth="203.0" style="-fx-background-color: white;" />
+                              <JFXTextField fx:id="RegisterTele" focusColor="RED" layoutX="542.0" layoutY="210.0" prefHeight="30.0" prefWidth="203.0" style="-fx-background-color: white;" />
                            </children>
                         </Pane>
                      </content>
                   </ScrollPane>
-                  <Button layoutX="618.0" layoutY="626.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="80.0" text="取消" />
+                  <JFXButton fx:id="RegisterButton" layoutX="512.0" layoutY="626.0" onMouseClicked="#handleClicks" prefHeight="30.0" prefWidth="91.0" style="-fx-background-color: white;" text="注册" />
                </children>
             </Pane>
             <Pane fx:id="pageCreate" layoutX="10.0" layoutY="10.0" prefHeight="554.0" prefWidth="793.0" style="-fx-background-color: #02030A;">
                <children>
-                  <TextField layoutX="157.0" layoutY="62.0" prefHeight="27.0" prefWidth="256.0" promptText="输入联系电话查询客户编号" style="-fx-background-color: #02030A; -fx-border-color: #B7C3D7; -fx-border-radius: 2em;" />
                   <Label layoutX="504.0" layoutY="14.0" text="生成订单" textFill="#e7e5e5">
                      <font>
                         <Font size="24.0" />
                      </font>
                   </Label>
-                  <ScrollPane layoutX="14.0" layoutY="194.0" prefHeight="399.0" prefWidth="530.0" stylesheets="@../css/style.css">
+                  <ScrollPane hbarPolicy="NEVER" layoutX="14.0" layoutY="109.0" prefHeight="484.0" prefWidth="530.0" stylesheets="@../css/style.css" vbarPolicy="NEVER">
                      <content>
-                        <Pane prefHeight="398.0" prefWidth="526.0" style="-fx-background-color: #05071F;">
+                        <Pane prefHeight="485.0" prefWidth="532.0" style="-fx-background-color: #05071F;">
                            <children>
                               <Label layoutX="30.0" layoutY="17.0" text="订单编号：" textFill="#e7e5e5" />
                               <Label layoutX="30.0" layoutY="49.0" text="客户编号：" textFill="#e7e5e5" />
-                              <Label layoutX="30.0" layoutY="268.0" text="付款类型：" textFill="#e7e5e5" />
-                              <Label layoutX="30.0" layoutY="306.0" text="本次付款金额：" textFill="#e7e5e5" />
-                              <Label layoutX="30.0" layoutY="342.0" text="剩余付款金额：" textFill="#e7e5e5" />
-                              <Label layoutX="30.0" layoutY="105.0" text="产品编号：" textFill="#e7e5e5" />
-                              <Label layoutX="30.0" layoutY="142.0" text="产品数量：" textFill="#e7e5e5" />
-                              <Button layoutX="356.0" layoutY="138.0" mnemonicParsing="false" prefHeight="23.0" prefWidth="135.0" style="-fx-background-color: blue;" text="添加到购物车" />
-                              <TextField layoutX="110.0" layoutY="13.0" />
-                              <TextField layoutX="110.0" layoutY="101.0" />
-                              <TextField layoutX="110.0" layoutY="138.0" />
-                              <TextField layoutX="183.0" layoutY="302.0" />
-                              <TextField layoutX="183.0" layoutY="338.0" />
-                              <TextField layoutX="110.0" layoutY="45.0" />
-                              <ComboBox layoutX="183.0" layoutY="264.0" prefHeight="23.0" prefWidth="160.0" />
-                              <TextField layoutX="26.0" layoutY="199.0" prefHeight="23.0" prefWidth="244.0" promptText="输入产品编号从购物车移除" />
-                              <Button layoutX="355.0" layoutY="199.0" mnemonicParsing="false" prefHeight="23.0" prefWidth="136.0" style="-fx-background-color: red;" text="从购物车移除" />
+                              <Label layoutX="30.0" layoutY="343.0" text="付款类型：" textFill="#e7e5e5" />
+                              <Label layoutX="30.0" layoutY="387.0" text="本次付款金额：" textFill="#e7e5e5" />
+                              <Label layoutX="30.0" layoutY="435.0" text="剩余付款金额：" textFill="#e7e5e5" />
+                              <Label layoutX="30.0" layoutY="226.0" text="产品编号：" textFill="#e7e5e5" />
+                              <Label layoutX="30.0" layoutY="264.0" text="产品数量：" textFill="#e7e5e5" />
+                              <JFXButton fx:id="CreateAddButton" layoutX="360.0" layoutY="259.0" onMouseClicked="#handleClicks" prefHeight="30.0" prefWidth="139.0" style="-fx-background-color: blue;" text="添加到购物车" />
+                              <JFXTextField fx:id="CreatePay" focusColor="RED" layoutX="183.0" layoutY="382.0" prefHeight="30.0" prefWidth="219.0" style="-fx-background-color: white;" />
+                              <JFXTextField fx:id="CreateNextPay" focusColor="RED" layoutX="183.0" layoutY="430.0" prefHeight="30.0" prefWidth="219.0" style="-fx-background-color: white;" />
+                              <JFXTextField fx:id="CreateID1" focusColor="RED" layoutX="110.0" layoutY="12.0" prefHeight="30.0" prefWidth="219.0" style="-fx-background-color: white;" />
+                              <JFXTextField fx:id="CreateID2" focusColor="RED" layoutX="110.0" layoutY="44.0" prefHeight="30.0" prefWidth="219.0" style="-fx-background-color: white;" />
+                              <JFXTextField fx:id="CreateOneID" focusColor="RED" layoutX="110.0" layoutY="221.0" prefHeight="30.0" prefWidth="219.0" style="-fx-background-color: white;" />
+                              <JFXTextField fx:id="CreateNumber" focusColor="RED" layoutX="110.0" layoutY="259.0" prefHeight="30.0" prefWidth="219.0" style="-fx-background-color: white;" />
+                              <Label layoutX="30.0" layoutY="153.0" text="产品名称：" textFill="#e7e5e5" />
+                              <Label layoutX="30.0" layoutY="190.0" text="产品单价：" textFill="#e7e5e5" />
+                              <JFXTextField fx:id="CreateOnePrice" focusColor="RED" layoutX="110.0" layoutY="185.0" prefHeight="30.0" prefWidth="219.0" style="-fx-background-color: white;" />
+                              <JFXTextField fx:id="CreateName" focusColor="RED" layoutX="110.0" layoutY="148.0" prefHeight="30.0" prefWidth="219.0" style="-fx-background-color: white;" />
+                              <ComboBox fx:id="CreatePayType" layoutX="181.0" layoutY="334.0" prefHeight="34.0" prefWidth="223.0" />
                            </children>
                         </Pane>
                      </content>
                   </ScrollPane>
-                  <HBox alignment="CENTER" layoutX="214.0" layoutY="102.0" prefHeight="92.0" prefWidth="661.0" spacing="50.0">
-                     <children>
-                        <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
-                           <children>
-                              <Label text="2019" textFill="#2a73ff">
-                                 <font>
-                                    <Font name="System Bold" size="26.0" />
-                                 </font>
-                              </Label>
-                              <Label text="年" textFill="#e7e5e5" />
-                           </children>
-                        </VBox>
-                        <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
-                           <children>
-                              <Label text="11" textFill="#26bfbc">
-                                 <font>
-                                    <Font name="System Bold" size="26.0" />
-                                 </font>
-                              </Label>
-                              <Label text="月" textFill="#e7e5e5" />
-                           </children>
-                        </VBox>
-                        <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
-                           <children>
-                              <Label text="14" textFill="#fa5f7e">
-                                 <font>
-                                    <Font name="System Bold" size="26.0" />
-                                 </font>
-                              </Label>
-                              <Label text="日" textFill="#e7e5e5" />
-                           </children>
-                        </VBox>
-                        <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
-                           <children>
-                              <Label text="18：37" textFill="#de0000">
-                                 <font>
-                                    <Font name="System Bold" size="26.0" />
-                                 </font>
-                              </Label>
-                              <Label text="时间" textFill="#e7e5e5" />
-                           </children>
-                        </VBox>
-                     </children>
-                  </HBox>
-                  <Button layoutX="403.0" layoutY="628.0" mnemonicParsing="false" prefHeight="23.0" prefWidth="96.0" text="生成订单" />
-                  <Button layoutX="616.0" layoutY="628.0" mnemonicParsing="false" prefHeight="23.0" prefWidth="90.0" text="取消操作" />
-                  <Button layoutX="447.0" layoutY="64.0" mnemonicParsing="false" text="查询" />
-                  <TextField layoutX="538.0" layoutY="62.0" prefHeight="27.0" prefWidth="256.0" promptText="输入产品名称查询产品编号" style="-fx-background-color: #02030A; -fx-border-color: #B7C3D7; -fx-border-radius: 2em;" />
-                  <Button layoutX="825.0" layoutY="64.0" mnemonicParsing="false" text="查询" />
-                  <ScrollPane layoutX="547.0" layoutY="232.0" prefHeight="334.0" prefWidth="466.0" stylesheets="@../css/style.css">
+                  <ScrollPane layoutX="547.0" layoutY="167.0" prefHeight="399.0" prefWidth="466.0" stylesheets="@../css/style.css">
                      <content>
-                        <VBox prefHeight="318.0" prefWidth="466.0" style="-fx-background-color: #05071F;" />
+                        <VBox prefHeight="380.0" prefWidth="466.0" style="-fx-background-color: #05071F;" />
                      </content>
                   </ScrollPane>
-                  <Label layoutX="747.0" layoutY="194.0" text="购物车" textFill="#e7e5e5">
+                  <Label layoutX="747.0" layoutY="121.0" text="购物车" textFill="#e7e5e5">
                      <font>
                         <Font size="22.0" />
                      </font>
                   </Label>
                   <Label layoutX="734.0" layoutY="578.0" text="产品总金额：0元" textFill="#e7e5e5" />
+                  <JFXButton fx:id="CreateSearch1" layoutX="451.0" layoutY="64.0" onMouseClicked="#handleClicks" style="-fx-background-color: white;" text="查询" />
+                  <JFXButton fx:id="CreateSearch2" layoutX="836.0" layoutY="63.0" onMouseClicked="#handleClicks" style="-fx-background-color: white;" text="查询" />
+                  <JFXTextField fx:id="CreateTextSearch1" focusColor="RED" layoutX="166.0" layoutY="64.0" prefHeight="30.0" prefWidth="256.0" promptText="输入联系电话查询客户编号" style="-fx-background-color: white;" />
+                  <JFXTextField fx:id="CreateTextSearch2" focusColor="RED" layoutX="552.0" layoutY="63.0" prefHeight="30.0" prefWidth="256.0" promptText="输入产品名称查询产品编号" style="-fx-background-color: white;" />
+                  <JFXButton fx:id="CreateButton" layoutX="499.0" layoutY="631.0" onMouseClicked="#handleClicks" prefHeight="30.0" prefWidth="107.0" style="-fx-background-color: white;" text="生成订单" />
                </children>
             </Pane>
             <Pane fx:id="pageCancel" layoutX="10.0" layoutY="10.0" prefHeight="554.0" prefWidth="793.0" style="-fx-background-color: #02030A;">
                <children>
-                  <TextField layoutX="256.0" layoutY="75.0" prefHeight="27.0" prefWidth="256.0" promptText="输入客户编号查询可取消的订单" style="-fx-background-color: #02030A; -fx-border-color: #B7C3D7; -fx-border-radius: 2em;" />
                   <Label layoutX="495.0" layoutY="30.0" text="取消订单" textFill="#e7e5e5">
                      <font>
                         <Font size="24.0" />
@@ -313,42 +260,42 @@
                         </VBox>
                      </children>
                   </HBox>
-                  <Button layoutX="844.0" layoutY="629.0" mnemonicParsing="false" prefHeight="23.0" prefWidth="112.0" style="-fx-background-color: red;" text="取消订单" textFill="WHITE" />
-                  <Button layoutX="611.0" layoutY="77.0" mnemonicParsing="false" text="查询" />
-                  <ScrollPane layoutX="14.0" layoutY="232.0" prefHeight="369.0" prefWidth="996.0" stylesheets="@../css/style.css">
+                  <ScrollPane hbarPolicy="NEVER" layoutX="14.0" layoutY="232.0" prefHeight="369.0" prefWidth="996.0" stylesheets="@../css/style.css" vbarPolicy="NEVER">
                      <content>
                         <Pane prefHeight="368.0" prefWidth="994.0" style="-fx-background-color: #05071F;">
                            <children>
                               <Label layoutX="385.0" layoutY="49.0" text="订单编号：" textFill="#e7e5e5" />
                               <Label layoutX="385.0" layoutY="203.0" text="返还金额：" textFill="#e7e5e5" />
                               <Label layoutX="385.0" layoutY="127.0" text="订单状态：" textFill="#e7e5e5" />
-                              <TextField layoutX="545.0" layoutY="45.0" />
-                              <TextField layoutX="545.0" layoutY="199.0" />
-                              <ComboBox layoutX="545.0" layoutY="123.0" prefHeight="23.0" prefWidth="161.0" />
+                              <JFXTextField fx:id="CancelID" focusColor="RED" layoutX="537.0" layoutY="44.0" prefHeight="30.0" prefWidth="203.0" style="-fx-background-color: white;" />
+                              <JFXTextField fx:id="CancelMoney" focusColor="RED" layoutX="537.0" layoutY="198.0" prefHeight="30.0" prefWidth="203.0" style="-fx-background-color: white;" />
+                              <ComboBox fx:id="CancelStage" layoutX="533.0" layoutY="122.0" prefHeight="30.0" prefWidth="211.0" />
                            </children>
                         </Pane>
                      </content>
                   </ScrollPane>
+                  <JFXButton fx:id="CancelSearch" layoutX="611.0" layoutY="76.0" onMouseClicked="#handleClicks" style="-fx-background-color: white;" text="查询" />
+                  <JFXTextField fx:id="CancelTextSearch" focusColor="RED" layoutX="226.0" layoutY="76.0" prefHeight="30.0" prefWidth="293.0" promptText="输入客户编号查询可取消的订单" style="-fx-background-color: white;" />
+                  <JFXButton fx:id="CancelButton" layoutX="850.0" layoutY="628.0" onMouseClicked="#handleClicks" prefHeight="30.0" prefWidth="112.0" style="-fx-background-color: red;" text="取消订单" textFill="WHITE" />
                </children>
             </Pane>
             <Pane fx:id="pageReturnGoods" layoutX="10.0" layoutY="10.0" prefHeight="576.0" prefWidth="840.0" style="-fx-background-color: #02030A;">
                <children>
-                  <TextField layoutX="289.0" layoutY="96.0" prefHeight="27.0" prefWidth="256.0" promptText="输入客户编号查询可退货的订单" style="-fx-background-color: #02030A; -fx-border-color: #B7C3D7; -fx-border-radius: 2em;" />
                   <Label layoutX="497.0" layoutY="31.0" text="客户退货" textFill="#e7e5e5">
                      <font>
                         <Font size="24.0" />
                      </font>
                   </Label>
-                  <ScrollPane hbarPolicy="NEVER" layoutX="14.0" layoutY="232.0" prefHeight="334.0" prefWidth="968.0" stylesheets="@../css/style.css" vbarPolicy="NEVER">
+                  <ScrollPane hbarPolicy="NEVER" layoutX="14.0" layoutY="232.0" prefHeight="348.0" prefWidth="968.0" stylesheets="@../css/style.css" vbarPolicy="NEVER">
                      <content>
-                        <Pane prefHeight="332.0" prefWidth="989.0" style="-fx-background-color: #05071F;">
+                        <Pane prefHeight="348.0" prefWidth="967.0" style="-fx-background-color: #05071F;">
                            <children>
                               <Label layoutX="315.0" layoutY="30.0" text="订单编号：" textFill="#e7e5e5" />
                               <Label layoutX="315.0" layoutY="75.0" text="返还金额：" textFill="#e7e5e5" />
                               <Label layoutX="315.0" layoutY="123.0" text="退货原因：" textFill="#e7e5e5" />
-                              <TextArea layoutX="506.0" layoutY="123.0" prefHeight="159.0" prefWidth="383.0" />
-                              <JFXTextField focusColor="#a84040" layoutX="506.0" layoutY="15.0" prefHeight="30.0" prefWidth="200.0" unFocusColor="WHITE" />
-                              <JFXTextField layoutX="505.0" layoutY="70.0" prefHeight="30.0" prefWidth="203.0" />
+                              <JFXTextField fx:id="ReturnID" focusColor="RED" layoutX="506.0" layoutY="25.0" prefHeight="30.0" prefWidth="202.0" style="-fx-background-color: white;" />
+                              <JFXTextField fx:id="ReturnMoney" focusColor="RED" layoutX="506.0" layoutY="70.0" prefHeight="30.0" prefWidth="202.0" style="-fx-background-color: white;" />
+                              <TextArea fx:id="ReturnReason" layoutX="506.0" layoutY="123.0" prefHeight="177.0" prefWidth="416.0" />
                            </children>
                         </Pane>
                      </content>
@@ -397,11 +344,12 @@
                         </VBox>
                      </children>
                   </HBox>
-                  <Button layoutX="886.0" layoutY="622.0" mnemonicParsing="false" prefHeight="23.0" prefWidth="72.0" style="-fx-background-color: red;" text="退货" textFill="WHITE" />
-                  <JFXButton layoutX="586.0" layoutY="97.0" style="-fx-background-color: #FFFFFF;" text="查询" />
+                  <JFXButton fx:id="ReturnSearch" layoutX="607.0" layoutY="97.0" onMouseClicked="#handleClicks" style="-fx-background-color: white;" text="查询" />
+                  <JFXTextField fx:id="ReturnTextSearch" focusColor="RED" layoutX="232.0" layoutY="97.0" prefHeight="30.0" prefWidth="293.0" promptText="输入客户编号查询可退货的订单" style="-fx-background-color: white;" unFocusColor="WHITE" />
+                  <JFXButton fx:id="ReturnButton" layoutX="840.0" layoutY="622.0" onMouseClicked="#handleClicks" prefHeight="30.0" prefWidth="107.0" style="-fx-background-color: red;" text="退货" textFill="WHITE" />
                </children>
             </Pane>
-            <Pane prefHeight="614.0" prefWidth="858.0" style="-fx-background-color: #02030A;" visible="false" />
+            <Pane prefHeight="614.0" prefWidth="858.0" style="-fx-background-color: #02030A;" />
          </children>
       </StackPane>
    </children>

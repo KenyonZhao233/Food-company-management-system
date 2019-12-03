@@ -35,7 +35,7 @@ public class PlanSection {
             Raw[] raws = new Raw[ansRaw.length - 1];
             for(int j = 1; j < ansRaw.length; j++)
                 raws[j - 1] = new Raw(ansRaw[j][0], ansRaw[j][1], Integer.parseInt(ansRaw[j][2]), Float.parseFloat(ansRaw[j][3]));
-            productions[i - 1] = new Production(ans[i - 1][0], ans[i - 1][1], Float.parseFloat(ans[i - 1][2]),Float.parseFloat(ans[i - 1][3]), Float.parseFloat(ans[i - 1][4]),Integer.parseInt(ans[i - 1][5]), Integer.parseInt(ans[i - 1][6]), raws);
+            productions[i - 1] = new Production(ans[i][0], ans[i][1], Float.parseFloat(ans[i][2]),Float.parseFloat(ans[i][3]), Float.parseFloat(ans[i][4]),Integer.parseInt(ans[i][5]), Integer.parseInt(ans[i][6]), raws, 0);
         }
         return productions;
     }
@@ -57,7 +57,7 @@ public class PlanSection {
             Raw[] raws = new Raw[ansRaw.length - 1];
             for(int j = 1; j < ansRaw.length; j++)
                 raws[j - 1] = new Raw(ansRaw[j][0], ansRaw[j][1], Integer.parseInt(ansRaw[j][2]), Float.parseFloat(ansRaw[j][3]), 0,Float.parseFloat(ansRaw[j][4]));
-            productions[i - 1] = new Production(ans[i - 1][0], ans[i - 1][1], Float.parseFloat(ans[i - 1][2]),Float.parseFloat(ans[i - 1][3]), Float.parseFloat(ans[i - 1][4]),Integer.parseInt(ans[i - 1][5]), Integer.parseInt(ans[i - 1][6]) ,raws);
+            productions[i - 1] = new Production(ans[i][0], ans[i][1], Float.parseFloat(ans[i][2]),Float.parseFloat(ans[i][3]), Float.parseFloat(ans[i][4]),Integer.parseInt(ans[i][5]), Integer.parseInt(ans[i][6]) ,raws, 0);
         }
         return productions;
     }
@@ -71,7 +71,7 @@ public class PlanSection {
         Raw[] raws = new Raw[ans.length - 1];
         for(int i = 1; i < ans.length; i++)
         {
-            raws[i - 1] = new Raw(ans[i - 1][0], ans[i - 1][1], Integer.parseInt(ans[i - 1][3]), Float.parseFloat(ans[i - 1][2]), Float.parseFloat(ans[i - 1][4]));
+            raws[i - 1] = new Raw(ans[i][0], ans[i][1], Integer.parseInt(ans[i][3]), Float.parseFloat(ans[i][2]), Float.parseFloat(ans[i][4]));
         }
         return raws;
     }
@@ -85,14 +85,14 @@ public class PlanSection {
         Raw[] raws = new Raw[ans.length - 1];
         for(int i = 1; i < ans.length; i++)
         {
-            raws[i - 1] = new Raw(ans[i - 1][0], ans[i - 1][1], Integer.parseInt(ans[i - 1][3]), Float.parseFloat(ans[i - 1][2]), Float.parseFloat(ans[i - 1][4]));
+            raws[i - 1] = new Raw(ans[i][0], ans[i][1], Integer.parseInt(ans[i][3]), Float.parseFloat(ans[i][2]), Float.parseFloat(ans[i][4]));
         }
         return raws;
     }
 
-    public void makePlan(String planId, Production production, int num,Date s_date, Date e_date, String planType, String fzr) throws SQLException
+    public void makePlan(String planId, Production production,Date s_date, Date e_date, String planType, String fzr) throws SQLException
     {
-        Plan plan = new Plan(planId, planType, production, num,s_date, e_date, fzr);
+        Plan plan = new Plan(planId, planType, production,s_date, e_date, fzr);
         //Insert
     }
 
@@ -106,7 +106,7 @@ public class PlanSection {
         for(int i = 1; i < ans.length; i++)
         {
             Production[] production = this.searchCpOnID(ans[i - 1][2]);
-            plans[i - 1] = new Plan(ans[i - 1][0], ans[i - 1][1], production[0], Integer.valueOf(ans[i - 1][3]), Date.valueOf(ans[i - 1][4]), Date.valueOf(ans[i - 1][5]), ans[i - 1][6]);
+            //plans[i - 1] = new Plan(ans[i][0], ans[i][1], production[0], Integer.valueOf(ans[i][3]), Date.valueOf(ans[i][4]), Date.valueOf(ans[i][5]), ans[i][6]);
         }
         return plans;
     }

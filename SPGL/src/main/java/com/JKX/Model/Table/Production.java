@@ -10,9 +10,10 @@ public class Production {
     private float production_p3;
     private int production_bzq;
     private int production_kc;
+    private int nums;
     private Raw[] raws;
 
-    public Production(String id, String name, float p1, float p2, float p3, int bzq, Raw[] raws)
+    public Production(String id, String name, float p1, float p2, float p3, int bzq, Raw[] raws, int nums)
     {
         this.raws = raws;
         this.production_id = id;
@@ -22,10 +23,12 @@ public class Production {
         this.production_p3 = p3;
         this.production_bzq = bzq;
         this.production_kc = 0;
+        this.nums = this.nums;
     }
 
-    public Production(String id, String name, float p1, float p2, float p3, int bzq, int kc, Raw[] raws)
+    public Production(String id, String name, float p1, float p2, float p3, int bzq, int kc, Raw[] raws, int nums)
     {
+        this.nums = nums;
         this.raws = raws;
         this.production_id = id;
         this.production_name = name;

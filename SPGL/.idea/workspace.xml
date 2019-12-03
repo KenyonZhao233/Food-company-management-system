@@ -1,13 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="cd6bffba-f933-4555-9a18-9be48c95ca33" name="Default Changelist" comment="正在写生产计划部">
+    <list default="true" id="cd6bffba-f933-4555-9a18-9be48c95ca33" name="Default Changelist" comment="最新版本">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/JKX/Model/SalesSection.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/JKX/Model/Table/Order.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/JKX/Controller/ItemController/StaffInformController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/JKX/Controller/ItemController/StaffInformController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/JKX/Controller/SalesController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/JKX/Controller/SalesController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/JKX/Model/PlanSection.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/JKX/Model/PlanSection.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/JKX/Model/Table/Plan.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/JKX/Model/Table/Plan.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/JKX/Mysql/MysqlConnect.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/JKX/Mysql/MysqlConnect.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/JKX/Controller/UserManageContorller.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/JKX/Controller/UserManageContorller.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/JKX/Model/Table/Production.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/JKX/Model/Table/Production.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/JKX/Model/Table/Raw.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/JKX/Model/Table/Raw.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/view/DepSales.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/view/DepSales.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/JKX/Mysql/MysqlConnect.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/JKX/Mysql/MysqlConnect.class" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -28,7 +33,7 @@
     </option>
   </component>
   <component name="Git.Settings">
-    <option name="PATH_TO_GIT" value="C:\Program Files\Git\cmd\git.exe" />
+    <option name="PATH_TO_GIT" value="D:\Git\install\Git\cmd\git.exe" />
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
     <option name="ROOT_SYNC" value="DONT_SYNC" />
   </component>
@@ -55,13 +60,13 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/lib/view-8.4.2.jar!/" />
+    <property name="last_opened_file_path" value="D:/Git/install/Git/cmd/git.exe" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
-    <property name="settings.editor.selected.configurable" value="reference.projectsettings.compiler.javacompiler" />
+    <property name="settings.editor.selected.configurable" value="vcs.Git" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -157,12 +162,6 @@
       <workItem from="1575108930782" duration="1201000" />
       <workItem from="1575173441974" duration="1109000" />
       <workItem from="1575189252919" duration="11901000" />
-      <workItem from="1575299271056" duration="2450000" />
-      <workItem from="1575303586646" duration="1364000" />
-      <workItem from="1575338479541" duration="1717000" />
-      <workItem from="1575346547710" duration="985000" />
-      <workItem from="1575354019765" duration="5351000" />
-      <workItem from="1575370638138" duration="1923000" />
     </task>
     <task id="LOCAL-00001" summary="最新版本（Commit测试）">
       <created>1574753611367</created>
@@ -248,21 +247,7 @@
       <option name="project" value="LOCAL" />
       <updated>1575195747599</updated>
     </task>
-    <task id="LOCAL-00013" summary="最新版本">
-      <created>1575293504941</created>
-      <option name="number" value="00013" />
-      <option name="presentableId" value="LOCAL-00013" />
-      <option name="project" value="LOCAL" />
-      <updated>1575293504942</updated>
-    </task>
-    <task id="LOCAL-00014" summary="正在写生产计划部">
-      <created>1575338695395</created>
-      <option name="number" value="00014" />
-      <option name="presentableId" value="LOCAL-00014" />
-      <option name="project" value="LOCAL" />
-      <updated>1575338695395</updated>
-    </task>
-    <option name="localTasksCounter" value="15" />
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -294,7 +279,6 @@
     <MESSAGE value="Bug Fixed" />
     <MESSAGE value="人员管理界面基本完工，还差给登录名赋权限，注册。" />
     <MESSAGE value="最新版本" />
-    <MESSAGE value="正在写生产计划部" />
-    <option name="LAST_COMMIT_MESSAGE" value="正在写生产计划部" />
+    <option name="LAST_COMMIT_MESSAGE" value="最新版本" />
   </component>
 </project>
