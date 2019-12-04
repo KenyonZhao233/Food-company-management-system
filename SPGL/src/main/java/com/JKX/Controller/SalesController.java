@@ -30,7 +30,7 @@ import javax.swing.*;
 
 public class SalesController implements Initializable {
 
-    private Staff staff;
+    private SalesSection salesSection;
 
     @FXML
     private AnchorPane SalePanel;
@@ -167,7 +167,7 @@ public class SalesController implements Initializable {
 
     public void initData(Staff staff)
     {
-        this.staff = staff;
+        salesSection = new SalesSection(staff);
     }
 
     @Override
@@ -203,7 +203,7 @@ public class SalesController implements Initializable {
 
             LeadContorller controller = loader.<LeadContorller>getController();
 
-            controller.initData(staff);
+            controller.initData(salesSection.getStaff());
 
             stage.show();
 
@@ -212,9 +212,9 @@ public class SalesController implements Initializable {
         }
         if(event.getSource() == ReturnSearch)
         {
-            SalesSection s=new SalesSection();
+
             try {
-                Order[] orders =s.searchOrderOnId(ReturnTextSearch.getText());
+                Order[] orders =salesSection.searchOrderOnId(ReturnTextSearch.getText());
                 if(orders.length == 0) {
                     Alert _alert = new Alert(Alert.AlertType.ERROR);
                     _alert.setTitle("错误");

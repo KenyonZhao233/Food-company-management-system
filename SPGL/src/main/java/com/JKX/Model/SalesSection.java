@@ -10,20 +10,28 @@ import java.sql.SQLException;
 
 public class SalesSection{
     Staff staff;
+    public SalesSection(Staff staff)
+    {
+        this.staff=staff;
+    }
+
+    public Staff getStaff() {
+        return staff;
+    }
+
     public Order[] searchOrderOnId(String CustomerID) throws SQLException
     {
         //String sql="select * from `order` where order_zt = '已完成' and order_custom = '"+CustomerID+"'";
-        String sql="SELECT orders.order_id, orders.order_zt, orders.order_date, orders.order_type, orders.order_custom " +
-                    "from orders " +
-                    "where orders.order_custom = '" + CustomerID + "' " +
-                    "GROUP BY orders.order_id, orders.order_zt, orders.order_date, orders.order_type, orders.order_custom";
-        System.out.println(sql);
+        String sql="SELECT orders.order_id, orders.order_zt, orders.order_date, orders.order_type, orders.order_custom \n" +
+                    "from orders \n" +
+                    "where orders.order_custom = '" + CustomerID + "' \n" +
+                    "GROUP BY orders.order_id, orders.order_zt, orders.order_date, orders.order_type, orders.order_custom\n";
         String[][] temp = staff.Search(sql);
         Order[] orders = new Order[temp.length - 1];
         for(int i = 1; i < temp.length; i++)
         {
             Production[] productions = this.searchCpOnOrder(temp[i][0]);
-            orders[i - 1] = new Order(temp[i][0], Date.valueOf(temp[i][2]), temp[i][3], temp[i][1], temp[i][4], productions);
+            orders[i - 1] = new Order(temp[i][0], Date.valueOf(temp[i][2].substring(0,10)), temp[i][3], temp[i][1], temp[i][4], productions);
         }
         System.out.println(orders.length);
         return orders;
