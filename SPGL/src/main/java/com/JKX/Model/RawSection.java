@@ -9,16 +9,23 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 
 public class RawSection {
-    public Staff staff;
 
-    public RawSection(Staff staff)
+    private Staff staff;
+
+    public RawSection(Staff s) throws SQLException
     {
-        this.staff = staff;
+        this.staff = s;
+        if(!staff.Login())
+            throw new SQLException();
     }
-
     public void getInformation()
     {
 
+    }
+
+    public String[][] getInform() throws SQLException
+    {
+        return staff.Search("select * from raw, raw_ck where raw.raw_id = raw_ck.raw_id order by raw_date DESC");
     }
 
     public String[][] Search(String sql) throws SQLException

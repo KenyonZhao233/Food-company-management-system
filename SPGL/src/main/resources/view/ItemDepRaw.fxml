@@ -3,7 +3,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="718.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.JKX.Controller.ItemController.ItemDepRawController">
+<AnchorPane fx:id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseEntered="#enter" onMouseExited="#exit" prefHeight="40.0" prefWidth="718.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.JKX.Controller.ItemController.ItemDepRawController">
    <children>
       <Label fx:id="time" layoutX="28.0" layoutY="14.0" prefHeight="15.0" prefWidth="143.0" text="入库时间" textFill="#e7e5e5" />
       <Label fx:id="id" layoutX="188.0" layoutY="14.0" text="原料编号" textFill="#e7e5e5" />

@@ -2,6 +2,9 @@ package com.JKX.Controller.ItemController;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
+
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -33,6 +36,19 @@ public class ItemDepRawController {
 
     @FXML
     private Label num;
+
+    @FXML
+    private AnchorPane pane;
+
+    @FXML
+    void enter(MouseEvent event) {
+        pane.setStyle("-fx-background-color : #22A7F0");
+    }
+
+    @FXML
+    void exit(MouseEvent event) {
+        pane.setStyle("-fx-background-color : #02030A");
+    }
 
     public void setInform(String time, String id, String name, String date, String prize, String count, String num)
     {
