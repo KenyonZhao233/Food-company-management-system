@@ -7,11 +7,11 @@ public class Plan {
     private String plan_id;
     private String plan_zt;
     private Production production;
-    private Date plan_sdate;
-    private Date plan_edate;
+    private String plan_sdate;
+    private String plan_edate;
     private String fzr;
 
-    public Plan(String plan_id, String plan_zt, Production productionm , Date plan_sdate, Date plan_edate, String fzr)
+    public Plan(String plan_id, String plan_zt, Production productionm , String plan_sdate, String plan_edate, String fzr)
     {
         this.plan_id = plan_id;
         this.plan_zt = plan_zt;
@@ -25,11 +25,11 @@ public class Plan {
         return production;
     }
 
-    public Date getPlan_edate() {
+    public String getPlan_edate() {
         return plan_edate;
     }
 
-    public Date getPlan_sdate() {
+    public String getPlan_sdate() {
         return plan_sdate;
     }
 
@@ -60,11 +60,11 @@ public class Plan {
         this.fzr = fzr;
     }
 
-    public void setPlan_edate(Date plan_edate) {
-        this.plan_edate = plan_edate;
+    public void setPlan_sdate(String plan_sdate) {
+        this.plan_sdate = plan_sdate;
     }
 
-    public void setPlan_sdate(Date plan_sdate) {
-        this.plan_sdate = plan_sdate;
+    public void setPlan_edate(String plan_edate) {
+        this.plan_edate = plan_edate;
     }
 }

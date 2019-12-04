@@ -90,7 +90,7 @@ public class PlanSection {
         return raws;
     }
 
-    public void makePlan(String planId, Production production,Date s_date, Date e_date, String planType, String fzr) throws SQLException
+    public void makePlan(String planId, Production production,String s_date, String e_date, String planType, String fzr) throws SQLException
     {
         Plan plan = new Plan(planId, planType, production,s_date, e_date, fzr);
         //Insert

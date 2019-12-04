@@ -4,8 +4,8 @@ import com.JKX.Model.Table.Production;
 import com.JKX.Mysql.MysqlConnect;
 import com.sun.org.apache.xpath.internal.operations.Or;
 
-import java.sql.Date;
 import java.sql.SQLException;
+import java.util.Date;
 
 
 public class SalesSection{
@@ -31,7 +31,7 @@ public class SalesSection{
         for(int i = 1; i < temp.length; i++)
         {
             Production[] productions = this.searchCpOnOrder(temp[i][0]);
-            orders[i - 1] = new Order(temp[i][0], Date.valueOf(temp[i][2].substring(0,10)), temp[i][3], temp[i][1], temp[i][4], productions);
+            orders[i - 1] = new Order(temp[i][0], temp[i][2], temp[i][3], temp[i][1], temp[i][4], productions);
         }
         System.out.println(orders.length);
         return orders;
