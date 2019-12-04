@@ -1,6 +1,8 @@
 package com.JKX.Controller;
 
+import com.JKX.Controller.ItemController.ItemFinanceController;
 import com.JKX.Controller.ItemController.ItemUnpaidController;
+import com.JKX.Model.FinanceSection;
 import com.JKX.Model.OrderSection;
 import com.JKX.Model.Staff;
 import javafx.animation.KeyFrame;
@@ -26,8 +28,8 @@ import java.util.Date;
 
 public class FinanceController {
 
-    private static Staff staff;
     private OrderSection orderSection;
+    private FinanceSection financeSection;
 
     DateFormat df = new SimpleDateFormat("yyyy.MM.dd hh:mm:ss");
     Timeline animation = new Timeline(new KeyFrame(Duration.millis(1000), new EventHandler<ActionEvent>() {
@@ -131,7 +133,24 @@ public class FinanceController {
 
     @FXML
     void click_query(MouseEvent event) {
-
+        try {
+            this.ItemsHome.getChildren().clear();
+            String[][] ans = financeSection.Query(this.qurey.getText());
+            for (int i = 1; i < ans.length; i++) {
+                FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("view/ItemFinance.fxml"));
+                Node node = null;
+                try {
+                    node = loader.load();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                ItemFinanceController itemFinanceController = loader.<ItemFinanceController>getController();
+                itemFinanceController.setInform(ans[i][0], ans[i][1], ans[i][2], ans[i][3].substring(0,19), ans[i][4]);
+                this.ItemsHome.getChildren().add(node);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML
@@ -184,6 +203,11 @@ public class FinanceController {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        try {
+            financeSection = new FinanceSection(new Staff("KenyonZ", "123456"));
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
 
         try {
             this.ItemsReceive.getChildren().clear();
@@ -204,6 +228,24 @@ public class FinanceController {
             e.printStackTrace();
         }
 
+        try {
+            this.ItemsHome.getChildren().clear();
+            String[][] ans = financeSection.Search();
+            for (int i = 1; i < ans.length; i++) {
+                FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("view/ItemFinance.fxml"));
+                Node node = null;
+                try {
+                    node = loader.load();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                ItemFinanceController itemFinanceController = loader.<ItemFinanceController>getController();
+                itemFinanceController.setInform(ans[i][0], ans[i][1], ans[i][2], ans[i][3].substring(0,19), ans[i][4]);
+                this.ItemsHome.getChildren().add(node);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
 
     }
 }

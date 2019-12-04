@@ -314,7 +314,7 @@
                         </VBox>
                      </children>
                   </HBox>
-                  <HBox alignment="CENTER_LEFT" layoutX="71.0" layoutY="178.0" prefHeight="42.0" prefWidth="712.0" spacing="80.0" style="-fx-background-color: #02030A;">
+                  <HBox alignment="CENTER_LEFT" layoutX="13.0" layoutY="178.0" prefHeight="42.0" prefWidth="770.0" spacing="60.0" style="-fx-background-color: #02030A;">
                      <children>
                         <Label text="财务编号" textFill="#e7e5e5">
                            <HBox.margin>
@@ -326,22 +326,25 @@
                               <Insets />
                            </HBox.margin>
                         </Label>
-                        <Label text="金额" textFill="#e7e5e5">
+                        <Label text="     金额" textFill="#e7e5e5">
                            <HBox.margin>
                               <Insets />
                            </HBox.margin>
                         </Label>
-                        <Label text="时间" textFill="#e7e5e5">
+                        <Label text="         时间" textFill="#e7e5e5">
                            <HBox.margin>
                               <Insets />
                            </HBox.margin>
                         </Label>
-                        <Label text="备注" textFill="#e7e5e5">
+                        <Label text="                              备注" textFill="#e7e5e5">
                            <HBox.margin>
                               <Insets />
                            </HBox.margin>
                         </Label>
                      </children>
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
                   </HBox>
                   <ScrollPane layoutX="14.0" layoutY="232.0" prefHeight="320.0" prefWidth="746.0" stylesheets="@../css/style.css">
                      <content>
