@@ -42,6 +42,22 @@ public class Raw {
         this.raw_num = raw_num;
     }
 
+    public void setRaw_bzq(int raw_bzq) {
+        this.raw_bzq = raw_bzq;
+    }
+
+    public void setRaw_kc(float raw_kc) {
+        this.raw_kc = raw_kc;
+    }
+
+    public void setRaw_num(float raw_num) {
+        this.raw_num = raw_num;
+    }
+
+    public void setRaw_price(float raw_price) {
+        this.raw_price = raw_price;
+    }
+
     public void setRaw_id(String raw_id) {
         this.raw_id = raw_id;
     }
@@ -68,5 +84,13 @@ public class Raw {
     public float getRaw_price()
     {
         return this.raw_price;
+    }
+
+    public float getRaw_kc() {
+        return raw_kc;
+    }
+
+    public float getRaw_num() {
+        return raw_num;
     }
 }
