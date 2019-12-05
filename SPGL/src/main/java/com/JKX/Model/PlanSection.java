@@ -1,12 +1,9 @@
 package com.JKX.Model;
 
-import com.JKX.Controller.ItemController.StaffInformController;
 import com.JKX.Model.Table.Plan;
 import com.JKX.Model.Table.Production;
 import com.JKX.Model.Table.Raw;
-import com.sun.xml.internal.bind.v2.runtime.property.StructureLoaderBuilder;
 
-import java.sql.Date;
 import java.sql.SQLException;
 import java.util.Calendar;
 import java.util.HashMap;
@@ -109,7 +106,23 @@ public class PlanSection {
         String[] a = {"string", "string"};
         String[] b = {id, zt};
         String[][] ans;
-        ans = staff.ExcuteSearch("Call Search_Plan(?, ?) ", a, b);
+        ans = staff.ExcuteSearch("Call Search_Plan_IdZt(?, ?) ", a, b);
+        Plan[] plans = new Plan[ans.length - 1];
+        for(int i = 1; i < ans.length; i++)
+        {
+            Production[] production = this.searchCpOnID(ans[i - 1][2]);
+            production[0].setNums(Integer.parseInt(ans[i][3]));
+            plans[i - 1] = new Plan(ans[i][0], ans[i][1], production[0], ans[i][4], ans[i][5], ans[i][6]);
+        }
+        return plans;
+    }
+
+    public Plan[] searchPlan(String id, String sdate, String edate) throws SQLException      //存储过程，查询Plan返回计划编号，成品类，计划状态。
+    {
+        String[] a = {"string", "date", "date"};
+        String[] b = {id, sdate, edate};
+        String[][] ans;
+        ans = staff.ExcuteSearch("Call Search_Plan_Date(?, ?, ?) ", a, b);
         Plan[] plans = new Plan[ans.length - 1];
         for(int i = 1; i < ans.length; i++)
         {
@@ -237,9 +250,15 @@ public class PlanSection {
         //同样是小界面来解决问题，按编号来删除
     }
 
-    public HashMap<Production, Integer> searchXl(Date d1, Date d2)
+    public HashMap<String, Integer> searchXl(String d1, String d2) throws SQLException
     {
-        HashMap<Production, Integer> hashMap = new HashMap<Production, Integer>();
+        HashMap<String, Integer> hashMap = new HashMap<String, Integer>();
+        String sql = "Call Search_XL(?, ?)";
+        String[] a = {"date", "date"};
+        String[] b = {d1, d2};
+        String[][] ans = this.staff.ExcuteSearch(sql, a, b);
+        for (int i = 1; i < ans.length; i++)
+            hashMap.put(ans[i][0], Integer.valueOf(ans[i][1]));
         return hashMap;
     }
 
