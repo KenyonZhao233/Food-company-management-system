@@ -9,10 +9,10 @@ public class Order {
     private String order_date;
     private String order_type;
     private String order_zt;
-    private String custom;
+    private Custom custom;
     private Production[] productions;
 
-    public Order(String order_id, String order_date, String order_type, String order_zt, String custom, Production[] productions)
+    public Order(String order_id, String order_date, String order_type, String order_zt, Custom custom, Production[] productions)
     {
         this.order_id = order_id;
         this.order_type = order_type;
@@ -30,7 +30,7 @@ public class Order {
         return productions;
     }
 
-    public String getCustom() {
+    public Custom getCustom() {
         return custom;
     }
 
@@ -46,7 +46,7 @@ public class Order {
         return order_zt;
     }
 
-    public void setCustom(String custom) {
+    public void setCustom(Custom custom) {
         this.custom = custom;
     }
 
