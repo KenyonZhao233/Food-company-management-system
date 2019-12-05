@@ -45,9 +45,10 @@ public class ItemFinanceController{
             this.money.setTextFill(Color.RED);
             this.money.setText("+" + money);
         }
-        else
+        else {
+            this.money.setTextFill(Color.GREEN);
             this.money.setText(money);
-
+        }
         this.inf.setText(inf);
     }
 

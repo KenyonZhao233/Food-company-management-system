@@ -1,6 +1,7 @@
 package com.JKX.Controller;
 
 import com.JKX.Controller.ItemController.ItemFinanceController;
+import com.JKX.Controller.ItemController.ItemRefundController;
 import com.JKX.Controller.ItemController.ItemUnpaidController;
 import com.JKX.Model.FinanceSection;
 import com.JKX.Model.OrderSection;
@@ -132,7 +133,7 @@ public class FinanceController {
     }
 
     @FXML
-    void click_query(MouseEvent event) {
+    public void click_query(MouseEvent event) {
         try {
             this.ItemsHome.getChildren().clear();
             String[][] ans = financeSection.Query(this.qurey.getText());
@@ -154,13 +155,47 @@ public class FinanceController {
     }
 
     @FXML
-    void click_receive(MouseEvent event) {
-
+    public void click_receive(MouseEvent event) {
+        try {
+            this.ItemsReceive.getChildren().clear();
+            String[][] ans = orderSection.unpaidQuery(this.receive.getText());
+            for (int i = 1; i < ans.length; i++) {
+                FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("view/ItemUnpaid.fxml"));
+                Node node = null;
+                try {
+                    node = loader.load();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                ItemUnpaidController itemUnpaidController = loader.<ItemUnpaidController>getController();
+                itemUnpaidController.setInform(ans[i][0], ans[i][1].substring(0,19), ans[i][2], ans[i][3],orderSection,this);
+                this.ItemsReceive.getChildren().add(node);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML
-    void click_refund(MouseEvent event) {
-
+    public void click_refund(MouseEvent event) {
+        try {
+            this.ItemsRefund.getChildren().clear();
+            String[][] ans = orderSection.refundQuery(this.refund.getText());
+            for (int i = 1; i < ans.length; i++) {
+                FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("view/ItemRefund.fxml"));
+                Node node = null;
+                try {
+                    node = loader.load();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                ItemRefundController itemRefundController = loader.<ItemRefundController>getController();
+                itemRefundController.setInform(ans[i][0], ans[i][3].substring(0,19), ans[i][1], ans[i][2],orderSection,this);
+                this.ItemsRefund.getChildren().add(node);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML
@@ -221,12 +256,32 @@ public class FinanceController {
                     e.printStackTrace();
                 }
                 ItemUnpaidController itemUnpaidController = loader.<ItemUnpaidController>getController();
-                itemUnpaidController.setInform(ans[i][0], ans[i][1].substring(0,19), ans[i][2], ans[i][3]);
+                itemUnpaidController.setInform(ans[i][0], ans[i][1].substring(0,19), ans[i][2], ans[i][3],orderSection,this);
                 this.ItemsReceive.getChildren().add(node);
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
+
+        try {
+            this.ItemsRefund.getChildren().clear();
+            String[][] ans = orderSection.refundSearch();
+            for (int i = 1; i < ans.length; i++) {
+                FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("view/ItemRefund.fxml"));
+                Node node = null;
+                try {
+                    node = loader.load();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                ItemRefundController itemRefundController = loader.<ItemRefundController>getController();
+                itemRefundController.setInform(ans[i][0], ans[i][3].substring(0,19), ans[i][1], ans[i][2],orderSection,this);
+                this.ItemsRefund.getChildren().add(node);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
 
         try {
             this.ItemsHome.getChildren().clear();
