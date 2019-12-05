@@ -203,7 +203,7 @@ public class UserManageContorller implements Initializable {
 
     public void handleAdd(MouseEvent mouseEvent) throws IOException, SQLException
     {
-        if(this.uidAddText.getText().equals("") || this.nameAddText.getText().equals("") || this.sexAddText.getValue().equals("null") || this.sfzAddText.getText().equals("") || this.sectionCombox.getItems().equals("")|| this.psw.getText().equals(""))
+        if(this.uidAddText.getText().equals("") || this.nameAddText.getText().equals("") || this.sexAddText.getItems().equals("") || this.sfzAddText.getText().equals("") || this.sectionCombox.getItems().equals("")|| this.psw.getText().equals(""))
         {
             Alert _alert = new Alert(Alert.AlertType.INFORMATION);
             _alert.setTitle("提示");
