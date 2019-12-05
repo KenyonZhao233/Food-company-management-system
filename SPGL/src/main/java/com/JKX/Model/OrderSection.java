@@ -44,8 +44,8 @@ public class OrderSection {
 
         String t = "insert into finance values(" + "'" + ans[1][0].format("%8d", Integer.parseInt(ans[1][0])).replace(" ", "0") + "','"+
         sta.Uid + "',"+ mn + ",'" + formatter.format(date) +"','"+ id + "')";
-        sta.Dose(t);
-        sta.Dose("delete from unpaid where order_id = '" + id + "'");
+        sta.Does(t);
+        sta.Does("delete from unpaid where order_id = '" + id + "'");
         return true;
     }
 
@@ -57,8 +57,8 @@ public class OrderSection {
 
         String t = "insert into finance values(" + "'" + ans[1][0].format("%8d", Integer.parseInt(ans[1][0])).replace(" ", "0") + "','"+
                 sta.Uid + "',-"+ mn + ",'" + formatter.format(date) +"','退款编号："+ id + "')";
-        sta.Dose(t);
-        sta.Dose("update refund set return_state = '已退款' where return_id = '" + id + "'");
+        sta.Does(t);
+        sta.Does("update refund set return_state = '已退款' where return_id = '" + id + "'");
         return true;
     }
 }

@@ -147,7 +147,7 @@
                               <Label layoutX="367.0" layoutY="215.0" text="联系电话：" textFill="#e7e5e5" />
                               <Label layoutX="367.0" layoutY="290.0" text="客户类型：" textFill="#e7e5e5" />
                               <ComboBox fx:id="RegisterType" layoutX="543.0" layoutY="286.0" prefHeight="30.0" prefWidth="203.0" />
-                              <JFXTextField fx:id="RegisterID" focusColor="RED" layoutX="542.0" layoutY="50.0" prefHeight="30.0" prefWidth="203.0" style="-fx-background-color: white;" />
+                              <JFXTextField fx:id="RegisterID" editable="false" focusColor="RED" layoutX="542.0" layoutY="50.0" prefHeight="30.0" prefWidth="203.0" style="-fx-background-color: white;" />
                               <JFXTextField fx:id="RegisterName" focusColor="RED" layoutX="542.0" layoutY="129.0" prefHeight="30.0" prefWidth="203.0" style="-fx-background-color: white;" />
                               <JFXTextField fx:id="RegisterTele" focusColor="RED" layoutX="542.0" layoutY="210.0" prefHeight="30.0" prefWidth="203.0" style="-fx-background-color: white;" />
                            </children>
