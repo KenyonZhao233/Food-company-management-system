@@ -97,6 +97,11 @@ public class Staff {
         return mysqlConnect.Search(sql);
     }
 
+    public int Does(String sql) throws SQLException
+    {
+        return mysqlConnect.Does(sql);
+    }
+
     public String[][] ExcuteSearch(String sql) throws SQLException
     {
         return mysqlConnect.ExcuteSearch(sql);

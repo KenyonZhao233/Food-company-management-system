@@ -1,11 +1,14 @@
 package com.JKX.Model;
 
+import com.JKX.Controller.ItemController.StaffInformController;
 import com.JKX.Model.Table.Plan;
 import com.JKX.Model.Table.Production;
 import com.JKX.Model.Table.Raw;
+import com.sun.xml.internal.bind.v2.runtime.property.StructureLoaderBuilder;
 
 import java.sql.Date;
 import java.sql.SQLException;
+import java.util.HashMap;
 
 public class PlanSection {
     private Staff staff;
@@ -92,48 +95,71 @@ public class PlanSection {
 
     public void makePlan(String planId, Production production,String s_date, String e_date, String planType, String fzr) throws SQLException
     {
-        Plan plan = new Plan(planId, planType, production,s_date, e_date, fzr);
+        Plan plan = new Plan(planId, planType, production, s_date, e_date, fzr);
         //Insert
     }
 
-    public Plan[] searchPlan(String id) throws SQLException      //存储过程，查询Plan返回计划编号，成品类，计划状态。
+    public Plan[] searchPlan(String id, String zt) throws SQLException      //存储过程，查询Plan返回计划编号，成品类，计划状态。
     {
-        String[] a = {"string"};
-        String[] b = {id};
+        String[] a = {"string", "string"};
+        String[] b = {id, zt};
         String[][] ans;
-        ans = staff.ExcuteSearch("Call ", a, b);
+        ans = staff.ExcuteSearch("Call(?, ?) ", a, b);
         Plan[] plans = new Plan[ans.length - 1];
         for(int i = 1; i < ans.length; i++)
         {
             Production[] production = this.searchCpOnID(ans[i - 1][2]);
-            //plans[i - 1] = new Plan(ans[i][0], ans[i][1], production[0], Integer.valueOf(ans[i][3]), Date.valueOf(ans[i][4]), Date.valueOf(ans[i][5]), ans[i][6]);
+            production[0].setNums(Integer.parseInt(ans[i][3]));
+            plans[i - 1] = new Plan(ans[i][0], ans[i][1], production[0], ans[i][4], ans[i][5], ans[i][6]);
         }
         return plans;
     }
 
-    public void changePlanOnnum(String id, String num)       //修改待执行的计划的成品数量
+    public int changePlanOnnum(String id, String num) throws SQLException
     {
+        //修改待执行的计划的成品数量
         //直接写个存储过程
+        String sql = "UPDATE project " +
+                     "SET project.produce_num = " + num +
+                     " WHERE project.produce_id = '" + id + "'";
+        int res = staff.Does(sql);
+        return res;
     }
 
-    public void deletePlan(String id)       //删除这个编号的
+    public int deletePlan(String id) throws SQLException    //删除这个编号的
     {
         //让小界面自己解决这个问题，如果是待执行是可以删除的。
+        String sql = "DELETE " +
+                    "FROM project " +
+                    "WHERE project.produce_id = '" + "'";
+        int res = staff.Does(sql);
+        return res;
     }
 
-    public void confirmPlan(String id)
+    public int confirmPlan(String id) throws SQLException
     {
         //将待审核的计划进行审核，同时修改为已完成， 添加个结束时间
+        String[] a = {"string"};
+        String[] b = {id};
+        String sql = "Call Confirm_Plan(?)";
+        int res = staff.ExcuteDoes(sql, a, b);
+        return res;
     }
 
-    public void addCp(Production production) //构造时先添加成品， 然后再添加原料
+    public int addCp(Production production) throws SQLException
     {
-
+        //构造时先添加成品， 然后再添加原料
+        //一个Insert语句
+        String a[] = {"string", "string", "float", "float", "float", "int"};
+        String b[] = {production.getProduction_id(), production.getProduction_name(), String.valueOf(production.getProduction_p1()), String.valueOf(production.getProduction_p2()), String.valueOf(production.getProduction_p3()), String.valueOf(production.getProduction_bzq())};
+        String sql = "Call Insert_Cp(?, ?, ?, ?, ?, ?)";
+        int res = staff.ExcuteDoes(sql, a, b);
+        return res;
     }
 
     public void addCpRaws(String id, Raw raw)    //添加完成品之后，想特定的一个成品添加原料
     {
-
+        //一个Insert语句
     }
 
     public void deleteCpRaws(String id, Raw raw)
@@ -144,32 +170,53 @@ public class PlanSection {
     public void deleteCp(String id)
     {
         //同样是小界面来解决问题，按编号来删除
+        //如果有库存，那么不能删除
+        String[] a = {"string"};
+        String[] b = {id};
+        String[] c = {"string"};
+        String sql = "Call Delete_Cp";
+        String[] ans = staff.ExcuteDoesReturn(sq)
     }
 
-    public void changeCp()
+    public int changeCp(Raw raw)
     {
         //删除该成品的所有原料信息，逐个添加
     }
 
-    public void addRaw(Raw raw)
+    public int addRaw(Raw raw) throws SQLException
     {
-
+        String[] a = {"string", "string", "int", "float"};
+        String[] b  ={raw.getRaw_id(), raw.getRaw_name(), String.valueOf(raw.getRaw_bzq()), String.valueOf(raw.getRaw_price())};
+        String sql = "Call Raw_Add(?, ?, ?, ?)";
+        int res = staff.ExcuteDoes(sql, a, b);
+        return res;
     }
 
-    public void changeRaw()
+    public int changeRaw(String id, String name, String bzq, String pri) throws SQLException
     {
+        String sql = "UPDATE raw\n" +
+                     "SET raw.raw_name = '" + name + "',\n" +
+                     "\t\traw.raw_bzq = " + bzq + ",\n" +
+                     "\t\traw.raw_pri = " +  pri +
+                     "WHERE raw.raw_id = '" + id + "'";
+        int res = staff.Does(sql);
+        return res;
         //可修改原料的单价， 名称， 保质期
     }
 
-    public void deleteRaw(String id)
+    public int deleteRaw(String id) throws SQLException
     {
+        String sql = "DELETE FROM raw\n" +
+                     "WHERE raw.raw_id = '" + id + "'";
+        int res = staff.Does(sql);
+        return res;
         //同样是小界面来解决问题，按编号来删除
     }
 
-    public void searchXl(Date d1, Date d2)
+    public HashMap<Production, Integer> searchXl(Date d1, Date d2)
     {
-        //根据时间来查询，希望能做成柱状图，用大到小排序
-        //从订单表里统计数据
+        HashMap<Production, Integer> hashMap = new HashMap<Production, Integer>();
+        return hashMap;
     }
 
     public String[][] Search(String sql) throws SQLException
