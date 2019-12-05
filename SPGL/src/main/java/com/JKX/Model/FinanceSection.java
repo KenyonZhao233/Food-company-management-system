@@ -15,12 +15,12 @@ public class FinanceSection {
 
     public String[][] Search() throws SQLException
     {
-        return sta.Search("select * from finance");
+        return sta.Search("select * from finance order by finance_id DESC");
     }
 
     public String[][] Query(String s) throws SQLException
     {
-        return sta.Search("select * from finance where finance_id like '%"+ s + "%'");
+        return sta.Search("select * from finance where finance_id like '%"+ s + "%' order by finance_id DESC");
     }
 
 }

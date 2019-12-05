@@ -139,9 +139,9 @@
                         </Label>
                      </children>
                   </HBox>
-                  <ScrollPane layoutX="145.0" layoutY="190.0" prefHeight="320.0" prefWidth="477.0" stylesheets="@../css/style.css">
+                  <ScrollPane layoutX="145.0" layoutY="190.0" prefHeight="320.0" prefWidth="511.0" stylesheets="@../css/style.css">
                      <content>
-                        <VBox fx:id="ItemsReceive" prefHeight="318.0" prefWidth="475.0" spacing="5.0" style="-fx-background-color: #02030A;">
+                        <VBox fx:id="ItemsReceive" prefHeight="318.0" prefWidth="509.0" spacing="5.0" style="-fx-background-color: #02030A;">
                            <padding>
                               <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                            </padding>
@@ -163,49 +163,46 @@
             </Pane>
             <Pane fx:id="pageRefund" prefHeight="554.0" prefWidth="737.0" style="-fx-background-color: #02030A;">
                <children>
-                  <TextField fx:id="refund" layoutX="249.0" layoutY="98.0" prefHeight="15.0" prefWidth="240.0" promptText="请输入订单号" style="-fx-background-color: #02030A; -fx-border-color: #B7C3D7; -fx-border-radius: 2em;" />
-                  <Label layoutX="273.0" layoutY="43.0" text="订单退款作业系统" textFill="#e7e5e5">
+                  <TextField fx:id="refund" layoutX="259.0" layoutY="108.0" prefHeight="15.0" prefWidth="240.0" promptText="请输入退款编号" style="-fx-background-color: #02030A; -fx-border-color: #B7C3D7; -fx-border-radius: 2em;" />
+                  <Label layoutX="283.0" layoutY="53.0" text="订单退款作业系统" textFill="#e7e5e5">
                      <font>
                         <Font size="24.0" />
                      </font>
                   </Label>
-                  <HBox alignment="CENTER_LEFT" layoutX="5.0" layoutY="148.0" prefHeight="42.0" prefWidth="707.0" spacing="50.0" style="-fx-background-color: #02030A;">
+                  <HBox alignment="CENTER_LEFT" layoutX="128.0" layoutY="148.0" prefHeight="42.0" prefWidth="539.0" spacing="80.0" style="-fx-background-color: #02030A;">
                      <children>
-                        <Label text="订单编号" textFill="#e7e5e5">
+                        <Label text="退款编号" textFill="#e7e5e5">
                            <HBox.margin>
                               <Insets left="50.0" />
                            </HBox.margin>
                         </Label>
-                        <Label text="订单时间" textFill="#e7e5e5">
+                        <Label text="出单时间" textFill="#e7e5e5">
                            <HBox.margin>
                               <Insets />
                            </HBox.margin>
                         </Label>
-                        <Label text="订单物品" textFill="#e7e5e5">
+                        <Label text="待退金额" textFill="#e7e5e5">
                            <HBox.margin>
                               <Insets />
                            </HBox.margin>
                         </Label>
-                        <Label text="订单数量" textFill="#e7e5e5">
+                        <Label text="客户编号" textFill="#e7e5e5">
                            <HBox.margin>
                               <Insets />
                            </HBox.margin>
                         </Label>
-                        <Label text="订单状态" textFill="#e7e5e5" />
-                        <Label text="客户编号" textFill="#e7e5e5" />
-                        <Label text="付款类型" textFill="#e7e5e5" />
                      </children>
                   </HBox>
-                  <ScrollPane layoutX="30.0" layoutY="190.0" prefHeight="320.0" prefWidth="680.0" stylesheets="@../css/style.css">
+                  <ScrollPane layoutX="145.0" layoutY="190.0" prefHeight="320.0" prefWidth="511.0" stylesheets="@../css/style.css">
                      <content>
-                        <VBox fx:id="ItemsRefund" prefHeight="318.0" prefWidth="678.0" spacing="5.0" style="-fx-background-color: #02030A;">
+                        <VBox fx:id="ItemsRefund" prefHeight="318.0" prefWidth="510.0" spacing="5.0" style="-fx-background-color: #02030A;">
                            <padding>
                               <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                            </padding>
                         </VBox>
                      </content>
                   </ScrollPane>
-                  <ImageView fitHeight="15.0" fitWidth="24.0" layoutX="463.0" layoutY="103.0" onMouseClicked="#click_refund" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="15.0" fitWidth="24.0" layoutX="473.0" layoutY="113.0" onMouseClicked="#click_refund" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../icon/icons8_Search_52px.png" />
                      </image>
