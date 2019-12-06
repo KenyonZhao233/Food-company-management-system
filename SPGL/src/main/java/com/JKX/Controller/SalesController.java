@@ -7,6 +7,7 @@ import java.util.ResourceBundle;
 
 import com.JKX.Model.Staff;
 import com.JKX.Model.SalesSection;
+import com.JKX.Model.Table.Custom;
 import com.JKX.Model.Table.Order;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextField;
@@ -18,6 +19,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.SingleSelectionModel;
 import javafx.scene.control.TextArea;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
@@ -25,6 +27,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import sun.awt.windows.WPrinterJob;
 
 import javax.swing.*;
 
@@ -168,6 +171,9 @@ public class SalesController implements Initializable {
     public void initData(Staff staff)
     {
         salesSection = new SalesSection(staff);
+        RegisterType.getItems().addAll("零售商","批发商","代理商");
+        CancelStage.getItems().addAll();
+        CreatePayType.getItems().addAll("预付款","全款");
     }
 
     @Override
@@ -175,11 +181,28 @@ public class SalesController implements Initializable {
     }
 
 
+    public void ClearRegister()
+    {
+        try
+        {
+            RegisterID.setText(salesSection.CreateCustomID());
+        }
+        catch (SQLException se)
+        {
+            this.salesSection.getStaff().showAlert(Alert.AlertType.ERROR, "错误", "查询失败", "系统错误");
+            return;
+        }
+        this.RegisterName.setText("");
+        this.RegisterTele.setText("");
+        this.RegisterType.setValue("");
+    }
+
     @FXML
     void handleClicks(MouseEvent event) throws IOException {
         if (event.getSource() == menuRegister) {
             pageRegister.setStyle("-fx-background-color : #02030A");
             pageRegister.toFront();
+            ClearRegister();
         }
         if (event.getSource() == menuCreate) {
             pageCreate.setStyle("-fx-background-color : #02030A");
@@ -210,17 +233,64 @@ public class SalesController implements Initializable {
             Stage index = (Stage)SalePanel.getScene().getWindow();
             index.close();
         }
+        if(event.getSource() == RegisterButton)
+        {
+            if(RegisterName.getText().equals(""))
+            {
+                this.salesSection.getStaff().showAlert(Alert.AlertType.ERROR, "错误", "注册失败", "客户姓名不能为空");
+                return;
+            }
+            if(RegisterTele.getText().equals(""))
+            {
+                this.salesSection.getStaff().showAlert(Alert.AlertType.ERROR, "错误", "注册失败", "联系电话不能为空");
+                return;
+            }
+            try
+            {
+                Custom[] customs=salesSection.searchCusOnPhone(RegisterTele.getText());
+                if(customs.length>0)
+                {
+                    this.salesSection.getStaff().showAlert(Alert.AlertType.ERROR, "错误", "注册失败", "此联系电话已存在，请检查联系电话");
+                    return;
+                }
+            }
+            catch (SQLException se)
+            {
+                this.salesSection.getStaff().showAlert(Alert.AlertType.ERROR, "错误", "查询失败", "系统错误");
+                return;
+            }
+            if(RegisterType.getValue().equals(""))
+            {
+                this.salesSection.getStaff().showAlert(Alert.AlertType.ERROR, "错误", "注册失败", "未选择客户类型");
+                return;
+            }
+            try
+            {
+                System.out.println(salesSection.CreateCustomID());
+            }
+            catch (SQLException se)
+            {
+                this.salesSection.getStaff().showAlert(Alert.AlertType.ERROR, "错误", "查询失败", "系统错误");
+                return;
+            }
+            try
+            {
+                this.salesSection.insertCustomer(RegisterID.getText(),RegisterType.getSelectionModel().getSelectedItem().toString(), RegisterName.getText(), RegisterTele.getText());
+                this.salesSection.getStaff().showAlert(Alert.AlertType.CONFIRMATION, "成功", "注册成功", "客户编号： " + RegisterID.getText());
+            }
+            catch (SQLException se)
+            {
+                this.salesSection.getStaff().showAlert(Alert.AlertType.ERROR, "错误", "查询失败", "系统错误");
+            }
+            ClearRegister();
+        }
         if(event.getSource() == ReturnSearch)
         {
 
             try {
                 Order[] orders =salesSection.searchOrderOnId(ReturnTextSearch.getText());
                 if(orders.length == 0) {
-                    Alert _alert = new Alert(Alert.AlertType.ERROR);
-                    _alert.setTitle("错误");
-                    _alert.setHeaderText("查询失败");
-                    _alert.setContentText("此客户编号不存在，请输入正确的客户编号");
-                    _alert.showAndWait();
+                    this.salesSection.getStaff().showAlert(Alert.AlertType.ERROR, "错误", "查询失败", "此客户编号不存在，请输入正确的客户编号");
                 }
                 else {
                     for(int i = 0; i < orders.length; i++)
@@ -231,11 +301,7 @@ public class SalesController implements Initializable {
             }
             catch (SQLException se)
             {
-                Alert _alert = new Alert(Alert.AlertType.ERROR);
-                _alert.setTitle("错误");
-                _alert.setHeaderText("查询失败");
-                _alert.setContentText("系统错误");
-                _alert.showAndWait();
+               this.salesSection.getStaff().showAlert(Alert.AlertType.ERROR, "错误", "查询失败", "系统错误");
             }
         }
     }

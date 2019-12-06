@@ -1,6 +1,7 @@
 package com.JKX.Model;
 
 import com.JKX.Mysql.MysqlConnect;
+import javafx.scene.control.Alert;
 import org.omg.CORBA.PUBLIC_MEMBER;
 
 import java.sql.SQLException;
@@ -97,6 +98,11 @@ public class Staff {
         return mysqlConnect.Search(sql);
     }
 
+    public int Does(String sql) throws SQLException
+    {
+        return mysqlConnect.Does(sql);
+    }
+
     public String[][] ExcuteSearch(String sql) throws SQLException
     {
         return mysqlConnect.ExcuteSearch(sql);
@@ -112,13 +118,16 @@ public class Staff {
         return mysqlConnect.ExcuteDoes(sql, a, b);
     }
 
-    public int Dose(String sql) throws SQLException
-    {
-        return mysqlConnect.Does(sql);
-    }
-
     public String[] ExcuteDoesReturn(String sql, String[] a, String[] b, String[] c) throws SQLException
     {
         return mysqlConnect.ExcuteDoesReturn(sql, a, b, c);
+    }
+    public void showAlert(Alert.AlertType alertType, String title, String head, String content)
+    {
+        Alert _alert = new Alert(alertType);
+        _alert.setTitle(title);
+        _alert.setHeaderText(head);
+        _alert.setContentText(content);
+        _alert.showAndWait();
     }
 }

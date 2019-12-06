@@ -71,6 +71,10 @@ public class Production {
         this.production_bzq = production_bzq;
     }
 
+    public void setNums(int nums) {
+        this.nums = nums;
+    }
+
     public String getProduction_id() {
         return production_id;
     }
@@ -97,6 +101,10 @@ public class Production {
 
     public int getProduction_bzq() {
         return production_bzq;
+    }
+
+    public int getNums() {
+        return nums;
     }
 
     public Raw[] getRaws() {

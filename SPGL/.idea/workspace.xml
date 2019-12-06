@@ -1,18 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="cd6bffba-f933-4555-9a18-9be48c95ca33" name="Default Changelist" comment="最新版本">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/JKX/Model/SalesSection.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/JKX/Model/Table/Order.java" afterDir="false" />
+    <list default="true" id="cd6bffba-f933-4555-9a18-9be48c95ca33" name="Default Changelist" comment="计划部方法除查询销量外完工">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/JKX/Controller/SalesController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/JKX/Controller/SalesController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/JKX/Model/PlanSection.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/JKX/Model/PlanSection.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/JKX/Model/Table/Plan.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/JKX/Model/Table/Plan.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/JKX/Model/Table/Production.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/JKX/Model/Table/Production.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/JKX/Model/Table/Raw.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/JKX/Model/Table/Raw.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/view/DepSales.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/view/DepSales.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/JKX/Mysql/MysqlConnect.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/JKX/Mysql/MysqlConnect.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/icon/28，ATK-OV7725摄像头模块资料.rar" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -33,7 +26,7 @@
     </option>
   </component>
   <component name="Git.Settings">
-    <option name="PATH_TO_GIT" value="D:\Git\install\Git\cmd\git.exe" />
+    <option name="PATH_TO_GIT" value="C:\Program Files\Git\cmd\git.exe" />
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
     <option name="ROOT_SYNC" value="DONT_SYNC" />
   </component>
@@ -60,25 +53,25 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="D:/Git/install/Git/cmd/git.exe" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/lib/view-8.4.2.jar!/" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
-    <property name="settings.editor.selected.configurable" value="vcs.Git" />
+    <property name="settings.editor.selected.configurable" value="reference.projectsettings.compiler.javacompiler" />
   </component>
   <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\asus\Desktop\Java实训\OnlineP\Food-company-management-system\SPGL\src\main\resources\view" />
+      <recent name="C:\Users\asus\Desktop\Java实训\SPGL\src\main\resources" />
+    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\asus\Desktop\Java实训\OnlineP\Food-company-management-system\SPGL\src\main\java\com\JKX\Controller" />
       <recent name="C:\Users\asus\Desktop\Java实训\SPGL" />
       <recent name="C:\Users\asus\Desktop\Java实训\SPGL\src\main\resources\css" />
       <recent name="C:\Users\asus\Desktop\Java实训\SPGL\src\main\resources\icon" />
       <recent name="C:\Users\asus\Desktop\Java实训\SPGL\src\main\resources\img" />
-    </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\asus\Desktop\Java实训\OnlineP\Food-company-management-system\SPGL\src\main\resources\view" />
-      <recent name="C:\Users\asus\Desktop\Java实训\SPGL\src\main\resources" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -162,6 +155,17 @@
       <workItem from="1575108930782" duration="1201000" />
       <workItem from="1575173441974" duration="1109000" />
       <workItem from="1575189252919" duration="11901000" />
+      <workItem from="1575299271056" duration="2450000" />
+      <workItem from="1575303586646" duration="1364000" />
+      <workItem from="1575338479541" duration="1717000" />
+      <workItem from="1575346547710" duration="985000" />
+      <workItem from="1575354019765" duration="5351000" />
+      <workItem from="1575370638138" duration="4429000" />
+      <workItem from="1575386743146" duration="1434000" />
+      <workItem from="1575425727718" duration="3055000" />
+      <workItem from="1575439354147" duration="1122000" />
+      <workItem from="1575446794019" duration="12816000" />
+      <workItem from="1575509257257" duration="10068000" />
     </task>
     <task id="LOCAL-00001" summary="最新版本（Commit测试）">
       <created>1574753611367</created>
@@ -247,7 +251,42 @@
       <option name="project" value="LOCAL" />
       <updated>1575195747599</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="最新版本">
+      <created>1575293504941</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1575293504942</updated>
+    </task>
+    <task id="LOCAL-00014" summary="正在写生产计划部">
+      <created>1575338695395</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1575338695395</updated>
+    </task>
+    <task id="LOCAL-00015" summary="先提交一波生产计划部部分内容">
+      <created>1575376762805</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1575376762805</updated>
+    </task>
+    <task id="LOCAL-00016" summary="bug fixed">
+      <created>1575426593746</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1575426593746</updated>
+    </task>
+    <task id="LOCAL-00017" summary="bug fixed">
+      <created>1575509321882</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1575509321882</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -256,6 +295,31 @@
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
       <map>
+        <entry key="1">
+          <value>
+            <State>
+              <option name="SHOW_ONLY_AFFECTED_CHANGES" value="true" />
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="HEAD" />
+                      </list>
+                    </value>
+                  </entry>
+                  <entry key="structure">
+                    <value>
+                      <list>
+                        <option value="dir:C:/Users/asus/Desktop/Java实训/OnlineP/Food-company-management-system/SPGL/src/main/java/com/JKX/Tools" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
+          </value>
+        </entry>
         <entry key="MAIN">
           <value>
             <State>
@@ -264,6 +328,11 @@
           </value>
         </entry>
       </map>
+    </option>
+    <option name="OPEN_TABS">
+      <set>
+        <option value="1" />
+      </set>
     </option>
   </component>
   <component name="VcsManagerConfiguration">
@@ -279,6 +348,9 @@
     <MESSAGE value="Bug Fixed" />
     <MESSAGE value="人员管理界面基本完工，还差给登录名赋权限，注册。" />
     <MESSAGE value="最新版本" />
-    <option name="LAST_COMMIT_MESSAGE" value="最新版本" />
+    <MESSAGE value="正在写生产计划部" />
+    <MESSAGE value="先提交一波生产计划部部分内容" />
+    <MESSAGE value="bug fixed" />
+    <option name="LAST_COMMIT_MESSAGE" value="bug fixed" />
   </component>
 </project>

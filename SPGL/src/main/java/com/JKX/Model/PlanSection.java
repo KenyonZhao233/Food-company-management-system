@@ -4,8 +4,10 @@ import com.JKX.Model.Table.Plan;
 import com.JKX.Model.Table.Production;
 import com.JKX.Model.Table.Raw;
 
-import java.sql.Date;
 import java.sql.SQLException;
+import java.util.Calendar;
+import java.util.HashMap;
+import java.util.Random;
 
 public class PlanSection {
     private Staff staff;
@@ -90,86 +92,174 @@ public class PlanSection {
         return raws;
     }
 
-    public void makePlan(String planId, Production production,String s_date, String e_date, String planType, String fzr) throws SQLException
+    public int makePlan(Plan plan) throws SQLException
     {
-        Plan plan = new Plan(planId, planType, production,s_date, e_date, fzr);
-        //Insert
+        //Plan plan = new Plan(planId, planType, production, s_date, e_date, fzr);
+        String sql = "INSERT INTO project(project.produce_id, project.produce_type, project.produce_wp, project.produce_num, project.produce_zrr) " +
+                     "VALUES ('" + plan.getPlan_id() + "', '" + plan.getProduction().getProduction_id() + "', " + String.valueOf(plan.getProduction().getNums()) + " , '" + plan.getFzr() + "')";
+        int res = staff.Does(sql);
+        return res;
     }
 
-    public Plan[] searchPlan(String id) throws SQLException      //存储过程，查询Plan返回计划编号，成品类，计划状态。
+    public Plan[] searchPlan(String id, String zt) throws SQLException      //存储过程，查询Plan返回计划编号，成品类，计划状态。
     {
-        String[] a = {"string"};
-        String[] b = {id};
+        String[] a = {"string", "string"};
+        String[] b = {id, zt};
         String[][] ans;
-        ans = staff.ExcuteSearch("Call ", a, b);
+        ans = staff.ExcuteSearch("Call Search_Plan_IdZt(?, ?) ", a, b);
         Plan[] plans = new Plan[ans.length - 1];
         for(int i = 1; i < ans.length; i++)
         {
             Production[] production = this.searchCpOnID(ans[i - 1][2]);
-            //plans[i - 1] = new Plan(ans[i][0], ans[i][1], production[0], Integer.valueOf(ans[i][3]), Date.valueOf(ans[i][4]), Date.valueOf(ans[i][5]), ans[i][6]);
+            production[0].setNums(Integer.parseInt(ans[i][3]));
+            plans[i - 1] = new Plan(ans[i][0], ans[i][1], production[0], ans[i][4], ans[i][5], ans[i][6]);
         }
         return plans;
     }
 
-    public void changePlanOnnum(String id, String num)       //修改待执行的计划的成品数量
+    public Plan[] searchPlan(String id, String sdate, String edate) throws SQLException      //存储过程，查询Plan返回计划编号，成品类，计划状态。
     {
-        //直接写个存储过程
+        String[] a = {"string", "date", "date"};
+        String[] b = {id, sdate, edate};
+        String[][] ans;
+        ans = staff.ExcuteSearch("Call Search_Plan_Date(?, ?, ?) ", a, b);
+        Plan[] plans = new Plan[ans.length - 1];
+        for(int i = 1; i < ans.length; i++)
+        {
+            Production[] production = this.searchCpOnID(ans[i - 1][2]);
+            production[0].setNums(Integer.parseInt(ans[i][3]));
+            plans[i - 1] = new Plan(ans[i][0], ans[i][1], production[0], ans[i][4], ans[i][5], ans[i][6]);
+        }
+        return plans;
     }
 
-    public void deletePlan(String id)       //删除这个编号的
+    public int changePlanOnnum(String id, String num) throws SQLException
+    {
+        //修改待执行的计划的成品数量
+        //直接写个存储过程
+        String sql = "UPDATE project " +
+                     "SET project.produce_num = " + num +
+                     " WHERE project.produce_id = '" + id + "'";
+        int res = staff.Does(sql);
+        return res;
+    }
+
+    public int deletePlan(String id) throws SQLException    //删除这个编号的
     {
         //让小界面自己解决这个问题，如果是待执行是可以删除的。
+        String sql = "DELETE " +
+                    "FROM project " +
+                    "WHERE project.produce_id = '" + "'";
+        int res = staff.Does(sql);
+        return res;
     }
 
-    public void confirmPlan(String id)
+    public int confirmPlan(String id) throws SQLException
     {
         //将待审核的计划进行审核，同时修改为已完成， 添加个结束时间
+        String[] a = {"string"};
+        String[] b = {id};
+        String sql = "Call Confirm_Plan(?)";
+        int res = staff.ExcuteDoes(sql, a, b);
+        return res;
     }
 
-    public void addCp(Production production) //构造时先添加成品， 然后再添加原料
+    public int addCp(Production production) throws SQLException
     {
-
+        //构造时先添加成品， 然后再添加原料
+        //一个Insert语句
+        String a[] = {"string", "string", "float", "float", "float", "int"};
+        String b[] = {production.getProduction_id(), production.getProduction_name(), String.valueOf(production.getProduction_p1()), String.valueOf(production.getProduction_p2()), String.valueOf(production.getProduction_p3()), String.valueOf(production.getProduction_bzq())};
+        String sql = "Call Insert_Cp(?, ?, ?, ?, ?, ?)";
+        int res = staff.ExcuteDoes(sql, a, b);
+        return res;
     }
 
-    public void addCpRaws(String id, Raw raw)    //添加完成品之后，想特定的一个成品添加原料
+    public int addCpRaws(String id, Raw raw)  throws SQLException  //添加完成品之后，想特定的一个成品添加原料
     {
-
+        String sql = "INSERT INTO product_raw(product_raw.product_id, product_raw.raw_id, product_raw.raw_num) " +
+                     "VALUES ('" + id + "', '" + raw.getRaw_id() + "', " + String.valueOf(raw.getRaw_num()) + ");";
+        int res = staff.Does(sql);
+        return res;
     }
 
-    public void deleteCpRaws(String id, Raw raw)
+    public int deleteCpRaws(String id) throws SQLException
+    {
+        //根据成品编号，删除全部的原料
+        String sql = "DELETE FROM product_raw " +
+                     "WHERE product_raw.product_id = '" + id + "'";
+        int res = staff.Does(sql);
+        return res;
+    }
+
+    public int deleteCpRaws(String id, Raw raw) throws SQLException
     {
         //根据成品编号，删除相应的原料
+        String sql = "DELETE FROM product_raw " +
+                     "WHERE product_raw.product_id = '" + id + "' AND product_raw.raw_id = '" + raw.getRaw_id() + "'";
+        int res = staff.Does(sql);
+        return res;
     }
 
-    public void deleteCp(String id)
+    public void deleteCp(String id) throws SQLException
     {
         //同样是小界面来解决问题，按编号来删除
+        //如果有库存，那么不能删除
+        String[] a = {"string"};
+        String[] b = {id};
+        String[] c = {"string"};
+        String sql = "Call Delete_Cp()";
+        String[] ans = staff.ExcuteDoesReturn(sql, a, b, c);
     }
 
-    public void changeCp()
+    public void changeCp(String id, Raw[] raws) throws SQLException
     {
         //删除该成品的所有原料信息，逐个添加
+        this.deleteCpRaws(id);
+        for(int i = 0; i < raws.length; i++)
+            this.addCpRaws(id, raws[i]);
     }
 
-    public void addRaw(Raw raw)
+    public int addRaw(Raw raw) throws SQLException
     {
-
+        String[] a = {"string", "string", "int", "float"};
+        String[] b  ={raw.getRaw_id(), raw.getRaw_name(), String.valueOf(raw.getRaw_bzq()), String.valueOf(raw.getRaw_price())};
+        String sql = "Call Raw_Add(?, ?, ?, ?)";
+        int res = staff.ExcuteDoes(sql, a, b);
+        return res;
     }
 
-    public void changeRaw()
+    public int changeRaw(String id, String name, String bzq, String pri) throws SQLException
     {
+        String sql = "UPDATE raw " +
+                     "SET raw.raw_name = '" + name + "', " +
+                     " raw.raw_bzq = " + bzq + ", " +
+                     " raw.raw_pri = " +  pri +
+                     "WHERE raw.raw_id = '" + id + "'";
+        int res = staff.Does(sql);
+        return res;
         //可修改原料的单价， 名称， 保质期
     }
 
-    public void deleteRaw(String id)
+    public int deleteRaw(String id) throws SQLException
     {
+        String sql = "DELETE FROM raw " +
+                     "WHERE raw.raw_id = '" + id + "'";
+        int res = staff.Does(sql);
+        return res;
         //同样是小界面来解决问题，按编号来删除
     }
 
-    public void searchXl(Date d1, Date d2)
+    public HashMap<String, Integer> searchXl(String d1, String d2) throws SQLException
     {
-        //根据时间来查询，希望能做成柱状图，用大到小排序
-        //从订单表里统计数据
+        HashMap<String, Integer> hashMap = new HashMap<String, Integer>();
+        String sql = "Call Search_XL(?, ?)";
+        String[] a = {"date", "date"};
+        String[] b = {d1, d2};
+        String[][] ans = this.staff.ExcuteSearch(sql, a, b);
+        for (int i = 1; i < ans.length; i++)
+            hashMap.put(ans[i][0], Integer.valueOf(ans[i][1]));
+        return hashMap;
     }
 
     public String[][] Search(String sql) throws SQLException
@@ -192,6 +282,35 @@ public class PlanSection {
         return staff.ExcuteDoesReturn(sql, a, b, c);
     }
 
+    public String GetNumber()
+    {
+        //生成计划号
+        //xx号生成原则：xx + 年（4位）+月（2位）+日（2位）+时（2位）+分（2位）+秒（2位）+3 位随机数
+        String num = GetRandomString(3);//自动生成一个3位随机数
+
+        String ordernum = "Or" + String.format("%04d", Calendar.getInstance().get(Calendar.YEAR))
+                + String.format("%02d", Calendar.getInstance().get(Calendar.MONTH))
+                + String.format("%02d", Calendar.getInstance().get(Calendar.DATE))
+                + String.format("%02d", Calendar.getInstance().get(Calendar.HOUR_OF_DAY))
+                + String.format("%02d", Calendar.getInstance().get(Calendar.MINUTE))
+                + String.format("%02d", Calendar.getInstance().get(Calendar.SECOND))
+                + num;
+
+        return ordernum;
+    }
+
+    public String GetRandomString(int Length)
+    {
+        String buffer = "0123456789";// 随机字符中也可以为汉字（任何）
+        StringBuilder sb = new StringBuilder();
+        Random r = new Random();
+        int range = buffer.length();
+        for (int i = 0; i < Length; i++)
+        {
+            sb.append(buffer.substring(r.nextInt(range), 1));
+        }
+        return sb.toString();
+    }
     //接下来开始写成品库所对应的操作
     //查询：写相应的sql语句，用sta中的函数调用select或存储过程，并返回一个二维数组；
     //修改：写相应的sql语句，用sta中的函数调用相应的存储过程，并返回影响的行数；

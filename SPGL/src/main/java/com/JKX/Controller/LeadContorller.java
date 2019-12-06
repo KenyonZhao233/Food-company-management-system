@@ -59,7 +59,6 @@ public class LeadContorller implements Initializable {
         }
         else if (actionBtn == btnCW) //财务部
         {
-
         }
         else if (actionBtn == btnJH) //生产计划部
         {
@@ -137,23 +136,23 @@ public class LeadContorller implements Initializable {
             {
                 btnCW.setDisable(false);
             }
-            else if(staff.zw[2][0] == 1)
+            if(staff.zw[2][0] == 1)
             {
                 btnXS.setDisable(false);
             }
-            else if (staff.zw[3][0] == 1)
+            if (staff.zw[3][0] == 1)
             {
                 btnCP.setDisable(false);
             }
-            else if (staff.zw[4][0] == 1)
+            if (staff.zw[4][0] == 1)
             {
                 btnYL.setDisable(false);
             }
-            else if (staff.zw[5][0] == 1)
+            if (staff.zw[5][0] == 1)
             {
                 btnCJ.setDisable(false);
             }
-            else if (staff.zw[6][0] == 1)
+            if (staff.zw[6][0] == 1)
             {
                 btnJH.setDisable(false);
             }
