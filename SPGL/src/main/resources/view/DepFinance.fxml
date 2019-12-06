@@ -227,7 +227,7 @@
                      </font>
                   </Label>
                   <TextField fx:id="in_text1" layoutX="277.0" layoutY="142.0" prefHeight="23.0" prefWidth="215.0" />
-                  <TextField fx:id="in_text2" layoutX="277.0" layoutY="207.0" prefHeight="237.0" prefWidth="215.0">
+                  <TextField fx:id="in_text2" alignment="TOP_LEFT" layoutX="277.0" layoutY="207.0" prefHeight="237.0" prefWidth="215.0">
                      <font>
                         <Font size="15.0" />
                      </font></TextField>

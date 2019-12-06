@@ -13,9 +13,7 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
@@ -123,13 +121,56 @@ public class FinanceController {
     private VBox ItemsHome;
 
     @FXML
-    void click_in(MouseEvent event) {
+    void click_in(MouseEvent event) throws SQLException {
+        try{
+            Integer.parseInt(this.in_text1.getText());
+        }catch (NumberFormatException e) {
+            Alert _alert = new Alert(Alert.AlertType.WARNING);
+            _alert.setTitle("支入系统");
+            _alert.setHeaderText("输入格式错误");
+            _alert.setContentText("请输入正确的金额");
+            _alert.show();
+            return;
+        }
 
+        Alert _alert = new Alert(Alert.AlertType.CONFIRMATION);
+        _alert.setTitle("支入系统");
+        _alert.setHeaderText("确认支入信息");
+        _alert.setContentText("备注：" + this.in_text2.getText() + "         支入" + this.in_text1.getText() + "元");
+        _alert.showAndWait();
+        if(_alert.getResult()== ButtonType.OK) {
+            financeSection.in(this.in_text2.getText(),this.in_text1.getText());
+        }
+        this.click_query(event);
+        this.in_text1.setText("");
+        this.in_text2.setText("");
     }
 
     @FXML
-    void click_out(MouseEvent event) {
+    void click_out(MouseEvent event) throws SQLException {
 
+        try{
+            Integer.parseInt(this.out_text1.getText());
+        }catch (NumberFormatException e) {
+            Alert _alert = new Alert(Alert.AlertType.WARNING);
+            _alert.setTitle("支出系统");
+            _alert.setHeaderText("输入格式错误");
+            _alert.setContentText("请输入正确的金额");
+            _alert.show();
+            return;
+        }
+
+        Alert _alert = new Alert(Alert.AlertType.CONFIRMATION);
+        _alert.setTitle("支出系统");
+        _alert.setHeaderText("确认支出信息");
+        _alert.setContentText("备注：" + this.out_text2.getText() + "         支出" + this.out_text1.getText() + "元");
+        _alert.showAndWait();
+        if(_alert.getResult()== ButtonType.OK) {
+            financeSection.out(this.out_text2.getText(),this.out_text1.getText());
+        }
+        this.click_query(event);
+        this.out_text1.setText("");
+        this.out_text2.setText("");
     }
 
     @FXML
@@ -148,6 +189,7 @@ public class FinanceController {
                 ItemFinanceController itemFinanceController = loader.<ItemFinanceController>getController();
                 itemFinanceController.setInform(ans[i][0], ans[i][1], ans[i][2], ans[i][3].substring(0,19), ans[i][4]);
                 this.ItemsHome.getChildren().add(node);
+
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -170,6 +212,7 @@ public class FinanceController {
                 ItemUnpaidController itemUnpaidController = loader.<ItemUnpaidController>getController();
                 itemUnpaidController.setInform(ans[i][0], ans[i][1].substring(0,19), ans[i][2], ans[i][3],orderSection,this);
                 this.ItemsReceive.getChildren().add(node);
+
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -192,6 +235,7 @@ public class FinanceController {
                 ItemRefundController itemRefundController = loader.<ItemRefundController>getController();
                 itemRefundController.setInform(ans[i][0], ans[i][3].substring(0,19), ans[i][1], ans[i][2],orderSection,this);
                 this.ItemsRefund.getChildren().add(node);
+
             }
         } catch (SQLException e) {
             e.printStackTrace();
