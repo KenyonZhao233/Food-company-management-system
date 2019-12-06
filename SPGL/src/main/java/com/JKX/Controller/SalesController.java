@@ -5,6 +5,7 @@ import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 
+import com.JKX.Controller.ItemController.ProductInformController;
 import com.JKX.Model.Staff;
 import com.JKX.Model.SalesSection;
 import com.JKX.Model.Table.Custom;
@@ -14,6 +15,7 @@ import com.jfoenix.controls.JFXTextField;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
@@ -135,6 +137,9 @@ public class SalesController implements Initializable {
     private JFXButton CancelSearch;
 
     @FXML
+    private JFXButton SearchNamePrice;
+
+    @FXML
     private JFXButton CancelButton;
 
     @FXML
@@ -167,12 +172,13 @@ public class SalesController implements Initializable {
     @FXML
     private TextArea ReturnReason;
 
+    @FXML
+    private VBox GoodsBox;
 
     public void initData(Staff staff)
     {
         salesSection = new SalesSection(staff);
         RegisterType.getItems().addAll("零售商","批发商","代理商");
-        CancelStage.getItems().addAll();
         CreatePayType.getItems().addAll("预付款","全款");
     }
 
@@ -197,6 +203,41 @@ public class SalesController implements Initializable {
         this.RegisterType.setValue("");
     }
 
+    public void ClearCreate()
+    {
+        try
+        {
+            CreateID1.setText(salesSection.CreateOrderID());
+        }
+        catch (SQLException se)
+        {
+            this.salesSection.getStaff().showAlert(Alert.AlertType.ERROR, "错误", "查询失败", "系统错误");
+            return;
+        }
+        CreateID2.setText("");
+        CreateName.setText("");
+        CreateOnePrice.setText("");
+        CreateOneID.setText("");
+        CreateNumber.setText("");
+        CreatePayType.setValue("");
+        CreatePay.setText("");
+        CreateNextPay.setText("");
+
+    }
+
+    public void ClearCancel()
+    {
+        CancelID.setText("");
+        CancelMoney.setText("");
+    }
+
+    public void ClearReturn()
+    {
+        this.ReturnID.setText("");
+        this.ReturnMoney.setText("");
+        this.ReturnReason.setText("");
+    }
+
     @FXML
     void handleClicks(MouseEvent event) throws IOException {
         if (event.getSource() == menuRegister) {
@@ -207,15 +248,18 @@ public class SalesController implements Initializable {
         if (event.getSource() == menuCreate) {
             pageCreate.setStyle("-fx-background-color : #02030A");
             pageCreate.toFront();
+            ClearCreate();
         }
         if (event.getSource() == menuCancel) {
             pageCancel.setStyle("-fx-background-color : #02030A");
             pageCancel.toFront();
+            ClearCancel();
         }
         if(event.getSource() == menuReturnGoods)
         {
             pageReturnGoods.setStyle("-fx-background-color : #02030A");
             pageReturnGoods.toFront();
+            ClearReturn();
         }
         if(event.getSource() == menuQuit)
         {
@@ -284,26 +328,255 @@ public class SalesController implements Initializable {
             }
             ClearRegister();
         }
-        if(event.getSource() == ReturnSearch)
+        if(event.getSource()==ReturnButton)
         {
+            if(ReturnID.getText().equals(""))
+            {
+                this.salesSection.getStaff().showAlert(Alert.AlertType.ERROR, "错误", "退货失败", "未填写退货订单编号");
+                return;
+            }
+            try
+            {
+                if(salesSection.CanReturn(ReturnID.getText())==false)
+                {
+                    this.salesSection.getStaff().showAlert(Alert.AlertType.ERROR, "错误", "退货失败", "此订单不可退货或已退货");
+                    return;
+                }
+            }
+            catch (SQLException se)
+            {
+                this.salesSection.getStaff().showAlert(Alert.AlertType.ERROR, "错误", "退货失败", "系统错误");
+            }
+            if(ReturnMoney.getText().equals(""))
+            {
+                this.salesSection.getStaff().showAlert(Alert.AlertType.ERROR, "错误", "退货失败", "未填写退款金额");
+                return;
+            }
+            if(ReturnReason.getText().equals(""))
+            {
+                this.salesSection.getStaff().showAlert(Alert.AlertType.ERROR, "错误", "退货失败", "未填写退款退款原因");
+                return;
+            }
+            try
+            {
+                this.salesSection.returnGoods(ReturnID.getText(),ReturnMoney.getText(),ReturnReason.getText());
+                this.salesSection.getStaff().showAlert(Alert.AlertType.INFORMATION, "成功退货", "已退货", "此订单已退");
+                ClearReturn();
+            }
+            catch (SQLException se)
+            {
+                this.salesSection.getStaff().showAlert(Alert.AlertType.ERROR, "错误", "退货失败", "系统错误");
+            }
+        }
+        if(event.getSource()==CancelButton)
+        {
+            if(CancelID.getText().equals(""))
+            {
+                this.salesSection.getStaff().showAlert(Alert.AlertType.ERROR, "错误", "取消订单失败", "订单编号不能为空");
+                return;
+            }
+            try
+            {
+                if(this.salesSection.CanCancel(CancelID.getText()).equals("error"))
+                {
+                    this.salesSection.getStaff().showAlert(Alert.AlertType.ERROR, "错误", "取消订单失败", "此订单已完成，不可取消");
+                    return;
+                }
 
+                System.out.println(this.salesSection.CanCancel(CancelID.getText()));
+            }
+            catch (SQLException se)
+            {
+                this.salesSection.getStaff().showAlert(Alert.AlertType.ERROR, "错误", "取消订单失败", "系统错误1");
+            }
+            if(CancelMoney.getText().equals(""))
+            {
+                this.salesSection.getStaff().showAlert(Alert.AlertType.ERROR, "错误", "取消订单失败", "请填写商议退款金额");
+                return;
+            }
+            try
+            {
+                int money=salesSection.cancelGoods(CancelID.getText(),CancelMoney.getText(),this.salesSection.CanCancel(CancelID.getText()));
+                this.salesSection.getStaff().showAlert(Alert.AlertType.INFORMATION, "成功取消订单", "已取消订单", "此订单已取消，按规定退款"+String.valueOf(money)+"元");
+            }
+            catch (SQLException se)
+            {
+                this.salesSection.getStaff().showAlert(Alert.AlertType.ERROR, "错误", "取消订单失败", "系统错误2");
+            }
+        }
+        if(event.getSource()==CancelSearch)
+        {
             try {
                 Order[] orders =salesSection.searchOrderOnId(ReturnTextSearch.getText());
                 if(orders.length == 0) {
                     this.salesSection.getStaff().showAlert(Alert.AlertType.ERROR, "错误", "查询失败", "此客户编号不存在，请输入正确的客户编号");
                 }
                 else {
+                    String str_id="";
                     for(int i = 0; i < orders.length; i++)
                     {
-                        System.out.println(orders[i].getOrder_id());
+                        if(!orders[i].getOrder_zt().equals("已完成"))
+                        {
+                            str_id=str_id+orders[i].getOrder_id()+"\n";
+                        }
                     }
+                    this.salesSection.getStaff().showAlert(Alert.AlertType.INFORMATION, "完成", "查询完成", "此客户可以退货的订单编号：\n"+str_id);
                 }
             }
             catch (SQLException se)
             {
-               this.salesSection.getStaff().showAlert(Alert.AlertType.ERROR, "错误", "查询失败", "系统错误");
+                this.salesSection.getStaff().showAlert(Alert.AlertType.ERROR, "错误", "查询失败", "系统错误0");
             }
         }
+        if(event.getSource() == ReturnSearch)
+        {
+            try {
+                Order[] orders =salesSection.searchOrderOnId(ReturnTextSearch.getText());
+                if(orders.length == 0) {
+                    this.salesSection.getStaff().showAlert(Alert.AlertType.ERROR, "错误", "查询失败", "此客户编号不存在，请输入正确的客户编号");
+                }
+                else {
+                    String str_id="";
+                    for(int i = 0; i < orders.length; i++)
+                    {
+                        if(orders[i].getOrder_zt().equals("已完成"))
+                        {
+                            str_id=str_id+orders[i].getOrder_id()+"\n";
+                        }
+                    }
+                    this.salesSection.getStaff().showAlert(Alert.AlertType.INFORMATION, "完成", "查询完成", "此客户可以退货的订单编号：\n"+str_id);
+                }
+            }
+            catch (SQLException se)
+            {
+               this.salesSection.getStaff().showAlert(Alert.AlertType.ERROR, "错误", "查询失败", "系统错误0");
+            }
+        }
+        if(event.getSource()==CreateSearch1)
+        {
+            if(CreateTextSearch1.getText().equals(""))
+            {
+                this.salesSection.getStaff().showAlert(Alert.AlertType.ERROR, "错误", "查询失败", "请输入联系电话查询客户编号");
+                return;
+            }
+            try
+            {
+                Custom[] c=salesSection.searchCusOnPhone(CreateTextSearch1.getText());
+                if(c.length==0)
+                {
+                    this.salesSection.getStaff().showAlert(Alert.AlertType.ERROR, "错误", "查询失败", "查无此人");
+                    return;
+                }
+                CreateID2.setText(c[0].getCustom_id());
+                this.salesSection.getStaff().showAlert(Alert.AlertType.ERROR, "完成", "查询完成", "客户编号为"+c[0].getCustom_id()+",已粘贴到客户编号栏");
+            }
+            catch (SQLException se)
+            {
+                this.salesSection.getStaff().showAlert(Alert.AlertType.ERROR, "错误", "查询失败", "系统错误");
+            }
+        }
+        if(event.getSource()==CreateSearch2)
+        {
+            if(CreateTextSearch2.getText().equals(""))
+            {
+                this.salesSection.getStaff().showAlert(Alert.AlertType.ERROR, "错误", "查询失败", "请输入产品名称查询产品编号");
+                return;
+            }
+            if(CreateID2.getText().equals(""))
+            {
+                this.salesSection.getStaff().showAlert(Alert.AlertType.ERROR, "错误", "请完善查询信息", "请输入客户编号以确定产品单价");
+                return;
+            }
+            try
+            {
+                Custom[] c=salesSection.searchCusOnId(CreateID2.getText());
+                if(c.length==0)
+                {
+                    this.salesSection.getStaff().showAlert(Alert.AlertType.ERROR, "错误", "查询失败", "此客户不存在");
+                    return;
+                }
+                String price_type="product_p"+c[0].getCustomType().getType_id();
+                String sql="select product_name,"+price_type+",product_id from product where product_name = '"+CreateTextSearch2.getText()+"'";
+                String [][]s=salesSection.getStaff().Search(sql);
+                if(s.length==1)
+                {
+                    this.salesSection.getStaff().showAlert(Alert.AlertType.ERROR, "错误", "查询失败", "此商品不存在");
+                    return;
+                }
+                CreateName.setText(s[1][0]);
+                CreateOnePrice.setText(s[1][1]);
+                CreateOneID.setText(s[1][2]);
+                this.salesSection.getStaff().showAlert(Alert.AlertType.INFORMATION, "完成", "查询完成", "查询成功，已将商品信息粘贴到面板");
+            }
+            catch (SQLException se)
+            {
+                this.salesSection.getStaff().showAlert(Alert.AlertType.ERROR, "错误", "查询失败", "系统错误?");
+            }
+        }
+        if(event.getSource()==SearchNamePrice)
+        {
+            if(CreateOneID.getText().equals(""))
+            {
+                this.salesSection.getStaff().showAlert(Alert.AlertType.ERROR, "错误", "查询失败", "请输入产品编号");
+                return;
+            }
+            try
+            {
+                Custom[] c=salesSection.searchCusOnId(CreateID2.getText());
+                if(c.length==0)
+                {
+                    this.salesSection.getStaff().showAlert(Alert.AlertType.ERROR, "错误", "查询失败", "此客户不存在，请检查是否输入客户编号");
+                    return;
+                }
+                String price_type="product_p"+c[0].getCustomType().getType_id();
+                String sql="select product_name,"+price_type+",product_id from product where product_id = '"+CreateOneID.getText()+"'";
+                String [][]s=salesSection.getStaff().Search(sql);
+                if(s.length==1)
+                {
+                    this.salesSection.getStaff().showAlert(Alert.AlertType.ERROR, "错误", "查询失败", "此商品不存在");
+                    return;
+                }
+                CreateName.setText(s[1][0]);
+                CreateOnePrice.setText(s[1][1]);
+                this.salesSection.getStaff().showAlert(Alert.AlertType.INFORMATION, "完成", "查询完成", "查询成功，已将商品信息粘贴到面板");
+            }
+            catch (SQLException se)
+            {
+                this.salesSection.getStaff().showAlert(Alert.AlertType.ERROR, "错误", "查询失败", "系统错误!");
+            }
+        }
+        if(event.getSource()==CreateAddButton)
+        {
+            if(CreateOneID.getText().equals(""))
+            {
+                this.salesSection.getStaff().showAlert(Alert.AlertType.ERROR, "错误", "无法添加到购物车", "请输入产品编号");
+                return;
+            }
+            if(CreateNumber.getText().equals(""))
+            {
+                this.salesSection.getStaff().showAlert(Alert.AlertType.ERROR, "错误", "无法添加到购物车", "请输入产品数量");
+                return;
+            }
+            if(CreateName.getText().equals(""))
+            {
+                this.salesSection.getStaff().showAlert(Alert.AlertType.ERROR, "错误", "无法添加到购物车", "请使用右上角查询按钮或查询名称单价按钮补全产品名称和产品单价");
+                return;
+            }
+
+            FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("view/ProductInform.fxml"));
+            Node node = loader.load();
+            ProductInformController productInformController=loader.<ProductInformController>getController();
+            String allPrice=String.valueOf(Integer.valueOf(CreateOnePrice.getText())*Integer.valueOf(CreateNumber.getText()));
+
+            productInformController.setInform(CreateOneID.getText(),CreateOnePrice.getText(),allPrice,CreateName.getText(),CreateNumber.getText());
+
+            productInformController.setContorller(this);
+            GoodsBox.getChildren().add(node);
+        }
+    }
+
+    public SalesSection getSalesSection() {
+        return salesSection;
     }
 
     @FXML
@@ -342,13 +615,14 @@ public class SalesController implements Initializable {
         assert CancelTextSearch != null : "fx:id=\"CancelTextSearch\" was not injected: check your FXML file 'DepSales.fxml'.";
         assert CancelID != null : "fx:id=\"CancelID\" was not injected: check your FXML file 'DepSales.fxml'.";
         assert CancelMoney != null : "fx:id=\"CancelMoney\" was not injected: check your FXML file 'DepSales.fxml'.";
-        assert CancelStage != null : "fx:id=\"CancelStage\" was not injected: check your FXML file 'DepSales.fxml'.";
+        //assert CancelStage != null : "fx:id=\"CancelStage\" was not injected: check your FXML file 'DepSales.fxml'.";
         assert ReturnSearch != null : "fx:id=\"ReturnSearch\" was not injected: check your FXML file 'DepSales.fxml'.";
         assert ReturnButton != null : "fx:id=\"ReturnButton\" was not injected: check your FXML file 'DepSales.fxml'.";
         assert ReturnTextSearch != null : "fx:id=\"ReturnTextSearch\" was not injected: check your FXML file 'DepSales.fxml'.";
         assert ReturnID != null : "fx:id=\"ReturnID\" was not injected: check your FXML file 'DepSales.fxml'.";
         assert ReturnMoney != null : "fx:id=\"ReturnMoney\" was not injected: check your FXML file 'DepSales.fxml'.";
         assert ReturnReason != null : "fx:id=\"ReturnReason\" was not injected: check your FXML file 'DepSales.fxml'.";
-
+        assert GoodsBox != null : "fx:id=\"GoodsBox\" was not injected: check your FXML file 'DepSales.fxml'.";
+        assert SearchNamePrice != null : "fx:id=\"SearchNamePrice\" was not injected: check your FXML file 'DepSales.fxml'.";
     }
 }

@@ -1,23 +1,34 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.image.*?>
+<?import com.jfoenix.controls.*?>
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<ScrollPane fx:id="staffPane" hbarPolicy="NEVER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#handleClick" prefHeight="114.0" prefWidth="938.0" vbarPolicy="NEVER" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.JKX.Controller.ItemController.StaffInformController">
+<ScrollPane fx:id="staffPane" hbarPolicy="NEVER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="165.0" prefWidth="457.0" vbarPolicy="NEVER" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.JKX.Controller.ItemController.ProductInformController">
   <content>
-    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="113.0" prefWidth="937.0">
+    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="164.0" prefWidth="454.0">
          <children>
-            <Label layoutX="211.0" layoutY="18.0" text="产品编号：" />
-            <Label layoutX="424.0" layoutY="18.0" text="产品名称：" />
-            <Label layoutX="211.0" layoutY="70.0" text="产品单价：" />
-            <Label layoutX="277.0" layoutY="16.0" prefHeight="20.0" prefWidth="134.0" />
-            <Label layoutX="642.0" layoutY="70.0" text="产品总价：" />
-            <Label layoutX="424.0" layoutY="70.0" text="产品数量：" />
-            <Label layoutX="484.0" layoutY="68.0" prefHeight="20.0" prefWidth="134.0" />
-            <Label layoutX="277.0" layoutY="68.0" prefHeight="20.0" prefWidth="134.0" />
-            <Label layoutX="712.0" layoutY="68.0" prefHeight="20.0" prefWidth="134.0" />
-            <Label layoutX="484.0" layoutY="16.0" prefHeight="20.0" prefWidth="134.0" />
+            <Label layoutX="23.0" layoutY="62.0" text="产品编号：" />
+            <Label layoutX="238.0" layoutY="94.0" text="产品名称：" />
+            <Label layoutX="23.0" layoutY="94.0" text="产品单价：" />
+            <Label fx:id="OneID" layoutX="98.0" layoutY="62.0" prefHeight="20.0" prefWidth="134.0" />
+            <Label layoutX="23.0" layoutY="124.0" text="产品总价：" />
+            <Label layoutX="238.0" layoutY="124.0" text="产品数量：" />
+            <Label fx:id="OneNumber" layoutX="313.0" layoutY="124.0" prefHeight="20.0" prefWidth="134.0" />
+            <Label fx:id="OnePrice" layoutX="98.0" layoutY="94.0" prefHeight="20.0" prefWidth="134.0" />
+            <Label fx:id="OneAllPrice" layoutX="98.0" layoutY="124.0" prefHeight="20.0" prefWidth="134.0" />
+            <Label fx:id="OneName" layoutX="313.0" layoutY="94.0" prefHeight="20.0" prefWidth="134.0" />
+            <JFXButton fx:id="deleteButton" layoutX="313.0" layoutY="21.0" onMouseClicked="#handleClicks" style="-fx-background-color: red;" text="从购物车移除" />
+            <ImageView fitHeight="52.0" fitWidth="66.0" layoutX="9.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../icon/Food-French.png" />
+               </image>
+            </ImageView>
          </children></AnchorPane>
   </content>
 </ScrollPane>

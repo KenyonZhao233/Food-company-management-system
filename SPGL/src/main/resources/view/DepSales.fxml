@@ -178,22 +178,23 @@
                               <JFXButton fx:id="CreateAddButton" layoutX="360.0" layoutY="259.0" onMouseClicked="#handleClicks" prefHeight="30.0" prefWidth="139.0" style="-fx-background-color: blue;" text="添加到购物车" />
                               <JFXTextField fx:id="CreatePay" focusColor="RED" layoutX="183.0" layoutY="382.0" prefHeight="30.0" prefWidth="219.0" style="-fx-background-color: white;" />
                               <JFXTextField fx:id="CreateNextPay" focusColor="RED" layoutX="183.0" layoutY="430.0" prefHeight="30.0" prefWidth="219.0" style="-fx-background-color: white;" />
-                              <JFXTextField fx:id="CreateID1" focusColor="RED" layoutX="110.0" layoutY="12.0" prefHeight="30.0" prefWidth="219.0" style="-fx-background-color: white;" />
+                              <JFXTextField fx:id="CreateID1" editable="false" focusColor="RED" layoutX="110.0" layoutY="12.0" prefHeight="30.0" prefWidth="219.0" style="-fx-background-color: white;" />
                               <JFXTextField fx:id="CreateID2" focusColor="RED" layoutX="110.0" layoutY="44.0" prefHeight="30.0" prefWidth="219.0" style="-fx-background-color: white;" />
                               <JFXTextField fx:id="CreateOneID" focusColor="RED" layoutX="110.0" layoutY="221.0" prefHeight="30.0" prefWidth="219.0" style="-fx-background-color: white;" />
                               <JFXTextField fx:id="CreateNumber" focusColor="RED" layoutX="110.0" layoutY="259.0" prefHeight="30.0" prefWidth="219.0" style="-fx-background-color: white;" />
                               <Label layoutX="30.0" layoutY="153.0" text="产品名称：" textFill="#e7e5e5" />
                               <Label layoutX="30.0" layoutY="190.0" text="产品单价：" textFill="#e7e5e5" />
-                              <JFXTextField fx:id="CreateOnePrice" focusColor="RED" layoutX="110.0" layoutY="185.0" prefHeight="30.0" prefWidth="219.0" style="-fx-background-color: white;" />
-                              <JFXTextField fx:id="CreateName" focusColor="RED" layoutX="110.0" layoutY="148.0" prefHeight="30.0" prefWidth="219.0" style="-fx-background-color: white;" />
+                              <JFXTextField fx:id="CreateOnePrice" editable="false" focusColor="RED" layoutX="110.0" layoutY="185.0" prefHeight="30.0" prefWidth="219.0" style="-fx-background-color: white;" />
+                              <JFXTextField fx:id="CreateName" editable="false" focusColor="RED" layoutX="110.0" layoutY="148.0" prefHeight="30.0" prefWidth="219.0" style="-fx-background-color: white;" />
                               <ComboBox fx:id="CreatePayType" layoutX="181.0" layoutY="334.0" prefHeight="34.0" prefWidth="223.0" />
+                              <JFXButton fx:id="SearchNamePrice" layoutX="360.0" layoutY="221.0" onMouseClicked="#handleClicks" prefHeight="30.0" prefWidth="139.0" style="-fx-background-color: white;" text="查询名称单价" textFill="RED" />
                            </children>
                         </Pane>
                      </content>
                   </ScrollPane>
                   <ScrollPane layoutX="547.0" layoutY="167.0" prefHeight="399.0" prefWidth="466.0" stylesheets="@../css/style.css">
                      <content>
-                        <VBox prefHeight="380.0" prefWidth="466.0" style="-fx-background-color: #05071F;" />
+                        <VBox fx:id="GoodsBox" prefHeight="380.0" prefWidth="466.0" style="-fx-background-color: #05071F;" />
                      </content>
                   </ScrollPane>
                   <Label layoutX="747.0" layoutY="121.0" text="购物车" textFill="#e7e5e5">
@@ -201,7 +202,7 @@
                         <Font size="22.0" />
                      </font>
                   </Label>
-                  <Label layoutX="734.0" layoutY="578.0" text="产品总金额：0元" textFill="#e7e5e5" />
+                  <Label fx:id="all_money" layoutX="734.0" layoutY="578.0" text="产品总金额：0元" textFill="#e7e5e5" />
                   <JFXButton fx:id="CreateSearch1" layoutX="451.0" layoutY="64.0" onMouseClicked="#handleClicks" style="-fx-background-color: white;" text="查询" />
                   <JFXButton fx:id="CreateSearch2" layoutX="836.0" layoutY="63.0" onMouseClicked="#handleClicks" style="-fx-background-color: white;" text="查询" />
                   <JFXTextField fx:id="CreateTextSearch1" focusColor="RED" layoutX="166.0" layoutY="64.0" prefHeight="30.0" prefWidth="256.0" promptText="输入联系电话查询客户编号" style="-fx-background-color: white;" />
@@ -264,12 +265,10 @@
                      <content>
                         <Pane prefHeight="368.0" prefWidth="994.0" style="-fx-background-color: #05071F;">
                            <children>
-                              <Label layoutX="385.0" layoutY="49.0" text="订单编号：" textFill="#e7e5e5" />
+                              <Label layoutX="385.0" layoutY="112.0" text="订单编号：" textFill="#e7e5e5" />
                               <Label layoutX="385.0" layoutY="203.0" text="返还金额：" textFill="#e7e5e5" />
-                              <Label layoutX="385.0" layoutY="127.0" text="订单状态：" textFill="#e7e5e5" />
-                              <JFXTextField fx:id="CancelID" focusColor="RED" layoutX="537.0" layoutY="44.0" prefHeight="30.0" prefWidth="203.0" style="-fx-background-color: white;" />
+                              <JFXTextField fx:id="CancelID" focusColor="RED" layoutX="537.0" layoutY="107.0" prefHeight="30.0" prefWidth="203.0" style="-fx-background-color: white;" />
                               <JFXTextField fx:id="CancelMoney" focusColor="RED" layoutX="537.0" layoutY="198.0" prefHeight="30.0" prefWidth="203.0" style="-fx-background-color: white;" />
-                              <ComboBox fx:id="CancelStage" layoutX="533.0" layoutY="122.0" prefHeight="30.0" prefWidth="211.0" />
                            </children>
                         </Pane>
                      </content>
