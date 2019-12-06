@@ -8,14 +8,19 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 
 import com.JKX.Model.Staff;
+import com.JKX.Model.Table.Ck;
+import com.JKX.Model.Table.Raw;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
@@ -51,6 +56,9 @@ public class RawController {
 
     @FXML
     private Button menuQuery;
+
+    @FXML
+    private Button menuManage;
 
     @FXML
     private Button menuStorage;
@@ -139,8 +147,22 @@ public class RawController {
     @FXML
     private VBox raw_items;
 
+    @FXML
+    private Pane pageManage;
 
-    void fresh(MouseEvent event)
+    @FXML
+    private TableView<Ck> ck;
+
+    @FXML
+    private TableView<Raw> kind;
+
+    @FXML
+    private Button edit;
+
+    public RawController() {
+    }
+
+    public void fresh(MouseEvent event)
     {
         try {
             this.raw_items2.getChildren().clear();
@@ -280,11 +302,27 @@ public class RawController {
                     e.printStackTrace();
                 }
                 ItemDepRawDestroyController itemDepRawDestroyController = loader.<ItemDepRawDestroyController>getController();
-                itemDepRawDestroyController.setInform(ans[i][4], ans[i][0], ans[i][1], ans[i][2], ans[i][3], ans[i][6], ans[i][7]);
+                itemDepRawDestroyController.setInform(ans[i][4], ans[i][0], ans[i][1], ans[i][2], ans[i][3], ans[i][6], ans[i][7],rawSection,this);
                 this.raw_items3.getChildren().add(node);
             }
         } catch (SQLException e) {
             e.printStackTrace();
+        }
+    }
+
+    @FXML
+    void click_edit(MouseEvent event) {
+        if(edit.getText().equals("修改"))
+        {
+            ck.setEditable(true);
+            kind.setEditable(true);
+            edit.setText("完成");
+            edit.setStyle("-fx-background-color: blue");
+        }else{
+            ck.setEditable(false);
+            kind.setEditable(false);
+            edit.setText("修改");
+            edit.setStyle("-fx-background-color: red");
         }
     }
 
@@ -306,6 +344,11 @@ public class RawController {
         {
             pageDestroy.setStyle("-fx-background-color : #02030A");
             pageDestroy.toFront();
+        }
+        if(event.getSource() == menuManage)
+        {
+            pageManage.setStyle("-fx-background-color : #02030A");
+            pageManage.toFront();
         }
         if(event.getSource() == menuQuit)
         {
@@ -372,7 +415,7 @@ public class RawController {
                     e.printStackTrace();
                 }
                 ItemDepRawDestroyController itemDepRawDestroyController = loader.<ItemDepRawDestroyController>getController();
-                itemDepRawDestroyController.setInform(ans[i][4], ans[i][0], ans[i][1], ans[i][2], ans[i][3], ans[i][6], ans[i][7]);
+                itemDepRawDestroyController.setInform(ans[i][4], ans[i][0], ans[i][1], ans[i][2], ans[i][3], ans[i][6], ans[i][7],rawSection,this);
                 this.raw_items3.getChildren().add(node);
             }
         } catch (SQLException e) {
@@ -398,6 +441,34 @@ public class RawController {
         }
         query_type.getItems().addAll("原料编号", "仓库编号");
         query_type.setValue("原料编号");
+        try {
+            String [][] ans = rawSection.ck();
+            final ObservableList<Ck> data = FXCollections.observableArrayList();
+            for (int i = 1; i < ans.length; i++) {
+               data.add(new Ck(ans[i][0], ans[i][1]));
+            }
+            ObservableList<TableColumn<Ck, ?>> observableList = ck.getColumns();
+            observableList.get(0).setCellValueFactory(new PropertyValueFactory("ck_id"));
+            observableList.get(1).setCellValueFactory(new PropertyValueFactory("ck_pos"));
+            ck.setItems(data);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        try {
+            String [][] ans = rawSection.kind();
+            final ObservableList<Raw> data = FXCollections.observableArrayList();
+            for (int i = 1; i < ans.length; i++) {
+                data.add(new Raw(ans[i][0], ans[i][1], Integer.parseInt(ans[i][2]), Float.parseFloat(ans[i][3])));
+            }
+            ObservableList<TableColumn<Raw, ?>> observableList = kind.getColumns();
+            observableList.get(0).setCellValueFactory(new PropertyValueFactory("raw_id"));
+            observableList.get(1).setCellValueFactory(new PropertyValueFactory("raw_name"));
+            observableList.get(2).setCellValueFactory(new PropertyValueFactory("raw_bzq"));
+            observableList.get(3).setCellValueFactory(new PropertyValueFactory("raw_price"));
+            kind.setItems(data);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
 }

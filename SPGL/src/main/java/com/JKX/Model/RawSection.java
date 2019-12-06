@@ -1,5 +1,6 @@
 package com.JKX.Model;
 
+import com.JKX.Model.Table.Ck;
 import com.JKX.Mysql.MysqlConnect;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
@@ -67,6 +68,22 @@ public class RawSection {
         String t = "insert into raw_ck values('" +formatter.format(date) +  "','" + id + "'," + rm + ",'" + in + "')";
         staff.Does(t);
         return true;
+    }
+
+    public boolean destory(String id, String time) throws SQLException
+    {
+        staff.Does("delete from raw_ck where raw_id = '" + id + "' and raw_date = '" + time + "'");
+        return true;
+    }
+
+    public String[][] ck() throws SQLException
+    {
+        return staff.Search("select * from ck");
+    }
+
+    public String[][] kind() throws SQLException
+    {
+        return staff.Search("select * from raw");
     }
 
     public String[][] Search(String sql) throws SQLException
