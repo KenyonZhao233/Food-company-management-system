@@ -5,12 +5,11 @@ import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 import com.JKX.Controller.FinanceController;
-import com.JKX.Model.OrderSection;
+import com.JKX.Model.FinanceSection;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
-import javafx.scene.input.MouseDragEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 
@@ -37,17 +36,17 @@ public class ItemRefundController {
     @FXML
     private Label id;
 
-    private  OrderSection orderSection;
+    private FinanceSection financeSection;
 
     private FinanceController controller;
 
-    public void setInform(String no, String time, String mn, String id, OrderSection orderSection,FinanceController controller)
+    public void setInform(String no, String time, String mn, String id, FinanceSection financeSection,FinanceController controller)
     {
         this.time.setText(time);
         this.id.setText(id);
         this.no.setText(no);
         this.mn.setText(mn);
-        this.orderSection = orderSection;
+        this.financeSection = financeSection;
         this.controller = controller;
     }
 
@@ -69,7 +68,7 @@ public class ItemRefundController {
         _alert.setContentText("退款编号：" + this.id.getText() + "         退款" + this.mn.getText() + "元");
         _alert.showAndWait();
         if(_alert.getResult()==ButtonType.OK) {
-            orderSection.refund(this.no.getText(),this.mn.getText());
+            financeSection.refund(this.no.getText(),this.mn.getText());
         }
         controller.click_refund(event);
         controller.click_query(event);

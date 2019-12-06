@@ -1,9 +1,11 @@
 package com.JKX.Controller.ItemController;
 
 import java.net.URL;
+import java.util.Optional;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
@@ -58,7 +60,10 @@ public class ItemDepRawDestroyController {
         _alert.setTitle("确认销毁");
         _alert.setHeaderText("");
         _alert.setContentText("是否销毁于" + this.time.getText().substring(0,19) + "入库\n编号为" + this.id.getText() + "的原材料？");
-        _alert.show();
+        Optional<ButtonType> result = _alert.showAndWait();
+        if (result.get() == ButtonType.OK) {
+
+        }
     }
     public void setInform(String time, String id, String name, String date, String prize, String count, String num)
     {

@@ -366,7 +366,7 @@
                               <Insets left="50.0" />
                            </HBox.margin>
                         </Label>
-                        <Label text="原料编号" textFill="#e7e5e5">
+                        <Label text="      原料编号" textFill="#e7e5e5">
                            <HBox.margin>
                               <Insets />
                            </HBox.margin>
