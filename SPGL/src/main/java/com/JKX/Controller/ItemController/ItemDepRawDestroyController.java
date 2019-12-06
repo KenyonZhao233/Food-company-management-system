@@ -1,9 +1,15 @@
 package com.JKX.Controller.ItemController;
 
 import java.net.URL;
+import java.sql.SQLException;
+import java.util.Optional;
 import java.util.ResourceBundle;
+
+import com.JKX.Controller.RawController;
+import com.JKX.Model.RawSection;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
@@ -40,6 +46,10 @@ public class ItemDepRawDestroyController {
     @FXML
     private AnchorPane pane;
 
+    private RawSection rawSection;
+
+    private RawController rawController;
+
     @FXML
     void enter(MouseEvent event) {
         pane.setStyle("-fx-background-color : #22A7F0");
@@ -51,16 +61,18 @@ public class ItemDepRawDestroyController {
     }
 
     @FXML
-    void click_destroy(MouseEvent event) {
-        String t = this.time.getText();
-        System.out.println(this.time.getText()+this.id.getText());
+    void click_destroy(MouseEvent event) throws SQLException {
         Alert _alert = new Alert(Alert.AlertType.CONFIRMATION);
         _alert.setTitle("确认销毁");
         _alert.setHeaderText("");
         _alert.setContentText("是否销毁于" + this.time.getText().substring(0,19) + "入库\n编号为" + this.id.getText() + "的原材料？");
-        _alert.show();
+        Optional<ButtonType> result = _alert.showAndWait();
+        if (result.get() == ButtonType.OK) {
+            rawSection.destory(this.id.getText(),this.time.getText());
+        }
+        rawController.fresh(event);
     }
-    public void setInform(String time, String id, String name, String date, String prize, String count, String num)
+    public void setInform(String time, String id, String name, String date, String prize, String count, String num, RawSection rawSection, RawController rawController)
     {
         this.time.setText(time);
         this.id.setText(id);
@@ -69,6 +81,8 @@ public class ItemDepRawDestroyController {
         this.prize.setText(prize);
         this.count.setText(count);
         this.num.setText(num);
+        this.rawSection = rawSection;
+        this.rawController = rawController;
     }
 
     @FXML

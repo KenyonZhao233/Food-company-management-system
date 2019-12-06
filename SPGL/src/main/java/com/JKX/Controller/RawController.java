@@ -8,14 +8,19 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 
 import com.JKX.Model.Staff;
+import com.JKX.Model.Table.Ck;
+import com.JKX.Model.Table.Raw;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
@@ -51,6 +56,9 @@ public class RawController {
 
     @FXML
     private Button menuQuery;
+
+    @FXML
+    private Button menuManage;
 
     @FXML
     private Button menuStorage;
@@ -139,9 +147,66 @@ public class RawController {
     @FXML
     private VBox raw_items;
 
+    @FXML
+    private Pane pageManage;
 
     @FXML
-    void click_input(MouseEvent event) {
+    private TableView<Ck> ck;
+
+    @FXML
+    private TableView<Raw> kind;
+
+    @FXML
+    private Button edit;
+
+    public RawController() {
+    }
+
+    public void fresh(MouseEvent event)
+    {
+        try {
+            this.raw_items2.getChildren().clear();
+            String[][] ans = rawSection.getInform();
+            for (int i = 1; i < ans.length; i++) {
+                FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("view/ItemDepRaw.fxml"));
+                Node node = null;
+                try {
+                    node = loader.load();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                ItemDepRawController itemDepRawController = loader.<ItemDepRawController>getController();
+                itemDepRawController.setInform(ans[i][4], ans[i][0], ans[i][1], ans[i][2], ans[i][3], ans[i][6], ans[i][7]);
+                this.raw_items2.getChildren().add(node);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        click_search(event);
+        click_search_d(event);
+        try {
+            this.raw_items.getChildren().clear();
+            String[][] ans = rawSection.getInform();
+            for (int i = 1; i < ans.length; i++) {
+                FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("view/ItemDepRaw.fxml"));
+                Node node = null;
+                try {
+                    node = loader.load();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                ItemDepRawController itemDepRawController = loader.<ItemDepRawController>getController();
+                itemDepRawController.setInform(ans[i][4], ans[i][0], ans[i][1], ans[i][2], ans[i][3], ans[i][6], ans[i][7]);
+                this.raw_items.getChildren().add(node);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+
+    @FXML
+    void click_input(MouseEvent event) throws SQLException {
         if(input_text1.getText().isEmpty() || input_text1.getText() == null ||
                 input_text2.getText().isEmpty() || input_text2.getText() == null ||
                 input_text3.getText().isEmpty() || input_text3.getText() == null)
@@ -153,15 +218,50 @@ public class RawController {
             _alert.show();
             return;
         }
+        try{
+            if(Float.parseFloat(input_text2.getText()) <= 0)
+            {
+                Alert _alert = new Alert(Alert.AlertType.WARNING);
+                _alert.setTitle("警告");
+                _alert.setHeaderText("输入错误");
+                _alert.setContentText("请输入正确的数量");
+                _alert.show();
+                return;
+            };
+        }catch(NumberFormatException e){
+            Alert _alert = new Alert(Alert.AlertType.WARNING);
+            _alert.setTitle("警告");
+            _alert.setHeaderText("输入错误");
+            _alert.setContentText("请输入正确的数量");
+            _alert.show();
+            return;
+        }
         Alert _alert = new Alert(Alert.AlertType.CONFIRMATION);
         _alert.setTitle("确认入库");
         _alert.setHeaderText("");
         _alert.setContentText("是否将原料编号为" + input_text1.getText() + "入仓库编号为" + input_text2.getText() + "的仓库" + input_text3.getText() + "件");
         Optional<ButtonType> result = _alert.showAndWait();
         if (result.get() == ButtonType.OK){
-            System.out.println("ok");
-        }else{
-            System.out.println("cancel");
+            rawSection.in(input_text1.getText(),input_text3.getText(),input_text2.getText());
+            try {
+                this.raw_items2.getChildren().clear();
+                String[][] ans = rawSection.getInform();
+                for (int i = 1; i < ans.length; i++) {
+                    FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("view/ItemDepRaw.fxml"));
+                    Node node = null;
+                    try {
+                        node = loader.load();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                    ItemDepRawController itemDepRawController = loader.<ItemDepRawController>getController();
+                    itemDepRawController.setInform(ans[i][4], ans[i][0], ans[i][1], ans[i][2], ans[i][3], ans[i][6], ans[i][7]);
+                    this.raw_items2.getChildren().add(node);
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+            fresh(event);
         }
     }
 
@@ -169,17 +269,8 @@ public class RawController {
     void click_search(MouseEvent event) {
         try {
             this.raw_items1.getChildren().clear();
-            String str = "select * from raw, raw_ck where raw.raw_id = raw_ck.raw_id ";
-            if(query_type.getValue() == "原料编号" && (!query_text.getText().isEmpty() || query_text.getText() == null))
-            {
-                str = str + "and raw_ck.raw_id = '" + query_text.getText() + "' ";
-            }
-            if(query_type.getValue() == "仓库编号" && (!query_text.getText().isEmpty() || query_text.getText() == null))
-            {
-                str = str + "and raw_ck.raw_in = '" + query_text.getText() + "' ";
-            }
-            str = str + "order by raw_date DESC";
-            String[][] ans = rawSection.Search(str);
+
+            String[][] ans = rawSection.search(query_type, query_text);
             for (int i = 1; i < ans.length; i++) {
                 FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("view/ItemDepRaw.fxml"));
                 Node node = null;
@@ -201,17 +292,7 @@ public class RawController {
     void click_search_d(MouseEvent event) {
         try {
             this.raw_items3.getChildren().clear();
-            String str = "select * from raw, raw_ck where raw.raw_id = raw_ck.raw_id ";
-            if(!destroy_text1.getText().isEmpty() || destroy_text2.getText() == null)
-            {
-                str = str + "and raw_ck.raw_id = '" + destroy_text1.getText() + "' ";
-            }
-            if(!destroy_text2.getText().isEmpty() || destroy_text2.getText() == null)
-            {
-                str = str + "and raw_ck.raw_in = '" + destroy_text2.getText() + "' ";
-            }
-            str = str + "order by raw_date DESC";
-            String[][] ans = rawSection.Search(str);
+            String[][] ans = rawSection.search_d(destroy_text1.getText(),destroy_text2.getText());
             for (int i = 1; i < ans.length; i++) {
                 FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("view/ItemDepRaw_Destory.fxml"));
                 Node node = null;
@@ -221,11 +302,27 @@ public class RawController {
                     e.printStackTrace();
                 }
                 ItemDepRawDestroyController itemDepRawDestroyController = loader.<ItemDepRawDestroyController>getController();
-                itemDepRawDestroyController.setInform(ans[i][4], ans[i][0], ans[i][1], ans[i][2], ans[i][3], ans[i][6], ans[i][7]);
+                itemDepRawDestroyController.setInform(ans[i][4], ans[i][0], ans[i][1], ans[i][2], ans[i][3], ans[i][6], ans[i][7],rawSection,this);
                 this.raw_items3.getChildren().add(node);
             }
         } catch (SQLException e) {
             e.printStackTrace();
+        }
+    }
+
+    @FXML
+    void click_edit(MouseEvent event) {
+        if(edit.getText().equals("修改"))
+        {
+            ck.setEditable(true);
+            kind.setEditable(true);
+            edit.setText("完成");
+            edit.setStyle("-fx-background-color: blue");
+        }else{
+            ck.setEditable(false);
+            kind.setEditable(false);
+            edit.setText("修改");
+            edit.setStyle("-fx-background-color: red");
         }
     }
 
@@ -247,6 +344,11 @@ public class RawController {
         {
             pageDestroy.setStyle("-fx-background-color : #02030A");
             pageDestroy.toFront();
+        }
+        if(event.getSource() == menuManage)
+        {
+            pageManage.setStyle("-fx-background-color : #02030A");
+            pageManage.toFront();
         }
         if(event.getSource() == menuQuit)
         {
@@ -313,7 +415,7 @@ public class RawController {
                     e.printStackTrace();
                 }
                 ItemDepRawDestroyController itemDepRawDestroyController = loader.<ItemDepRawDestroyController>getController();
-                itemDepRawDestroyController.setInform(ans[i][4], ans[i][0], ans[i][1], ans[i][2], ans[i][3], ans[i][6], ans[i][7]);
+                itemDepRawDestroyController.setInform(ans[i][4], ans[i][0], ans[i][1], ans[i][2], ans[i][3], ans[i][6], ans[i][7],rawSection,this);
                 this.raw_items3.getChildren().add(node);
             }
         } catch (SQLException e) {
@@ -339,6 +441,34 @@ public class RawController {
         }
         query_type.getItems().addAll("原料编号", "仓库编号");
         query_type.setValue("原料编号");
+        try {
+            String [][] ans = rawSection.ck();
+            final ObservableList<Ck> data = FXCollections.observableArrayList();
+            for (int i = 1; i < ans.length; i++) {
+               data.add(new Ck(ans[i][0], ans[i][1]));
+            }
+            ObservableList<TableColumn<Ck, ?>> observableList = ck.getColumns();
+            observableList.get(0).setCellValueFactory(new PropertyValueFactory("ck_id"));
+            observableList.get(1).setCellValueFactory(new PropertyValueFactory("ck_pos"));
+            ck.setItems(data);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        try {
+            String [][] ans = rawSection.kind();
+            final ObservableList<Raw> data = FXCollections.observableArrayList();
+            for (int i = 1; i < ans.length; i++) {
+                data.add(new Raw(ans[i][0], ans[i][1], Integer.parseInt(ans[i][2]), Float.parseFloat(ans[i][3])));
+            }
+            ObservableList<TableColumn<Raw, ?>> observableList = kind.getColumns();
+            observableList.get(0).setCellValueFactory(new PropertyValueFactory("raw_id"));
+            observableList.get(1).setCellValueFactory(new PropertyValueFactory("raw_name"));
+            observableList.get(2).setCellValueFactory(new PropertyValueFactory("raw_bzq"));
+            observableList.get(3).setCellValueFactory(new PropertyValueFactory("raw_price"));
+            kind.setItems(data);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
 }

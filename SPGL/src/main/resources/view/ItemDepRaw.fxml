@@ -3,14 +3,14 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane fx:id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseEntered="#enter" onMouseExited="#exit" prefHeight="40.0" prefWidth="718.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.JKX.Controller.ItemController.ItemDepRawController">
+<AnchorPane fx:id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseEntered="#enter" onMouseExited="#exit" prefHeight="40.0" prefWidth="734.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.JKX.Controller.ItemController.ItemDepRawController">
    <children>
       <Label fx:id="time" layoutX="28.0" layoutY="14.0" prefHeight="15.0" prefWidth="143.0" text="入库时间" textFill="#e7e5e5" />
-      <Label fx:id="id" layoutX="188.0" layoutY="14.0" text="原料编号" textFill="#e7e5e5" />
-      <Label fx:id="name" layoutX="273.0" layoutY="14.0" text="原料名称" textFill="#e7e5e5" />
-      <Label fx:id="date" layoutX="359.0" layoutY="14.0" text="原料保质期" textFill="#e7e5e5" />
-      <Label fx:id="prize" layoutX="451.0" layoutY="14.0" text="原料单价" textFill="#e7e5e5" />
-      <Label fx:id="count" layoutX="538.0" layoutY="14.0" text="剩余数量" textFill="#e7e5e5" />
-      <Label fx:id="num" layoutX="636.0" layoutY="14.0" text="所在仓库编号" textFill="#e7e5e5" />
+      <Label fx:id="id" layoutX="171.0" layoutY="14.0" text="原料编号" textFill="#e7e5e5" />
+      <Label fx:id="name" layoutX="247.0" layoutY="14.0" text="原料名称" textFill="#e7e5e5" />
+      <Label fx:id="date" layoutX="369.0" layoutY="14.0" text="原料保质期" textFill="#e7e5e5" />
+      <Label fx:id="prize" layoutX="463.0" layoutY="14.0" text="原料单价" textFill="#e7e5e5" />
+      <Label fx:id="count" layoutX="561.0" layoutY="14.0" text="剩余数量" textFill="#e7e5e5" />
+      <Label fx:id="num" layoutX="672.0" layoutY="13.0" prefHeight="15.0" prefWidth="48.0" text="所在仓库编号" textFill="#e7e5e5" />
    </children>
 </AnchorPane>

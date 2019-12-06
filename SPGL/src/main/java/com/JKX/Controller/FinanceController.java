@@ -4,7 +4,6 @@ import com.JKX.Controller.ItemController.ItemFinanceController;
 import com.JKX.Controller.ItemController.ItemRefundController;
 import com.JKX.Controller.ItemController.ItemUnpaidController;
 import com.JKX.Model.FinanceSection;
-import com.JKX.Model.OrderSection;
 import com.JKX.Model.Staff;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -27,7 +26,6 @@ import java.util.Date;
 
 public class FinanceController {
 
-    private OrderSection orderSection;
     private FinanceSection financeSection;
 
     DateFormat df = new SimpleDateFormat("yyyy.MM.dd hh:mm:ss");
@@ -200,7 +198,7 @@ public class FinanceController {
     public void click_receive(MouseEvent event) {
         try {
             this.ItemsReceive.getChildren().clear();
-            String[][] ans = orderSection.unpaidQuery(this.receive.getText());
+            String[][] ans = financeSection.unpaidQuery(this.receive.getText());
             for (int i = 1; i < ans.length; i++) {
                 FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("view/ItemUnpaid.fxml"));
                 Node node = null;
@@ -210,7 +208,7 @@ public class FinanceController {
                     e.printStackTrace();
                 }
                 ItemUnpaidController itemUnpaidController = loader.<ItemUnpaidController>getController();
-                itemUnpaidController.setInform(ans[i][0], ans[i][1].substring(0,19), ans[i][2], ans[i][3],orderSection,this);
+                itemUnpaidController.setInform(ans[i][0], ans[i][1].substring(0,19), ans[i][2], ans[i][3],financeSection,this);
                 this.ItemsReceive.getChildren().add(node);
 
             }
@@ -223,7 +221,7 @@ public class FinanceController {
     public void click_refund(MouseEvent event) {
         try {
             this.ItemsRefund.getChildren().clear();
-            String[][] ans = orderSection.refundQuery(this.refund.getText());
+            String[][] ans = financeSection.refundQuery(this.refund.getText());
             for (int i = 1; i < ans.length; i++) {
                 FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("view/ItemRefund.fxml"));
                 Node node = null;
@@ -233,7 +231,7 @@ public class FinanceController {
                     e.printStackTrace();
                 }
                 ItemRefundController itemRefundController = loader.<ItemRefundController>getController();
-                itemRefundController.setInform(ans[i][0], ans[i][3].substring(0,19), ans[i][1], ans[i][2],orderSection,this);
+                itemRefundController.setInform(ans[i][0], ans[i][3].substring(0,19), ans[i][1], ans[i][2],financeSection,this);
                 this.ItemsRefund.getChildren().add(node);
 
             }
@@ -278,11 +276,6 @@ public class FinanceController {
         animation.setCycleCount(Timeline.INDEFINITE);
         animation.play();
         try {
-            orderSection = new OrderSection(new Staff("KenyonZ", "123456"));
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        try {
             financeSection = new FinanceSection(new Staff("KenyonZ", "123456"));
         } catch (SQLException e) {
             e.printStackTrace();
@@ -290,7 +283,7 @@ public class FinanceController {
 
         try {
             this.ItemsReceive.getChildren().clear();
-            String[][] ans = orderSection.unpaidSearch();
+            String[][] ans = financeSection.unpaidSearch();
             for (int i = 1; i < ans.length; i++) {
                 FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("view/ItemUnpaid.fxml"));
                 Node node = null;
@@ -300,7 +293,7 @@ public class FinanceController {
                     e.printStackTrace();
                 }
                 ItemUnpaidController itemUnpaidController = loader.<ItemUnpaidController>getController();
-                itemUnpaidController.setInform(ans[i][0], ans[i][1].substring(0,19), ans[i][2], ans[i][3],orderSection,this);
+                itemUnpaidController.setInform(ans[i][0], ans[i][1].substring(0,19), ans[i][2], ans[i][3],financeSection,this);
                 this.ItemsReceive.getChildren().add(node);
             }
         } catch (SQLException e) {
@@ -309,7 +302,7 @@ public class FinanceController {
 
         try {
             this.ItemsRefund.getChildren().clear();
-            String[][] ans = orderSection.refundSearch();
+            String[][] ans = financeSection.refundSearch();
             for (int i = 1; i < ans.length; i++) {
                 FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("view/ItemRefund.fxml"));
                 Node node = null;
@@ -319,7 +312,7 @@ public class FinanceController {
                     e.printStackTrace();
                 }
                 ItemRefundController itemRefundController = loader.<ItemRefundController>getController();
-                itemRefundController.setInform(ans[i][0], ans[i][3].substring(0,19), ans[i][1], ans[i][2],orderSection,this);
+                itemRefundController.setInform(ans[i][0], ans[i][3].substring(0,19), ans[i][1], ans[i][2],financeSection,this);
                 this.ItemsRefund.getChildren().add(node);
             }
         } catch (SQLException e) {
