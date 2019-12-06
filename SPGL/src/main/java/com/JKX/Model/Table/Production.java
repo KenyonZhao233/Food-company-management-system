@@ -13,6 +13,10 @@ public class Production {
     private int nums;
     private Raw[] raws;
 
+    public Production(){
+
+    }
+
     public Production(String id, String name, float p1, float p2, float p3, int bzq, Raw[] raws, int nums)
     {
         this.raws = raws;

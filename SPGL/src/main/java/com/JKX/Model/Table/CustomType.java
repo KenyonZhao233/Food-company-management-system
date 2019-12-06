@@ -5,6 +5,11 @@ public class CustomType {
     private String type_name;
     private float type_bl;
 
+    public CustomType()
+    {
+
+    }
+
     public CustomType(String type_id, String type_name, float type_bl)
     {
         this.type_id = type_id;

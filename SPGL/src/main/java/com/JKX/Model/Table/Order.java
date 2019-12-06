@@ -12,6 +12,11 @@ public class Order {
     private Custom custom;
     private Production[] productions;
 
+    public Order()
+    {
+
+    }
+
     public Order(String order_id, String order_date, String order_type, String order_zt, Custom custom, Production[] productions)
     {
         this.order_id = order_id;

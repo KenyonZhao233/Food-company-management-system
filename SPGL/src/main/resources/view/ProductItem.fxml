@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.jfoenix.controls.JFXButton?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TableColumn?>
@@ -9,40 +10,41 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 
-<ScrollPane hbarPolicy="NEVER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#handleClick" prefHeight="176.0" prefWidth="922.0" vbarPolicy="NEVER" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+<ScrollPane fx:id="productPane" hbarPolicy="NEVER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#handleClick" prefHeight="176.0" prefWidth="862.0" vbarPolicy="NEVER" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.JKX.Controller.ItemController.ProductItemController">
   <content>
-    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="175.0" prefWidth="919.0">
+    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="175.0" prefWidth="861.0">
          <children>
-            <ImageView fitHeight="100.0" fitWidth="96.0" layoutX="57.0" layoutY="36.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="100.0" fitWidth="96.0" layoutX="22.0" layoutY="34.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../icon/food.png" />
                </image>
             </ImageView>
-            <Label layoutX="219.0" layoutY="20.0" text="食品编号：" />
-            <Label fx:id="pro_id" layoutX="291.0" layoutY="20.0" prefHeight="20.0" prefWidth="109.0" />
-            <Label layoutX="219.0" layoutY="61.0" text="食品名称：" />
-            <Label fx:id="pro_name" layoutX="272.0" layoutY="61.0" prefHeight="20.0" prefWidth="120.0" />
-            <HBox layoutX="204.0" layoutY="105.0" prefHeight="25.0" prefWidth="310.0">
+            <Label layoutX="144.0" layoutY="20.0" text="食品编号：" />
+            <Label fx:id="pro_id" layoutX="218.0" layoutY="20.0" prefHeight="20.0" prefWidth="109.0" />
+            <Label layoutX="143.0" layoutY="62.0" text="食品名称：" />
+            <Label fx:id="pro_name" layoutX="219.0" layoutY="62.0" prefHeight="20.0" prefWidth="120.0" />
+            <HBox layoutX="126.0" layoutY="105.0" prefHeight="25.0" prefWidth="310.0">
                <children>
                   <Label alignment="CENTER" contentDisplay="TOP" prefHeight="20.0" prefWidth="108.0" text="零售商价格" />
                   <Label alignment="CENTER" prefHeight="20.0" prefWidth="98.0" text="批发商价格" />
                   <Label alignment="CENTER" prefHeight="20.0" prefWidth="112.0" text="代理商价格" />
                </children>
             </HBox>
-            <HBox layoutX="204.0" layoutY="128.0" prefHeight="25.0" prefWidth="310.0">
+            <HBox layoutX="126.0" layoutY="130.0" prefHeight="25.0" prefWidth="310.0">
                <children>
                   <Label fx:id="p1" alignment="CENTER" contentDisplay="TOP" prefHeight="20.0" prefWidth="108.0" text="1" />
                   <Label fx:id="p2" alignment="CENTER" prefHeight="20.0" prefWidth="98.0" text="1" />
                   <Label fx:id="p3" alignment="CENTER" prefHeight="20.0" prefWidth="112.0" text="1" />
                </children>
             </HBox>
-            <TableView fx:id="raw_table" layoutX="526.0" layoutY="18.0" prefHeight="131.0" prefWidth="372.0">
+            <TableView fx:id="raw_table" layoutX="436.0" layoutY="19.0" prefHeight="131.0" prefWidth="372.0">
               <columns>
                 <TableColumn fx:id="raw_id" prefWidth="128.0" text="原料编号" />
                 <TableColumn fx:id="raw_name" prefWidth="136.0" text="原料名称" />
                   <TableColumn fx:id="raw_pri" prefWidth="107.0" text="原料单价" />
               </columns>
             </TableView>
+            <JFXButton fx:id="delete" layoutX="826.0" layoutY="-4.0" onMouseClicked="#handleDelete" prefHeight="183.0" prefWidth="34.0" ripplerFill="#e10a0a" style="-fx-background-color: #f85a5a;" text="删除" textFill="WHITE" wrapText="true" />
          </children></AnchorPane>
   </content>
 </ScrollPane>

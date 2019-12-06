@@ -8,6 +8,11 @@ public class Raw {
     public float raw_kc;
     public float raw_num;
 
+    public Raw()
+    {
+
+    }
+
     public Raw(String id, String name, int bzq, float price)
     {
         this.raw_id = id;

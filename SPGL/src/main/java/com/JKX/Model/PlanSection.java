@@ -3,6 +3,7 @@ package com.JKX.Model;
 import com.JKX.Model.Table.Plan;
 import com.JKX.Model.Table.Production;
 import com.JKX.Model.Table.Raw;
+import javafx.scene.control.Alert;
 
 import java.sql.SQLException;
 import java.util.Calendar;
@@ -13,11 +14,13 @@ public class PlanSection {
     private Staff staff;
     //可以向其中添加你所需要的相应的属性，在初始化中连接数据库，查询出你所需要的属性并将其初始化;
 
-    public PlanSection(Staff s) throws SQLException
+    public PlanSection(Staff s)
     {
         this.staff = s;
-        if(!staff.Login())
-            throw new SQLException();
+    }
+
+    public Staff getStaff() {
+        return staff;
     }
 
     public Production[] searchCpOnID(String id) throws SQLException
@@ -25,7 +28,7 @@ public class PlanSection {
         String[] a = {"string"};
         String[] b = {id};
         String[][] ans;
-        ans = staff.ExcuteSearch("Call SearchSearch_CpId(?)", a, b);
+        ans = staff.ExcuteSearch("Call Search_CpId(?)", a, b);
         Production[] productions = new Production[ans.length - 1];
         for(int i = 1; i < ans.length; i++)
         {
@@ -47,7 +50,7 @@ public class PlanSection {
         String[] a = {"string"};
         String[] b = {name};
         String[][] ans;
-        ans = staff.ExcuteSearch("Call SearchSearch_CpId(?)", a, b);
+        ans = staff.ExcuteSearch("Call Search_CpName(?)", a, b);
         Production[] productions = new Production[ans.length - 1];
         for(int i = 1; i < ans.length; i++)
         {

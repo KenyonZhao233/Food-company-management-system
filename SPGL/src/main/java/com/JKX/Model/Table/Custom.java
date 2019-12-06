@@ -7,6 +7,11 @@ public class Custom {
     private int wg;
     private String custom_phone;
 
+    public Custom()
+    {
+
+    }
+
     public Custom(String custom_id, CustomType customType, String custom_name, int wg, String custom_phone)
     {
         this.custom_id = custom_id;

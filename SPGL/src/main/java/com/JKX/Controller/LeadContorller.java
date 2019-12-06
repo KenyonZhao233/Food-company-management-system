@@ -62,7 +62,19 @@ public class LeadContorller implements Initializable {
         }
         else if (actionBtn == btnJH) //生产计划部
         {
+            FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("view/ProductionPlan.fxml"));
 
+            Stage stage = new Stage(StageStyle.UNDECORATED);
+            stage.setScene(new Scene((Parent) loader.load()));
+
+            ProductionPlanController controller = loader.<ProductionPlanController>getController();
+
+            controller.initData(staff);
+
+            stage.show();
+
+            Stage index = (Stage)LeadPane.getScene().getWindow();
+            index.close();
         }
         else if (actionBtn == btnYL) //原料库
         {

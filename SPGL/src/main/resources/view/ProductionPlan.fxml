@@ -1,8 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.calendarfx.view.print.TimeRangeView?>
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXTextField?>
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.chart.BarChart?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.NumberAxis?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -10,7 +24,7 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane fx:id="UserManagePane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="689.0" prefWidth="1276.0" style="-fx-background-color: #02030A;" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.JKX.Controller.UserManageContorller">
+<AnchorPane fx:id="UserManagePane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="689.0" prefWidth="1276.0" style="-fx-background-color: #02030A;" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.JKX.Controller.ProductionPlanController">
    <children>
       <VBox alignment="TOP_CENTER" prefHeight="576.0" prefWidth="256.0" spacing="15.0" style="-fx-background-color: #05071F;" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -27,7 +41,7 @@
                   <Insets bottom="20.0" />
                </VBox.margin>
             </Label>
-            <Button fx:id="userSearch" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onMouseClicked="#handleClicks" prefHeight="42.0" prefWidth="259.0" stylesheets="@../css/style.css" text="查询成品库存" textFill="#e7e5e5">
+            <Button fx:id="SearchCpkc" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onMouseClicked="#handleJump" prefHeight="42.0" prefWidth="259.0" stylesheets="@../css/style.css" text="查询成品库存" textFill="#e7e5e5">
                <graphic>
                   <ImageView fitHeight="23.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -45,7 +59,7 @@
                   <Insets left="50.0" />
                </padding>
             </Button>
-            <Button fx:id="userAdd" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onMouseClicked="#handleClicks" prefHeight="42.0" prefWidth="259.0" stylesheets="@../css/style.css" text="查询原料库存">
+            <Button fx:id="SearchYlkc" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onMouseClicked="#handleJump" prefHeight="42.0" prefWidth="259.0" stylesheets="@../css/style.css" text="查询原料库存">
                <graphic>
                   <ImageView fitHeight="23.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -57,22 +71,7 @@
                   <Insets left="50.0" />
                </padding>
             </Button>
-            <Button fx:id="userSearch1" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onMouseClicked="#handleClicks" prefHeight="42.0" prefWidth="259.0" stylesheets="@../css/style.css" text="管理生产计划" textFill="#e7e5e5">
-               <graphic>
-                  <ImageView fitHeight="23.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../icon/icons8_Search_52px.png" />
-                     </image>
-                  </ImageView>
-               </graphic>
-               <opaqueInsets>
-                  <Insets />
-               </opaqueInsets>
-               <padding>
-                  <Insets left="50.0" />
-               </padding>
-            </Button>
-            <Button fx:id="userSearch2" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onMouseClicked="#handleClicks" prefHeight="42.0" prefWidth="259.0" stylesheets="@../css/style.css" text="制定生产计划" textFill="#e7e5e5">
+            <Button fx:id="SearchScjh" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onMouseClicked="#handleJump" prefHeight="42.0" prefWidth="259.0" stylesheets="@../css/style.css" text="查询生产计划" textFill="#e7e5e5">
                <graphic>
                   <ImageView fitHeight="23.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -87,7 +86,7 @@
                   <Insets left="50.0" />
                </padding>
             </Button>
-            <Button fx:id="userSearch3" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onMouseClicked="#handleClicks" prefHeight="42.0" prefWidth="259.0" stylesheets="@../css/style.css" text="成品管理" textFill="#e7e5e5">
+            <Button fx:id="ChangeScjh" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onMouseClicked="#handleJump" prefHeight="42.0" prefWidth="259.0" stylesheets="@../css/style.css" text="管理生产计划" textFill="#e7e5e5">
                <graphic>
                   <ImageView fitHeight="23.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -102,7 +101,37 @@
                   <Insets left="50.0" />
                </padding>
             </Button>
-            <Button fx:id="userSearch4" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onMouseClicked="#handleClicks" prefHeight="42.0" prefWidth="256.0" stylesheets="@../css/style.css" text="原料管理" textFill="#e7e5e5">
+            <Button fx:id="ChangeCp" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onMouseClicked="#handleJump" prefHeight="42.0" prefWidth="259.0" stylesheets="@../css/style.css" text="成品管理" textFill="#e7e5e5">
+               <graphic>
+                  <ImageView fitHeight="23.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../icon/icons8_Search_52px.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <padding>
+                  <Insets left="50.0" />
+               </padding>
+            </Button>
+            <Button fx:id="ChangeRaw" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onMouseClicked="#handleJump" prefHeight="42.0" prefWidth="256.0" stylesheets="@../css/style.css" text="原料管理" textFill="#e7e5e5">
+               <graphic>
+                  <ImageView fitHeight="23.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../icon/icons8_Search_52px.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <padding>
+                  <Insets left="50.0" />
+               </padding>
+            </Button>
+            <Button fx:id="SearchXl" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onMouseClicked="#handleJump" prefHeight="42.0" prefWidth="256.0" stylesheets="@../css/style.css" text="查询销量" textFill="#e7e5e5">
                <graphic>
                   <ImageView fitHeight="23.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -118,7 +147,7 @@
                </padding>
             </Button>
             <Label prefHeight="28.0" prefWidth="8.0" />
-            <Button fx:id="btnSignout" alignment="TOP_LEFT" graphicTextGap="50.0" mnemonicParsing="false" onMouseClicked="#handleClicks" prefHeight="26.0" prefWidth="266.0" stylesheets="@../css/style.css" text="返回">
+            <Button fx:id="btnSignout" alignment="BASELINE_LEFT" graphicTextGap="50.0" mnemonicParsing="false" onMouseClicked="#handleJump" prefHeight="0.0" prefWidth="256.0" stylesheets="@../css/style.css" text="返回">
                <graphic>
                   <ImageView fitHeight="23.0" fitWidth="35.0" nodeOrientation="RIGHT_TO_LEFT" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -127,12 +156,381 @@
                   </ImageView>
                </graphic>
                <padding>
-                  <Insets bottom="40.0" left="50.0" />
+                  <Insets left="50.0" />
                </padding>
+               <cursor>
+                  <Cursor fx:constant="DEFAULT" />
+               </cursor>
+               <VBox.margin>
+                  <Insets bottom="40.0" />
+               </VBox.margin>
             </Button>
          </children>
       </VBox>
-      <StackPane layoutX="258.0" prefHeight="689.0" prefWidth="1018.0" style="-fx-background-color: #02030A;" />
+      <StackPane layoutX="258.0" prefHeight="689.0" prefWidth="1018.0" style="-fx-background-color: #02030A;">
+         <children>
+            <AnchorPane fx:id="searchXlPane" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #000000;">
+               <children>
+                  <BarChart fx:id="ChartXl" layoutX="1.0" layoutY="158.0" prefHeight="533.0" prefWidth="1018.0" title="销量">
+                    <xAxis>
+                      <CategoryAxis side="BOTTOM" />
+                    </xAxis>
+                    <yAxis>
+                      <NumberAxis side="LEFT" />
+                    </yAxis>
+                  </BarChart>
+                  <TimeRangeView fx:id="timeXl" layoutX="341.0" layoutY="42.0" />
+                  <JFXButton fx:id="searchXlonDate" layoutX="600.0" layoutY="62.0" onMouseClicked="#handleSearchXl" text="查询销量" />
+               </children></AnchorPane>
+            <AnchorPane fx:id="ChangeRawPane" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #000000;">
+               <children>
+                  <TabPane prefHeight="693.0" prefWidth="1018.0" tabClosingPolicy="UNAVAILABLE">
+                    <tabs>
+                      <Tab text="查询原料">
+                        <content>
+                          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="602.0" prefWidth="1018.0">
+                                 <children>
+                                    <JFXButton fx:id="searchRaw1" ellipsisString="" layoutX="502.0" layoutY="71.0" onMouseClicked="#handleSearchRaw" prefHeight="20.0" prefWidth="8.0">
+                                       <graphic>
+                                          <ImageView fitHeight="30.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../icon/icons8_Search_52px.png" />
+                                             </image>
+                                          </ImageView>
+                                       </graphic>
+                                    </JFXButton>
+                                    <TextField fx:id="messageRaw1" layoutX="220.0" layoutY="72.0" prefHeight="32.0" prefWidth="267.0" style="-fx-border-color: #B7C3D7; -fx-background-color: #02030A; -fx-border-radius: 2em;" />
+                                    <ScrollPane layoutY="162.0" prefHeight="490.0" prefWidth="1019.0">
+                                       <content>
+                                          <VBox fx:id="rawList" prefHeight="489.0" prefWidth="1017.0" />
+                                       </content>
+                                    </ScrollPane>
+                                    <ComboBox fx:id="comboxSearchRaw" layoutX="576.0" layoutY="74.0" prefHeight="30.0" prefWidth="124.0" />
+                                 </children>
+                              </AnchorPane>
+                        </content>
+                      </Tab>
+                      <Tab text="修改原料">
+                        <content>
+                          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                 <children>
+                                    <ScrollPane layoutX="486.0" layoutY="15.0" prefHeight="625.0" prefWidth="521.0">
+                                       <content>
+                                          <VBox fx:id="vboxYl" prefHeight="624.0" prefWidth="519.0" />
+                                       </content>
+                                    </ScrollPane>
+                                    <Label layoutX="110.0" layoutY="147.0" text="原料编号：" />
+                                    <JFXTextField fx:id="rawId" layoutX="206.0" layoutY="142.0" />
+                                    <Label layoutX="110.0" layoutY="226.0" text="原料名称：" />
+                                    <JFXTextField fx:id="rawName" layoutX="206.0" layoutY="221.0" />
+                                    <Label layoutX="110.0" layoutY="310.0" text="原料价格：" />
+                                    <JFXTextField fx:id="rawPri" layoutX="206.0" layoutY="305.0" />
+                                    <Label layoutX="118.0" layoutY="392.0" text="保质期：" />
+                                    <JFXTextField fx:id="rawBzq" layoutX="206.0" layoutY="387.0" onMouseClicked="#handleRaw" />
+                                    <JFXButton fx:id="changeRaw" layoutX="229.0" layoutY="496.0" text="修改" />
+                                 </children>
+                              </AnchorPane>
+                        </content>
+                      </Tab>
+                        <Tab text="添加原料">
+                           <content>
+                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                 <children>
+                                    <Label layoutX="397.0" layoutY="189.0" text="原料编号：" />
+                                    <JFXTextField fx:id="rawId1" layoutX="472.0" layoutY="184.0" />
+                                    <Label layoutX="397.0" layoutY="243.0" text="原料名称：" />
+                                    <JFXTextField fx:id="rawName1" layoutX="472.0" layoutY="238.0" />
+                                    <Label layoutX="397.0" layoutY="298.0" text="原料价格：" />
+                                    <JFXTextField fx:id="rawPri1" layoutX="472.0" layoutY="293.0" />
+                                    <Label layoutX="412.0" layoutY="354.0" text="保质期：" />
+                                    <JFXTextField fx:id="rawBzq1" layoutX="472.0" layoutY="349.0" />
+                                    <JFXButton fx:id="addRaw1" layoutX="471.0" layoutY="441.0" onMouseClicked="#handleRaw" text="添加" />
+                                 </children>
+                              </AnchorPane>
+                           </content>
+                        </Tab>
+                    </tabs>
+                  </TabPane>
+               </children>
+            </AnchorPane>
+            <AnchorPane fx:id="ChangeCppane" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #000000;">
+               <children>
+                  <TabPane layoutY="1.0" prefHeight="689.0" prefWidth="1019.0" tabClosingPolicy="UNAVAILABLE">
+                    <tabs>
+                      <Tab text="查询成品">
+                        <content>
+                          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                 <children>
+                                    <JFXButton fx:id="searchCp1" ellipsisString="" layoutX="507.0" layoutY="70.0" onMouseClicked="#handleSearchCp" prefHeight="20.0" prefWidth="8.0">
+                                       <graphic>
+                                          <ImageView fitHeight="30.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../icon/icons8_Search_52px.png" />
+                                             </image>
+                                          </ImageView>
+                                       </graphic>
+                                    </JFXButton>
+                                    <TextField fx:id="messageCp1" layoutX="220.0" layoutY="71.0" prefHeight="32.0" prefWidth="267.0" style="-fx-border-color: #B7C3D7; -fx-background-color: #02030A; -fx-border-radius: 2em;" />
+                                    <ScrollPane layoutY="160.0" prefHeight="490.0" prefWidth="1019.0">
+                                       <content>
+                                          <VBox fx:id="cpList" prefHeight="489.0" prefWidth="1017.0" />
+                                       </content>
+                                    </ScrollPane>
+                                    <ComboBox fx:id="comboxSearchCp1" layoutX="573.0" layoutY="73.0" prefHeight="30.0" prefWidth="127.0" />
+                                 </children>
+                              </AnchorPane>
+                        </content>
+                      </Tab>
+                      <Tab text="修改成品">
+                        <content>
+                          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                 <children>
+                                    <JFXButton fx:id="searchCp3" ellipsisString="" layoutX="832.0" layoutY="344.0" onMouseClicked="#handleSearchCp" prefHeight="20.0" prefWidth="8.0">
+                                       <graphic>
+                                          <ImageView fitHeight="30.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../icon/icons8_Search_52px.png" />
+                                             </image>
+                                          </ImageView>
+                                       </graphic>
+                                    </JFXButton>
+                                    <TextField fx:id="messageCp3" layoutX="687.0" layoutY="345.0" prefHeight="32.0" prefWidth="145.0" style="-fx-border-color: #B7C3D7; -fx-background-color: #02030A; -fx-border-radius: 2em;" />
+                                    <Label layoutX="61.0" layoutY="42.0" prefHeight="20.0" prefWidth="83.0" text="成品编号：" />
+                                    <Label layoutX="61.0" layoutY="82.0" prefHeight="20.0" prefWidth="83.0" text="成品名称：" />
+                                    <Label layoutX="54.0" layoutY="121.0" prefHeight="20.0" prefWidth="97.0" text="零售商价格：" />
+                                    <Label layoutX="54.0" layoutY="161.0" prefHeight="20.0" prefWidth="98.0" text="批发商价格：" />
+                                    <Label layoutX="54.0" layoutY="200.0" prefHeight="20.0" prefWidth="98.0" text="代理商价格：" />
+                                    <Label layoutX="83.0" layoutY="238.0" prefHeight="20.0" prefWidth="61.0" text="保质期：" />
+                                    <JFXTextField fx:id="cpId" editable="false" layoutX="145.0" layoutY="37.0" />
+                                    <JFXTextField fx:id="cpName" layoutX="145.0" layoutY="77.0" />
+                                    <JFXTextField fx:id="p1" layoutX="145.0" layoutY="116.0" />
+                                    <JFXTextField fx:id="p2" layoutX="145.0" layoutY="156.0" />
+                                    <JFXTextField fx:id="p3" layoutX="145.0" layoutY="195.0" />
+                                    <JFXTextField fx:id="bzq" layoutX="145.0" layoutY="233.0" />
+                                    <Label layoutX="378.0" layoutY="87.0" prefHeight="20.0" prefWidth="83.0" text="原料编号：" />
+                                    <Label layoutX="378.0" layoutY="128.0" prefHeight="20.0" prefWidth="83.0" text="原料名称：" />
+                                    <Label layoutX="378.0" layoutY="166.0" prefHeight="20.0" prefWidth="97.0" text="原料价格：" />
+                                    <JFXTextField fx:id="cpRawId" editable="false" layoutX="461.0" layoutY="82.0" />
+                                    <JFXTextField fx:id="cpRawName" layoutX="461.0" layoutY="122.0" />
+                                    <JFXTextField fx:id="cpRawPrice" layoutX="461.0" layoutY="161.0" />
+                                    <Label layoutX="378.0" layoutY="206.0" prefHeight="20.0" prefWidth="83.0" text="原料数量：" />
+                                    <JFXTextField fx:id="cpRawNum" layoutX="461.0" layoutY="201.0" />
+                                    <ScrollPane layoutX="687.0" layoutY="10.0" prefHeight="314.0" prefWidth="325.0">
+                                       <content>
+                                          <VBox fx:id="vboxChangeCPRaw" prefHeight="295.0" prefWidth="324.0" />
+                                       </content>
+                                    </ScrollPane>
+                                    <JFXButton fx:id="changeCp" layoutX="183.0" layoutY="293.0" onMouseClicked="#handleChangeCp" text="修改" />
+                                    <JFXButton fx:id="addRaw" layoutX="495.0" layoutY="293.0" onMouseClicked="#handleChangeCp" text="添加原料" />
+                                    <ScrollPane layoutX="6.0" layoutY="396.0" prefHeight="249.0" prefWidth="1006.0">
+                                       <content>
+                                          <VBox fx:id="vboxChangeCp" prefHeight="246.0" prefWidth="1003.0" />
+                                       </content>
+                                    </ScrollPane>
+                                    <ComboBox fx:id="comboxSearchCp3" layoutX="881.0" layoutY="346.0" prefHeight="30.0" prefWidth="124.0" />
+                                 </children>
+                              </AnchorPane>
+                        </content>
+                      </Tab>
+                        <Tab text="添加成品">
+                          <content>
+                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                 <children>
+                                    <Label layoutX="370.0" layoutY="132.0" prefHeight="20.0" prefWidth="83.0" text="成品编号：" />
+                                    <Label layoutX="369.0" layoutY="189.0" prefHeight="20.0" prefWidth="83.0" text="成品名称：" />
+                                    <Label layoutX="353.0" layoutY="246.0" prefHeight="20.0" prefWidth="97.0" text="零售商价格：" />
+                                    <Label layoutX="353.0" layoutY="305.0" prefHeight="20.0" prefWidth="98.0" text="批发商价格：" />
+                                    <Label layoutX="353.0" layoutY="364.0" prefHeight="20.0" prefWidth="98.0" text="代理商价格：" />
+                                    <Label layoutX="378.0" layoutY="423.0" prefHeight="20.0" prefWidth="61.0" text="保质期：" />
+                                    <JFXTextField fx:id="cpId1" editable="false" layoutX="450.0" layoutY="127.0" />
+                                    <JFXTextField fx:id="cpName1" layoutX="450.0" layoutY="184.0" />
+                                    <JFXTextField fx:id="p11" layoutX="450.0" layoutY="241.0" />
+                                    <JFXTextField fx:id="p21" layoutX="450.0" layoutY="300.0" />
+                                    <JFXTextField fx:id="p31" layoutX="450.0" layoutY="359.0" />
+                                    <JFXTextField fx:id="bzq1" layoutX="448.0" layoutY="418.0" />
+                                    <JFXButton fx:id="addCp" layoutX="493.0" layoutY="516.0" onMouseClicked="#handleAddCp" text="添加成品" />
+                                 </children>
+                              </AnchorPane>
+                          </content>
+                        </Tab>
+                    </tabs>
+                  </TabPane>
+               </children></AnchorPane>
+            <AnchorPane fx:id="PlanGlpane" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #000000;">
+               <children>
+                  <TabPane layoutX="1.0" layoutY="1.0" prefHeight="689.0" prefWidth="1018.0" tabClosingPolicy="UNAVAILABLE">
+                    <tabs>
+                      <Tab text="新建计划">
+                        <content>
+                          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                 <children>
+                                    <Label layoutX="92.0" layoutY="184.0" text="计划编号：" />
+                                    <Label layoutX="92.0" layoutY="234.0" text="成品编号：" />
+                                    <Label layoutX="92.0" layoutY="284.0" text="成品名称：" />
+                                    <JFXTextField fx:id="PlanId" layoutX="172.0" layoutY="174.0" />
+                                    <JFXTextField fx:id="Cpid" layoutX="172.0" layoutY="224.0" />
+                                    <JFXTextField fx:id="Cpname" layoutX="172.0" layoutY="274.0" />
+                                    <ImageView fitHeight="30.0" fitWidth="25.0" layoutX="373.0" layoutY="282.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../icon/icons8_Search_52px.png" />
+                                       </image>
+                                    </ImageView>
+                                    <ImageView fitHeight="30.0" fitWidth="25.0" layoutX="373.0" layoutY="232.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../icon/icons8_Search_52px.png" />
+                                       </image>
+                                    </ImageView>
+                                    <Label layoutX="92.0" layoutY="330.0" text="制作数量：" />
+                                    <JFXTextField fx:id="Cpnum" layoutX="172.0" layoutY="323.0" />
+                                    <Button fx:id="makePlan" layoutX="222.0" layoutY="431.0" mnemonicParsing="false" text="制定" />
+                                    <Label layoutX="622.0" layoutY="606.0" text="总成本：" />
+                                    <Label fx:id="sum" layoutX="735.0" layoutY="606.0" prefHeight="20.0" prefWidth="116.0" />
+                                    <ScrollPane layoutX="466.0" layoutY="24.0" prefHeight="555.0" prefWidth="532.0">
+                                       <content>
+                                          <VBox fx:id="Rawbox" prefHeight="550.0" prefWidth="531.0" />
+                                       </content>
+                                    </ScrollPane>
+                                 </children></AnchorPane>
+                        </content>
+                      </Tab>
+                      <Tab text="修改计划">
+                        <content>
+                          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                 <children>
+                                    <ScrollPane layoutX="-1.0" layoutY="195.0" prefHeight="455.0" prefWidth="1018.0">
+                                       <content>
+                                          <VBox fx:id="vboxPlan" prefHeight="451.0" prefWidth="1015.0" />
+                                       </content>
+                                    </ScrollPane>
+                                    <JFXButton fx:id="searchPlanId1" ellipsisString="" layoutX="378.0" layoutY="84.0" onMouseClicked="#handleSearchPlan" prefHeight="20.0" prefWidth="8.0">
+                                       <graphic>
+                                          <ImageView fitHeight="30.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../icon/icons8_Search_52px.png" />
+                                             </image>
+                                          </ImageView>
+                                       </graphic>
+                                    </JFXButton>
+                                    <TextField fx:id="messagePlan1" layoutX="96.0" layoutY="85.0" prefHeight="32.0" prefWidth="267.0" style="-fx-border-color: #B7C3D7; -fx-background-color: #02030A; -fx-border-radius: 2em;" />
+                                    <TimeRangeView fx:id="searchPlanPicker1" layoutX="520.0" layoutY="51.0" prefHeight="100.0" prefWidth="289.0" />
+                                    <JFXButton fx:id="searchPlanDate1" ellipsisString="" layoutX="823.0" layoutY="84.0" onMouseClicked="#handleSearchPlan" prefHeight="20.0" prefWidth="8.0">
+                                       <graphic>
+                                          <ImageView fitHeight="30.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../icon/icons8_Search_52px.png" />
+                                             </image>
+                                          </ImageView>
+                                       </graphic>
+                                    </JFXButton>
+                                 </children></AnchorPane>
+                        </content>
+                      </Tab>
+                        <Tab text="审核计划">
+                           <content>
+                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                 <children>
+                                    <JFXButton fx:id="searchPlanId2" ellipsisString="" layoutX="604.0" layoutY="71.0" onMouseClicked="#handleSearchPlan" prefHeight="20.0" prefWidth="8.0">
+                                       <graphic>
+                                          <ImageView fitHeight="30.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../icon/icons8_Search_52px.png" />
+                                             </image>
+                                          </ImageView>
+                                       </graphic>
+                                    </JFXButton>
+                                    <TextField fx:id="messagePlan2" layoutX="318.0" layoutY="72.0" prefHeight="32.0" prefWidth="267.0" style="-fx-border-color: #B7C3D7; -fx-background-color: #02030A; -fx-border-radius: 2em;" />
+                                    <ScrollPane layoutY="196.0" prefHeight="454.0" prefWidth="1018.0">
+                                       <content>
+                                          <VBox fx:id="vboxPlanSh" prefHeight="453.0" prefWidth="1015.0" />
+                                       </content>
+                                    </ScrollPane>
+                                 </children>
+                              </AnchorPane>
+                           </content>
+                        </Tab>
+                    </tabs>
+                  </TabPane>
+               </children>
+            </AnchorPane>
+            <AnchorPane fx:id="PlanSearPane" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #000000;">
+               <children>
+                  <JFXButton fx:id="searchPlanId" ellipsisString="" layoutX="396.0" layoutY="92.0" onMouseClicked="#handleSearchPlan" prefHeight="20.0" prefWidth="8.0">
+                     <graphic>
+                        <ImageView fitHeight="30.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../icon/icons8_Search_52px.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </JFXButton>
+                  <TextField fx:id="messagePlan" layoutX="114.0" layoutY="93.0" prefHeight="32.0" prefWidth="267.0" style="-fx-border-color: #B7C3D7; -fx-background-color: #02030A; -fx-border-radius: 2em;" />
+                  <ScrollPane hbarPolicy="NEVER" layoutX="-1.0" layoutY="210.0" prefHeight="480.0" prefWidth="1018.0" vbarPolicy="ALWAYS">
+                     <content>
+                        <VBox fx:id="vboxSearchPlan" prefHeight="479.0" prefWidth="998.0" />
+                     </content>
+                  </ScrollPane>
+                  <TimeRangeView fx:id="searchPlanPicker" layoutX="502.0" layoutY="59.0" prefHeight="100.0" prefWidth="289.0" />
+                  <JFXButton fx:id="searchPlanDate" ellipsisString="" layoutX="840.0" layoutY="90.0" onMouseClicked="#handleSearchPlan" prefHeight="20.0" prefWidth="8.0">
+                     <graphic>
+                        <ImageView fitHeight="30.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../icon/icons8_Search_52px.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </JFXButton>
+               </children></AnchorPane>
+            <AnchorPane fx:id="RawkcPane" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #000000;">
+               <children>
+                  <JFXButton fx:id="searchRaw" ellipsisString="" layoutX="553.0" layoutY="72.0" onMouseClicked="#handleSearchRaw" prefHeight="20.0" prefWidth="8.0">
+                     <graphic>
+                        <ImageView fitHeight="30.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../icon/icons8_Search_52px.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </JFXButton>
+                  <TextField fx:id="messageRaw" layoutX="272.0" layoutY="73.0" prefHeight="32.0" prefWidth="267.0" style="-fx-border-color: #B7C3D7; -fx-background-color: #02030A; -fx-border-radius: 2em;" />
+                  <TableView fx:id="viewRawkc" layoutY="184.0" prefHeight="506.0" prefWidth="1018.0" stylesheets="@../css/tabelview.css">
+                     <columns>
+                        <TableColumn fx:id="CrawId" prefWidth="163.0" text="原料编号" />
+                        <TableColumn fx:id="CrawName" prefWidth="275.0" text="原料名称" />
+                        <TableColumn fx:id="CrawPri" prefWidth="154.0" text="原料单价" />
+                        <TableColumn fx:id="CrawBzq" prefWidth="138.0" text="原料保质期" />
+                        <TableColumn fx:id="CrawKc" prefWidth="287.0" text="原料库存" />
+                     </columns></TableView>
+                  <ComboBox fx:id="comboxRaw" layoutX="610.0" layoutY="74.0" prefHeight="30.0" prefWidth="138.0" />
+               </children>
+            </AnchorPane>
+            <AnchorPane fx:id="CpkcPane" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #000000;" visible="false">
+               <children>
+                  <JFXButton fx:id="searchCp" ellipsisString="" layoutX="552.0" layoutY="72.0" onMouseClicked="#handleSearchCp" prefHeight="20.0" prefWidth="8.0">
+                     <graphic>
+                        <ImageView fitHeight="30.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../icon/icons8_Search_52px.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </JFXButton>
+                  <TextField fx:id="messageCp" layoutX="271.0" layoutY="73.0" prefHeight="32.0" prefWidth="267.0" style="-fx-border-color: #B7C3D7; -fx-background-color: #02030A; -fx-border-radius: 2em;" />
+                  <TableView fx:id="viewCpkc" layoutY="184.0" prefHeight="506.0" prefWidth="1018.0" stylesheets="@../css/tabelview.css">
+                     <columns>
+                        <TableColumn fx:id="CcpId" prefWidth="144.0" text="成品编号" />
+                        <TableColumn fx:id="CcpName" prefWidth="213.0" text="名称" />
+                        <TableColumn fx:id="cpPri" maxWidth="665.0" minWidth="-Infinity" prefWidth="526.0" text="价格">
+                           <columns>
+                              <TableColumn fx:id="CcpP1" prefWidth="110.0" text="零售商价格" />
+                              <TableColumn fx:id="CcpP2" prefWidth="110.0" text="批发商价格" />
+                              <TableColumn fx:id="CcpP3" prefWidth="110.0" text="代理商价格" />
+                           </columns>
+                        </TableColumn>
+                        <TableColumn fx:id="CcpKc" minWidth="0.0" prefWidth="330.0" text="库存" />
+                     </columns></TableView>
+                  <ComboBox fx:id="comboxCp" layoutX="610.0" layoutY="75.0" prefHeight="30.0" prefWidth="138.0" />
+               </children></AnchorPane>
+         </children></StackPane>
    </children>
    <effect>
       <DropShadow color="#1b1eeb" />

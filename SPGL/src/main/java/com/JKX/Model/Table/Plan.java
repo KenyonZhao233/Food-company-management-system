@@ -11,6 +11,11 @@ public class Plan {
     private String plan_edate;
     private String fzr;
 
+    public Plan()
+    {
+
+    }
+
     public Plan(String plan_id, String plan_zt, Production productionm , String plan_sdate, String plan_edate, String fzr)
     {
         this.plan_id = plan_id;
