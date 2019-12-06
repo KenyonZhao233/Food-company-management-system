@@ -118,6 +118,11 @@ public class Staff {
         return mysqlConnect.ExcuteDoes(sql, a, b);
     }
 
+    public int Dose(String sql) throws SQLException
+    {
+        return mysqlConnect.Does(sql);
+    }
+
     public String[] ExcuteDoesReturn(String sql, String[] a, String[] b, String[] c) throws SQLException
     {
         return mysqlConnect.ExcuteDoesReturn(sql, a, b, c);
