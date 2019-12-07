@@ -6,6 +6,8 @@ import javafx.scene.control.Label;
 import com.jfoenix.controls.JFXButton;
 import javafx.scene.input.MouseEvent;
 
+import java.sql.SQLException;
+
 public class ProductInformController {
 
     @FXML
@@ -27,6 +29,8 @@ public class ProductInformController {
     private Label OneNumber;
 
     private SalesController salesController;
+
+    private Node node;
 
     public void setInform(String OneID, String OnePrice, String OneAllPrice, String OneName, String OneNumber)
     {
@@ -51,7 +55,19 @@ public class ProductInformController {
         assert OneNumber != null : "fx:id=\"OneNumber\" was not injected: check your FXML file 'ProductInform.fxml'.";
     }
 
+    public void setNode(Node node)
+    {
+        this.node = node;
+    }
+
     public void handleClicks(MouseEvent mouseEvent) {
-        this.salesController.getSalesSection();
+//        try {
+//            this.salesController.getSalesSection().deleteOrderItem(this.OneID.getText(), this.OneName.getText());
+//        }
+//        catch (SQLException se)
+//        {
+//            this.salesController.getSalesSection().getStaff().showAlert("1", "2", "3", "4");
+//        }
+        this.salesController.removeGoodsNode(this.node,OneName.getText(),OneAllPrice.getText());
     }
 }

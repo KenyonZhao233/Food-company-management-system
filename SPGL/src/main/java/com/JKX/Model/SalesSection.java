@@ -73,6 +73,7 @@ public class SalesSection{
             orders[i - 1] = new Order(temp[i][0], temp[i][2], temp[i][3], temp[i][1], customs[0], productions);
         }
         System.out.println(orders.length);
+        orders[0].getProductions()[0].getProduction_id();
         return orders;
     }
 
@@ -118,10 +119,18 @@ public class SalesSection{
         return customs;
     }
 
+    public int insertOrderItem(String id, String pro, String num, String custom, String type) throws SQLException
+    {
+        String sql = "INSERT INTO orders(orders.order_id, orders.order_product, orders.order_num, orders.order_zt, orders.order_custom, orders.order_type) " +
+                     "VALUES('" + id + "', '" + pro + "', " + num + ", '待付款', '" + custom + "', '" + type + "');";
+        int res = this.staff.Does(sql);
+        return res;
+    }
+
     public int deleteOrderItem(String id, String itemId) throws SQLException
     {
-        String a[] = {};
-        String b[] = {};
+        String a[] = {"stirng", "string"};
+        String b[] = {id, itemId};
         String sql = "Call Delete_OrderItem(?, ?)";
         int res = this.staff.ExcuteDoes(sql, a, b);
         return res;
@@ -250,5 +259,101 @@ public class SalesSection{
                 return customTypes[i].getType_id();
         }
         return "";
+    }
+
+    public int InsertOrUpdate(String order_id,String Product_name) throws SQLException
+    {
+        String sql="select * from orders where order_id = '"+order_id+"' and order_product = '"+Product_name+"'";
+        String [][]ans=staff.Search(sql);
+        if(ans.length==1)
+            return 0;//返回0是insert插入操作
+        else
+            return 1;//返回1是update更新操作
+    }
+
+    public void InsertOrders(String order_id,String order_product,String order_num,String order_custom) throws SQLException
+    {
+        String sql="insert into orders(order_id,order_product,order_num,order_zt,order_custom,order_type) values('"+order_id+"','"+order_product+"',"+order_num+",'待付款','"+order_custom+"','未付款')";
+        staff.Does(sql);
+    }
+
+    public void UpdateOrders(String order_id,String order_product,String order_num) throws SQLException
+    {
+        String sql="update orders set order_num = order_num + "+order_num+" where order_id = '"+order_id+"' and order_product = '"+order_product+"'";
+        staff.Does(sql);
+    }
+
+    public int CheckOrders(String product_id,String product_name) throws SQLException
+    {
+        String sql="select SUM(product_rm) from product_ck where product_id = '"+ product_id +"'";//仓库查总量
+        String [][]ans = staff.Search(sql);
+        int sum1=Integer.valueOf(ans[1][0]);
+        sql="select order_id from pick";//待提货库查待提货量
+        ans=staff.Search(sql);
+        if(ans.length>1)
+        {
+            int num=0;
+            for(int i=1;i<ans.length;i++)
+            {
+                sql="select order_num from orders where order_id = '"+ ans[i][0] +"' and order_product = '"+ product_name +"'";
+                String [][]s=staff.Search(sql);
+                if(s.length>1)
+                {
+                    num=num+Integer.valueOf(s[1][0]);
+                }
+            }
+            return sum1-num;
+        }
+        else
+        {
+            return sum1;
+        }
+    }
+
+    public String[][] GouWuChe(String order_id,String customer_id) throws SQLException
+    {
+        String sql="select customer_tp from customer where customer_id = '"+ customer_id +"'";
+        String [][]ans=staff.Search(sql);
+        String type=ans[1][0];
+        String [][]r=new String[3000][5];
+        int t=0;
+        sql="select order_product,order_num from orders where order_id = '"+ order_id +"'";
+        ans=staff.Search(sql);
+        if(ans.length>1)
+        {
+            for(int i=1;i<ans.length;i++)
+            {
+                String name=ans[i][0];
+                sql="select product_id,product_p"+ type +" from product where product_name = '"+ name +"'";
+                String [][]temp=staff.Search(sql);
+                String []q=new String[5];//编号，单价，名称，总价，数量
+                q[0]=temp[1][0];
+                q[1]=temp[1][1];
+                q[2]=name;
+                q[4]=ans[i][1];
+                q[3]=String.valueOf(Integer.valueOf(q[4])*Integer.valueOf(q[1]));
+                r[t]=q;
+                t++;
+            }
+            String [][]p=new String[t][5];
+            for(int i=0;i<t;i++)
+            {
+                p[i]=r[i];
+            }
+            return p;
+        }
+        return null;
+    }
+
+    public void DeleteProduct(String order_id,String product_name) throws SQLException
+    {
+        String sql="delete from orders where order_id = '"+ order_id +"' and order_product = '"+ product_name +"'";
+        staff.Does(sql);
+    }
+
+    public void DeleteAllProduct(String order_id) throws SQLException
+    {
+        String sql="delete from orders where order_id = '"+ order_id +"'";
+        staff.Does(sql);
     }
 }

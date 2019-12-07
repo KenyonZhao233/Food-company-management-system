@@ -1,44 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXCheckBox?>
+<?import com.jfoenix.controls.JFXComboBox?>
 <?import com.jfoenix.controls.JFXPasswordField?>
-<?import com.jfoenix.controls.JFXTextField?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="loginPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="437.0" prefWidth="810.0" style="-fx-background-color: #FFFFFF;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.JKX.Controller.LoginController">
+<AnchorPane fx:id="loginPane" prefHeight="350.0" prefWidth="304.0" style="-fx-background-color: #02030A;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.JKX.Controller.LoginController">
    <children>
-      <AnchorPane layoutX="469.0" layoutY="44.0" prefHeight="350.0" prefWidth="304.0" style="-fx-background-color: #22A6F2;">
-         <children>
-            <JFXTextField fx:id="uid" focusColor="#20c94a" layoutX="42.0" layoutY="84.0" prefHeight="30.0" prefWidth="221.0" promptText="UID" unFocusColor="#c3b7b7" />
-            <JFXPasswordField fx:id="passWord" focusColor="#3cc656" layoutX="41.0" layoutY="174.0" prefHeight="30.0" prefWidth="221.0" promptText="password" unFocusColor="#c3b7b7" />
-            <JFXButton fx:id="signIn" layoutX="42.0" layoutY="266.0" onMouseClicked="#handleSignin" prefHeight="30.0" prefWidth="221.0" style="-fx-background-color: #e45652;" text="Signin" textFill="#d7d0d0">
-               <font>
-                  <Font size="12.0" />
-               </font>
-            </JFXButton>
-            <Label layoutX="123.0" layoutY="35.0" text="Sign In" textFill="WHITE">
-               <font>
-                  <Font size="18.0" />
-               </font>
-            </Label>
-         </children>
-      </AnchorPane>
-      <Label alignment="CENTER" layoutX="109.0" layoutY="136.0" prefHeight="37.0" prefWidth="221.0" text="欢迎使用本系统" textFill="#ab3434">
+      <JFXPasswordField fx:id="passWord" focusColor="#3cc656" layoutX="42.0" layoutY="145.0" prefHeight="30.0" prefWidth="221.0" promptText="请输入密码" unFocusColor="#c3b7b7" />
+      <JFXButton fx:id="signIn" layoutX="42.0" layoutY="266.0" onMouseClicked="#handleSignin" prefHeight="30.0" prefWidth="221.0" style="-fx-background-color: #19B5FE;" text="登录" textFill="#d7d0d0">
          <font>
-            <Font size="28.0" />
+            <Font size="12.0" />
          </font>
-      </Label>
-      <Label layoutX="156.0" layoutY="289.0" text="作者：季克欣" textFill="#723a3a">
-         <font>
-            <Font size="21.0" />
-         </font>
-      </Label>
-      <Label fx:id="labelClose" layoutX="790.0" layoutY="2.0" onMouseClicked="#handleClose" text="X" textAlignment="RIGHT" textFill="#bfb6b6">
+      </JFXButton>
+      <Label layoutX="134.0" layoutY="34.0" text="欢迎" textFill="WHITE">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
+      <JFXComboBox fx:id="uid" editable="true" layoutX="42.0" layoutY="99.0" prefHeight="23.0" prefWidth="227.0" promptText="请输入用户名" />
+      <JFXCheckBox layoutX="196.0" layoutY="212.0" text="记住密码" textFill="WHITE" />
+      <Label layoutX="122.0" layoutY="213.0" text="修改密码" textFill="AQUA" underline="true" />
    </children>
 </AnchorPane>
