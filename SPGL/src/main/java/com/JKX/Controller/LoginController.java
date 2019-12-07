@@ -1,11 +1,7 @@
 package com.JKX.Controller;
 
 import com.JKX.Model.Staff;
-import com.jfoenix.controls.JFXAlert;
-import com.jfoenix.controls.JFXButton;
-import com.jfoenix.controls.JFXDialog;
-import com.jfoenix.controls.JFXTextField;
-import com.jfoenix.controls.JFXPasswordField;
+import com.jfoenix.controls.*;
 import com.sun.javafx.robot.impl.FXRobotHelper;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -39,19 +35,16 @@ public class LoginController implements Initializable {
     private Staff staff;
 
     @FXML
-    private Label labelClose;
-
-    @FXML
-    private JFXButton signIn;
+    private AnchorPane loginPane;
 
     @FXML
     private JFXPasswordField passWord;
 
     @FXML
-    private JFXTextField uid;
+    private JFXButton signIn;
 
     @FXML
-    private AnchorPane loginPane;
+    private JFXComboBox<?> uid;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -63,7 +56,7 @@ public class LoginController implements Initializable {
     }
 
     public void handleSignin(MouseEvent mouseEvent) throws Exception{
-        staff.Uid = uid.getText();
+        staff.Uid = uid.getValue().toString();
         staff.password = passWord.getText();
         if(staff.Login()) {
             Alert _alert = new Alert(Alert.AlertType.INFORMATION);
