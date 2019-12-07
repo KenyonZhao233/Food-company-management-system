@@ -15,6 +15,10 @@ public class FinanceSection {
             throw new SQLException();
     }
 
+    public Staff getStaff() {
+        return sta;
+    }
+
     public String[][] Search() throws SQLException
     {
         return sta.Search("select * from finance order by finance_id DESC");

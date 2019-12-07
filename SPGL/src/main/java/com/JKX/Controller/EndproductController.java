@@ -24,15 +24,20 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import java.io.IOException;
 import java.sql.SQLException;
 
 import com.JKX.Controller.ItemController.ItemDepRawController;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import javafx.util.Duration;
 
 
@@ -55,6 +60,9 @@ public class EndproductController {
             label_time2.setText(time.substring(11,19));
         }
     }));
+
+    @FXML
+    private AnchorPane all;
 
     @FXML
     private Button menuHomepage;
@@ -164,6 +172,115 @@ public class EndproductController {
 
     public EndproductController() {
     }
+
+    public void initData(Staff staff) throws SQLException {
+        endSection = new EndSection(staff);
+        animation.setCycleCount(Timeline.INDEFINITE);
+        animation.play();
+        try {
+            this.raw_items.getChildren().clear();
+            String[][] ans = endSection.getInform();
+            for (int i = 1; i < ans.length; i++) {
+                FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("view/ItemDepEnd.fxml"));
+                Node node = null;
+                try {
+                    node = loader.load();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                ItemDepEndController itemDepEndController = loader.<ItemDepEndController>getController();
+                itemDepEndController.setInform(ans[i][6].substring(0,19), ans[i][0], ans[i][1], ans[i][5], ans[i][8], ans[i][9]);
+                this.raw_items.getChildren().add(node);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        try {
+            this.raw_items1.getChildren().clear();
+            String[][] ans = endSection.getInform();
+            for (int i = 1; i < ans.length; i++) {
+                FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("view/ItemDepEnd.fxml"));
+                Node node = null;
+                try {
+                    node = loader.load();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                ItemDepEndController itemDepEndController = loader.<ItemDepEndController>getController();
+                itemDepEndController.setInform(ans[i][6].substring(0,19), ans[i][0], ans[i][1], ans[i][5], ans[i][8], ans[i][9]);
+                this.raw_items1.getChildren().add(node);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        try {
+            this.raw_items3.getChildren().clear();
+            String[][] ans = endSection.getInform();
+            for (int i = 1; i < ans.length; i++) {
+                FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("view/ItemDepEnd_Destory.fxml"));
+                Node node = null;
+                try {
+                    node = loader.load();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                ItemDepEndDestroyController itemDepEndDestroyController = loader.<ItemDepEndDestroyController>getController();
+                itemDepEndDestroyController.setInform(ans[i][6].substring(0,19), ans[i][0], ans[i][1], ans[i][5], ans[i][8], ans[i][9],endSection,this);
+                this.raw_items3.getChildren().add(node);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        try {
+            this.raw_items2.getChildren().clear();
+            String[][] ans = endSection.getInform();
+            for (int i = 1; i < ans.length; i++) {
+                FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("view/ItemDepEnd.fxml"));
+                Node node = null;
+                try {
+                    node = loader.load();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                ItemDepEndController itemDepEndController = loader.<ItemDepEndController>getController();
+                itemDepEndController.setInform(ans[i][6].substring(0,19), ans[i][0], ans[i][1], ans[i][5], ans[i][8], ans[i][9]);
+                this.raw_items2.getChildren().add(node);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        query_type.getItems().addAll("成品编号", "仓库编号");
+        query_type.setValue("成品编号");
+
+        try {
+            String [][] ans = endSection.ck();
+            final ObservableList<Ck> data = FXCollections.observableArrayList();
+            for (int i = 1; i < ans.length; i++) {
+                data.add(new Ck(ans[i][0], ans[i][1]));
+            }
+            ObservableList<TableColumn<Ck, ?>> observableList = ck.getColumns();
+            observableList.get(0).setCellValueFactory(new PropertyValueFactory("ck_id"));
+            observableList.get(1).setCellValueFactory(new PropertyValueFactory("ck_pos"));
+            ck.setItems(data);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        try {
+            String [][] ans = endSection.kind();
+            final ObservableList<Production> data = FXCollections.observableArrayList();
+            for (int i = 1; i < ans.length; i++) {
+                data.add(new Production(ans[i][0], ans[i][1], Integer.parseInt(ans[i][5])));
+            }
+            ObservableList<TableColumn<Production, ?>> observableList = kind.getColumns();
+            observableList.get(0).setCellValueFactory(new PropertyValueFactory("production_id"));
+            observableList.get(1).setCellValueFactory(new PropertyValueFactory("production_name"));
+            observableList.get(2).setCellValueFactory(new PropertyValueFactory("production_bzq"));
+            kind.setItems(data);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
 
     public void fresh(MouseEvent event)
     {
@@ -314,7 +431,7 @@ public class EndproductController {
     }
 
     @FXML
-    void handleClicks(MouseEvent event) {
+    void handleClicks(MouseEvent event) throws IOException, SQLException {
         if (event.getSource() == menuHomepage) {
             pageHomepage.setStyle("-fx-background-color : #02030A");
             pageHomepage.toFront();
@@ -339,123 +456,25 @@ public class EndproductController {
         }
         if(event.getSource() == menuQuit)
         {
+            FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("view/Lead.fxml"));
 
+            Stage stage = new Stage(StageStyle.UNDECORATED);
+            stage.setScene(new Scene((Parent) loader.load()));
+
+            LeadContorller controller = loader.<LeadContorller>getController();
+
+            controller.initData(endSection.getStaff());
+
+            stage.show();
+
+            Stage index = (Stage)all.getScene().getWindow();
+            index.close();
         }
     }
 
 
     @FXML
     void initialize() {
-        animation.setCycleCount(Timeline.INDEFINITE);
-        animation.play();
-        try {
-            endSection = new EndSection(new Staff("KenyonZ", "123456"));
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
-        try {
-            this.raw_items.getChildren().clear();
-            String[][] ans = endSection.getInform();
-            for (int i = 1; i < ans.length; i++) {
-                FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("view/ItemDepEnd.fxml"));
-                Node node = null;
-                try {
-                    node = loader.load();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-                ItemDepEndController itemDepEndController = loader.<ItemDepEndController>getController();
-                itemDepEndController.setInform(ans[i][6].substring(0,19), ans[i][0], ans[i][1], ans[i][5], ans[i][8], ans[i][9]);
-                this.raw_items.getChildren().add(node);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        try {
-            this.raw_items1.getChildren().clear();
-            String[][] ans = endSection.getInform();
-            for (int i = 1; i < ans.length; i++) {
-                FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("view/ItemDepEnd.fxml"));
-                Node node = null;
-                try {
-                    node = loader.load();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-                ItemDepEndController itemDepEndController = loader.<ItemDepEndController>getController();
-                itemDepEndController.setInform(ans[i][6].substring(0,19), ans[i][0], ans[i][1], ans[i][5], ans[i][8], ans[i][9]);
-                this.raw_items1.getChildren().add(node);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        try {
-            this.raw_items3.getChildren().clear();
-            String[][] ans = endSection.getInform();
-            for (int i = 1; i < ans.length; i++) {
-                FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("view/ItemDepEnd_Destory.fxml"));
-                Node node = null;
-                try {
-                    node = loader.load();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-                ItemDepEndDestroyController itemDepEndDestroyController = loader.<ItemDepEndDestroyController>getController();
-                itemDepEndDestroyController.setInform(ans[i][6].substring(0,19), ans[i][0], ans[i][1], ans[i][5], ans[i][8], ans[i][9],endSection,this);
-                this.raw_items3.getChildren().add(node);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        try {
-            this.raw_items2.getChildren().clear();
-            String[][] ans = endSection.getInform();
-            for (int i = 1; i < ans.length; i++) {
-                FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("view/ItemDepEnd.fxml"));
-                Node node = null;
-                try {
-                    node = loader.load();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-                ItemDepEndController itemDepEndController = loader.<ItemDepEndController>getController();
-                itemDepEndController.setInform(ans[i][6].substring(0,19), ans[i][0], ans[i][1], ans[i][5], ans[i][8], ans[i][9]);
-                this.raw_items2.getChildren().add(node);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        query_type.getItems().addAll("成品编号", "仓库编号");
-        query_type.setValue("成品编号");
-
-        try {
-            String [][] ans = endSection.ck();
-            final ObservableList<Ck> data = FXCollections.observableArrayList();
-            for (int i = 1; i < ans.length; i++) {
-                data.add(new Ck(ans[i][0], ans[i][1]));
-            }
-            ObservableList<TableColumn<Ck, ?>> observableList = ck.getColumns();
-            observableList.get(0).setCellValueFactory(new PropertyValueFactory("ck_id"));
-            observableList.get(1).setCellValueFactory(new PropertyValueFactory("ck_pos"));
-            ck.setItems(data);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        try {
-            String [][] ans = endSection.kind();
-            final ObservableList<Production> data = FXCollections.observableArrayList();
-            for (int i = 1; i < ans.length; i++) {
-                data.add(new Production(ans[i][0], ans[i][1], Integer.parseInt(ans[i][5])));
-            }
-            ObservableList<TableColumn<Production, ?>> observableList = kind.getColumns();
-            observableList.get(0).setCellValueFactory(new PropertyValueFactory("production_id"));
-            observableList.get(1).setCellValueFactory(new PropertyValueFactory("production_name"));
-            observableList.get(2).setCellValueFactory(new PropertyValueFactory("production_bzq"));
-            kind.setItems(data);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
     }
 }
 

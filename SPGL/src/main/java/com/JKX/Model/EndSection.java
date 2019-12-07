@@ -26,6 +26,10 @@ public class EndSection {
 
     }
 
+    public Staff getStaff() {
+        return staff;
+    }
+
     public String[][] getInform() throws SQLException
     {
         return staff.Search("select * from product, product_ck where product.product_id = product_ck.product_id order by product_date DESC");

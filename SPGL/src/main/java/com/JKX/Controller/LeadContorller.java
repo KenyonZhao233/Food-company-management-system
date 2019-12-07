@@ -55,10 +55,35 @@ public class LeadContorller implements Initializable {
         }
         else if (actionBtn == btnCP) //成品库
         {
+            FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("view/DepEndproduct.fxml"));
 
+            Stage stage = new Stage(StageStyle.UNDECORATED);
+            stage.setScene(new Scene((Parent) loader.load()));
+
+            EndproductController controller = loader.<EndproductController>getController();
+
+            controller.initData(staff);
+
+            stage.show();
+
+            Stage index = (Stage)LeadPane.getScene().getWindow();
+            index.close();
         }
         else if (actionBtn == btnCW) //财务部
         {
+            FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("view/DepFinance.fxml"));
+
+            Stage stage = new Stage(StageStyle.UNDECORATED);
+            stage.setScene(new Scene((Parent) loader.load()));
+
+            FinanceController controller = loader.<FinanceController>getController();
+
+            controller.initData(staff);
+
+            stage.show();
+
+            Stage index = (Stage)LeadPane.getScene().getWindow();
+            index.close();
         }
         else if (actionBtn == btnJH) //生产计划部
         {
@@ -78,7 +103,19 @@ public class LeadContorller implements Initializable {
         }
         else if (actionBtn == btnYL) //原料库
         {
+            FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("view/DepRaw.fxml"));
 
+            Stage stage = new Stage(StageStyle.UNDECORATED);
+            stage.setScene(new Scene((Parent) loader.load()));
+
+            RawController controller = loader.<RawController>getController();
+
+            controller.initData(staff);
+
+            stage.show();
+
+            Stage index = (Stage)LeadPane.getScene().getWindow();
+            index.close();
         }
         else if (actionBtn == btnXS) //销售部
         {

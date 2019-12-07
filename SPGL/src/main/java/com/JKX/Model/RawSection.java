@@ -21,6 +21,11 @@ public class RawSection {
         if(!staff.Login())
             throw new SQLException();
     }
+
+    public Staff getStaff() {
+        return staff;
+    }
+
     public void getInformation()
     {
 

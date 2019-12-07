@@ -19,15 +19,20 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import java.io.IOException;
 import java.sql.SQLException;
 
 import com.JKX.Controller.ItemController.ItemDepRawController;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import javafx.util.Duration;
 
 
@@ -50,6 +55,9 @@ public class RawController {
             label_time2.setText(time.substring(11,19));
         }
     }));
+
+    @FXML
+    private AnchorPane all;
 
     @FXML
     private Button menuHomepage;
@@ -327,7 +335,7 @@ public class RawController {
     }
 
     @FXML
-    void handleClicks(MouseEvent event) {
+    void handleClicks(MouseEvent event) throws IOException {
         if (event.getSource() == menuHomepage) {
             pageHomepage.setStyle("-fx-background-color : #02030A");
             pageHomepage.toFront();
@@ -352,20 +360,26 @@ public class RawController {
         }
         if(event.getSource() == menuQuit)
         {
+            FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("view/Lead.fxml"));
 
+            Stage stage = new Stage(StageStyle.UNDECORATED);
+            stage.setScene(new Scene((Parent) loader.load()));
+
+            LeadContorller controller = loader.<LeadContorller>getController();
+
+            controller.initData(rawSection.getStaff());
+
+            stage.show();
+
+            Stage index = (Stage)all.getScene().getWindow();
+            index.close();
         }
     }
 
-
-    @FXML
-    void initialize() {
+    public void initData(Staff staff) throws SQLException {
+        rawSection = new RawSection(staff);
         animation.setCycleCount(Timeline.INDEFINITE);
         animation.play();
-        try {
-            rawSection = new RawSection(new Staff("KenyonZ", "123456"));
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
 
         try {
             this.raw_items.getChildren().clear();
@@ -445,7 +459,7 @@ public class RawController {
             String [][] ans = rawSection.ck();
             final ObservableList<Ck> data = FXCollections.observableArrayList();
             for (int i = 1; i < ans.length; i++) {
-               data.add(new Ck(ans[i][0], ans[i][1]));
+                data.add(new Ck(ans[i][0], ans[i][1]));
             }
             ObservableList<TableColumn<Ck, ?>> observableList = ck.getColumns();
             observableList.get(0).setCellValueFactory(new PropertyValueFactory("ck_id"));
@@ -469,6 +483,10 @@ public class RawController {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+    @FXML
+    void initialize() {
+
     }
 
 }

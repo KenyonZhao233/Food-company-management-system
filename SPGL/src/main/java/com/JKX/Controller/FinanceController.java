@@ -12,10 +12,15 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import javafx.util.Duration;
 
 import java.io.IOException;
@@ -39,6 +44,9 @@ public class FinanceController {
             time.setText(timet.substring(11,19));
         }
     }));
+
+    @FXML
+    private AnchorPane all;
 
     @FXML
     private Button menuHomepage;
@@ -241,7 +249,7 @@ public class FinanceController {
     }
 
     @FXML
-    void handleClicks(MouseEvent event) {
+    void handleClicks(MouseEvent event) throws IOException {
         if (event.getSource() == menuHomepage) {
             pageHomepage.setStyle("-fx-background-color : #02030A");
             pageHomepage.toFront();
@@ -266,21 +274,26 @@ public class FinanceController {
         }
         if(event.getSource() == menuQuit)
         {
+            FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("view/Lead.fxml"));
 
+            Stage stage = new Stage(StageStyle.UNDECORATED);
+            stage.setScene(new Scene((Parent) loader.load()));
+
+            LeadContorller controller = loader.<LeadContorller>getController();
+
+            controller.initData(financeSection.getStaff());
+
+            stage.show();
+
+            Stage index = (Stage)all.getScene().getWindow();
+            index.close();
         }
     }
 
-
-    @FXML
-    void initialize() {
+    public void initData(Staff staff) throws SQLException {
+        financeSection = new FinanceSection(staff);
         animation.setCycleCount(Timeline.INDEFINITE);
         animation.play();
-        try {
-            financeSection = new FinanceSection(new Staff("KenyonZ", "123456"));
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
         try {
             this.ItemsReceive.getChildren().clear();
             String[][] ans = financeSection.unpaidSearch();
@@ -339,5 +352,8 @@ public class FinanceController {
             e.printStackTrace();
         }
 
+    }
+    @FXML
+    void initialize() {
     }
 }
