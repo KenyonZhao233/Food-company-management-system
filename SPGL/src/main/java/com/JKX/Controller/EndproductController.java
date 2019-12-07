@@ -1,26 +1,69 @@
 package com.JKX.Controller;
 
+import com.JKX.Controller.ItemController.ItemDepEndController;
+import com.JKX.Controller.ItemController.ItemDepEndDestroyController;
+import com.JKX.Controller.ItemController.ItemDepRawDestroyController;
+import com.JKX.Model.EndSection;
+import com.JKX.Model.RawSection;
+
 import java.net.URL;
-import java.util.ResourceBundle;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.*;
+
+import com.JKX.Model.Staff;
+import com.JKX.Model.Table.Ck;
+import com.JKX.Model.Table.Production;
+import com.JKX.Model.Table.Raw;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import java.io.IOException;
+import java.sql.SQLException;
+
+import com.JKX.Controller.ItemController.ItemDepRawController;
+import javafx.util.Duration;
+
 
 public class EndproductController {
 
-    @FXML
-    private ResourceBundle resources;
+    private EndSection endSection;
 
-    @FXML
-    private URL location;
+    DateFormat df = new SimpleDateFormat("yyyy.MM.dd hh:mm:ss");
+    Timeline animation = new Timeline(new KeyFrame(Duration.millis(1000), new EventHandler<ActionEvent>() {
+        @Override
+        public void handle(ActionEvent event) {
+            String time = df.format(new Date());
+            label_year.setText(time.substring(0,4));
+            label_month.setText(time.substring(5,7));
+            label_day.setText(time.substring(8,10));
+            label_time.setText(time.substring(11,19));
+            label_year2.setText(time.substring(0,4));
+            label_month2.setText(time.substring(5,7));
+            label_day2.setText(time.substring(8,10));
+            label_time2.setText(time.substring(11,19));
+        }
+    }));
 
     @FXML
     private Button menuHomepage;
 
     @FXML
     private Button menuQuery;
+
+    @FXML
+    private Button menuManage;
 
     @FXML
     private Button menuStorage;
@@ -35,13 +78,43 @@ public class EndproductController {
     private Pane pageQuery;
 
     @FXML
-    private VBox pnItems3;
+    private Label label_year2;
+
+    @FXML
+    private Label label_month2;
+
+    @FXML
+    private Label label_day2;
+
+    @FXML
+    private Label label_time2;
+
+    @FXML
+    private VBox raw_items2;
+
+    @FXML
+    private TextField query_text;
+
+    @FXML
+    private ComboBox query_type;
+
+    @FXML
+    private VBox raw_items1;
 
     @FXML
     private Pane pageStorage;
 
     @FXML
-    private VBox pnItems11;
+    private TextField input_text1;
+
+    @FXML
+    private TextField input_text2;
+
+    @FXML
+    private Button input;
+
+    @FXML
+    private TextField input_text3;
 
     @FXML
     private Pane pageDestroy;
@@ -50,10 +123,195 @@ public class EndproductController {
     private VBox pnItems1;
 
     @FXML
+    private TextField destroy_text1;
+
+    @FXML
+    private TextField destroy_text2;
+
+    @FXML
+    private Button search_d;
+
+    @FXML
+    private VBox raw_items3;
+
+    @FXML
     private Pane pageHomepage;
 
     @FXML
-    private VBox pnItems32;
+    private Label label_year;
+
+    @FXML
+    private Label label_month;
+
+    @FXML
+    private Label label_day;
+
+    @FXML
+    private Label label_time;
+
+    @FXML
+    private VBox raw_items;
+
+    @FXML
+    private Pane pageManage;
+
+    @FXML
+    private TableView<Ck> ck;
+
+    @FXML
+    private TableView<Production> kind;
+
+
+    public EndproductController() {
+    }
+
+    public void fresh(MouseEvent event)
+    {
+        try {
+            this.raw_items2.getChildren().clear();
+            String[][] ans = endSection.getInform();
+            for (int i = 1; i < ans.length; i++) {
+                FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("view/ItemDepEnd.fxml"));
+                Node node = null;
+                try {
+                    node = loader.load();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                ItemDepEndController itemDepEndController = loader.<ItemDepEndController>getController();
+                itemDepEndController.setInform(ans[i][6].substring(0,19), ans[i][0], ans[i][1], ans[i][5], ans[i][8], ans[i][9]);
+                this.raw_items2.getChildren().add(node);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        click_search(event);
+        click_search_d(event);
+        try {
+            this.raw_items.getChildren().clear();
+            String[][] ans = endSection.getInform();
+            for (int i = 1; i < ans.length; i++) {
+                FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("view/ItemDepEnd.fxml"));
+                Node node = null;
+                try {
+                    node = loader.load();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                ItemDepEndController itemDepEndController = loader.<ItemDepEndController>getController();
+                itemDepEndController.setInform(ans[i][6].substring(0,19), ans[i][0], ans[i][1], ans[i][5], ans[i][8], ans[i][9]);
+                this.raw_items.getChildren().add(node);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+
+    @FXML
+    void click_input(MouseEvent event) throws SQLException {
+        if(input_text1.getText().isEmpty() || input_text1.getText() == null ||
+                input_text2.getText().isEmpty() || input_text2.getText() == null ||
+                input_text3.getText().isEmpty() || input_text3.getText() == null)
+        {
+            Alert _alert = new Alert(Alert.AlertType.WARNING);
+            _alert.setTitle("警告");
+            _alert.setHeaderText("输入错误");
+            _alert.setContentText("信息填写有缺失");
+            _alert.show();
+            return;
+        }
+        try{
+            if(Float.parseFloat(input_text2.getText()) <= 0)
+            {
+                Alert _alert = new Alert(Alert.AlertType.WARNING);
+                _alert.setTitle("警告");
+                _alert.setHeaderText("输入错误");
+                _alert.setContentText("请输入正确的数量");
+                _alert.show();
+                return;
+            };
+        }catch(NumberFormatException e){
+            Alert _alert = new Alert(Alert.AlertType.WARNING);
+            _alert.setTitle("警告");
+            _alert.setHeaderText("输入错误");
+            _alert.setContentText("请输入正确的数量");
+            _alert.show();
+            return;
+        }
+        Alert _alert = new Alert(Alert.AlertType.CONFIRMATION);
+        _alert.setTitle("确认入库");
+        _alert.setHeaderText("");
+        _alert.setContentText("是否将原料编号为" + input_text1.getText() + "入仓库编号为" + input_text2.getText() + "的仓库" + input_text3.getText() + "件");
+        Optional<ButtonType> result = _alert.showAndWait();
+        if (result.get() == ButtonType.OK){
+            endSection.in(input_text1.getText(),input_text3.getText(),input_text2.getText());
+            try {
+                this.raw_items2.getChildren().clear();
+                String[][] ans = endSection.getInform();
+                for (int i = 1; i < ans.length; i++) {
+                    FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("view/ItemDepEnd.fxml"));
+                    Node node = null;
+                    try {
+                        node = loader.load();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                    ItemDepEndController itemDepEndController = loader.<ItemDepEndController>getController();
+                    itemDepEndController.setInform(ans[i][6].substring(0,19), ans[i][0], ans[i][1], ans[i][5], ans[i][8], ans[i][9]);
+                    this.raw_items2.getChildren().add(node);
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+            fresh(event);
+        }
+    }
+
+    @FXML
+    void click_search(MouseEvent event) {
+        try {
+            this.raw_items1.getChildren().clear();
+
+            String[][] ans = endSection.search(query_type, query_text);
+            for (int i = 1; i < ans.length; i++) {
+                FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("view/ItemDepEnd.fxml"));
+                Node node = null;
+                try {
+                    node = loader.load();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                ItemDepEndController itemDepEndController = loader.<ItemDepEndController>getController();
+                itemDepEndController.setInform(ans[i][6].substring(0,19), ans[i][0], ans[i][1], ans[i][5], ans[i][8], ans[i][9]);
+                this.raw_items1.getChildren().add(node);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    void click_search_d(MouseEvent event) {
+        try {
+            this.raw_items3.getChildren().clear();
+            String[][] ans = endSection.search_d(destroy_text1.getText(),destroy_text2.getText());
+            for (int i = 1; i < ans.length; i++) {
+                FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("view/ItemDepEnd_Destory.fxml"));
+                Node node = null;
+                try {
+                    node = loader.load();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                ItemDepEndDestroyController itemDepEndDestroyController = loader.<ItemDepEndDestroyController>getController();
+                itemDepEndDestroyController.setInform(ans[i][6].substring(0,19), ans[i][0], ans[i][1], ans[i][5], ans[i][8], ans[i][9],endSection,this);
+                this.raw_items3.getChildren().add(node);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 
     @FXML
     void handleClicks(MouseEvent event) {
@@ -74,27 +332,130 @@ public class EndproductController {
             pageDestroy.setStyle("-fx-background-color : #02030A");
             pageDestroy.toFront();
         }
+        if(event.getSource() == menuManage)
+        {
+            pageManage.setStyle("-fx-background-color : #02030A");
+            pageManage.toFront();
+        }
         if(event.getSource() == menuQuit)
         {
 
         }
     }
 
+
     @FXML
     void initialize() {
-        assert menuHomepage != null : "fx:id=\"menuHomepage\" was not injected: check your FXML file 'DepEndproduct.fxml'.";
-        assert menuQuery != null : "fx:id=\"menuQuery\" was not injected: check your FXML file 'DepEndproduct.fxml'.";
-        assert menuStorage != null : "fx:id=\"menuStorage\" was not injected: check your FXML file 'DepEndproduct.fxml'.";
-        assert menuDestroy != null : "fx:id=\"menuDestroy\" was not injected: check your FXML file 'DepEndproduct.fxml'.";
-        assert menuQuit != null : "fx:id=\"menuQuit\" was not injected: check your FXML file 'DepEndproduct.fxml'.";
-        assert pageQuery != null : "fx:id=\"pageQuery\" was not injected: check your FXML file 'DepEndproduct.fxml'.";
-        assert pnItems3 != null : "fx:id=\"pnItems3\" was not injected: check your FXML file 'DepEndproduct.fxml'.";
-        assert pageStorage != null : "fx:id=\"pageStorage\" was not injected: check your FXML file 'DepEndproduct.fxml'.";
-        assert pnItems11 != null : "fx:id=\"pnItems11\" was not injected: check your FXML file 'DepEndproduct.fxml'.";
-        assert pageDestroy != null : "fx:id=\"pageDestroy\" was not injected: check your FXML file 'DepEndproduct.fxml'.";
-        assert pnItems1 != null : "fx:id=\"pnItems1\" was not injected: check your FXML file 'DepEndproduct.fxml'.";
-        assert pageHomepage != null : "fx:id=\"pageHomepage\" was not injected: check your FXML file 'DepEndproduct.fxml'.";
-        assert pnItems32 != null : "fx:id=\"pnItems32\" was not injected: check your FXML file 'DepEndproduct.fxml'.";
+        animation.setCycleCount(Timeline.INDEFINITE);
+        animation.play();
+        try {
+            endSection = new EndSection(new Staff("KenyonZ", "123456"));
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
 
+        try {
+            this.raw_items.getChildren().clear();
+            String[][] ans = endSection.getInform();
+            for (int i = 1; i < ans.length; i++) {
+                FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("view/ItemDepEnd.fxml"));
+                Node node = null;
+                try {
+                    node = loader.load();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                ItemDepEndController itemDepEndController = loader.<ItemDepEndController>getController();
+                itemDepEndController.setInform(ans[i][6].substring(0,19), ans[i][0], ans[i][1], ans[i][5], ans[i][8], ans[i][9]);
+                this.raw_items.getChildren().add(node);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        try {
+            this.raw_items1.getChildren().clear();
+            String[][] ans = endSection.getInform();
+            for (int i = 1; i < ans.length; i++) {
+                FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("view/ItemDepEnd.fxml"));
+                Node node = null;
+                try {
+                    node = loader.load();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                ItemDepEndController itemDepEndController = loader.<ItemDepEndController>getController();
+                itemDepEndController.setInform(ans[i][6].substring(0,19), ans[i][0], ans[i][1], ans[i][5], ans[i][8], ans[i][9]);
+                this.raw_items1.getChildren().add(node);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        try {
+            this.raw_items3.getChildren().clear();
+            String[][] ans = endSection.getInform();
+            for (int i = 1; i < ans.length; i++) {
+                FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("view/ItemDepEnd_Destory.fxml"));
+                Node node = null;
+                try {
+                    node = loader.load();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                ItemDepEndDestroyController itemDepEndDestroyController = loader.<ItemDepEndDestroyController>getController();
+                itemDepEndDestroyController.setInform(ans[i][6].substring(0,19), ans[i][0], ans[i][1], ans[i][5], ans[i][8], ans[i][9],endSection,this);
+                this.raw_items3.getChildren().add(node);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        try {
+            this.raw_items2.getChildren().clear();
+            String[][] ans = endSection.getInform();
+            for (int i = 1; i < ans.length; i++) {
+                FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("view/ItemDepEnd.fxml"));
+                Node node = null;
+                try {
+                    node = loader.load();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                ItemDepEndController itemDepEndController = loader.<ItemDepEndController>getController();
+                itemDepEndController.setInform(ans[i][6].substring(0,19), ans[i][0], ans[i][1], ans[i][5], ans[i][8], ans[i][9]);
+                this.raw_items2.getChildren().add(node);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        query_type.getItems().addAll("成品编号", "仓库编号");
+        query_type.setValue("成品编号");
+
+        try {
+            String [][] ans = endSection.ck();
+            final ObservableList<Ck> data = FXCollections.observableArrayList();
+            for (int i = 1; i < ans.length; i++) {
+                data.add(new Ck(ans[i][0], ans[i][1]));
+            }
+            ObservableList<TableColumn<Ck, ?>> observableList = ck.getColumns();
+            observableList.get(0).setCellValueFactory(new PropertyValueFactory("ck_id"));
+            observableList.get(1).setCellValueFactory(new PropertyValueFactory("ck_pos"));
+            ck.setItems(data);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        try {
+            String [][] ans = endSection.kind();
+            final ObservableList<Production> data = FXCollections.observableArrayList();
+            for (int i = 1; i < ans.length; i++) {
+                data.add(new Production(ans[i][0], ans[i][1], Integer.parseInt(ans[i][5])));
+            }
+            ObservableList<TableColumn<Production, ?>> observableList = kind.getColumns();
+            observableList.get(0).setCellValueFactory(new PropertyValueFactory("production_id"));
+            observableList.get(1).setCellValueFactory(new PropertyValueFactory("production_name"));
+            observableList.get(2).setCellValueFactory(new PropertyValueFactory("production_bzq"));
+            kind.setItems(data);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 }
+
