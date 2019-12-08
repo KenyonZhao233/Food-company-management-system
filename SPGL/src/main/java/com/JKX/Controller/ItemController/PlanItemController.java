@@ -1,7 +1,6 @@
 package com.JKX.Controller.ItemController;
 
 import com.JKX.Controller.ProductionPlanController;
-import com.JKX.Model.Table.Ck;
 import com.JKX.Model.Table.Plan;
 import com.JKX.Model.Table.Raw;
 import com.jfoenix.controls.JFXButton;
