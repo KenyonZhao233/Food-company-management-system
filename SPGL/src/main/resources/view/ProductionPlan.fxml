@@ -253,9 +253,9 @@
                   </TabPane>
                </children>
             </AnchorPane>
-            <AnchorPane fx:id="ChangeCppane" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #000000;">
+            <AnchorPane fx:id="ChangeCppane" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #000000;" visible="false">
                <children>
-                  <TabPane layoutY="1.0" prefHeight="689.0" prefWidth="1019.0" tabClosingPolicy="UNAVAILABLE">
+                  <TabPane layoutY="1.0" prefHeight="689.0" prefWidth="1019.0" style="-fx-background-color: #000000;" tabClosingPolicy="UNAVAILABLE">
                     <tabs>
                       <Tab text="查询成品">
                         <content>
@@ -285,7 +285,7 @@
                         <content>
                           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                  <children>
-                                    <JFXButton fx:id="searchCp3" ellipsisString="" layoutX="832.0" layoutY="344.0" onMouseClicked="#handleSearchCp" prefHeight="20.0" prefWidth="8.0">
+                                    <JFXButton fx:id="searchCp3" ellipsisString="" layoutX="832.0" layoutY="300.0" onMouseClicked="#handleSearchCp" prefHeight="20.0" prefWidth="8.0">
                                        <graphic>
                                           <ImageView fitHeight="30.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
                                              <image>
@@ -294,7 +294,7 @@
                                           </ImageView>
                                        </graphic>
                                     </JFXButton>
-                                    <TextField fx:id="messageCp3" layoutX="687.0" layoutY="345.0" prefHeight="32.0" prefWidth="145.0" style="-fx-border-color: #B7C3D7; -fx-background-color: #02030A; -fx-border-radius: 2em;" />
+                                    <TextField fx:id="messageCp3" layoutX="687.0" layoutY="300.0" prefHeight="32.0" prefWidth="145.0" style="-fx-border-color: #B7C3D7; -fx-background-color: #02030A; -fx-border-radius: 2em;" />
                                     <Label layoutX="61.0" layoutY="42.0" prefHeight="20.0" prefWidth="83.0" text="成品编号：" />
                                     <Label layoutX="61.0" layoutY="82.0" prefHeight="20.0" prefWidth="83.0" text="成品名称：" />
                                     <Label layoutX="54.0" layoutY="121.0" prefHeight="20.0" prefWidth="97.0" text="零售商价格：" />
@@ -307,27 +307,25 @@
                                     <JFXTextField fx:id="p2" layoutX="145.0" layoutY="156.0" />
                                     <JFXTextField fx:id="p3" layoutX="145.0" layoutY="195.0" />
                                     <JFXTextField fx:id="bzq" layoutX="145.0" layoutY="233.0" />
-                                    <Label layoutX="378.0" layoutY="87.0" prefHeight="20.0" prefWidth="83.0" text="原料编号：" />
-                                    <Label layoutX="378.0" layoutY="128.0" prefHeight="20.0" prefWidth="83.0" text="原料名称：" />
-                                    <Label layoutX="378.0" layoutY="166.0" prefHeight="20.0" prefWidth="97.0" text="原料价格：" />
-                                    <JFXTextField fx:id="cpRawId" editable="false" layoutX="461.0" layoutY="82.0" />
-                                    <JFXTextField fx:id="cpRawName" layoutX="461.0" layoutY="122.0" />
-                                    <JFXTextField fx:id="cpRawPrice" layoutX="461.0" layoutY="161.0" />
-                                    <Label layoutX="378.0" layoutY="206.0" prefHeight="20.0" prefWidth="83.0" text="原料数量：" />
-                                    <JFXTextField fx:id="cpRawNum" layoutX="461.0" layoutY="201.0" />
-                                    <ScrollPane layoutX="687.0" layoutY="10.0" prefHeight="314.0" prefWidth="325.0">
+                                    <Label layoutX="376.0" layoutY="193.0" prefHeight="20.0" prefWidth="83.0" text="原料名称：" />
+                                    <Label layoutX="699.0" layoutY="193.0" prefHeight="20.0" prefWidth="97.0" text="原料价格：" />
+                                    <JFXTextField fx:id="cpRawName" layoutX="459.0" layoutY="187.0" />
+                                    <JFXTextField fx:id="cpRawPrice" editable="false" layoutX="782.0" layoutY="188.0" />
+                                    <Label layoutX="376.0" layoutY="238.0" prefHeight="20.0" prefWidth="83.0" text="原料数量：" />
+                                    <JFXTextField fx:id="cpRawNum" layoutX="459.0" layoutY="233.0" />
+                                    <ScrollPane layoutX="349.0" layoutY="10.0" prefHeight="157.0" prefWidth="663.0">
                                        <content>
-                                          <VBox fx:id="vboxChangeCPRaw" prefHeight="295.0" prefWidth="324.0" />
+                                          <VBox fx:id="vboxChangeCPRaw" prefHeight="136.0" prefWidth="660.0" />
                                        </content>
                                     </ScrollPane>
                                     <JFXButton fx:id="changeCp" layoutX="183.0" layoutY="293.0" onMouseClicked="#handleChangeCp" text="修改" />
-                                    <JFXButton fx:id="addRaw" layoutX="495.0" layoutY="293.0" onMouseClicked="#handleChangeCp" text="添加原料" />
-                                    <ScrollPane layoutX="6.0" layoutY="396.0" prefHeight="249.0" prefWidth="1006.0">
+                                    <JFXButton fx:id="addRaw" disable="true" layoutX="470.0" layoutY="293.0" onMouseClicked="#handleChangeCp" text="添加原料" />
+                                    <ScrollPane layoutX="6.0" layoutY="345.0" prefHeight="300.0" prefWidth="1006.0">
                                        <content>
-                                          <VBox fx:id="vboxChangeCp" prefHeight="246.0" prefWidth="1003.0" />
+                                          <VBox fx:id="vboxChangeCp" prefHeight="298.0" prefWidth="1003.0" />
                                        </content>
                                     </ScrollPane>
-                                    <ComboBox fx:id="comboxSearchCp3" layoutX="881.0" layoutY="346.0" prefHeight="30.0" prefWidth="124.0" />
+                                    <ComboBox fx:id="comboxSearchCp3" layoutX="881.0" layoutY="302.0" prefHeight="30.0" prefWidth="124.0" />
                                  </children>
                               </AnchorPane>
                         </content>
@@ -342,7 +340,7 @@
                                     <Label layoutX="353.0" layoutY="305.0" prefHeight="20.0" prefWidth="98.0" text="批发商价格：" />
                                     <Label layoutX="353.0" layoutY="364.0" prefHeight="20.0" prefWidth="98.0" text="代理商价格：" />
                                     <Label layoutX="378.0" layoutY="423.0" prefHeight="20.0" prefWidth="61.0" text="保质期：" />
-                                    <JFXTextField fx:id="cpId1" editable="false" layoutX="450.0" layoutY="127.0" />
+                                    <JFXTextField fx:id="cpId1" layoutX="450.0" layoutY="127.0" />
                                     <JFXTextField fx:id="cpName1" layoutX="450.0" layoutY="184.0" />
                                     <JFXTextField fx:id="p11" layoutX="450.0" layoutY="241.0" />
                                     <JFXTextField fx:id="p21" layoutX="450.0" layoutY="300.0" />
@@ -356,7 +354,7 @@
                     </tabs>
                   </TabPane>
                </children></AnchorPane>
-            <AnchorPane fx:id="PlanGlpane" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #000000;">
+            <AnchorPane fx:id="PlanGlpane" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #000000;" visible="false">
                <children>
                   <TabPane layoutX="1.0" layoutY="1.0" prefHeight="689.0" prefWidth="1018.0" tabClosingPolicy="UNAVAILABLE">
                     <tabs>

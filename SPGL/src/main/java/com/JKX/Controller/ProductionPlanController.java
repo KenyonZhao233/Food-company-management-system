@@ -1,6 +1,8 @@
 package com.JKX.Controller;
 
 import com.JKX.Controller.ItemController.PlanItemController;
+import com.JKX.Controller.ItemController.ProductItemController;
+import com.JKX.Controller.ItemController.ProductRawController;
 import com.JKX.Controller.ItemController.StaffInformController;
 import com.JKX.Model.PlanSection;
 import com.JKX.Model.Staff;
@@ -134,7 +136,7 @@ public class ProductionPlanController {
 
     //成品修改界面
     @FXML
-    private JFXTextField cpId, cpName, p1, p2, p3, bzq, cpRawId, cpRawName, cpRawPrice, cpRawNum;
+    private JFXTextField cpId, cpName, p1, p2, p3, bzq, cpRawName, cpRawPrice, cpRawNum;
     @FXML
     private JFXButton changeCp, addRaw, searchCp3;
     @FXML
@@ -209,6 +211,39 @@ public class ProductionPlanController {
         this.CrawBzq.setCellValueFactory(new PropertyValueFactory<Raw, Integer>("raw_bzq"));
         this.CrawPri.setCellValueFactory(new PropertyValueFactory<Raw, Float>("raw_price"));
         this.CrawKc.setCellValueFactory(new PropertyValueFactory<Raw, Float>("raw_kc"));
+
+        this.cpRawName.textProperty().addListener((observable, oldValue, newValue)-> {
+            String trimed = newValue.trim();
+            if (trimed.length() > 0) {
+                this.handleAddRaw(trimed);
+            }
+        });
+
+        this.cpName1.textProperty().addListener((observable, oldValue, newValue)-> {
+            String trimed = newValue.trim();
+            if (trimed.length() > 0) {
+                this.handleCpnameChange(trimed);
+            }
+        });
+    }
+
+    public void handleAddRaw(String s)
+    {
+        try {
+            Raw[] raw = this.planSection.searchRawOnName(this.cpRawName.getText());
+            if(raw.length == 0)
+                this.addRaw.setDisable(true);
+            else
+            {
+                this.addRaw.setDisable(false);
+                this.cpRawPrice.setText(String.valueOf(raw[0].getRaw_price()));
+            }
+        }
+        catch (SQLException se)
+        {
+            se.printStackTrace();
+            this.planSection.getStaff().showAlert(Alert.AlertType.ERROR, "错误", "查询失败", "系统错误");
+        }
     }
 
     public void handleJump(MouseEvent mouseEvent) throws IOException {
@@ -460,6 +495,53 @@ public class ProductionPlanController {
 
     public void handleChangeCp(MouseEvent mouseEvent) {
         JFXButton actionBtn = (JFXButton)mouseEvent.getSource();
+        if(actionBtn == this.changeCp)
+        {
+            if(this.cpName.getText().isEmpty() || this.p1.getText().isEmpty() || this.p2.getText().isEmpty() || this.p3.getText().isEmpty() || this.bzq.getText().isEmpty())
+            {
+                this.planSection.getStaff().showAlert(Alert.AlertType.INFORMATION, "警告", "修改失败", "请填写完整信息");
+            }
+            else
+            {
+                try {
+                    this.planSection.changeCpInform(this.cpId.getText(), this.cpName.getText(), this.p1.getText(), this.p2.getText(), this.p3.getText(), this.bzq.getText());
+                }
+                catch (SQLException se)
+                {
+                    se.printStackTrace();
+                    this.planSection.getStaff().showAlert(Alert.AlertType.INFORMATION, "警告", "修改失败", "系统错误");
+                }
+            }
+        }
+        else if(actionBtn == this.addRaw)
+        {
+            if(this.cpRawName.getText().isEmpty() || this.cpRawPrice.getText().isEmpty() || this.cpRawNum.getText().isEmpty())
+            {
+                this.planSection.getStaff().showAlert(Alert.AlertType.INFORMATION, "警告", "添加失败", "请填写完整信息");
+            }
+            else
+            {
+                try {
+                    Raw[] raws = this.planSection.searchRawOnName(this.cpRawName.getText());
+                    raws[0].setRaw_num(Float.parseFloat(this.cpRawNum.getText()));
+                    this.planSection.addCpRaws(this.cpId.getText(), raws[0]);
+                    FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("view/ProductRawItem.fxml"));
+                    Node node = loader.load();
+
+                    ProductRawController productRawController = loader.<ProductRawController>getController();
+                    productRawController.setInform(raws[0]);
+                    productRawController.setNode(node);
+                    productRawController.setProductionPlanController(this);
+                    productRawController.setIds(this.cpId.getText());
+
+                    vboxChangeCPRaw.getChildren().add(node);
+                }
+                catch (SQLException | IOException se)
+                {
+                    se.printStackTrace();
+                }
+            }
+        }
     }
 
     public void handleSearchCp(MouseEvent mouseEvent) {
@@ -495,14 +577,54 @@ public class ProductionPlanController {
             try {
                 if(this.comboxSearchCp1.getValue().equals("按编号查询"))
                 {
-                    Production[] productions = this.planSection.searchCpOnID(this.messageCp1.getText());
+                    String inform;
+                    if(this.messageCp1.getText().isEmpty())
+                        inform = "null";
+                    else
+                        inform = this.messageCp1.getText();
+                    Production[] productions = this.planSection.searchCpOnID(inform);
+                    cpList.getChildren().clear();
+                    for(int i = 0; i < productions.length; i++)
+                    {
+
+                        FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("view/ProductItem.fxml"));
+                        Node node = loader.load();
+
+                        ProductItemController productItemController = loader.<ProductItemController>getController();
+                        productItemController.setInform(productions[i], 0);
+                        productItemController.setProductionPlanController(this);
+                        productItemController.setNode(node);
+                        productItemController.setDeleteDisable(true);
+
+                        cpList.getChildren().add(node);
+                    }
                 }
                 else if(this.comboxSearchCp1.getValue().equals("按名称查询"))
                 {
-                    Production[] productions = this.planSection.searchCpOnName(this.messageCp1.getText());
+                    String inform;
+                    if(this.messageCp1.getText().isEmpty())
+                        inform = "null";
+                    else
+                        inform = this.messageCp1.getText();
+                    Production[] productions = this.planSection.searchCpOnName(inform);
+                    cpList.getChildren().clear();
+                    for(int i = 0; i < productions.length; i++)
+                    {
+
+                        FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("view/ProductItem.fxml"));
+                        Node node = loader.load();
+
+                        ProductItemController productItemController = loader.<ProductItemController>getController();
+                        productItemController.setInform(productions[i], 0);
+                        productItemController.setProductionPlanController(this);
+                        productItemController.setNode(node);
+                        productItemController.setDeleteDisable(true);
+
+                        cpList.getChildren().add(node);
+                    }
                 }
             }
-            catch (SQLException se)
+            catch (SQLException | IOException se)
             {
                 se.printStackTrace();
                 this.planSection.getStaff().showAlert(Alert.AlertType.ERROR, "错误", "查询失败", "系统错误");
@@ -510,8 +632,99 @@ public class ProductionPlanController {
         }
         else if(actionBtn == this.searchCp3)
         {
+            try {
+                if(this.comboxSearchCp1.getValue().equals("按编号查询"))
+                {
+                    String inform;
+                    if(this.messageCp3.getText().isEmpty())
+                        inform = "null";
+                    else
+                        inform = this.messageCp3.getText();
+                    Production[] productions = this.planSection.searchCpOnID(inform);
+                    vboxChangeCp.getChildren().clear();
+                    for(int i = 0; i < productions.length; i++)
+                    {
+                        FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("view/ProductItem.fxml"));
+                        Node node = loader.load();
 
+                        ProductItemController productItemController = loader.<ProductItemController>getController();
+                        productItemController.setInform(productions[i], 1);
+                        productItemController.setProductionPlanController(this);
+                        productItemController.setNode(node);
+                        productItemController.setDeleteDisable(false);
+
+                        vboxChangeCp.getChildren().add(node);
+                    }
+                }
+                else if(this.comboxSearchCp1.getValue().equals("按名称查询"))
+                {
+                    String inform;
+                    if(this.messageCp3.getText().isEmpty())
+                        inform = "null";
+                    else
+                        inform = this.messageCp3.getText();
+                    Production[] productions = this.planSection.searchCpOnID(inform);
+                    vboxChangeCp.getChildren().clear();
+                    for(int i = 0; i < productions.length; i++)
+                    {
+                        FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("view/ProductItem.fxml"));
+                        Node node = loader.load();
+
+                        ProductItemController productItemController = loader.<ProductItemController>getController();
+                        productItemController.setInform(productions[i], 1);
+                        productItemController.setProductionPlanController(this);
+                        productItemController.setNode(node);
+                        productItemController.setDeleteDisable(false);
+
+                        vboxChangeCp.getChildren().add(node);
+                    }
+                }
+            }
+            catch (SQLException | IOException se)
+            {
+                se.printStackTrace();
+                this.planSection.getStaff().showAlert(Alert.AlertType.ERROR, "错误", "查询失败", "系统错误");
+            }
         }
+    }
+
+    public void setChangeCpInform(Production production) {
+        this.cpId.setText(production.getProduction_id());
+        this.cpName.setText(production.getProduction_name());
+        this.p1.setText(String.valueOf(production.getProduction_p1()));
+        this.p2.setText(String.valueOf(production.getProduction_p2()));
+        this.p3.setText(String.valueOf(production.getProduction_p3()));
+        this.bzq.setText(String.valueOf(production.getProduction_bzq()));
+        vboxChangeCPRaw.getChildren().clear();
+        try {
+            for(int i = 0; i < production.getRaws().length; i++)
+            {
+                FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("view/ProductRawItem.fxml"));
+                Node node = loader.load();
+
+                ProductRawController productRawController = loader.<ProductRawController>getController();
+                productRawController.setProductionPlanController(this);
+                productRawController.setNode(node);
+                productRawController.setInform(production.getRaws()[i]);
+                productRawController.setIds(production.getProduction_id());
+
+                vboxChangeCPRaw.getChildren().add(node);
+            }
+        }
+        catch (IOException ie)
+        {
+            ie.printStackTrace();
+        }
+    }
+
+    public void deleteChangeCpRawbox(Node node)
+    {
+        this.vboxChangeCPRaw.getChildren().remove(node);
+    }
+
+    public void deletevboxChangeCp(Node node)
+    {
+        this.vboxChangeCp.getChildren().remove(node);
     }
 
     public void handleRaw(MouseEvent mouseEvent) {
@@ -520,7 +733,39 @@ public class ProductionPlanController {
     public void handleSearchXl(MouseEvent mouseEvent) {
     }
 
+    public void handleCpnameChange(String s)
+    {
+        try {
+            Production[] productions = this.planSection.searchCpOnName(this.cpName1.getText());
+            if(productions.length == 0)
+                this.addCp.setDisable(false);
+            else
+                this.addCp.setDisable(true);
+        }
+        catch (SQLException se)
+        {
+            this.planSection.getStaff().showAlert(Alert.AlertType.ERROR, "错误", "查询失败", "系统错误");
+        }
+    }
+
     public void handleAddCp(MouseEvent mouseEvent) {
+        if(this.cpId1.getText().isEmpty() || this.cpName1.getText().isEmpty() || this.p11.getText().isEmpty() || this.p21.getText().isEmpty() || this.p31.getText().isEmpty() || this.bzq1.getText().isEmpty())
+        {
+            this.planSection.getStaff().showAlert(Alert.AlertType.ERROR, "错误", "添加失败", "请输入完整信息");
+        }
+        else
+        {
+            try {
+                Production production = new Production(this.cpId1.getText(), this.cpName1.getText(), Float.parseFloat(this.p11.getText()), Float.parseFloat(this.p21.getText()), Float.parseFloat(this.p31.getText()), Integer.parseInt(this.bzq1.getText()), null, 0);
+                this.planSection.addCp(production);
+                this.planSection.getStaff().showAlert(Alert.AlertType.INFORMATION, "成功", "添加成功", "商品编号:" + this.cpId1.getText());
+            }
+            catch (Exception ex)
+            {
+                ex.printStackTrace();
+                this.planSection.getStaff().showAlert(Alert.AlertType.ERROR, "错误", "添加失败", "系统错误");
+            }
+        }
     }
 
     public void handleMakePlan(MouseEvent mouseEvent) {

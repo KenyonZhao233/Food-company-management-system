@@ -19,10 +19,10 @@
                   <Image url="@../icon/food.png" />
                </image>
             </ImageView>
-            <Label layoutX="144.0" layoutY="20.0" text="食品编号：" />
-            <Label fx:id="pro_id" layoutX="218.0" layoutY="20.0" prefHeight="20.0" prefWidth="109.0" />
-            <Label layoutX="143.0" layoutY="62.0" text="食品名称：" />
-            <Label fx:id="pro_name" layoutX="219.0" layoutY="62.0" prefHeight="20.0" prefWidth="120.0" />
+            <Label layoutX="143.0" layoutY="65.0" text="保质期：" />
+            <Label fx:id="pro_id" layoutX="16.0" layoutY="140.0" prefHeight="20.0" prefWidth="109.0" />
+            <Label layoutX="143.0" layoutY="24.0" text="食品名称：" />
+            <Label fx:id="pro_name" layoutX="219.0" layoutY="24.0" prefHeight="20.0" prefWidth="120.0" />
             <HBox layoutX="126.0" layoutY="105.0" prefHeight="25.0" prefWidth="310.0">
                <children>
                   <Label alignment="CENTER" contentDisplay="TOP" prefHeight="20.0" prefWidth="108.0" text="零售商价格" />
@@ -45,6 +45,7 @@
               </columns>
             </TableView>
             <JFXButton fx:id="delete" layoutX="826.0" layoutY="-4.0" onMouseClicked="#handleDelete" prefHeight="183.0" prefWidth="34.0" ripplerFill="#e10a0a" style="-fx-background-color: #f85a5a;" text="删除" textFill="WHITE" wrapText="true" />
+            <Label fx:id="bzq" layoutX="203.0" layoutY="65.0" prefHeight="20.0" prefWidth="183.0" />
          </children></AnchorPane>
   </content>
 </ScrollPane>

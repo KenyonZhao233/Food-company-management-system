@@ -41,7 +41,7 @@
             <Label fx:id="proName" layoutX="232.0" layoutY="55.0" prefHeight="18.0" prefWidth="85.0" />
             <Label fx:id="sdate" layoutX="231.0" layoutY="88.0" prefHeight="20.0" prefWidth="283.0" />
             <Label fx:id="edate" layoutX="233.0" layoutY="121.0" prefHeight="20.0" prefWidth="264.0" />
-            <JFXButton fx:id="change" layoutX="651.0" layoutY="160.0" prefHeight="30.0" prefWidth="98.0" text="修改" />
+            <JFXButton fx:id="change" layoutX="651.0" layoutY="160.0" onMouseClicked="#handleClicks" prefHeight="30.0" prefWidth="98.0" text="修改" />
             <JFXTextField fx:id="proNum" editable="false" layoutX="364.0" layoutY="17.0" prefHeight="30.0" prefWidth="136.0" />
          </children></AnchorPane>
   </content>

@@ -109,21 +109,23 @@ public class PlanItemController {
         {
             try {
                 int prenums = this.plan.getProduction().getNums();
+                System.out.println("pre" + prenums);
                 int nums = Integer.parseInt(this.proNum.getText());
                 this.plan.getProduction().setNums(nums);
                 for(int i = 0; i < this.plan.getProduction().getRaws().length; i++) {
                     float vae = this.plan.getProduction().getRaws()[i].getRaw_num() / prenums * nums;
-                    Raw[] raws = this.productionPlanController.getPlanSection().searchRawOnId(this.plan.getProduction().getRaws()[i].getRaw_id());
-                    if(raws[0].getRaw_kc() > vae)
+                    float now = this.productionPlanController.getPlanSection().searchRawOnId(this.plan.getProduction().getRaws()[i].getRaw_id())[0].getRaw_kc()+ this.productionPlanController.getPlanSection().searchPlanRawNum(this.plan.getProduction().getRaws()[i].getRaw_id());
+                    if(now >= vae)
                     {
                         this.plan.getProduction().getRaws()[i].setRaw_num(vae);
                     }
                     else
                     {
-                        this.productionPlanController.getPlanSection().getStaff().showAlert(Alert.AlertType.ERROR, "错误", "修改失败", "当前库存仅剩：" + String.valueOf(raws[0].getRaw_kc()));
+                        this.productionPlanController.getPlanSection().getStaff().showAlert(Alert.AlertType.ERROR, "错误", "修改失败", "当前库存仅剩：" + String.valueOf(now));
                     }
                 }
                 this.productionPlanController.getPlanSection().changePlanOnnum(this.planId.getText(), this.proNum.getText());
+                this.rawView.refresh();
             }
             catch (SQLException se)
             {

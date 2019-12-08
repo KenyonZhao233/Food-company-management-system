@@ -136,7 +136,7 @@ public class PlanSection {
             production[0].setNums(Integer.parseInt(ans[i][3]));
             for(int j = 0; j < production[0].getRaws().length; j++)
             {
-                production[0].getRaws()[i].setRaw_num(production[0].getRaws()[i].getRaw_num() * production[0].getNums());
+                production[0].getRaws()[j].setRaw_num(production[0].getRaws()[j].getRaw_num() * production[0].getNums());
             }
             plans[i - 1] = new Plan(ans[i][0], ans[i][1], production[0], ans[i][4], ans[i][5], ans[i][6]);
         }
@@ -206,6 +206,15 @@ public class PlanSection {
         String sql = "INSERT INTO product_raw(product_raw.product_id, product_raw.raw_id, product_raw.raw_num) " +
                      "VALUES ('" + id + "', '" + raw.getRaw_id() + "', " + String.valueOf(raw.getRaw_num()) + ");";
         int res = staff.Does(sql);
+        return res;
+    }
+
+    public int changeCpInform(String id, String name, String p1, String p2, String p3, String bzq) throws SQLException
+    {
+        String[] a = {"string", "string", "float", "float", "float", "int"};
+        String[] b = {id, name, p1, p2, p3, bzq};
+        String sql = "Call Change_Cp(?, ?, ?, ?, ?, ?)";
+        int res = this.staff.ExcuteDoes(sql, a, b);
         return res;
     }
 
