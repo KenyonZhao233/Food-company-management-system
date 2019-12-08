@@ -1,10 +1,10 @@
 package com.JKX.Model.Table;
 
-public class Ck {
+public class Storehouse {
     private String ck_id;
     private String ck_pos;
 
-    public Ck(String ck_id, String ck_pos)
+    public Storehouse(String ck_id, String ck_pos)
     {
         this.ck_id = ck_id;
         this.ck_pos = ck_pos;

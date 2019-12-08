@@ -1,6 +1,5 @@
 package com.JKX.Model;
 
-import com.JKX.Model.Table.Ck;
 import com.JKX.Mysql.MysqlConnect;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
@@ -82,7 +81,7 @@ public class EndSection {
 
     public String[][] ck() throws SQLException
     {
-        return staff.Search("select * from ck");
+        return staff.Search("select * from storehouse");
     }
 
     public String[][] kind() throws SQLException

@@ -8,8 +8,8 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 
 import com.JKX.Model.Staff;
-import com.JKX.Model.Table.Ck;
 import com.JKX.Model.Table.Raw;
+import com.JKX.Model.Table.Storehouse;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.collections.FXCollections;
@@ -159,7 +159,7 @@ public class RawController {
     private Pane pageManage;
 
     @FXML
-    private TableView<Ck> ck;
+    private TableView<Storehouse> ck;
 
     @FXML
     private TableView<Raw> kind;
@@ -457,11 +457,11 @@ public class RawController {
         query_type.setValue("原料编号");
         try {
             String [][] ans = rawSection.ck();
-            final ObservableList<Ck> data = FXCollections.observableArrayList();
+            final ObservableList<Storehouse> data = FXCollections.observableArrayList();
             for (int i = 1; i < ans.length; i++) {
-                data.add(new Ck(ans[i][0], ans[i][1]));
+                data.add(new Storehouse(ans[i][0], ans[i][1]));
             }
-            ObservableList<TableColumn<Ck, ?>> observableList = ck.getColumns();
+            ObservableList<TableColumn<Storehouse, ?>> observableList = ck.getColumns();
             observableList.get(0).setCellValueFactory(new PropertyValueFactory("ck_id"));
             observableList.get(1).setCellValueFactory(new PropertyValueFactory("ck_pos"));
             ck.setItems(data);
