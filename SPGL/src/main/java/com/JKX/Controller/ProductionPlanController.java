@@ -1,16 +1,21 @@
 package com.JKX.Controller;
 
+import com.JKX.Controller.ItemController.PlanItemController;
+import com.JKX.Controller.ItemController.StaffInformController;
 import com.JKX.Model.PlanSection;
 import com.JKX.Model.Staff;
+import com.JKX.Model.Table.Plan;
 import com.JKX.Model.Table.Production;
 import com.JKX.Model.Table.Raw;
 import com.calendarfx.view.print.TimeRangeView;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextField;
+import com.sun.javaws.util.JfxHelper;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.chart.BarChart;
@@ -94,13 +99,9 @@ public class ProductionPlanController {
     //计划管理
     //新建计划页面
     @FXML
-    private JFXTextField PlanId, Cpid, Cpname, Cpnum;
+    private JFXTextField PlanId, Cpname, Cpnum;
     @FXML
-    private Button makePlan;
-    @FXML
-    private VBox Rawbox;
-    @FXML
-    private javafx.scene.control.Label sum;
+    private JFXButton makePlan;
 
     //修改计划页面
     @FXML
@@ -218,8 +219,10 @@ public class ProductionPlanController {
             this.RawkcPane.toFront();
         else if(actionBtn == this.SearchScjh)
             this.PlanSearPane.toFront();
-        else if(actionBtn == this.ChangeScjh)
+        else if(actionBtn == this.ChangeScjh) {
+            this.PlanId.setText(this.planSection.GetNumber());
             this.PlanGlpane.toFront();
+        }
         else if(actionBtn == this.ChangeCp)
             this.ChangeCppane.toFront();
         else if(actionBtn == this.ChangeRaw)
@@ -280,10 +283,183 @@ public class ProductionPlanController {
         }
     }
 
-    public void handleSearchPlan(MouseEvent mouseEvent) {
+    public void handleSearchPlan(MouseEvent mouseEvent) throws IOException{
+        JFXButton actionBtn = (JFXButton)mouseEvent.getSource();
+        if(actionBtn == this.searchPlanId)
+        {
+            try
+            {
+                String infom;
+                if(this.messagePlan.getText().isEmpty())
+                    infom = "全部";
+                else
+                    infom = this.messagePlan.getText();
+                Plan[] plans = this.planSection.searchPlan(infom, "全部");
+                this.vboxSearchPlan.getChildren().clear();
+                for(int i = 0; i < plans.length; i++)
+                {
+                    FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("view/PlanItem.fxml"));
+                    Node node = loader.load();
+
+                    PlanItemController planItemController = loader.<PlanItemController>getController();
+                    planItemController.setInform(plans[i]);
+                    planItemController.setController(this);
+                    planItemController.setNode(node);
+                    planItemController.setConfirmDisable(true);
+                    planItemController.setDeleteDisable(true);
+                    planItemController.setChangeDisable(true);
+                    planItemController.setNumEditable(false);
+
+                    vboxSearchPlan.getChildren().add(node);
+                }
+            }
+            catch (SQLException se)
+            {
+                se.printStackTrace();
+                this.planSection.getStaff().showAlert(Alert.AlertType.ERROR, "错误", "查询失败", "系统错误");
+            }
+        }
+        else if(actionBtn == this.searchPlanDate)
+        {
+            try {
+                String sdate = this.searchPlanPicker.getStartDate().toString();
+                String edate = this.searchPlanPicker.getEndDate().toString();
+                Plan[] plans = this.planSection.searchPlan("全部", sdate, edate, "全部");
+                this.vboxSearchPlan.getChildren().clear();
+                for(int i = 0; i < plans.length; i++)
+                {
+                    FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("view/PlanItem.fxml"));
+                    Node node = loader.load();
+
+                    PlanItemController planItemController = loader.<PlanItemController>getController();
+                    planItemController.setInform(plans[i]);
+                    planItemController.setController(this);
+                    planItemController.setNode(node);
+                    planItemController.setConfirmDisable(true);
+                    planItemController.setDeleteDisable(true);
+                    planItemController.setChangeDisable(true);
+                    planItemController.setNumEditable(false);
+
+                    vboxSearchPlan.getChildren().add(node);
+                }
+            }
+            catch (SQLException se)
+            {
+                se.printStackTrace();
+                this.planSection.getStaff().showAlert(Alert.AlertType.ERROR, "错误", "查询失败", "系统错误");
+            }
+        }
+        else if(actionBtn == this.searchPlanId1)
+        {
+            try
+            {
+                String infom;
+                if(this.messagePlan1.getText().isEmpty())
+                    infom = "全部";
+                else
+                    infom = this.messagePlan1.getText();
+                Plan[] plans = this.planSection.searchPlan(infom, "待执行");
+                this.vboxSearchPlan.getChildren().clear();
+                for(int i = 0; i < plans.length; i++)
+                {
+                    FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("view/PlanItem.fxml"));
+                    Node node = loader.load();
+
+                    PlanItemController planItemController = loader.<PlanItemController>getController();
+                    planItemController.setInform(plans[i]);
+                    planItemController.setController(this);
+                    planItemController.setNode(node);
+                    planItemController.setConfirmDisable(true);
+                    planItemController.setDeleteDisable(false);
+                    planItemController.setChangeDisable(false);
+                    planItemController.setNumEditable(true);
+
+                    vboxPlan.getChildren().add(node);
+                }
+            }
+            catch (SQLException se)
+            {
+                se.printStackTrace();
+                this.planSection.getStaff().showAlert(Alert.AlertType.ERROR, "错误", "查询失败", "系统错误");
+            }
+        }
+        else if(actionBtn == this.searchPlanDate1)
+        {
+            try {
+                String sdate = this.searchPlanPicker1.getStartDate().toString();
+                String edate = this.searchPlanPicker1.getEndDate().toString();
+                Plan[] plans = this.planSection.searchPlan("全部", sdate, edate, "待执行");
+                this.vboxSearchPlan.getChildren().clear();
+                for(int i = 0; i < plans.length; i++)
+                {
+                    FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("view/PlanItem.fxml"));
+                    Node node = loader.load();
+
+                    PlanItemController planItemController = loader.<PlanItemController>getController();
+                    planItemController.setInform(plans[i]);
+                    planItemController.setNode(node);
+                    planItemController.setController(this);
+                    planItemController.setConfirmDisable(true);
+                    planItemController.setDeleteDisable(false);
+                    planItemController.setChangeDisable(false);
+                    planItemController.setNumEditable(true);
+
+                    vboxPlan.getChildren().add(node);
+                }
+            }
+            catch (SQLException se)
+            {
+                se.printStackTrace();
+                this.planSection.getStaff().showAlert(Alert.AlertType.ERROR, "错误", "查询失败", "系统错误");
+            }
+        }
+        else if(actionBtn == searchPlanId2)
+        {
+            try
+            {
+                String infom;
+                if(this.messagePlan2.getText().isEmpty())
+                    infom = "全部";
+                else
+                    infom = this.messagePlan2.getText();
+                Plan[] plans = this.planSection.searchPlan(infom, "待审核");
+                this.vboxSearchPlan.getChildren().clear();
+                for(int i = 0; i < plans.length; i++)
+                {
+                    FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("view/PlanItem.fxml"));
+                    Node node = loader.load();
+
+                    PlanItemController planItemController = loader.<PlanItemController>getController();
+                    planItemController.setInform(plans[i]);
+                    planItemController.setController(this);
+                    planItemController.setNode(node);
+                    planItemController.setConfirmDisable(false);
+                    planItemController.setDeleteDisable(true);
+                    planItemController.setChangeDisable(true);
+                    planItemController.setNumEditable(false);
+
+                    vboxPlanSh.getChildren().add(node);
+                }
+            }
+            catch (SQLException se)
+            {
+                se.printStackTrace();
+                this.planSection.getStaff().showAlert(Alert.AlertType.ERROR, "错误", "查询失败", "系统错误");
+            }
+        }
+    }
+
+    public PlanSection getPlanSection() {
+        return planSection;
+    }
+
+    public void deletevboxPlannode(Node node)
+    {
+        this.vboxPlan.getChildren().remove(node);
     }
 
     public void handleChangeCp(MouseEvent mouseEvent) {
+        JFXButton actionBtn = (JFXButton)mouseEvent.getSource();
     }
 
     public void handleSearchCp(MouseEvent mouseEvent) {
@@ -314,6 +490,28 @@ public class ProductionPlanController {
                 this.planSection.getStaff().showAlert(Alert.AlertType.ERROR, "错误", "查询失败", "系统错误");
             }
         }
+        else if(actionBtn == this.searchCp1)
+        {
+            try {
+                if(this.comboxSearchCp1.getValue().equals("按编号查询"))
+                {
+                    Production[] productions = this.planSection.searchCpOnID(this.messageCp1.getText());
+                }
+                else if(this.comboxSearchCp1.getValue().equals("按名称查询"))
+                {
+                    Production[] productions = this.planSection.searchCpOnName(this.messageCp1.getText());
+                }
+            }
+            catch (SQLException se)
+            {
+                se.printStackTrace();
+                this.planSection.getStaff().showAlert(Alert.AlertType.ERROR, "错误", "查询失败", "系统错误");
+            }
+        }
+        else if(actionBtn == this.searchCp3)
+        {
+
+        }
     }
 
     public void handleRaw(MouseEvent mouseEvent) {
@@ -323,5 +521,53 @@ public class ProductionPlanController {
     }
 
     public void handleAddCp(MouseEvent mouseEvent) {
+    }
+
+    public void handleMakePlan(MouseEvent mouseEvent) {
+        JFXButton actionBtn = (JFXButton)mouseEvent.getSource();
+
+        if(actionBtn == this.makePlan)
+        {
+            try
+            {
+                if(this.Cpname.getText().isEmpty() || this.Cpnum.getText().isEmpty())
+                {
+                    this.planSection.getStaff().showAlert(Alert.AlertType.ERROR, "错误", "添加失败", "请填写完整信息");
+                }
+                else
+                 {
+                    Production[] production = this.planSection.searchCpOnName(this.Cpname.getText());
+                    if (production.length == 0) {
+                        this.planSection.getStaff().showAlert(Alert.AlertType.ERROR, "错误", "添加失败", "未查询到该成品");
+                    }
+                    else {
+                        production[0].setNums(Integer.parseInt(this.Cpnum.getText()));
+                        int flag = 0;
+                        for (int i = 0; i < production[0].getRaws().length; i++) {
+                            System.out.println(production[0].getRaws()[i].getRaw_num());
+                            float vae = production[0].getRaws()[i].getRaw_num() * Integer.parseInt(this.Cpnum.getText());
+                            Raw[] raws = this.planSection.searchRawOnId(production[0].getRaws()[i].getRaw_id());
+                            if (raws[0].getRaw_kc() < vae)
+                            {
+                                flag = 1;
+                            }
+                        }
+                        if (flag == 1) {
+                            this.planSection.getStaff().showAlert(Alert.AlertType.ERROR, "错误", "添加失败", "库存不足");
+                        }
+                        else {
+                            Plan plan = new Plan(this.PlanId.getText(), "待执行", production[0], "", "", this.planSection.getStaff().Name);
+                            this.planSection.makePlan(plan);
+                            this.planSection.getStaff().showAlert(Alert.AlertType.INFORMATION, "成功", "添加成功", "计划编号" + this.PlanId.getText());
+                        }
+                    }
+                }
+            }
+            catch (SQLException se)
+            {
+                se.printStackTrace();
+                this.planSection.getStaff().showAlert(Alert.AlertType.ERROR, "错误", "添加失败", "系统错误");
+            }
+        }
     }
 }

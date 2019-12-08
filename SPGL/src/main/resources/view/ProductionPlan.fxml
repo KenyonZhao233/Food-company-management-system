@@ -364,32 +364,13 @@
                         <content>
                           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                  <children>
-                                    <Label layoutX="92.0" layoutY="184.0" text="计划编号：" />
-                                    <Label layoutX="92.0" layoutY="234.0" text="成品编号：" />
-                                    <Label layoutX="92.0" layoutY="284.0" text="成品名称：" />
-                                    <JFXTextField fx:id="PlanId" layoutX="172.0" layoutY="174.0" />
-                                    <JFXTextField fx:id="Cpid" layoutX="172.0" layoutY="224.0" />
-                                    <JFXTextField fx:id="Cpname" layoutX="172.0" layoutY="274.0" />
-                                    <ImageView fitHeight="30.0" fitWidth="25.0" layoutX="373.0" layoutY="282.0" pickOnBounds="true" preserveRatio="true">
-                                       <image>
-                                          <Image url="@../icon/icons8_Search_52px.png" />
-                                       </image>
-                                    </ImageView>
-                                    <ImageView fitHeight="30.0" fitWidth="25.0" layoutX="373.0" layoutY="232.0" pickOnBounds="true" preserveRatio="true">
-                                       <image>
-                                          <Image url="@../icon/icons8_Search_52px.png" />
-                                       </image>
-                                    </ImageView>
-                                    <Label layoutX="92.0" layoutY="330.0" text="制作数量：" />
-                                    <JFXTextField fx:id="Cpnum" layoutX="172.0" layoutY="323.0" />
-                                    <Button fx:id="makePlan" layoutX="222.0" layoutY="431.0" mnemonicParsing="false" text="制定" />
-                                    <Label layoutX="622.0" layoutY="606.0" text="总成本：" />
-                                    <Label fx:id="sum" layoutX="735.0" layoutY="606.0" prefHeight="20.0" prefWidth="116.0" />
-                                    <ScrollPane layoutX="466.0" layoutY="24.0" prefHeight="555.0" prefWidth="532.0">
-                                       <content>
-                                          <VBox fx:id="Rawbox" prefHeight="550.0" prefWidth="531.0" />
-                                       </content>
-                                    </ScrollPane>
+                                    <Label layoutX="377.0" layoutY="225.0" text="计划编号：" />
+                                    <Label layoutX="377.0" layoutY="294.0" text="成品名称：" />
+                                    <JFXTextField fx:id="PlanId" editable="false" layoutX="457.0" layoutY="215.0" />
+                                    <JFXTextField fx:id="Cpname" layoutX="457.0" layoutY="284.0" />
+                                    <Label layoutX="377.0" layoutY="354.0" text="制作数量：" />
+                                    <JFXTextField fx:id="Cpnum" layoutX="457.0" layoutY="347.0" />
+                                    <JFXButton fx:id="makePlan" layoutX="515.0" layoutY="406.0" onMouseClicked="#handleMakePlan" text="制定" />
                                  </children></AnchorPane>
                         </content>
                       </Tab>
@@ -452,7 +433,7 @@
                   </TabPane>
                </children>
             </AnchorPane>
-            <AnchorPane fx:id="PlanSearPane" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #000000;">
+            <AnchorPane fx:id="PlanSearPane" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #000000;" visible="false">
                <children>
                   <JFXButton fx:id="searchPlanId" ellipsisString="" layoutX="396.0" layoutY="92.0" onMouseClicked="#handleSearchPlan" prefHeight="20.0" prefWidth="8.0">
                      <graphic>
@@ -480,7 +461,7 @@
                      </graphic>
                   </JFXButton>
                </children></AnchorPane>
-            <AnchorPane fx:id="RawkcPane" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #000000;">
+            <AnchorPane fx:id="RawkcPane" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #000000;" visible="false">
                <children>
                   <JFXButton fx:id="searchRaw" ellipsisString="" layoutX="553.0" layoutY="72.0" onMouseClicked="#handleSearchRaw" prefHeight="20.0" prefWidth="8.0">
                      <graphic>

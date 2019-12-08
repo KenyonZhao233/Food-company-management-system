@@ -33,13 +33,14 @@ public class PlanSection {
         for(int i = 1; i < ans.length; i++)
         {
             String[][] ansRaw;
-            ansRaw = staff.Search("SELECT raw.*\n" +
-                                             "FROM product_raw, raw\n" +
-                                             "where product_id = '" + ans[i][0] + "' AND raw.raw_id = product_raw.raw_id\n" +
+            ansRaw = staff.Search("SELECT raw.*, product_raw.raw_num " +
+                                             "FROM product_raw, raw " +
+                                             "where product_id = '" + ans[i][0] + "' AND raw.raw_id = product_raw.raw_id " +
                                              "ORDER BY raw.raw_name;");
             Raw[] raws = new Raw[ansRaw.length - 1];
-            for(int j = 1; j < ansRaw.length; j++)
-                raws[j - 1] = new Raw(ansRaw[j][0], ansRaw[j][1], Integer.parseInt(ansRaw[j][2]), Float.parseFloat(ansRaw[j][3]));
+            for(int j = 1; j < ansRaw.length; j++) {
+                raws[j - 1] = new Raw(ansRaw[j][0], ansRaw[j][1], Integer.parseInt(ansRaw[j][2]), Float.parseFloat(ansRaw[j][3]), 0, Float.parseFloat(ansRaw[j][4]));
+            }
             productions[i - 1] = new Production(ans[i][0], ans[i][1], Float.parseFloat(ans[i][2]),Float.parseFloat(ans[i][3]), Float.parseFloat(ans[i][4]),Integer.parseInt(ans[i][5]), Integer.parseInt(ans[i][6]), raws, 0);
         }
         return productions;
@@ -55,9 +56,9 @@ public class PlanSection {
         for(int i = 1; i < ans.length; i++)
         {
             String[][] ansRaw;
-            ansRaw = staff.Search("SELECT raw.*, product_raw.raw_num\n" +
-                    "FROM product_raw, raw\n" +
-                    "where product_id = '" + ans[i][0] + "' AND raw.raw_id = product_raw.raw_id\n" +
+            ansRaw = staff.Search("SELECT raw.*, product_raw.raw_num " +
+                    "FROM product_raw, raw " +
+                    "where product_id = '" + ans[i][0] + "' AND raw.raw_id = product_raw.raw_id " +
                     "ORDER BY raw.raw_name;");
             Raw[] raws = new Raw[ansRaw.length - 1];
             for(int j = 1; j < ansRaw.length; j++)
@@ -74,11 +75,26 @@ public class PlanSection {
         String[][] ans;
         ans = staff.ExcuteSearch("Call Search_RawName(?)", a, b);
         Raw[] raws = new Raw[ans.length - 1];
+
         for(int i = 1; i < ans.length; i++)
         {
-            raws[i - 1] = new Raw(ans[i][0], ans[i][1], Integer.parseInt(ans[i][3]), Float.parseFloat(ans[i][2]), Float.parseFloat(ans[i][4]));
+            float plans = this.searchPlanRawNum(ans[i][0]);
+
+            raws[i - 1] = new Raw(ans[i][0], ans[i][1], Integer.parseInt(ans[i][3]), Float.parseFloat(ans[i][2]), Float.parseFloat(ans[i][4]) - plans);
         }
         return raws;
+    }
+
+    public float searchPlanRawNum(String rawId) throws SQLException
+    {
+        float res;
+        String[] a = {"string"};
+        String[] b = {rawId};
+        String[] c = {"float"};
+        String sql = "CALL Search_PlanRaw(?,?)";
+        String[] ans = this.staff.ExcuteDoesReturn(sql, a, b, c);
+        res = Float.parseFloat(ans[0]);
+        return res;
     }
 
     public Raw[] searchRawOnId(String id) throws SQLException
@@ -86,11 +102,14 @@ public class PlanSection {
         String[] a = {"string"};
         String[] b = {id};
         String[][] ans;
-        ans = staff.ExcuteSearch("Call Search_RawName(?)", a, b);
+        ans = staff.ExcuteSearch("Call Search_RawId(?)", a, b);
         Raw[] raws = new Raw[ans.length - 1];
+        System.out.println("l:" + String.valueOf(ans.length - 1));
         for(int i = 1; i < ans.length; i++)
         {
-            raws[i - 1] = new Raw(ans[i][0], ans[i][1], Integer.parseInt(ans[i][3]), Float.parseFloat(ans[i][2]), Float.parseFloat(ans[i][4]));
+            float plans = this.searchPlanRawNum(ans[i][0]);
+            System.out.println("p" + plans);
+            raws[i - 1] = new Raw(ans[i][0], ans[i][1], Integer.parseInt(ans[i][3]), Float.parseFloat(ans[i][2]), Float.parseFloat(ans[i][4]) - plans);
         }
         return raws;
     }
@@ -99,7 +118,7 @@ public class PlanSection {
     {
         //Plan plan = new Plan(planId, planType, production, s_date, e_date, fzr);
         String sql = "INSERT INTO project(project.produce_id, project.produce_type, project.produce_wp, project.produce_num, project.produce_zrr) " +
-                     "VALUES ('" + plan.getPlan_id() + "', '" + plan.getProduction().getProduction_id() + "', " + String.valueOf(plan.getProduction().getNums()) + " , '" + plan.getFzr() + "')";
+                     "VALUES ('" + plan.getPlan_id() + "', '" + plan.getPlan_zt() + "', '" + plan.getProduction().getProduction_id() + "', " + String.valueOf(plan.getProduction().getNums()) + " , '" + plan.getFzr() + "')";
         int res = staff.Does(sql);
         return res;
     }
@@ -113,23 +132,27 @@ public class PlanSection {
         Plan[] plans = new Plan[ans.length - 1];
         for(int i = 1; i < ans.length; i++)
         {
-            Production[] production = this.searchCpOnID(ans[i - 1][2]);
+            Production[] production = this.searchCpOnID(ans[i][2]);
             production[0].setNums(Integer.parseInt(ans[i][3]));
+            for(int j = 0; j < production[0].getRaws().length; j++)
+            {
+                production[0].getRaws()[i].setRaw_num(production[0].getRaws()[i].getRaw_num() * production[0].getNums());
+            }
             plans[i - 1] = new Plan(ans[i][0], ans[i][1], production[0], ans[i][4], ans[i][5], ans[i][6]);
         }
         return plans;
     }
 
-    public Plan[] searchPlan(String id, String sdate, String edate) throws SQLException      //存储过程，查询Plan返回计划编号，成品类，计划状态。
+    public Plan[] searchPlan(String id, String sdate, String edate, String zt) throws SQLException      //存储过程，查询Plan返回计划编号，成品类，计划状态。
     {
-        String[] a = {"string", "date", "date"};
-        String[] b = {id, sdate, edate};
+        String[] a = {"string", "date", "date", "string"};
+        String[] b = {id, sdate, edate, zt};
         String[][] ans;
-        ans = staff.ExcuteSearch("Call Search_Plan_Date(?, ?, ?) ", a, b);
+        ans = staff.ExcuteSearch("Call Search_Plan_Date(?, ?, ?, ?) ", a, b);
         Plan[] plans = new Plan[ans.length - 1];
         for(int i = 1; i < ans.length; i++)
         {
-            Production[] production = this.searchCpOnID(ans[i - 1][2]);
+            Production[] production = this.searchCpOnID(ans[i][2]);
             production[0].setNums(Integer.parseInt(ans[i][3]));
             plans[i - 1] = new Plan(ans[i][0], ans[i][1], production[0], ans[i][4], ans[i][5], ans[i][6]);
         }
@@ -151,8 +174,8 @@ public class PlanSection {
     {
         //让小界面自己解决这个问题，如果是待执行是可以删除的。
         String sql = "DELETE " +
-                    "FROM project " +
-                    "WHERE project.produce_id = '" + "'";
+                     "FROM project " +
+                     "WHERE project.produce_id = '" + id +  "'";
         int res = staff.Does(sql);
         return res;
     }
@@ -290,8 +313,9 @@ public class PlanSection {
         //生成计划号
         //xx号生成原则：xx + 年（4位）+月（2位）+日（2位）+时（2位）+分（2位）+秒（2位）+3 位随机数
         String num = GetRandomString(3);//自动生成一个3位随机数
+        System.out.println(num);
 
-        String ordernum = "Or" + String.format("%04d", Calendar.getInstance().get(Calendar.YEAR))
+        String ordernum = "PL" + String.format("%04d", Calendar.getInstance().get(Calendar.YEAR))
                 + String.format("%02d", Calendar.getInstance().get(Calendar.MONTH))
                 + String.format("%02d", Calendar.getInstance().get(Calendar.DATE))
                 + String.format("%02d", Calendar.getInstance().get(Calendar.HOUR_OF_DAY))
@@ -310,7 +334,7 @@ public class PlanSection {
         int range = buffer.length();
         for (int i = 0; i < Length; i++)
         {
-            sb.append(buffer.substring(r.nextInt(range), 1));
+            sb.append(buffer.charAt(r.nextInt(range)));
         }
         return sb.toString();
     }

@@ -76,8 +76,9 @@ public class MysqlConnect {
         int cnt = 1;
         rs.beforeFirst();
         while (rs.next()) {
-            for (int i = 0; i < rsmd.getColumnCount(); i++)
+            for (int i = 0; i < rsmd.getColumnCount(); i++) {
                 ans[cnt][i] = rs.getString(i + 1);
+            }
             cnt++;
         }
         cs.close();
@@ -96,10 +97,8 @@ public class MysqlConnect {
                 cs.setFloat(i + 1, Float.parseFloat(b[i]));
             else if(a[i].equals("date"))
                 cs.setDate(i + 1, Date.valueOf(b[i]));
-            else if(a[i].equals("string")) {
-                System.out.println(i);
+            else if(a[i].equals("string"))
                 cs.setString(i + 1, b[i]);
-            }
         }
         ResultSet rs = cs.executeQuery();
         ResultSetMetaData rsmd = rs.getMetaData();
@@ -110,8 +109,9 @@ public class MysqlConnect {
         int cnt = 1;
         rs.beforeFirst();
         while (rs.next()) {
-            for (int i = 0; i < rsmd.getColumnCount(); i++)
+            for (int i = 0; i < rsmd.getColumnCount(); i++) {
                 ans[cnt][i] = rs.getString(i + 1);
+            }
             cnt++;
         }
         cs.close();
