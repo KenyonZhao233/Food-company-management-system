@@ -75,12 +75,32 @@ public class FinanceSection {
 
     public boolean unpaid(String id, String mn) throws SQLException
     {
-        String ans[][] = sta.Search("select count(*) from finance");
         SimpleDateFormat formatter= new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         Date date = new Date(System.currentTimeMillis());
+        String ans[][] = sta.Search("select count(*) from finance");
+        String t = "";
 
-        String t = "insert into finance values(" + "'" + ans[1][0].format("%8d", Integer.parseInt(ans[1][0])).replace(" ", "0") + "','"+
-                sta.Uid + "',"+ mn + ",'" + formatter.format(date) +"','"+ id + "')";
+        String tp[][] = sta.Search("SELECT order_type from orders where order_id = '" + id + "'");
+        if(tp[1][0].equals("全款")){
+            sta.Does("update orders set order_zt = '待发货' where order_id = '" + id + "'");
+            t = "insert into finance values(" + "'" + ans[1][0].format("%8d", Integer.parseInt(ans[1][0])).replace(" ", "0") + "','"+
+                    sta.Uid + "',"+ mn + ",'" + formatter.format(date) +"','" + id + tp[1][0] + "')";
+        }else{
+            String st[][] = sta.Search("SELECT order_zt from orders where order_id = '" + id + "'");
+            if(st[1][0].equals("待付款")){
+                sta.Does("update orders set order_zt = '待发货' where order_id = '" + id + "'");
+                String order_id[][] = sta.Search("SELECT order_custom  from orders where order_id = '" + id + "'");
+                String mno[][] = sta.Search("SELECT mn_re  from advance where order_id = '" + id + "'");
+                t = "insert into finance values(" + "'" + ans[1][0].format("%8d", Integer.parseInt(ans[1][0])).replace(" ", "0") + "','"+
+                        sta.Uid + "',"+ mn + ",'" + formatter.format(date) +"','" + id + tp[1][0] + "')";
+            }else if(st[1][0].equals("待付全款"))
+            {
+                sta.Does("update orders set order_zt = '待收货' where order_id = '" + id + "'");
+                t = "insert into finance values(" + "'" + ans[1][0].format("%8d", Integer.parseInt(ans[1][0])).replace(" ", "0") + "','"+
+                        sta.Uid + "',"+ mn + ",'" + formatter.format(date) +"','" + id + "补齐全款')";
+            }
+        }
+
         sta.Does(t);
         sta.Does("delete from unpaid where order_id = '" + id + "'");
         return true;
