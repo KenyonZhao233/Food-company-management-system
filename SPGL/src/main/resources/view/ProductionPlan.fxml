@@ -205,7 +205,7 @@
                                           <VBox fx:id="rawList" prefHeight="489.0" prefWidth="1017.0" />
                                        </content>
                                     </ScrollPane>
-                                    <ComboBox fx:id="comboxSearchRaw" layoutX="576.0" layoutY="74.0" prefHeight="30.0" prefWidth="124.0" />
+                                    <ComboBox fx:id="comboxSearchRaw" layoutX="568.0" layoutY="74.0" prefHeight="30.0" prefWidth="155.0" />
                                  </children>
                               </AnchorPane>
                         </content>
@@ -214,20 +214,22 @@
                         <content>
                           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                  <children>
-                                    <ScrollPane layoutX="486.0" layoutY="15.0" prefHeight="625.0" prefWidth="521.0">
+                                    <ScrollPane layoutX="6.0" layoutY="13.0" prefHeight="567.0" prefWidth="1006.0">
                                        <content>
-                                          <VBox fx:id="vboxYl" prefHeight="624.0" prefWidth="519.0" />
+                                          <VBox fx:id="vboxYl" prefHeight="564.0" prefWidth="1003.0" />
                                        </content>
                                     </ScrollPane>
-                                    <Label layoutX="110.0" layoutY="147.0" text="原料编号：" />
-                                    <JFXTextField fx:id="rawId" layoutX="206.0" layoutY="142.0" />
-                                    <Label layoutX="110.0" layoutY="226.0" text="原料名称：" />
-                                    <JFXTextField fx:id="rawName" layoutX="206.0" layoutY="221.0" />
-                                    <Label layoutX="110.0" layoutY="310.0" text="原料价格：" />
-                                    <JFXTextField fx:id="rawPri" layoutX="206.0" layoutY="305.0" />
-                                    <Label layoutX="118.0" layoutY="392.0" text="保质期：" />
-                                    <JFXTextField fx:id="rawBzq" layoutX="206.0" layoutY="387.0" onMouseClicked="#handleRaw" />
-                                    <JFXButton fx:id="changeRaw" layoutX="229.0" layoutY="496.0" text="修改" />
+                                    <JFXButton fx:id="searchRaw2" ellipsisString="" layoutX="799.0" layoutY="599.0" onMouseClicked="#handleSearchRaw" prefHeight="20.0" prefWidth="8.0" text="Button">
+                                       <graphic>
+                                          <ImageView fitHeight="30.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../icon/icons8_Search_52px.png" />
+                                             </image>
+                                          </ImageView>
+                                       </graphic>
+                                    </JFXButton>
+                                    <TextField fx:id="messageRaw11" layoutX="612.0" layoutY="600.0" prefHeight="34.0" prefWidth="182.0" style="-fx-border-color: #B7C3D7; -fx-background-color: #02030A; -fx-border-radius: 2em;" />
+                                    <ComboBox fx:id="comboxSearchRaw1" layoutX="845.0" layoutY="601.0" prefHeight="30.0" prefWidth="159.0" />
                                  </children>
                               </AnchorPane>
                         </content>

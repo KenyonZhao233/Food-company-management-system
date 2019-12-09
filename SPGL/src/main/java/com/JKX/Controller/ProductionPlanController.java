@@ -1,9 +1,6 @@
 package com.JKX.Controller;
 
-import com.JKX.Controller.ItemController.PlanItemController;
-import com.JKX.Controller.ItemController.ProductItemController;
-import com.JKX.Controller.ItemController.ProductRawController;
-import com.JKX.Controller.ItemController.StaffInformController;
+import com.JKX.Controller.ItemController.*;
 import com.JKX.Model.PlanSection;
 import com.JKX.Model.Staff;
 import com.JKX.Model.Table.Plan;
@@ -166,7 +163,11 @@ public class ProductionPlanController {
     @FXML
     private JFXTextField rawId, rawName, rawPri, rawBzq;
     @FXML
-    private JFXButton changeRaw;
+    private TextField messageRaw11;
+    @FXML
+    private JFXButton changeRaw, searchRaw2;
+    @FXML
+    private ComboBox<String> comboxSearchRaw1;
     @FXML
     private VBox vboxYl;
     //添加原料界面
@@ -194,11 +195,13 @@ public class ProductionPlanController {
         this.comboxSearchCp1.getItems().addAll(searchMethod);
         this.comboxSearchCp3.getItems().addAll(searchMethod);
         this.comboxSearchRaw.getItems().addAll(searchMethod);
+        this.comboxSearchRaw1.getItems().addAll(searchMethod);
         this.comboxCp.setValue("按编号查询");
         this.comboxRaw.setValue("按编号查询");
         this.comboxSearchRaw.setValue("按编号查询");
         this.comboxSearchCp1.setValue("按编号查询");
         this.comboxSearchCp3.setValue("按编号查询");
+        this.comboxSearchRaw1.setValue("按编号查询");
         this.CcpId.setCellValueFactory(new PropertyValueFactory<Production, String>("production_id"));
         this.CcpName.setCellValueFactory(new PropertyValueFactory<Production, String>("production_name"));
         this.CcpP1.setCellValueFactory(new PropertyValueFactory<Production, Float>("production_p1"));
@@ -311,6 +314,80 @@ public class ProductionPlanController {
                 viewRawkc.getItems().addAll(list);
             }
             catch (SQLException se)
+            {
+                se.printStackTrace();
+                this.planSection.getStaff().showAlert(Alert.AlertType.ERROR, "错误", "查询失败", "系统错误");
+            }
+        }
+        else if(actionBtn == this.searchRaw1)
+        {
+            try {
+                this.rawList.getChildren().clear();
+                String infom;
+                if(this.messageRaw1.getText().isEmpty())
+                    infom = "null";
+                else
+                    infom = messageRaw1.getText();
+                Raw[] raws = new Raw[0];
+                if(this.comboxSearchRaw.getValue().equals("按编号查询"))
+                    raws = this.planSection.searchRawOnId(infom);
+                else if(this.comboxSearchRaw.getValue().equals("按名称查询"))
+                    raws = this.planSection.searchRawOnName(infom);
+                for(int i = 0; i < raws.length; i++) {
+                    FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("view/RawItem.fxml"));
+                    Node node = loader.load();
+
+                    RawItemController rawItemController = loader.<RawItemController>getController();
+                    rawItemController.setNode(node);
+                    rawItemController.initData(raws[i]);
+                    rawItemController.setProductionPlanController(this);
+                    rawItemController.setChangeDisable(true);
+                    rawItemController.setDeleteDisable(true);
+                    rawItemController.setBzqEditable(false);
+                    rawItemController.setRawnameEditable(false);
+                    rawItemController.setRawpriEditable(false);
+
+                    this.rawList.getChildren().add(node);
+                }
+            }
+            catch (SQLException | IOException se)
+            {
+                se.printStackTrace();
+                this.planSection.getStaff().showAlert(Alert.AlertType.ERROR, "错误", "查询失败", "系统错误");
+            }
+        }
+        else if(actionBtn == this.searchRaw2)
+        {
+            try {
+                this.vboxYl.getChildren().clear();
+                String infom;
+                if(this.messageRaw11.getText().isEmpty())
+                    infom = "null";
+                else
+                    infom = messageRaw11.getText();
+                Raw[] raws = new Raw[0];
+                if(this.comboxSearchRaw1.getValue().equals("按编号查询"))
+                    raws = this.planSection.searchRawOnId(infom);
+                else if(this.comboxSearchRaw1.getValue().equals("按名称查询"))
+                    raws = this.planSection.searchRawOnName(infom);
+                for(int i = 0; i < raws.length; i++) {
+                    FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("view/RawItem.fxml"));
+                    Node node = loader.load();
+
+                    RawItemController rawItemController = loader.<RawItemController>getController();
+                    rawItemController.setNode(node);
+                    rawItemController.initData(raws[i]);
+                    rawItemController.setProductionPlanController(this);
+                    rawItemController.setChangeDisable(false);
+                    rawItemController.setDeleteDisable(false);
+                    rawItemController.setBzqEditable(true);
+                    rawItemController.setRawnameEditable(true);
+                    rawItemController.setRawpriEditable(true);
+
+                    this.vboxYl.getChildren().add(node);
+                }
+            }
+            catch (SQLException | IOException se)
             {
                 se.printStackTrace();
                 this.planSection.getStaff().showAlert(Alert.AlertType.ERROR, "错误", "查询失败", "系统错误");
@@ -728,6 +805,21 @@ public class ProductionPlanController {
     }
 
     public void handleRaw(MouseEvent mouseEvent) {
+        if(this.rawName1.getText().isEmpty() || this.rawPri1.getText().isEmpty() || this.rawBzq1.getText().isEmpty())
+        {
+            this.planSection.getStaff().showAlert(Alert.AlertType.ERROR, "错误", "添加失败", "请填写完整信息");
+        }
+        else{
+            try {
+                Raw raw = new Raw(this.rawId1.getText(), this.rawName1.getText(), Integer.parseInt(this.rawBzq1.getText()), Float.parseFloat(this.rawPri1.getText()));
+                this.planSection.addRaw(raw);
+            }
+            catch (SQLException se)
+            {
+                se.printStackTrace();
+                this.planSection.getStaff().showAlert(Alert.AlertType.ERROR, "错误", "添加失败", "系统错误");
+            }
+        }
     }
 
     public void handleSearchXl(MouseEvent mouseEvent) {
@@ -814,5 +906,9 @@ public class ProductionPlanController {
                 this.planSection.getStaff().showAlert(Alert.AlertType.ERROR, "错误", "添加失败", "系统错误");
             }
         }
+    }
+
+    public void deletevboxYl(Node node) {
+        this.vboxYl.getChildren().remove(node);
     }
 }

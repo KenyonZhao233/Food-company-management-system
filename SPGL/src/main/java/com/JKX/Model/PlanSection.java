@@ -1,5 +1,6 @@
 package com.JKX.Model;
 
+import com.JKX.Controller.ItemController.StaffInformController;
 import com.JKX.Model.Table.Plan;
 import com.JKX.Model.Table.Production;
 import com.JKX.Model.Table.Raw;
@@ -79,7 +80,6 @@ public class PlanSection {
         for(int i = 1; i < ans.length; i++)
         {
             float plans = this.searchPlanRawNum(ans[i][0]);
-
             raws[i - 1] = new Raw(ans[i][0], ans[i][1], Integer.parseInt(ans[i][3]), Float.parseFloat(ans[i][2]), Float.parseFloat(ans[i][4]) - plans);
         }
         return raws;
@@ -108,10 +108,18 @@ public class PlanSection {
         for(int i = 1; i < ans.length; i++)
         {
             float plans = this.searchPlanRawNum(ans[i][0]);
-            System.out.println("p" + plans);
-            raws[i - 1] = new Raw(ans[i][0], ans[i][1], Integer.parseInt(ans[i][3]), Float.parseFloat(ans[i][2]), Float.parseFloat(ans[i][4]) - plans);
+            raws[i - 1] = new Raw(ans[i][0], ans[i][1], Integer.parseInt(ans[i][3]), Float.parseFloat(ans[i][2]), this.searchRawRm(ans[i][0]) - plans);
         }
         return raws;
+    }
+
+    public float searchRawRm(String rawId) throws SQLException {
+        String[] a = {"string"};
+        String[] b = {rawId};
+        String[] c = {"float"};
+        String sql = "Call Search_RawRm(?, ?)";
+        String[] ans = this.staff.ExcuteDoesReturn(sql, a, b, c);
+        return Float.parseFloat(ans[0]);
     }
 
     public int makePlan(Plan plan) throws SQLException
@@ -270,7 +278,7 @@ public class PlanSection {
                      "SET raw.raw_name = '" + name + "', " +
                      " raw.raw_bzq = " + bzq + ", " +
                      " raw.raw_pri = " +  pri +
-                     "WHERE raw.raw_id = '" + id + "'";
+                     " WHERE raw.raw_id = '" + id + "'";
         int res = staff.Does(sql);
         return res;
         //可修改原料的单价， 名称， 保质期
