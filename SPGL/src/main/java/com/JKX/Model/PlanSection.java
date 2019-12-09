@@ -80,7 +80,7 @@ public class PlanSection {
         for(int i = 1; i < ans.length; i++)
         {
             float plans = this.searchPlanRawNum(ans[i][0]);
-            raws[i - 1] = new Raw(ans[i][0], ans[i][1], Integer.parseInt(ans[i][3]), Float.parseFloat(ans[i][2]), Float.parseFloat(ans[i][4]) - plans);
+            raws[i - 1] = new Raw(ans[i][0], ans[i][1], Integer.parseInt(ans[i][3]), Float.parseFloat(ans[i][2]), this.searchRawRm(ans[i][0]) - plans);
         }
         return raws;
     }
@@ -97,6 +97,24 @@ public class PlanSection {
         return res;
     }
 
+    public String getNewCpId() throws SQLException
+    {
+        String sql = "SELECT product_id " +
+                     "FROM product " +
+                     "ORDER BY product_id DESC LIMIT 1";
+        String[][] ans = this.staff.Search(sql);
+        return  String.format("%06d", Integer.parseInt(ans[1][0]) + 1);
+    }
+
+    public String getNewRawId() throws SQLException
+    {
+        String sql = "SELECT raw_id " +
+                     "FROM raw " +
+                     "ORDER BY raw_id DESC LIMIT 1";
+        String[][] ans = this.staff.Search(sql);
+        return  String.format("%05d", Integer.parseInt(ans[1][0]) + 1);
+    }
+
     public Raw[] searchRawOnId(String id) throws SQLException
     {
         String[] a = {"string"};
@@ -106,8 +124,9 @@ public class PlanSection {
         Raw[] raws = new Raw[ans.length - 1];
         System.out.println("l:" + String.valueOf(ans.length - 1));
         for(int i = 1; i < ans.length; i++)
-        {
+        { System.out.println(ans[i][0]);
             float plans = this.searchPlanRawNum(ans[i][0]);
+
             raws[i - 1] = new Raw(ans[i][0], ans[i][1], Integer.parseInt(ans[i][3]), Float.parseFloat(ans[i][2]), this.searchRawRm(ans[i][0]) - plans);
         }
         return raws;
@@ -125,8 +144,8 @@ public class PlanSection {
     public int makePlan(Plan plan) throws SQLException
     {
         //Plan plan = new Plan(planId, planType, production, s_date, e_date, fzr);
-        String sql = "INSERT INTO project(project.produce_id, project.produce_type, project.produce_wp, project.produce_num, project.produce_zrr) " +
-                     "VALUES ('" + plan.getPlan_id() + "', '" + plan.getPlan_zt() + "', '" + plan.getProduction().getProduction_id() + "', " + String.valueOf(plan.getProduction().getNums()) + " , '" + plan.getFzr() + "')";
+        String sql = "INSERT INTO project(project.produce_id, project.produce_type, project.produce_wp, project.produce_num, project.produce_zrr, project.project_ddl) " +
+                     "VALUES ('" + plan.getPlan_id() + "', '" + plan.getPlan_zt() + "', '" + plan.getProduction().getProduction_id() + "', " + String.valueOf(plan.getProduction().getNums()) + " , '" + plan.getFzr() + "', '" + plan.getPlan_ddl() + "')";
         int res = staff.Does(sql);
         return res;
     }
@@ -146,9 +165,21 @@ public class PlanSection {
             {
                 production[0].getRaws()[j].setRaw_num(production[0].getRaws()[j].getRaw_num() * production[0].getNums());
             }
-            plans[i - 1] = new Plan(ans[i][0], ans[i][1], production[0], ans[i][4], ans[i][5], ans[i][6]);
+            plans[i - 1] = new Plan(ans[i][0], ans[i][1], production[0], ans[i][4], ans[i][5], ans[i][6], ans[i][7], ans[i][8]);
         }
         return plans;
+    }
+
+    public int[] SearchnowAndaim(String id) throws SQLException
+    {
+        String sql = "SELECT * " +
+                     "FROM project_status " +
+                     "where project_status.project_id = '" + id + "'";
+        String[][] ans = this.staff.Search(sql);
+        int[] nums = new int[3];
+        for(int i = 0; i < 3; i++)
+            nums[i] = Integer.parseInt(ans[1][i + 1]);
+        return nums;
     }
 
     public Plan[] searchPlan(String id, String sdate, String edate, String zt) throws SQLException      //存储过程，查询Plan返回计划编号，成品类，计划状态。
@@ -162,17 +193,18 @@ public class PlanSection {
         {
             Production[] production = this.searchCpOnID(ans[i][2]);
             production[0].setNums(Integer.parseInt(ans[i][3]));
-            plans[i - 1] = new Plan(ans[i][0], ans[i][1], production[0], ans[i][4], ans[i][5], ans[i][6]);
+            plans[i - 1] = new Plan(ans[i][0], ans[i][1], production[0], ans[i][4], ans[i][5], ans[i][6], ans[i][7], ans[i][8]);
         }
         return plans;
     }
 
-    public int changePlanOnnum(String id, String num) throws SQLException
+    public int changePlanOnnum(String id, String num, String ddl) throws SQLException
     {
         //修改待执行的计划的成品数量
         //直接写个存储过程
         String sql = "UPDATE project " +
-                     "SET project.produce_num = " + num +
+                     "SET project.produce_num = " + num + ", " +
+                     "project.produce_ddl = '" + ddl + "' " +
                      " WHERE project.produce_id = '" + id + "'";
         int res = staff.Does(sql);
         return res;

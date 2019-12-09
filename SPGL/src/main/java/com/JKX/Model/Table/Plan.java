@@ -9,14 +9,16 @@ public class Plan {
     private Production production;
     private String plan_sdate;
     private String plan_edate;
+    private String plan_ddl;
     private String fzr;
+    private String zrr;
 
     public Plan()
     {
 
     }
 
-    public Plan(String plan_id, String plan_zt, Production production , String plan_sdate, String plan_edate, String fzr)
+    public Plan(String plan_id, String plan_zt, Production production , String plan_sdate, String plan_edate, String fzr, String zrr, String ddl)
     {
         this.plan_id = plan_id;
         this.plan_zt = plan_zt;
@@ -24,6 +26,16 @@ public class Plan {
         this.plan_sdate = plan_sdate;
         this.plan_edate = plan_edate;
         this.fzr = fzr;
+        this.zrr = zrr;
+        this.plan_ddl = ddl;
+    }
+
+    public String getPlan_ddl() {
+        return plan_ddl;
+    }
+
+    public String getZrr() {
+        return zrr;
     }
 
     public Production getProduction() {
@@ -71,5 +83,13 @@ public class Plan {
 
     public void setPlan_edate(String plan_edate) {
         this.plan_edate = plan_edate;
+    }
+
+    public void setPlan_ddl(String plan_ddl) {
+        this.plan_ddl = plan_ddl;
+    }
+
+    public void setZrr(String zrr) {
+        this.zrr = zrr;
     }
 }

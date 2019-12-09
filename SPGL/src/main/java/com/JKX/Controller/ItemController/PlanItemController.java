@@ -14,6 +14,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 
 import java.sql.SQLException;
+import java.time.LocalDate;
 
 
 public class PlanItemController {
@@ -24,22 +25,29 @@ public class PlanItemController {
 
     private Node node;
 
+    private int nowNum;
+
+    private int aimNum;
+
     final ObservableList<Raw> data = FXCollections.observableArrayList();
 
     @FXML
-    private Label proId, planId, proName, sdate, edate, zt;
+    private Label proId, planId, proName, sdate, edate, zt, wait;
+
+    @FXML
+    private DatePicker deadline;
 
     @FXML
     private TableView<Raw> rawView;
 
     @FXML
-    private JFXButton delete, confirm, change;
+    private JFXButton delete, confirm, change, push;
 
     @FXML
     private ProgressBar progress;
 
     @FXML
-    private JFXTextField proNum;
+    private JFXTextField proNum, pushNum;
 
     public void setNode(Node node) {
         this.node = node;
@@ -47,41 +55,97 @@ public class PlanItemController {
 
     public void setInform(Plan plan)
     {
-        this.plan = plan;
-        Raw[] raws = plan.getProduction().getRaws();
-        for (int i = 0; i < raws.length; i++) {
-            data.add(raws[i]);
+        try {
+            this.plan = plan;
+            Raw[] raws = plan.getProduction().getRaws();
+            for (int i = 0; i < raws.length; i++) {
+                data.add(raws[i]);
+            }
+            ObservableList<TableColumn<Raw, ?>> observableList = rawView.getColumns();
+            observableList.get(0).setCellValueFactory(new PropertyValueFactory("raw_id"));
+            observableList.get(1).setCellValueFactory(new PropertyValueFactory("raw_name"));
+            observableList.get(2).setCellValueFactory(new PropertyValueFactory("raw_num"));
+            rawView.setItems(data);
+            this.planId.setText(plan.getPlan_id());
+            this.proId.setText(plan.getProduction().getProduction_id());
+            this.proName.setText(plan.getProduction().getProduction_name());
+            this.proNum.setText(String.valueOf(plan.getProduction().getNums()));
+            this.sdate.setText(plan.getPlan_sdate());
+            this.edate.setText(plan.getPlan_edate());
+//            final Callback<DatePicker, DateCell> dayCellFactory =
+//                    new Callback<DatePicker, DateCell>() {
+//                        @Override
+//                        public DateCell call(final DatePicker datePicker) {
+//                            return new DateCell() {
+//                                @Override
+//                                public void updateItem(LocalDate item, boolean empty) {
+//                                    super.updateItem(item, empty);
+//
+//                                    if (item.isBefore(
+//                                            deadline.getValue().plusDays(1))
+//                                    ) {
+//                                        setDisable(true);
+//                                        setStyle("-fx-background-color: #ffc0cb;");
+//                                    }
+//                                }
+//                            };
+//                        }
+//                    };
+//            deadline.setDayCellFactory(dayCellFactory);
+            this.deadline.setValue(LocalDate.of(Integer.parseInt(plan.getPlan_ddl().substring(0, 4)), Integer.parseInt(plan.getPlan_ddl().substring(0, 4)), Integer.parseInt(plan.getPlan_ddl().substring(0, 4))));
+            this.zt.setText(plan.getPlan_zt());
+            String z = plan.getPlan_zt();
+            this.wait.setVisible(false);
+            if(z.equals("待执行"))
+            {
+                this.progress.setProgress(0.0);
+            }
+            else if(z.equals("执行中"))
+            {
+                this.progress.setProgress(0.33);
+            }
+            else if(z.equals("待审核"))
+            {
+                int[] nums = this.productionPlanController.getPlanSection().SearchnowAndaim(this.planId.getText());
+                this.nowNum = nums[0];
+                this.aimNum = nums[1];
+                if(nums[2] == 1)
+                {
+                    this.wait.setVisible(true);
+                }
+                this.progress.setProgress(this.nowNum * (1.0) / this.aimNum);
+                this.zt.setText(this.nowNum + "/" + this.aimNum);
+            }
+            else if(z.equals("已完成"))
+            {
+                this.progress.setProgress(1.0);
+            }
         }
-        ObservableList<TableColumn<Raw, ?>> observableList = rawView.getColumns();
-        observableList.get(0).setCellValueFactory(new PropertyValueFactory("raw_id"));
-        observableList.get(1).setCellValueFactory(new PropertyValueFactory("raw_name"));
-        observableList.get(2).setCellValueFactory(new PropertyValueFactory("raw_num"));
-        rawView.setItems(data);
-        this.planId.setText(plan.getPlan_id());
-        System.out.println(plan.getProduction().getProduction_id());
-        this.proId.setText(plan.getProduction().getProduction_id());
-        this.proName.setText(plan.getProduction().getProduction_name());
-        this.proNum.setText(String.valueOf(plan.getProduction().getNums()));
-        this.sdate.setText(plan.getPlan_sdate());
-        this.edate.setText(plan.getPlan_edate());
-        this.zt.setText(plan.getPlan_zt());
-        String z = plan.getPlan_zt();
-        if(z.equals("待执行"))
+        catch (SQLException se)
         {
-            this.progress.setProgress(0.0);
+            se.printStackTrace();
+            this.productionPlanController.getPlanSection().getStaff().showAlert(Alert.AlertType.ERROR, "错误", "查询失败", "系统错误");
         }
-        else if(z.equals("执行中"))
-        {
-            this.progress.setProgress(0.33);
-        }
-        else if(z.equals("待审核"))
-        {
-            this.progress.setProgress(0.66);
-        }
-        else if(z.equals("已完成"))
-        {
-            this.progress.setProgress(1.0);
-        }
+    }
+
+    public void setChangeVisable(boolean changeVisable)
+    {
+        this.change.setVisible(changeVisable);
+    }
+
+    public void setDeleteVisable(boolean deleteVisable)
+    {
+        this.delete.setVisible(deleteVisable);
+    }
+
+    public void setPushVisable(boolean pushVisable)
+    {
+        this.push.setVisible(pushVisable);
+    }
+
+    public void setPushNumVisable(boolean pushNumVisable)
+    {
+        this.pushNum.setVisible(pushNumVisable);
     }
 
     public void setNumEditable(boolean numEditable){this.proNum.setEditable(numEditable);}
@@ -102,13 +166,14 @@ public class PlanItemController {
         this.productionPlanController = productionPlanController;
     }
 
+
+
     public void handleClicks(MouseEvent mouseEvent) {
         JFXButton actionBtn = (JFXButton)mouseEvent.getSource();
         if(actionBtn == this.change)
         {
             try {
                 int prenums = this.plan.getProduction().getNums();
-                System.out.println("pre" + prenums);
                 int nums = Integer.parseInt(this.proNum.getText());
                 this.plan.getProduction().setNums(nums);
                 for(int i = 0; i < this.plan.getProduction().getRaws().length; i++) {
@@ -123,7 +188,7 @@ public class PlanItemController {
                         this.productionPlanController.getPlanSection().getStaff().showAlert(Alert.AlertType.ERROR, "错误", "修改失败", "当前库存仅剩：" + String.valueOf(now));
                     }
                 }
-                this.productionPlanController.getPlanSection().changePlanOnnum(this.planId.getText(), this.proNum.getText());
+                this.productionPlanController.getPlanSection().changePlanOnnum(this.planId.getText(), this.proNum.getText(), this.deadline.getValue().toString());
                 this.rawView.refresh();
             }
             catch (SQLException se)
@@ -158,5 +223,9 @@ public class PlanItemController {
                 this.productionPlanController.getPlanSection().getStaff().showAlert(Alert.AlertType.ERROR, "错误", "删除失败", "系统错误");
             }
         }
+    }
+
+    public void handlePush(MouseEvent mouseEvent) {
+
     }
 }

@@ -101,6 +101,8 @@ public class ProductionPlanController {
     private JFXTextField PlanId, Cpname, Cpnum;
     @FXML
     private JFXButton makePlan;
+    @FXML
+    private DatePicker planDdl;
 
     //修改计划页面
     @FXML
@@ -161,11 +163,9 @@ public class ProductionPlanController {
     private VBox rawList;
     //修改原料界面
     @FXML
-    private JFXTextField rawId, rawName, rawPri, rawBzq;
-    @FXML
     private TextField messageRaw11;
     @FXML
-    private JFXButton changeRaw, searchRaw2;
+    private JFXButton searchRaw2;
     @FXML
     private ComboBox<String> comboxSearchRaw1;
     @FXML
@@ -893,7 +893,8 @@ public class ProductionPlanController {
                             this.planSection.getStaff().showAlert(Alert.AlertType.ERROR, "错误", "添加失败", "库存不足");
                         }
                         else {
-                            Plan plan = new Plan(this.PlanId.getText(), "待执行", production[0], "", "", this.planSection.getStaff().Name);
+                            Plan plan = new Plan(this.PlanId.getText(), "待执行", production[0], "", "", this.planSection.getStaff().Name, "", this.planDdl.getValue().toString());
+                            System.out.println(this.planDdl.getValue().toString());
                             this.planSection.makePlan(plan);
                             this.planSection.getStaff().showAlert(Alert.AlertType.INFORMATION, "成功", "添加成功", "计划编号" + this.PlanId.getText());
                         }
