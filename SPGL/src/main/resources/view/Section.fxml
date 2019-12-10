@@ -5,6 +5,7 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.effect.DropShadow?>
@@ -613,7 +614,16 @@
                      </font>
                   </Label>
                   <TextField fx:id="bhD" layoutX="730.0" layoutY="114.0" prefHeight="30.0" prefWidth="184.0" style="-fx-background-color: #02030A; -fx-border-color: #B7C3D7; -fx-border-radius: 2em;" />
-                  <TableView fx:id="dateTable" layoutY="212.0" prefHeight="477.0" prefWidth="1018.0" style="-fx-background-color: #000000;" stylesheets="@../css/fullpackstyling.css" />
+                  <TableView fx:id="dateTable" layoutY="212.0" prefHeight="477.0" prefWidth="1018.0">
+                     <columns>
+                        <TableColumn prefWidth="140.0" text="订单编号" />
+                        <TableColumn prefWidth="180.0" text="下单时间" />
+                        <TableColumn prefWidth="140.0" text="购买产品" />
+                        <TableColumn prefWidth="140.0" text="购买数量" />
+                        <TableColumn prefWidth="140.0" text="订单状态" />
+                        <TableColumn prefWidth="140.0" text="订单客户" />
+                        <TableColumn prefWidth="140.0" text="付款状态" />
+                     </columns></TableView>
                   <JFXButton fx:id="searchDate" layoutX="352.0" layoutY="114.0" onMouseClicked="#handleDate" text="查询时间" />
                   <JFXButton fx:id="searchIdD" layoutX="926.0" layoutY="114.0" onMouseClicked="#handleDate" text="查询编号" />
                </children></Pane>
@@ -626,11 +636,157 @@
                   </Label>
                   <TextField fx:id="bhN" layoutX="135.0" layoutY="83.0" onMouseClicked="#handleName" style="-fx-border-radius: 2em; -fx-border-color: #B7C3D7; -fx-background-color: #02030A;" />
                   <TextField fx:id="name" layoutX="598.0" layoutY="82.0" style="-fx-background-color: #02030A; -fx-border-color: #B7C3D7; -fx-border-radius: 2em;" />
-                  <TableView fx:id="nameTable" layoutX="7.0" layoutY="142.0" prefHeight="543.0" prefWidth="1011.0" style="-fx-background-color: #000000;" stylesheets="@../css/fullpackstyling.css" />
+                  <TableView fx:id="nameTable" layoutX="7.0" layoutY="142.0" prefHeight="543.0" prefWidth="1011.0">
+                     <columns>
+                        <TableColumn prefWidth="170.0" text="产品名称" />
+                        <TableColumn prefWidth="170.0" text="产品编号" />
+                        <TableColumn prefWidth="170.0" text="总销量" />
+                        <TableColumn prefWidth="170.0" text="零售商价格" />
+                        <TableColumn prefWidth="170.0" text="批发商价格" />
+                        <TableColumn prefWidth="170.0" text="代理商价格" />
+                     </columns></TableView>
                   <JFXButton fx:id="searchIdN" layoutX="379.0" layoutY="83.0" onMouseClicked="#handleName" text="查询编号" />
                   <JFXButton fx:id="saerchName" layoutX="827.0" layoutY="82.0" onMouseClicked="#handleName" text="查询名称" />
                </children></Pane>
-            <Pane fx:id="emptyPane" prefHeight="689.0" prefWidth="1046.0" style="-fx-background-color: #000000;" visible="false" />
+            <Pane fx:id="PaneCustom" prefHeight="689.0" prefWidth="1046.0" style="-fx-background-color: #000000;">
+               <children>
+                  <TableView fx:id="CustomTable" layoutX="5.0" layoutY="197.0" prefHeight="491.0" prefWidth="1011.0">
+                     <columns>
+                        <TableColumn prefWidth="210.0" text="客户编号" />
+                        <TableColumn prefWidth="210.0" text="客户类型" />
+                        <TableColumn prefWidth="210.0" text="客户姓名" />
+                        <TableColumn prefWidth="210.0" text="违规次数" />
+                        <TableColumn prefWidth="210.0" text="联系电话" />
+                     </columns>
+                  </TableView>
+                  <TextField fx:id="cust_id_text" layoutX="71.0" layoutY="62.0" prefHeight="30.0" prefWidth="229.0" promptText="请输入客户编号" />
+                  <TextField fx:id="cust_tele_text" layoutX="511.0" layoutY="62.0" prefHeight="30.0" prefWidth="229.0" promptText="请输入客户联系电话" />
+                  <JFXButton fx:id="cust_tele_btn" layoutX="761.0" layoutY="62.0" onMouseClicked="#handleClicks" text="查询" />
+                  <JFXButton fx:id="cust_id_btn" layoutX="321.0" layoutY="62.0" onMouseClicked="#handleClicks" text="查询" />
+               </children></Pane>
+            <Pane fx:id="product_kc" layoutX="10.0" layoutY="10.0" prefHeight="689.0" prefWidth="1046.0" style="-fx-background-color: #000000;">
+               <children>
+                  <TableView fx:id="kc_table" layoutX="8.0" layoutY="232.0" prefHeight="451.0" prefWidth="1002.0">
+                     <columns>
+                        <TableColumn prefWidth="250.0" text="产品编号" />
+                        <TableColumn prefWidth="250.0" text="产品名称" />
+                        <TableColumn prefWidth="250.0" text="剩余数量" />
+                        <TableColumn prefWidth="250.0" text="所在仓库编号" />
+                     </columns>
+                  </TableView>
+                  <TextField fx:id="kc_name_text" layoutX="19.0" layoutY="137.0" prefHeight="30.0" prefWidth="272.0" promptText="请输入产品名称" />
+                  <TextField fx:id="kc_ck_id_text" layoutX="490.0" layoutY="137.0" prefHeight="30.0" prefWidth="256.0" promptText="请输入产品所在仓库编号" />
+                  <JFXButton fx:id="kc_name_btn" layoutX="322.0" layoutY="137.0" onMouseClicked="#handleClicks" text="查询" />
+                  <JFXButton fx:id="kc_ck_id_btn" layoutX="782.0" layoutY="137.0" onMouseClicked="#handleClicks" text="查询" />
+               </children>
+            </Pane>
+            <Pane fx:id="raw1_panel" layoutX="10.0" layoutY="10.0" prefHeight="689.0" prefWidth="1046.0" style="-fx-background-color: #000000;">
+               <children>
+                  <TableView fx:id="raw1_table" layoutX="8.0" layoutY="215.0" prefHeight="460.0" prefWidth="1002.0">
+                     <columns>
+                        <TableColumn prefWidth="250.0" text="原料编号" />
+                        <TableColumn prefWidth="250.0" text="原料名称" />
+                        <TableColumn prefWidth="250.0" text="保质期" />
+                        <TableColumn prefWidth="250.0" text="原料单价" />
+                     </columns>
+                  </TableView>
+                  <TextField fx:id="raw_id_text" layoutX="62.0" layoutY="115.0" prefHeight="30.0" prefWidth="229.0" promptText="请输入原料编号" />
+                  <TextField fx:id="rew_name_text" layoutX="500.0" layoutY="115.0" prefHeight="30.0" prefWidth="229.0" promptText="请输入原料名称" />
+                  <JFXButton fx:id="rew_id_btn" layoutX="321.0" layoutY="115.0" onMouseClicked="#handleClicks" text="查询" />
+                  <JFXButton fx:id="rew_name_btn" layoutX="774.0" layoutY="115.0" onMouseClicked="#handleClicks" text="查询" />
+               </children>
+            </Pane>
+            <Pane fx:id="raw2_panel" layoutX="10.0" layoutY="10.0" prefHeight="689.0" prefWidth="1046.0" style="-fx-background-color: #000000;">
+               <children>
+                  <TableView fx:id="raw2_table" layoutX="8.0" layoutY="205.0" prefHeight="470.0" prefWidth="1002.0">
+                     <columns>
+                        <TableColumn prefWidth="250.0" text="原料名称" />
+                        <TableColumn prefWidth="250.0" text="原料编号" />
+                        <TableColumn prefWidth="250.0" text="剩余数量" />
+                        <TableColumn prefWidth="250.0" text="所在仓库编号" />
+                     </columns>
+                  </TableView>
+                  <TextField fx:id="yl_kc_id_text" layoutX="87.0" layoutY="107.0" prefHeight="30.0" prefWidth="242.0" promptText="请输入原料编号" />
+                  <TextField fx:id="yl_kc_ck_text" layoutX="543.0" layoutY="107.0" prefHeight="30.0" prefWidth="242.0" promptText="请输入原料所在仓库编号" />
+                  <JFXButton fx:id="yl_kc_id_btn" layoutX="357.0" layoutY="107.0" onMouseClicked="#handleClicks" text="查询" />
+                  <JFXButton fx:id="yl_kc_ck_btn" layoutX="812.0" layoutY="107.0" onMouseClicked="#handleClicks" text="查询" />
+               </children>
+            </Pane>
+            <Pane fx:id="yljl_panel" layoutX="10.0" layoutY="10.0" prefHeight="689.0" prefWidth="1046.0" style="-fx-background-color: #000000;">
+               <children>
+                  <TableView fx:id="yljl_table" layoutX="14.0" layoutY="204.0" prefHeight="477.0" prefWidth="1002.0">
+                     <columns>
+                        <TableColumn prefWidth="170.0" text="原料编号" />
+                        <TableColumn prefWidth="170.0" text="原料名称" />
+                        <TableColumn prefWidth="240.0" text="操作时间" />
+                        <TableColumn text="操作类型" />
+                        <TableColumn prefWidth="170.0" text="操作数量" />
+                        <TableColumn prefWidth="170.0" text="操作人员" />
+                     </columns>
+                  </TableView>
+                  <TimeRangeView fx:id="yl_cz_date_view" layoutX="41.0" layoutY="57.0" />
+                  <TextField fx:id="yl_cz_id_text" layoutX="652.0" layoutY="77.0" prefHeight="30.0" prefWidth="217.0" promptText="请输入原料编号" />
+                  <JFXButton fx:id="yl_cz_date_btn" layoutX="400.0" layoutY="77.0" onMouseClicked="#handleClicks" text="查询" />
+                  <JFXButton fx:id="yl_cz_id_btn" layoutX="906.0" layoutY="77.0" onMouseClicked="#handleClicks" text="查询" />
+               </children>
+            </Pane>
+            <Pane fx:id="unpaid_panel" layoutX="10.0" layoutY="10.0" prefHeight="689.0" prefWidth="1046.0" style="-fx-background-color: #000000;">
+               <children>
+                  <TableView fx:id="unpaid_table" layoutX="5.0" layoutY="199.0" prefHeight="485.0" prefWidth="1011.0">
+                     <columns>
+                        <TableColumn prefWidth="160.0" text="订单编号" />
+                        <TableColumn prefWidth="210.0" text="出单时间" />
+                        <TableColumn prefWidth="160.0" text="待付金额" />
+                        <TableColumn prefWidth="160.0" text="客户编号" />
+                        <TableColumn prefWidth="160.0" text="客户姓名" />
+                        <TableColumn prefWidth="160.0" text="联系方式" />
+                     </columns>
+                  </TableView>
+                  <TextField fx:id="unpaid_ddid_text" layoutX="574.0" layoutY="42.0" prefHeight="30.0" prefWidth="242.0" promptText="请输入订单编号" />
+                  <TextField fx:id="unpaid_khid_text" layoutX="574.0" layoutY="120.0" prefHeight="30.0" prefWidth="242.0" promptText="请输入客户编号" />
+                  <TimeRangeView fx:id="unpaid_dateview" layoutX="14.0" layoutY="42.0" />
+                  <JFXButton fx:id="unpaid_date_btn" layoutX="343.0" layoutY="62.0" onMouseClicked="#handleClicks" text="查询" />
+                  <JFXButton fx:id="unpaid_ddid_btn" layoutX="862.0" layoutY="42.0" onMouseClicked="#handleClicks" text="查询" />
+                  <JFXButton fx:id="unpaid_khid_btn" layoutX="862.0" layoutY="120.0" onMouseClicked="#handleClicks" text="查询" />
+               </children>
+            </Pane>
+            <Pane fx:id="refund_pane" layoutX="10.0" layoutY="10.0" prefHeight="689.0" prefWidth="1046.0" style="-fx-background-color: #000000;">
+               <children>
+                  <TableView fx:id="refund_table" layoutX="5.0" layoutY="198.0" prefHeight="485.0" prefWidth="1011.0">
+                     <columns>
+                        <TableColumn prefWidth="100.0" text="退货单号" />
+                        <TableColumn prefWidth="100.0" text="退款金额" />
+                        <TableColumn prefWidth="100.0" text="订单编号" />
+                        <TableColumn prefWidth="200.0" text="退货时间" />
+                        <TableColumn prefWidth="100.0" text="退货原因" />
+                        <TableColumn prefWidth="100.0" text="退货状态" />
+                        <TableColumn prefWidth="100.0" text="客户编号" />
+                        <TableColumn prefWidth="100.0" text="客户姓名" />
+                        <TableColumn prefWidth="120.0" text="联系方式" />
+                     </columns>
+                  </TableView>
+                  <TextField fx:id="refund_ddid_text" layoutX="570.0" layoutY="49.0" prefHeight="30.0" prefWidth="272.0" promptText="请输入订单编号" />
+                  <TextField fx:id="refund_khid_text" layoutX="570.0" layoutY="136.0" prefHeight="30.0" prefWidth="272.0" promptText="请输入客户编号" />
+                  <JFXButton fx:id="refund_ddid_btn" layoutX="884.0" layoutY="49.0" onMouseClicked="#handleClicks" text="查询" />
+                  <JFXButton fx:id="refund_khid_btn" layoutX="884.0" layoutY="136.0" onMouseClicked="#handleClicks" text="查询" />
+                  <TimeRangeView fx:id="refund_dateview" layoutX="14.0" layoutY="64.0" />
+                  <JFXButton fx:id="refund_dateview_btn" layoutX="396.0" layoutY="84.0" onMouseClicked="#handleClicks" text="查询" />
+               </children>
+            </Pane>
+            <Pane fx:id="finance_pane" layoutX="10.0" layoutY="10.0" prefHeight="689.0" prefWidth="1046.0" style="-fx-background-color: #000000;">
+               <children>
+                  <TableView fx:id="finance_table" layoutX="5.0" layoutY="206.0" prefHeight="477.0" prefWidth="1011.0">
+                     <columns>
+                        <TableColumn prefWidth="200.0" text="财务编号" />
+                        <TableColumn prefWidth="200.0" text="操作人员" />
+                        <TableColumn prefWidth="200.0" text="流水金额" />
+                        <TableColumn prefWidth="220.0" text="操作时间" />
+                        <TableColumn prefWidth="200.0" text="操作备注" />
+                     </columns>
+                  </TableView>
+               </children>
+            </Pane>
+            <Pane fx:id="emptyPane" layoutX="10.0" layoutY="10.0" prefHeight="689.0" prefWidth="1046.0" style="-fx-background-color: #000000;" />
          </children>
       </StackPane>
    </children>

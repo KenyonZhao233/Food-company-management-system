@@ -345,13 +345,18 @@
                   <JFXButton fx:id="ReturnButton" layoutX="840.0" layoutY="622.0" onMouseClicked="#handleClicks" prefHeight="30.0" prefWidth="107.0" style="-fx-background-color: red;" text="退货" textFill="WHITE" />
                </children>
             </Pane>
-            <Pane prefHeight="614.0" prefWidth="858.0" style="-fx-background-color: #02030A;">
+            <Pane fx:id="firstPage" prefHeight="614.0" prefWidth="858.0" style="-fx-background-color: #02030A;">
                <children>
-                  <Label layoutX="174.0" layoutY="83.0" text="欢迎使用销售部" textFill="#e7e5e5">
+                  <Label layoutX="178.0" layoutY="96.0" text="欢迎使用销售部" textFill="#e7e5e5">
                      <font>
                         <Font name="Bodoni MT" size="96.0" />
                      </font>
                   </Label>
+                  <ImageView fitHeight="355.0" fitWidth="355.0" layoutX="333.0" layoutY="292.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../icon/Pet_Store.png" />
+                     </image>
+                  </ImageView>
                </children></Pane>
          </children>
       </StackPane>
