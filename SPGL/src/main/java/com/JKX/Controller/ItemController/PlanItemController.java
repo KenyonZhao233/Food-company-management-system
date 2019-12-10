@@ -1,7 +1,9 @@
 package com.JKX.Controller.ItemController;
 
 import com.JKX.Controller.ProductionPlanController;
+import com.JKX.Controller.WorkshopController;
 import com.JKX.Model.Table.Plan;
+import com.JKX.Model.Table.Production;
 import com.JKX.Model.Table.Raw;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextField;
@@ -12,14 +14,21 @@ import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
 
 import java.sql.SQLException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.util.Date;
 
 
 public class PlanItemController {
 
     private ProductionPlanController productionPlanController;
+
+    private WorkshopController workshopController;
 
     private Plan plan;
 
@@ -32,7 +41,7 @@ public class PlanItemController {
     final ObservableList<Raw> data = FXCollections.observableArrayList();
 
     @FXML
-    private Label proId, planId, proName, sdate, edate, zt, wait;
+    private Label proId, planId, proName, sdate, edate, zt, wait, zrr, fzr, outs;
 
     @FXML
     private DatePicker deadline;
@@ -41,7 +50,7 @@ public class PlanItemController {
     private TableView<Raw> rawView;
 
     @FXML
-    private JFXButton delete, confirm, change, push;
+    private JFXButton delete, confirm, change, push, complete, doPlan;
 
     @FXML
     private ProgressBar progress;
@@ -56,6 +65,7 @@ public class PlanItemController {
     public void setInform(Plan plan)
     {
         try {
+            this.complete.setVisible(false);
             this.plan = plan;
             Raw[] raws = plan.getProduction().getRaws();
             for (int i = 0; i < raws.length; i++) {
@@ -72,6 +82,8 @@ public class PlanItemController {
             this.proNum.setText(String.valueOf(plan.getProduction().getNums()));
             this.sdate.setText(plan.getPlan_sdate());
             this.edate.setText(plan.getPlan_edate());
+            this.zrr.setText(plan.getZrr());
+            this.fzr.setText(plan.getZrr());
 //            final Callback<DatePicker, DateCell> dayCellFactory =
 //                    new Callback<DatePicker, DateCell>() {
 //                        @Override
@@ -92,40 +104,71 @@ public class PlanItemController {
 //                        }
 //                    };
 //            deadline.setDayCellFactory(dayCellFactory);
-            this.deadline.setValue(LocalDate.of(Integer.parseInt(plan.getPlan_ddl().substring(0, 4)), Integer.parseInt(plan.getPlan_ddl().substring(0, 4)), Integer.parseInt(plan.getPlan_ddl().substring(0, 4))));
+            this.deadline.setValue(LocalDate.of(Integer.parseInt(plan.getPlan_ddl().substring(0, 4)), Integer.parseInt(plan.getPlan_ddl().substring(5, 7)), Integer.parseInt(plan.getPlan_ddl().substring(8, 10))));
             this.zt.setText(plan.getPlan_zt());
             String z = plan.getPlan_zt();
             this.wait.setVisible(false);
             if(z.equals("待执行"))
             {
                 this.progress.setProgress(0.0);
+                DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                String date = df.format(new Date());
+                if(plan.getPlan_ddl().compareTo(date) < 0) {
+                    this.outs.setVisible(true);
+                }
             }
             else if(z.equals("执行中"))
             {
-                this.progress.setProgress(0.33);
-            }
-            else if(z.equals("待审核"))
-            {
-                int[] nums = this.productionPlanController.getPlanSection().SearchnowAndaim(this.planId.getText());
+                this.progress.setProgress(0.0);
+                DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                String date = df.format(new Date());
+                if(plan.getPlan_ddl().compareTo(date) < 0) {
+                    this.outs.setVisible(true);
+                }
+                int[] nums = this.productionPlanController.getPlanSection().SearchAdair(this.plan.getPlan_id());
+                this.setNumEditable(false);
                 this.nowNum = nums[0];
                 this.aimNum = nums[1];
-                if(nums[2] == 1)
+                if(this.nowNum >= this.aimNum)
                 {
-                    this.wait.setVisible(true);
+                    this.complete.setVisible(true);
+                    this.push.setVisible(false);
+                    this.pushNum.setVisible(false);
                 }
                 this.progress.setProgress(this.nowNum * (1.0) / this.aimNum);
                 this.zt.setText(this.nowNum + "/" + this.aimNum);
+                this.setNumEditable(false);
+            }
+            else if(z.equals("待审核"))
+            {
+                if(plan.getPlan_ddl().compareTo(plan.getPlan_sdate()) < 0)
+                {
+                    this.edate.setTextFill(Color.RED);
+                }
+                this.deadline.setEditable(false);
+                this.setNumEditable(false);
+                this.progress.setProgress(0.66);
             }
             else if(z.equals("已完成"))
             {
+                if(plan.getPlan_ddl().compareTo(plan.getPlan_sdate()) < 0)
+                {
+                    this.edate.setTextFill(Color.RED);
+                }
+                this.deadline.setEditable(false);
+                this.setNumEditable(false);
                 this.progress.setProgress(1.0);
             }
         }
-        catch (SQLException se)
+        catch (Exception se)
         {
             se.printStackTrace();
             this.productionPlanController.getPlanSection().getStaff().showAlert(Alert.AlertType.ERROR, "错误", "查询失败", "系统错误");
         }
+    }
+
+    public void setWorkshopController(WorkshopController workshopController) {
+        this.workshopController = workshopController;
     }
 
     public void setChangeVisable(boolean changeVisable)
@@ -225,7 +268,67 @@ public class PlanItemController {
         }
     }
 
-    public void handlePush(MouseEvent mouseEvent) {
 
+
+
+
+    public void handleComplete(MouseEvent mouseEvent) {
+        try {
+            this.zt.setText("待审核");
+            this.progress.setProgress(0.66);
+            DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            String date = df.format(new Date());
+            this.plan.setPlan_edate(date);
+            this.edate.setText(date);
+            this.plan.setPlan_zt("待审核");
+            this.workshopController.getWorkshopSection().changeZtOver(this.plan.getPlan_id());
+        }
+        catch (SQLException se)
+        {
+            se.printStackTrace();
+            this.workshopController.getWorkshopSection().getStaff().showAlert(Alert.AlertType.ERROR, "错误", "完成失败", "系统错误");
+        }
+    }
+
+    public void handlePush(MouseEvent mouseEvent) {
+        if(this.pushNum.getText().isEmpty() )
+        {
+            this.workshopController.getWorkshopSection().getStaff().showAlert(Alert.AlertType.ERROR, "错误", "交付失败", "请填写信息");
+        }
+        else
+        {
+            try {
+                this.nowNum += Integer.parseInt(this.pushNum.getText());
+                this.workshopController.getWorkshopSection().updatePlan(this.plan.getPlan_id(), Math.min(this.nowNum, this.aimNum));
+                if(this.nowNum >= this.aimNum)
+                {
+                    this.push.setVisible(false);
+                    this.complete.setVisible(true);
+                    this.pushNum.setVisible(false);
+                }
+                else
+                {
+                    this.plan.setPlan_zt(this.nowNum + "/" + this.aimNum);
+                    this.progress.setProgress(this.nowNum * (1.0) / this.aimNum);
+                }
+            }
+            catch (SQLException se)
+            {
+                se.printStackTrace();
+                this.workshopController.getWorkshopSection().getStaff().showAlert(Alert.AlertType.ERROR, "错误", "交付失败", "系统错误");
+            }
+        }
+    }
+
+    public void handleDo(MouseEvent mouseEvent) {
+        try {
+            this.workshopController.getWorkshopSection().changeZtDo(this.plan.getPlan_id(), 0, this.plan.getProduction().getNums(), this.workshopController.getWorkshopSection().getStaff().Name);
+            this.workshopController.deleteVbox1(this.node);
+        }
+        catch (SQLException se)
+        {
+            se.printStackTrace();
+            this.workshopController.getWorkshopSection().getStaff().showAlert(Alert.AlertType.ERROR, "错误", "执行失败", "系统错误");
+        }
     }
 }

@@ -16,7 +16,7 @@
   <content>
     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="227.0" prefWidth="896.0">
          <children>
-            <ImageView fitHeight="66.0" fitWidth="66.0" layoutX="33.0" layoutY="32.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="66.0" fitWidth="66.0" layoutX="43.0" layoutY="32.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../icon/plan.png" />
                </image>
@@ -48,7 +48,12 @@
             <JFXButton fx:id="push" layoutX="773.0" layoutY="186.0" onMouseClicked="#handlePush" prefHeight="30.0" prefWidth="104.0" text="交付" />
             <Label layoutX="156.0" layoutY="119.0" text="截止时间：" />
             <DatePicker fx:id="deadline" layoutX="225.0" layoutY="114.0" prefHeight="30.0" prefWidth="278.0" />
-            <Label fx:id="wait" alignment="CENTER" contentDisplay="CENTER" layoutX="522.0" layoutY="184.0" prefHeight="35.0" prefWidth="352.0" style="-fx-background-color: RED;" text="等          待          审          核" textFill="WHITE" />
+            <Label fx:id="wait" alignment="CENTER" contentDisplay="CENTER" layoutX="524.0" layoutY="184.0" prefHeight="35.0" prefWidth="352.0" style="-fx-background-color: RED;" text="等          待          审          核" textFill="WHITE" visible="false" />
+            <Label fx:id="fzr" alignment="CENTER" layoutX="35.0" layoutY="161.0" prefHeight="20.0" prefWidth="88.0" />
+            <Label fx:id="zrr" alignment="CENTER" layoutX="44.0" layoutY="121.0" prefHeight="20.0" prefWidth="65.0" />
+            <JFXButton fx:id="complete" layoutX="51.0" layoutY="179.0" onMouseClicked="#handleComplete" text="完成" />
+            <Label fx:id="outs" layoutX="10.0" layoutY="7.0" text="已超期" textFill="RED" visible="false" />
+            <JFXButton fx:id="doPlan" layoutX="593.0" layoutY="186.0" onMouseClicked="#handleDo" prefHeight="30.0" prefWidth="209.0" text="执行" />
          </children></AnchorPane>
   </content>
 </ScrollPane>

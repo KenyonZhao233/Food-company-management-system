@@ -94,6 +94,8 @@ public class ProductionPlanController {
     private TimeRangeView searchPlanPicker;
     @FXML
     private VBox vboxSearchPlan;
+    @FXML
+    private ComboBox<String> comboxZt;
 
     //计划管理
     //新建计划页面
@@ -188,20 +190,27 @@ public class ProductionPlanController {
     {
         this.planSection = new PlanSection(staff);
         List<String> searchMethod = new ArrayList<String>();
+        List<String> searchMethod2 = new ArrayList<String>();
         searchMethod.add("按编号查询");
         searchMethod.add("按名称查询");
+        searchMethod2.add("待执行");
+        searchMethod2.add("执行中");
+        searchMethod2.add("待审核");
+        searchMethod2.add("已完成");
         this.comboxCp.getItems().addAll(searchMethod);
         this.comboxRaw.getItems().addAll(searchMethod);
         this.comboxSearchCp1.getItems().addAll(searchMethod);
         this.comboxSearchCp3.getItems().addAll(searchMethod);
         this.comboxSearchRaw.getItems().addAll(searchMethod);
         this.comboxSearchRaw1.getItems().addAll(searchMethod);
+        this.comboxZt.getItems().addAll(searchMethod2);
         this.comboxCp.setValue("按编号查询");
         this.comboxRaw.setValue("按编号查询");
         this.comboxSearchRaw.setValue("按编号查询");
         this.comboxSearchCp1.setValue("按编号查询");
         this.comboxSearchCp3.setValue("按编号查询");
         this.comboxSearchRaw1.setValue("按编号查询");
+        this.comboxZt.setValue("待执行");
         this.CcpId.setCellValueFactory(new PropertyValueFactory<Production, String>("production_id"));
         this.CcpName.setCellValueFactory(new PropertyValueFactory<Production, String>("production_name"));
         this.CcpP1.setCellValueFactory(new PropertyValueFactory<Production, Float>("production_p1"));
@@ -375,9 +384,9 @@ public class ProductionPlanController {
                     Node node = loader.load();
 
                     RawItemController rawItemController = loader.<RawItemController>getController();
+                    rawItemController.setProductionPlanController(this);
                     rawItemController.setNode(node);
                     rawItemController.initData(raws[i]);
-                    rawItemController.setProductionPlanController(this);
                     rawItemController.setChangeDisable(false);
                     rawItemController.setDeleteDisable(false);
                     rawItemController.setBzqEditable(true);
@@ -406,7 +415,7 @@ public class ProductionPlanController {
                     infom = "全部";
                 else
                     infom = this.messagePlan.getText();
-                Plan[] plans = this.planSection.searchPlan(infom, "全部");
+                Plan[] plans = this.planSection.searchPlan(infom, this.comboxZt.getValue());
                 this.vboxSearchPlan.getChildren().clear();
                 for(int i = 0; i < plans.length; i++)
                 {
@@ -414,13 +423,15 @@ public class ProductionPlanController {
                     Node node = loader.load();
 
                     PlanItemController planItemController = loader.<PlanItemController>getController();
-                    planItemController.setInform(plans[i]);
                     planItemController.setController(this);
+                    planItemController.setInform(plans[i]);
                     planItemController.setNode(node);
                     planItemController.setConfirmDisable(true);
                     planItemController.setDeleteDisable(true);
                     planItemController.setChangeDisable(true);
                     planItemController.setNumEditable(false);
+                    planItemController.setPushNumVisable(false);
+                    planItemController.setPushVisable(false);
 
                     vboxSearchPlan.getChildren().add(node);
                 }
@@ -436,7 +447,7 @@ public class ProductionPlanController {
             try {
                 String sdate = this.searchPlanPicker.getStartDate().toString();
                 String edate = this.searchPlanPicker.getEndDate().toString();
-                Plan[] plans = this.planSection.searchPlan("全部", sdate, edate, "全部");
+                Plan[] plans = this.planSection.searchPlan("全部", sdate, edate, this.comboxZt.getValue());
                 this.vboxSearchPlan.getChildren().clear();
                 for(int i = 0; i < plans.length; i++)
                 {
@@ -444,13 +455,15 @@ public class ProductionPlanController {
                     Node node = loader.load();
 
                     PlanItemController planItemController = loader.<PlanItemController>getController();
-                    planItemController.setInform(plans[i]);
                     planItemController.setController(this);
+                    planItemController.setInform(plans[i]);
                     planItemController.setNode(node);
                     planItemController.setConfirmDisable(true);
                     planItemController.setDeleteDisable(true);
                     planItemController.setChangeDisable(true);
                     planItemController.setNumEditable(false);
+                    planItemController.setPushNumVisable(false);
+                    planItemController.setPushVisable(false);
 
                     vboxSearchPlan.getChildren().add(node);
                 }
@@ -470,23 +483,29 @@ public class ProductionPlanController {
                     infom = "全部";
                 else
                     infom = this.messagePlan1.getText();
-                Plan[] plans = this.planSection.searchPlan(infom, "待执行");
-                this.vboxSearchPlan.getChildren().clear();
-                for(int i = 0; i < plans.length; i++)
-                {
-                    FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("view/PlanItem.fxml"));
-                    Node node = loader.load();
+                Plan[] plans1 = this.planSection.searchPlan(infom, "待执行");
+                Plan[] plans2 = this.planSection.searchPlan(infom, "执行中");
+                Plan[] plans3 = this.planSection.searchPlan(infom, "审核中");
+                Plan[][] plans = {plans1, plans2, plans3};
+                this.vboxPlan.getChildren().clear();
+                for(int k = 0; k < 3; k++) {
+                    for (int i = 0; i < plans[k].length; i++) {
+                        FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("view/PlanItem.fxml"));
+                        Node node = loader.load();
 
-                    PlanItemController planItemController = loader.<PlanItemController>getController();
-                    planItemController.setInform(plans[i]);
-                    planItemController.setController(this);
-                    planItemController.setNode(node);
-                    planItemController.setConfirmDisable(true);
-                    planItemController.setDeleteDisable(false);
-                    planItemController.setChangeDisable(false);
-                    planItemController.setNumEditable(true);
+                        PlanItemController planItemController = loader.<PlanItemController>getController();
+                        planItemController.setController(this);
+                        planItemController.setInform(plans[k][i]);
+                        planItemController.setNode(node);
+                        planItemController.setConfirmDisable(true);
+                        planItemController.setDeleteDisable(false);
+                        planItemController.setChangeDisable(false);
+                        planItemController.setNumEditable(true);
+                        planItemController.setPushNumVisable(false);
+                        planItemController.setPushVisable(false);
 
-                    vboxPlan.getChildren().add(node);
+                        vboxPlan.getChildren().add(node);
+                    }
                 }
             }
             catch (SQLException se)
@@ -498,25 +517,36 @@ public class ProductionPlanController {
         else if(actionBtn == this.searchPlanDate1)
         {
             try {
+                String infom;
                 String sdate = this.searchPlanPicker1.getStartDate().toString();
                 String edate = this.searchPlanPicker1.getEndDate().toString();
-                Plan[] plans = this.planSection.searchPlan("全部", sdate, edate, "待执行");
-                this.vboxSearchPlan.getChildren().clear();
-                for(int i = 0; i < plans.length; i++)
-                {
-                    FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("view/PlanItem.fxml"));
-                    Node node = loader.load();
+                if(this.messagePlan1.getText().isEmpty())
+                    infom = "全部";
+                else
+                    infom = this.messagePlan1.getText();
+                Plan[] plans1 = this.planSection.searchPlan(infom, sdate, edate, "待执行");
+                Plan[] plans2 = this.planSection.searchPlan(infom, sdate, edate, "执行中");
+                Plan[] plans3 = this.planSection.searchPlan(infom, sdate, edate, "审核中");
+                Plan[][] plans = {plans1, plans2, plans3};
+                this.vboxPlan.getChildren().clear();
+                for(int k = 0; k < 3; k++) {
+                    for (int i = 0; i < plans[k].length; i++) {
+                        FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("view/PlanItem.fxml"));
+                        Node node = loader.load();
 
-                    PlanItemController planItemController = loader.<PlanItemController>getController();
-                    planItemController.setInform(plans[i]);
-                    planItemController.setNode(node);
-                    planItemController.setController(this);
-                    planItemController.setConfirmDisable(true);
-                    planItemController.setDeleteDisable(false);
-                    planItemController.setChangeDisable(false);
-                    planItemController.setNumEditable(true);
+                        PlanItemController planItemController = loader.<PlanItemController>getController();
+                        planItemController.setController(this);
+                        planItemController.setInform(plans[k][i]);
+                        planItemController.setNode(node);
+                        planItemController.setConfirmDisable(true);
+                        planItemController.setDeleteDisable(false);
+                        planItemController.setChangeDisable(false);
+                        planItemController.setNumEditable(true);
+                        planItemController.setPushNumVisable(false);
+                        planItemController.setPushVisable(false);
 
-                    vboxPlan.getChildren().add(node);
+                        vboxPlan.getChildren().add(node);
+                    }
                 }
             }
             catch (SQLException se)
@@ -542,13 +572,15 @@ public class ProductionPlanController {
                     Node node = loader.load();
 
                     PlanItemController planItemController = loader.<PlanItemController>getController();
-                    planItemController.setInform(plans[i]);
                     planItemController.setController(this);
+                    planItemController.setInform(plans[i]);
                     planItemController.setNode(node);
                     planItemController.setConfirmDisable(false);
                     planItemController.setDeleteDisable(true);
                     planItemController.setChangeDisable(true);
                     planItemController.setNumEditable(false);
+                    planItemController.setPushNumVisable(false);
+                    planItemController.setPushVisable(false);
 
                     vboxPlanSh.getChildren().add(node);
                 }
@@ -881,7 +913,6 @@ public class ProductionPlanController {
                         production[0].setNums(Integer.parseInt(this.Cpnum.getText()));
                         int flag = 0;
                         for (int i = 0; i < production[0].getRaws().length; i++) {
-                            System.out.println(production[0].getRaws()[i].getRaw_num());
                             float vae = production[0].getRaws()[i].getRaw_num() * Integer.parseInt(this.Cpnum.getText());
                             Raw[] raws = this.planSection.searchRawOnId(production[0].getRaws()[i].getRaw_id());
                             if (raws[0].getRaw_kc() < vae)
