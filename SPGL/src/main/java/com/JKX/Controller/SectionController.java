@@ -62,6 +62,21 @@ public class SectionController implements Initializable {
     private Pane finance_pane;
 
     @FXML
+    private Pane project_panel;
+
+    @FXML
+    private Pane cangku_panel;
+
+    @FXML
+    private Pane finished_product_panel;
+
+    @FXML
+    private Pane pick_panel;
+
+    @FXML
+    private Pane chejian_panel;
+
+    @FXML
     private AnchorPane SectionPane;
 
     /*跳转按钮*/
@@ -97,6 +112,15 @@ public class SectionController implements Initializable {
     private TimeRangeView refund_dateview;
 
     @FXML
+    private TimeRangeView finance_dateview;
+
+    @FXML
+    private TimeRangeView project_dateview1;
+
+    @FXML
+    private TextField finance_inf_text;
+
+    @FXML
     private TextField bhD;
 
     @FXML
@@ -109,7 +133,34 @@ public class SectionController implements Initializable {
     private TextField unpaid_khid_text;
 
     @FXML
+    private TextField project_cp_id_text;
+
+    @FXML
+    private TextField product_id_text1;
+
+    @FXML
+    private TextField product_name_text1;
+
+    @FXML
     private JFXButton yl_cz_date_btn;
+
+    @FXML
+    private JFXButton product_id_btn1;
+
+    @FXML
+    private JFXButton product_name_btn1;
+
+    @FXML
+    private JFXButton project_btn1;
+
+    @FXML
+    private JFXButton project_cp_id_btn;
+
+    @FXML
+    private JFXButton finance_dateview_btn;
+
+    @FXML
+    private JFXButton finance_inf_btn;
 
     @FXML
     private JFXButton yl_cz_id_btn;
@@ -161,10 +212,28 @@ public class SectionController implements Initializable {
     private TextField refund_khid_text;
 
     @FXML
+    private TextField orderid_text1;
+
+    @FXML
+    private TextField customid_text1;
+
+    @FXML
+    private TextField chejian_cj_id_text;
+
+    @FXML
+    private TextField chejian_cp_id_text;
+
+    @FXML
     private JFXButton yl_kc_id_btn;
 
     @FXML
     private JFXButton yl_kc_ck_btn;
+
+    @FXML
+    private JFXButton chejian_cj_id_btn;
+
+    @FXML
+    private JFXButton chejian_cp_id_btn;
 
     @FXML
     private JFXButton cust_id_btn;
@@ -199,6 +268,12 @@ public class SectionController implements Initializable {
     @FXML
     private JFXButton refund_khid_btn;
 
+    @FXML
+    private JFXButton orderid_btn1;
+
+    @FXML
+    private JFXButton customid_btn1;
+
     /*名称界面组件*/
 
     /*表格*/
@@ -231,6 +306,21 @@ public class SectionController implements Initializable {
 
     @FXML
     private TableView<Finance> finance_table;
+
+    @FXML
+    private TableView<Project> project_table;
+
+    @FXML
+    private TableView<Warehouse> cangku_table;
+
+    @FXML
+    private TableView<Product> finished_product_table;
+
+    @FXML
+    private TableView<Pick> pick_table;
+
+    @FXML
+    private TableView<WorkShop> chejian_table;
 
     @FXML
     public void handleClicks(MouseEvent event) throws IOException
@@ -322,7 +412,7 @@ public class SectionController implements Initializable {
         //
 
 
-        if(actionBtn == this.btnSearchOrder)
+        if(actionBtn == this.btnSearchOrder||actionBtn==btnSearchOrder2)
         {
             final ObservableList<OneOrderRecord> data = FXCollections.observableArrayList();
             try
@@ -349,7 +439,7 @@ public class SectionController implements Initializable {
             dateTable.setItems(data);
         }
 
-        if(actionBtn==this.btnSearchXl)
+        if(actionBtn==this.btnSearchXl||actionBtn==btnSearchXl2)
         {
             final ObservableList<ProductSales> data = FXCollections.observableArrayList();
             try
@@ -466,7 +556,7 @@ public class SectionController implements Initializable {
             PaneCustom.toFront();
         }
 
-        if(actionBtn==btnSearchKc)
+        if(actionBtn==btnSearchKc||actionBtn==btnSearchKc2||actionBtn==btnSearchKc3)
         {
             final ObservableList<ProductKuCun> data = FXCollections.observableArrayList();
             try
@@ -652,7 +742,7 @@ public class SectionController implements Initializable {
             raw1_panel.toFront();
         }
 
-        if(actionBtn==btnSearchYlKC)
+        if(actionBtn==btnSearchYlKC||actionBtn==btnSearchYlKC2)
         {
             final ObservableList<Raw> data = FXCollections.observableArrayList();
             try
@@ -875,7 +965,7 @@ public class SectionController implements Initializable {
             yljl_panel.toFront();
         }
 
-        if(actionBtn==btnSearchDfk)
+        if(actionBtn==btnSearchDfk||actionBtn==btnSearchDfk2)
         {
             final ObservableList<Unpaid> data = FXCollections.observableArrayList();
             try
@@ -1187,6 +1277,708 @@ public class SectionController implements Initializable {
 
             finance_pane.toFront();
         }
+
+        if(actionBtn==finance_dateview_btn)
+        {
+            final ObservableList<Finance> data = FXCollections.observableArrayList();
+            try
+            {
+                Finance[] finances=SearchFinanceByDate(finance_dateview.getStartDate().toString(),finance_dateview.getEndDate().toString());
+                if(finances.length==0)
+                {
+                    staff.showAlert(Alert.AlertType.ERROR, "错误", "查询错误", "不存在");
+                    return;
+                }
+                for(int i=0;i<finances.length;i++)
+                {
+                    data.add(finances[i]);
+                }
+            }
+            catch(SQLException ex)
+            {
+                staff.showAlert(Alert.AlertType.ERROR, "错误", "查询错误", "系统错误");
+                return;
+            }
+            ObservableList<TableColumn<Finance, ?>> observableList = finance_table.getColumns();
+            observableList.get(0).setCellValueFactory(new PropertyValueFactory("finance_id"));
+            observableList.get(1).setCellValueFactory(new PropertyValueFactory("finance_user"));
+            observableList.get(2).setCellValueFactory(new PropertyValueFactory("finance_mn"));
+            observableList.get(3).setCellValueFactory(new PropertyValueFactory("finance_time"));
+            observableList.get(4).setCellValueFactory(new PropertyValueFactory("finance_inf"));
+
+            finance_table.setItems(data);
+
+            finance_pane.toFront();
+        }
+
+        if(actionBtn==finance_inf_btn)
+        {
+            final ObservableList<Finance> data = FXCollections.observableArrayList();
+            try
+            {
+                Finance[] finances=SearchFinanceByInfo(finance_inf_text.getText());
+                if(finances.length==0)
+                {
+                    staff.showAlert(Alert.AlertType.ERROR, "错误", "查询错误", "不存在");
+                    return;
+                }
+                for(int i=0;i<finances.length;i++)
+                {
+                    data.add(finances[i]);
+                }
+            }
+            catch(SQLException ex)
+            {
+                staff.showAlert(Alert.AlertType.ERROR, "错误", "查询错误", "系统错误");
+                return;
+            }
+            ObservableList<TableColumn<Finance, ?>> observableList = finance_table.getColumns();
+            observableList.get(0).setCellValueFactory(new PropertyValueFactory("finance_id"));
+            observableList.get(1).setCellValueFactory(new PropertyValueFactory("finance_user"));
+            observableList.get(2).setCellValueFactory(new PropertyValueFactory("finance_mn"));
+            observableList.get(3).setCellValueFactory(new PropertyValueFactory("finance_time"));
+            observableList.get(4).setCellValueFactory(new PropertyValueFactory("finance_inf"));
+
+            finance_table.setItems(data);
+
+            finance_pane.toFront();
+        }
+
+        if(actionBtn==btnSearchScjh||actionBtn==btnSearchScjh2)
+        {
+            final ObservableList<Project> data = FXCollections.observableArrayList();
+            try
+            {
+                Project[] projects=SearchAllProject();
+                if(projects.length==0)
+                {
+                    staff.showAlert(Alert.AlertType.ERROR, "错误", "查询错误", "不存在");
+                    return;
+                }
+                for(int i=0;i<projects.length;i++)
+                {
+                    data.add(projects[i]);
+                }
+            }
+            catch(SQLException ex)
+            {
+                staff.showAlert(Alert.AlertType.ERROR, "错误", "查询错误", "系统错误");
+                return;
+            }
+            ObservableList<TableColumn<Project, ?>> observableList = project_table.getColumns();
+            observableList.get(0).setCellValueFactory(new PropertyValueFactory("produce_id"));
+            observableList.get(1).setCellValueFactory(new PropertyValueFactory("produce_type"));
+            observableList.get(2).setCellValueFactory(new PropertyValueFactory("produce_wp"));
+            observableList.get(3).setCellValueFactory(new PropertyValueFactory("produce_num"));
+            observableList.get(4).setCellValueFactory(new PropertyValueFactory("produce_sdate"));
+            observableList.get(5).setCellValueFactory(new PropertyValueFactory("produce_edate"));
+            observableList.get(6).setCellValueFactory(new PropertyValueFactory("produce_zzr"));
+            observableList.get(7).setCellValueFactory(new PropertyValueFactory("produce_fzr"));
+            observableList.get(8).setCellValueFactory(new PropertyValueFactory("produce_ddl"));
+
+            project_table.setItems(data);
+
+            project_panel.toFront();
+        }
+
+        if(actionBtn==project_btn1)
+        {
+            final ObservableList<Project> data = FXCollections.observableArrayList();
+            try
+            {
+                Project[] projects=SearchProjectByStartDate(project_dateview1.getStartDate().toString(),project_dateview1.getEndDate().toString());
+                if(projects.length==0)
+                {
+                    staff.showAlert(Alert.AlertType.ERROR, "错误", "查询错误", "不存在");
+                    return;
+                }
+                for(int i=0;i<projects.length;i++)
+                {
+                    data.add(projects[i]);
+                }
+            }
+            catch(SQLException ex)
+            {
+                staff.showAlert(Alert.AlertType.ERROR, "错误", "查询错误", "系统错误");
+                return;
+            }
+            ObservableList<TableColumn<Project, ?>> observableList = project_table.getColumns();
+            observableList.get(0).setCellValueFactory(new PropertyValueFactory("produce_id"));
+            observableList.get(1).setCellValueFactory(new PropertyValueFactory("produce_type"));
+            observableList.get(2).setCellValueFactory(new PropertyValueFactory("produce_wp"));
+            observableList.get(3).setCellValueFactory(new PropertyValueFactory("produce_num"));
+            observableList.get(4).setCellValueFactory(new PropertyValueFactory("produce_sdate"));
+            observableList.get(5).setCellValueFactory(new PropertyValueFactory("produce_edate"));
+            observableList.get(6).setCellValueFactory(new PropertyValueFactory("produce_zzr"));
+            observableList.get(7).setCellValueFactory(new PropertyValueFactory("produce_fzr"));
+            observableList.get(8).setCellValueFactory(new PropertyValueFactory("produce_ddl"));
+
+            project_table.setItems(data);
+
+            project_panel.toFront();
+        }
+
+        if(actionBtn==project_cp_id_btn)
+        {
+            final ObservableList<Project> data = FXCollections.observableArrayList();
+            try
+            {
+                Project[] projects=SearchProjectByProductId(project_cp_id_text.getText());
+                if(projects.length==0)
+                {
+                    staff.showAlert(Alert.AlertType.ERROR, "错误", "查询错误", "不存在");
+                    return;
+                }
+                for(int i=0;i<projects.length;i++)
+                {
+                    data.add(projects[i]);
+                }
+            }
+            catch(SQLException ex)
+            {
+                staff.showAlert(Alert.AlertType.ERROR, "错误", "查询错误", "系统错误");
+                return;
+            }
+            ObservableList<TableColumn<Project, ?>> observableList = project_table.getColumns();
+            observableList.get(0).setCellValueFactory(new PropertyValueFactory("produce_id"));
+            observableList.get(1).setCellValueFactory(new PropertyValueFactory("produce_type"));
+            observableList.get(2).setCellValueFactory(new PropertyValueFactory("produce_wp"));
+            observableList.get(3).setCellValueFactory(new PropertyValueFactory("produce_num"));
+            observableList.get(4).setCellValueFactory(new PropertyValueFactory("produce_sdate"));
+            observableList.get(5).setCellValueFactory(new PropertyValueFactory("produce_edate"));
+            observableList.get(6).setCellValueFactory(new PropertyValueFactory("produce_zzr"));
+            observableList.get(7).setCellValueFactory(new PropertyValueFactory("produce_fzr"));
+            observableList.get(8).setCellValueFactory(new PropertyValueFactory("produce_ddl"));
+
+            project_table.setItems(data);
+
+            project_panel.toFront();
+        }
+
+        if(actionBtn==btnSearchCK)
+        {
+            final ObservableList<Warehouse> data = FXCollections.observableArrayList();
+            try
+            {
+                Warehouse[] warehouses=SearchAllWarehouse();
+                if(warehouses.length==0)
+                {
+                    staff.showAlert(Alert.AlertType.ERROR, "错误", "查询错误", "不存在");
+                    return;
+                }
+                for(int i=0;i<warehouses.length;i++)
+                {
+                    data.add(warehouses[i]);
+                }
+            }
+            catch(SQLException ex)
+            {
+                staff.showAlert(Alert.AlertType.ERROR, "错误", "查询错误", "系统错误");
+                return;
+            }
+            ObservableList<TableColumn<Warehouse, ?>> observableList = cangku_table.getColumns();
+            observableList.get(0).setCellValueFactory(new PropertyValueFactory("ck_id"));
+            observableList.get(1).setCellValueFactory(new PropertyValueFactory("ck_pos"));
+
+            cangku_table.setItems(data);
+
+            cangku_panel.toFront();
+        }
+
+        if(actionBtn==btnSearchCp||actionBtn==btnSearchCp2)
+        {
+            final ObservableList<Product> data = FXCollections.observableArrayList();
+            try
+            {
+                Product[] products=SearchAllProduct();
+                if(products.length==0)
+                {
+                    staff.showAlert(Alert.AlertType.ERROR, "错误", "查询错误", "不存在");
+                    return;
+                }
+                for(int i=0;i<products.length;i++)
+                {
+                    data.add(products[i]);
+                }
+            }
+            catch(SQLException ex)
+            {
+                staff.showAlert(Alert.AlertType.ERROR, "错误", "查询错误", "系统错误");
+                return;
+            }
+            ObservableList<TableColumn<Product, ?>> observableList = finished_product_table.getColumns();
+            observableList.get(0).setCellValueFactory(new PropertyValueFactory("product_id"));
+            observableList.get(1).setCellValueFactory(new PropertyValueFactory("product_name"));
+            observableList.get(2).setCellValueFactory(new PropertyValueFactory("product_p1"));
+            observableList.get(3).setCellValueFactory(new PropertyValueFactory("product_p2"));
+            observableList.get(4).setCellValueFactory(new PropertyValueFactory("product_p3"));
+            observableList.get(5).setCellValueFactory(new PropertyValueFactory("product_bzq"));
+
+            finished_product_table.setItems(data);
+
+            finished_product_panel.toFront();
+        }
+
+        if(actionBtn==product_id_btn1)
+        {
+            final ObservableList<Product> data = FXCollections.observableArrayList();
+            try
+            {
+                Product[] products=SearchProductById(product_id_text1.getText());
+                if(products.length==0)
+                {
+                    staff.showAlert(Alert.AlertType.ERROR, "错误", "查询错误", "不存在");
+                    return;
+                }
+                for(int i=0;i<products.length;i++)
+                {
+                    data.add(products[i]);
+                }
+            }
+            catch(SQLException ex)
+            {
+                staff.showAlert(Alert.AlertType.ERROR, "错误", "查询错误", "系统错误");
+                return;
+            }
+            ObservableList<TableColumn<Product, ?>> observableList = finished_product_table.getColumns();
+            observableList.get(0).setCellValueFactory(new PropertyValueFactory("product_id"));
+            observableList.get(1).setCellValueFactory(new PropertyValueFactory("product_name"));
+            observableList.get(2).setCellValueFactory(new PropertyValueFactory("product_p1"));
+            observableList.get(3).setCellValueFactory(new PropertyValueFactory("product_p2"));
+            observableList.get(4).setCellValueFactory(new PropertyValueFactory("product_p3"));
+            observableList.get(5).setCellValueFactory(new PropertyValueFactory("product_bzq"));
+
+            finished_product_table.setItems(data);
+
+            finished_product_panel.toFront();
+        }
+
+        if(actionBtn==product_name_btn1)
+        {
+            final ObservableList<Product> data = FXCollections.observableArrayList();
+            try
+            {
+                Product[] products=SearchProductByName(product_name_text1.getText());
+                if(products.length==0)
+                {
+                    staff.showAlert(Alert.AlertType.ERROR, "错误", "查询错误", "不存在");
+                    return;
+                }
+                for(int i=0;i<products.length;i++)
+                {
+                    data.add(products[i]);
+                }
+            }
+            catch(SQLException ex)
+            {
+                staff.showAlert(Alert.AlertType.ERROR, "错误", "查询错误", "系统错误");
+                return;
+            }
+            ObservableList<TableColumn<Product, ?>> observableList = finished_product_table.getColumns();
+            observableList.get(0).setCellValueFactory(new PropertyValueFactory("product_id"));
+            observableList.get(1).setCellValueFactory(new PropertyValueFactory("product_name"));
+            observableList.get(2).setCellValueFactory(new PropertyValueFactory("product_p1"));
+            observableList.get(3).setCellValueFactory(new PropertyValueFactory("product_p2"));
+            observableList.get(4).setCellValueFactory(new PropertyValueFactory("product_p3"));
+            observableList.get(5).setCellValueFactory(new PropertyValueFactory("product_bzq"));
+
+            finished_product_table.setItems(data);
+
+            finished_product_panel.toFront();
+        }
+
+        if(actionBtn==btnSearchDth)
+        {
+            final ObservableList<Pick> data = FXCollections.observableArrayList();
+            try
+            {
+                Pick[] picks=SearchAllPick();
+                if(picks.length==0)
+                {
+                    staff.showAlert(Alert.AlertType.ERROR, "错误", "查询错误", "不存在");
+                    return;
+                }
+                for(int i=0;i<picks.length;i++)
+                {
+                    data.add(picks[i]);
+                }
+            }
+            catch(SQLException ex)
+            {
+                staff.showAlert(Alert.AlertType.ERROR, "错误", "查询错误", "系统错误");
+                return;
+            }
+            ObservableList<TableColumn<Pick, ?>> observableList = pick_table.getColumns();
+            observableList.get(0).setCellValueFactory(new PropertyValueFactory("order_id"));
+            observableList.get(1).setCellValueFactory(new PropertyValueFactory("order_type"));
+            observableList.get(2).setCellValueFactory(new PropertyValueFactory("custom_id"));
+            observableList.get(3).setCellValueFactory(new PropertyValueFactory("custom_name"));
+            observableList.get(4).setCellValueFactory(new PropertyValueFactory("custom_tele"));
+            observableList.get(5).setCellValueFactory(new PropertyValueFactory("order_date"));
+
+            pick_table.setItems(data);
+
+            pick_panel.toFront();
+        }
+
+        if(actionBtn==orderid_btn1)
+        {
+            final ObservableList<Pick> data = FXCollections.observableArrayList();
+            try
+            {
+                Pick[] picks=SearchPickByOrderId(orderid_text1.getText());
+                if(picks.length==0)
+                {
+                    staff.showAlert(Alert.AlertType.ERROR, "错误", "查询错误", "不存在");
+                    return;
+                }
+                for(int i=0;i<picks.length;i++)
+                {
+                    data.add(picks[i]);
+                }
+            }
+            catch(SQLException ex)
+            {
+                staff.showAlert(Alert.AlertType.ERROR, "错误", "查询错误", "系统错误");
+                return;
+            }
+            ObservableList<TableColumn<Pick, ?>> observableList = pick_table.getColumns();
+            observableList.get(0).setCellValueFactory(new PropertyValueFactory("order_id"));
+            observableList.get(1).setCellValueFactory(new PropertyValueFactory("order_type"));
+            observableList.get(2).setCellValueFactory(new PropertyValueFactory("custom_id"));
+            observableList.get(3).setCellValueFactory(new PropertyValueFactory("custom_name"));
+            observableList.get(4).setCellValueFactory(new PropertyValueFactory("custom_tele"));
+            observableList.get(5).setCellValueFactory(new PropertyValueFactory("order_date"));
+
+            pick_table.setItems(data);
+
+            pick_panel.toFront();
+        }
+
+        if(actionBtn==customid_btn1)
+        {
+            final ObservableList<Pick> data = FXCollections.observableArrayList();
+            try
+            {
+                Pick[] picks=SearchPickByCustomId(customid_text1.getText());
+                if(picks.length==0)
+                {
+                    staff.showAlert(Alert.AlertType.ERROR, "错误", "查询错误", "不存在");
+                    return;
+                }
+                for(int i=0;i<picks.length;i++)
+                {
+                    data.add(picks[i]);
+                }
+            }
+            catch(SQLException ex)
+            {
+                staff.showAlert(Alert.AlertType.ERROR, "错误", "查询错误", "系统错误");
+                return;
+            }
+            ObservableList<TableColumn<Pick, ?>> observableList = pick_table.getColumns();
+            observableList.get(0).setCellValueFactory(new PropertyValueFactory("order_id"));
+            observableList.get(1).setCellValueFactory(new PropertyValueFactory("order_type"));
+            observableList.get(2).setCellValueFactory(new PropertyValueFactory("custom_id"));
+            observableList.get(3).setCellValueFactory(new PropertyValueFactory("custom_name"));
+            observableList.get(4).setCellValueFactory(new PropertyValueFactory("custom_tele"));
+            observableList.get(5).setCellValueFactory(new PropertyValueFactory("order_date"));
+
+            pick_table.setItems(data);
+
+            pick_panel.toFront();
+        }
+
+        if(actionBtn==btnSearchCj)
+        {
+            final ObservableList<WorkShop> data = FXCollections.observableArrayList();
+            try
+            {
+                WorkShop[] workShops=SearchAllWorkShop();
+                if(workShops.length==0)
+                {
+                    staff.showAlert(Alert.AlertType.ERROR, "错误", "查询错误", "不存在");
+                    return;
+                }
+                for(int i=0;i<workShops.length;i++)
+                {
+                    data.add(workShops[i]);
+                }
+            }
+            catch(SQLException ex)
+            {
+                staff.showAlert(Alert.AlertType.ERROR, "错误", "查询错误", "系统错误");
+                return;
+            }
+            ObservableList<TableColumn<WorkShop, ?>> observableList = chejian_table.getColumns();
+            observableList.get(0).setCellValueFactory(new PropertyValueFactory("cj_id"));
+            observableList.get(1).setCellValueFactory(new PropertyValueFactory("cj_fzr"));
+            observableList.get(2).setCellValueFactory(new PropertyValueFactory("cj_productid"));
+            observableList.get(3).setCellValueFactory(new PropertyValueFactory("product_name"));
+            observableList.get(4).setCellValueFactory(new PropertyValueFactory("cj_num"));
+
+            chejian_table.setItems(data);
+
+            chejian_panel.toFront();
+        }
+
+        if(actionBtn==chejian_cj_id_btn)
+        {
+            final ObservableList<WorkShop> data = FXCollections.observableArrayList();
+            try
+            {
+                WorkShop[] workShops=SearchWorkShopByCheJianId(chejian_cj_id_text.getText());
+                if(workShops.length==0)
+                {
+                    staff.showAlert(Alert.AlertType.ERROR, "错误", "查询错误", "不存在");
+                    return;
+                }
+                for(int i=0;i<workShops.length;i++)
+                {
+                    data.add(workShops[i]);
+                }
+            }
+            catch(SQLException ex)
+            {
+                staff.showAlert(Alert.AlertType.ERROR, "错误", "查询错误", "系统错误");
+                return;
+            }
+            ObservableList<TableColumn<WorkShop, ?>> observableList = chejian_table.getColumns();
+            observableList.get(0).setCellValueFactory(new PropertyValueFactory("cj_id"));
+            observableList.get(1).setCellValueFactory(new PropertyValueFactory("cj_fzr"));
+            observableList.get(2).setCellValueFactory(new PropertyValueFactory("cj_productid"));
+            observableList.get(3).setCellValueFactory(new PropertyValueFactory("product_name"));
+            observableList.get(4).setCellValueFactory(new PropertyValueFactory("cj_num"));
+
+            chejian_table.setItems(data);
+
+            chejian_panel.toFront();
+        }
+
+        if(actionBtn==chejian_cp_id_btn)
+        {
+            final ObservableList<WorkShop> data = FXCollections.observableArrayList();
+            try
+            {
+                WorkShop[] workShops=SearchWorkShopByProductId(chejian_cp_id_text.getText());
+                if(workShops.length==0)
+                {
+                    staff.showAlert(Alert.AlertType.ERROR, "错误", "查询错误", "不存在");
+                    return;
+                }
+                for(int i=0;i<workShops.length;i++)
+                {
+                    data.add(workShops[i]);
+                }
+            }
+            catch(SQLException ex)
+            {
+                staff.showAlert(Alert.AlertType.ERROR, "错误", "查询错误", "系统错误");
+                return;
+            }
+            ObservableList<TableColumn<WorkShop, ?>> observableList = chejian_table.getColumns();
+            observableList.get(0).setCellValueFactory(new PropertyValueFactory("cj_id"));
+            observableList.get(1).setCellValueFactory(new PropertyValueFactory("cj_fzr"));
+            observableList.get(2).setCellValueFactory(new PropertyValueFactory("cj_productid"));
+            observableList.get(3).setCellValueFactory(new PropertyValueFactory("product_name"));
+            observableList.get(4).setCellValueFactory(new PropertyValueFactory("cj_num"));
+
+            chejian_table.setItems(data);
+
+            chejian_panel.toFront();
+        }
+    }
+
+    public WorkShop[] SearchWorkShopByProductId(String product_id) throws SQLException
+    {
+        String sql="select workshop.cj_id,workshop.cj_fzr,workshop.cj_productid,product.product_name,workshop.cj_num " +
+                "from workshop,product " +
+                "where workshop.cj_productid = product.product_id and workshop.cj_productid = '"+product_id+"' ";
+        String ans[][] =staff.Search(sql);
+        WorkShop workShops[]=new WorkShop[ans.length-1];
+        for(int i=1;i<ans.length;i++)
+        {
+            workShops[i-1]=new WorkShop(ans[i][0],ans[i][1],ans[i][2],ans[i][3],ans[i][4]);
+        }
+        return workShops;
+    }
+
+    public WorkShop[] SearchWorkShopByCheJianId(String cj_id) throws SQLException
+    {
+        String sql="select workshop.cj_id,workshop.cj_fzr,workshop.cj_productid,product.product_name,workshop.cj_num " +
+                "from workshop,product " +
+                "where workshop.cj_productid = product.product_id and workshop.cj_id = '"+cj_id+"' ";
+        String ans[][] =staff.Search(sql);
+        WorkShop workShops[]=new WorkShop[ans.length-1];
+        for(int i=1;i<ans.length;i++)
+        {
+            workShops[i-1]=new WorkShop(ans[i][0],ans[i][1],ans[i][2],ans[i][3],ans[i][4]);
+        }
+        return workShops;
+    }
+
+    public WorkShop[] SearchAllWorkShop() throws SQLException
+    {
+        String sql="select workshop.cj_id,workshop.cj_fzr,workshop.cj_productid,product.product_name,workshop.cj_num " +
+                "from workshop,product " +
+                "where workshop.cj_productid = product.product_id";
+        String ans[][] =staff.Search(sql);
+        WorkShop workShops[]=new WorkShop[ans.length-1];
+        for(int i=1;i<ans.length;i++)
+        {
+            workShops[i-1]=new WorkShop(ans[i][0],ans[i][1],ans[i][2],ans[i][3],ans[i][4]);
+        }
+        return workShops;
+    }
+
+    public Pick[] SearchPickByCustomId(String custom_id) throws SQLException
+    {
+        String sql="select pick.order_id,pick.order_type,pick.order_custom,customer.customer_name,customer.customer_tele,pick.order_date " +
+                "from pick,customer " +
+                "where pick.order_custom = customer.customer_id and pick.order_custom = '"+custom_id+"' ";
+        String ans[][] =staff.Search(sql);
+        Pick picks[]=new Pick[ans.length-1];
+        for(int i=1;i<ans.length;i++)
+        {
+            picks[i-1]=new Pick(ans[i][0],ans[i][1],ans[i][2],ans[i][3],ans[i][4],ans[i][5]);
+        }
+        return picks;
+    }
+
+    public Pick[] SearchPickByOrderId(String order_id) throws SQLException
+    {
+        String sql="select pick.order_id,pick.order_type,pick.order_custom,customer.customer_name,customer.customer_tele,pick.order_date " +
+                "from pick,customer " +
+                "where pick.order_custom = customer.customer_id and pick.order_id = '"+order_id+"' ";
+        String ans[][] =staff.Search(sql);
+        Pick picks[]=new Pick[ans.length-1];
+        for(int i=1;i<ans.length;i++)
+        {
+            picks[i-1]=new Pick(ans[i][0],ans[i][1],ans[i][2],ans[i][3],ans[i][4],ans[i][5]);
+        }
+        return picks;
+    }
+
+    public Pick[] SearchAllPick() throws SQLException
+    {
+        String sql="select pick.order_id,pick.order_type,pick.order_custom,customer.customer_name,customer.customer_tele,pick.order_date " +
+                "from pick,customer " +
+                "where pick.order_custom = customer.customer_id";
+        String ans[][] =staff.Search(sql);
+        Pick picks[]=new Pick[ans.length-1];
+        for(int i=1;i<ans.length;i++)
+        {
+            picks[i-1]=new Pick(ans[i][0],ans[i][1],ans[i][2],ans[i][3],ans[i][4],ans[i][5]);
+        }
+        return picks;
+    }
+
+    public Product[] SearchProductByName(String product_name) throws SQLException
+    {
+        String sql="select * from product where product.product_name = '"+product_name+"' ";
+        String ans[][] =staff.Search(sql);
+        Product products[]=new Product[ans.length-1];
+        for(int i=1;i<ans.length;i++)
+        {
+            products[i-1]=new Product(ans[i][0],ans[i][1],ans[i][2],ans[i][3],ans[i][4],ans[i][5]);
+        }
+        return products;
+    }
+
+    public Product[] SearchProductById(String product_id) throws SQLException
+    {
+        String sql="select * from product where product.product_id = '"+product_id+"' ";
+        String ans[][] =staff.Search(sql);
+        Product products[]=new Product[ans.length-1];
+        for(int i=1;i<ans.length;i++)
+        {
+            products[i-1]=new Product(ans[i][0],ans[i][1],ans[i][2],ans[i][3],ans[i][4],ans[i][5]);
+        }
+        return products;
+    }
+
+    public Product[] SearchAllProduct() throws SQLException
+    {
+        String sql="select * from product";
+        String ans[][] =staff.Search(sql);
+        Product products[]=new Product[ans.length-1];
+        for(int i=1;i<ans.length;i++)
+        {
+            products[i-1]=new Product(ans[i][0],ans[i][1],ans[i][2],ans[i][3],ans[i][4],ans[i][5]);
+        }
+        return products;
+    }
+
+    public Warehouse[] SearchAllWarehouse() throws SQLException
+    {
+        String sql="select * from storehouse";
+        String ans[][] =staff.Search(sql);
+        Warehouse warehouses[]=new Warehouse[ans.length-1];
+        for(int i=1;i<ans.length;i++)
+        {
+            warehouses[i-1]=new Warehouse(ans[i][0],ans[i][1]);
+        }
+        return warehouses;
+    }
+
+    public Project[] SearchProjectByProductId(String product_id) throws SQLException
+    {
+        String sql="select * from project where project.produce_wp = '"+product_id+"'";
+        String ans[][] =staff.Search(sql);
+        Project projects[]=new Project[ans.length-1];
+        for(int i=1;i<ans.length;i++)
+        {
+            projects[i-1]=new Project(ans[i][0],ans[i][1],ans[i][2],ans[i][3],ans[i][4],ans[i][5],ans[i][6],ans[i][7],ans[i][8]);
+        }
+        return projects;
+    }
+
+    public Project[] SearchProjectByStartDate(String start,String end) throws SQLException
+    {
+        String sql="select * from project where project.produce_sdate between '"+start+"' and '"+end+"' ";
+        String ans[][] =staff.Search(sql);
+        Project projects[]=new Project[ans.length-1];
+        for(int i=1;i<ans.length;i++)
+        {
+            projects[i-1]=new Project(ans[i][0],ans[i][1],ans[i][2],ans[i][3],ans[i][4],ans[i][5],ans[i][6],ans[i][7],ans[i][8]);
+        }
+        return projects;
+    }
+
+    public Project[] SearchAllProject() throws SQLException
+    {
+        String sql="select * from project";
+        String ans[][] =staff.Search(sql);
+        Project projects[]=new Project[ans.length-1];
+        for(int i=1;i<ans.length;i++)
+        {
+            projects[i-1]=new Project(ans[i][0],ans[i][1],ans[i][2],ans[i][3],ans[i][4],ans[i][5],ans[i][6],ans[i][7],ans[i][8]);
+        }
+        return projects;
+    }
+
+    public Finance[] SearchFinanceByInfo(String info)throws SQLException
+    {
+        String sql="select * from finance where finance.finance_inf like '%%"+ info +"%%'";
+        String ans[][] =staff.Search(sql);
+        Finance finances[]=new Finance[ans.length-1];
+        for(int i=1;i<ans.length;i++)
+        {
+            finances[i-1]=new Finance(ans[i][0],ans[i][1],ans[i][2],ans[i][3],ans[i][4]);
+        }
+        return finances;
+    }
+
+    public Finance[] SearchFinanceByDate(String start,String end)throws SQLException
+    {
+        String sql="select * from finance where finance.finance_time between '"+start+"' and '"+end+"' ";
+        String ans[][] =staff.Search(sql);
+        Finance finances[]=new Finance[ans.length-1];
+        for(int i=1;i<ans.length;i++)
+        {
+            finances[i-1]=new Finance(ans[i][0],ans[i][1],ans[i][2],ans[i][3],ans[i][4]);
+        }
+        return finances;
     }
 
     public Finance[] SearchAllFinance()throws SQLException
@@ -1843,5 +2635,33 @@ public class SectionController implements Initializable {
         assert refund_dateview_btn != null : "fx:id=\"refund_dateview_btn\" was not injected: check your FXML file 'Section.fxml'.";
         assert finance_pane != null : "fx:id=\"finance_pane\" was not injected: check your FXML file 'Section.fxml'.";
         assert finance_table != null : "fx:id=\"finance_table\" was not injected: check your FXML file 'Section.fxml'.";
+        assert finance_dateview != null : "fx:id=\"finance_dateview\" was not injected: check your FXML file 'Section.fxml'.";
+        assert finance_dateview_btn != null : "fx:id=\"finance_dateview_btn\" was not injected: check your FXML file 'Section.fxml'.";
+        assert finance_inf_text != null : "fx:id=\"finance_inf_text\" was not injected: check your FXML file 'Section.fxml'.";
+        assert finance_inf_btn != null : "fx:id=\"finance_inf_btn\" was not injected: check your FXML file 'Section.fxml'.";
+        assert project_panel != null : "fx:id=\"project_panel\" was not injected: check your FXML file 'Section.fxml'.";
+        assert project_table != null : "fx:id=\"project_table\" was not injected: check your FXML file 'Section.fxml'.";
+        assert cangku_panel != null : "fx:id=\"cangku_panel\" was not injected: check your FXML file 'Section.fxml'.";
+        assert cangku_table != null : "fx:id=\"cangku_table\" was not injected: check your FXML file 'Section.fxml'.";
+        assert project_dateview1 != null : "fx:id=\"project_dateview1\" was not injected: check your FXML file 'Section.fxml'.";
+        assert project_btn1 != null : "fx:id=\"project_btn1\" was not injected: check your FXML file 'Section.fxml'.";
+        assert project_cp_id_text != null : "fx:id=\"project_cp_id_text\" was not injected: check your FXML file 'Section.fxml'.";
+        assert project_cp_id_btn != null : "fx:id=\"project_cp_id_btn\" was not injected: check your FXML file 'Section.fxml'.";
+        assert finished_product_panel != null : "fx:id=\"finished_product_panel\" was not injected: check your FXML file 'Section.fxml'.";
+        assert finished_product_table != null : "fx:id=\"finished_product_table\" was not injected: check your FXML file 'Section.fxml'.";
+        assert product_id_text1 != null : "fx:id=\"product_id_text1\" was not injected: check your FXML file 'Section.fxml'.";
+        assert product_id_btn1 != null : "fx:id=\"product_id_btn1\" was not injected: check your FXML file 'Section.fxml'.";
+        assert product_name_text1 != null : "fx:id=\"product_name_text1\" was not injected: check your FXML file 'Section.fxml'.";
+        assert product_name_btn1 != null : "fx:id=\"product_name_btn1\" was not injected: check your FXML file 'Section.fxml'.";
+        assert orderid_text1 != null : "fx:id=\"orderid_text1\" was not injected: check your FXML file 'Section.fxml'.";
+        assert orderid_btn1 != null : "fx:id=\"orderid_btn1\" was not injected: check your FXML file 'Section.fxml'.";
+        assert customid_text1 != null : "fx:id=\"customid_text1\" was not injected: check your FXML file 'Section.fxml'.";
+        assert customid_btn1 != null : "fx:id=\"customid_btn1\" was not injected: check your FXML file 'Section.fxml'.";
+        assert chejian_panel != null : "fx:id=\"chejian_panel\" was not injected: check your FXML file 'Section.fxml'.";
+        assert chejian_table != null : "fx:id=\"chejian_table\" was not injected: check your FXML file 'Section.fxml'.";
+        assert chejian_cj_id_text != null : "fx:id=\"chejian_cj_id_text\" was not injected: check your FXML file 'Section.fxml'.";
+        assert chejian_cj_id_btn != null : "fx:id=\"chejian_cj_id_btn\" was not injected: check your FXML file 'Section.fxml'.";
+        assert chejian_cp_id_text != null : "fx:id=\"chejian_cp_id_text\" was not injected: check your FXML file 'Section.fxml'.";
+        assert chejian_cp_id_btn != null : "fx:id=\"chejian_cp_id_btn\" was not injected: check your FXML file 'Section.fxml'.";
     }
 }
