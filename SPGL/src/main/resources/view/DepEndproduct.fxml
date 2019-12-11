@@ -286,6 +286,42 @@
                   </TableView>
                </children>
             </Pane>
+            <Pane fx:id="pageOut" prefHeight="554.0" prefWidth="545.0" style="-fx-background-color: #02030A;">
+               <children>
+                  <Label layoutX="325.0" layoutY="53.0" text="收货作业系统" textFill="#e7e5e5">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Label>
+                  <ScrollPane layoutX="21.0" layoutY="95.0" prefHeight="448.0" prefWidth="256.0" stylesheets="@../css/style.css">
+                     <content>
+                        <VBox fx:id="raw_items_out" prefHeight="446.0" prefWidth="254.0" spacing="5.0" style="-fx-background-color: #02030A;">
+                           <padding>
+                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                           </padding>
+                        </VBox>
+                     </content>
+                  </ScrollPane>
+                  <ScrollPane layoutX="325.0" layoutY="155.0" prefHeight="388.0" prefWidth="429.0" stylesheets="@../css/style.css">
+                     <content>
+                        <VBox fx:id="raw_items_out2" prefHeight="386.0" prefWidth="427.0" spacing="5.0" style="-fx-background-color: #02030A;">
+                           <padding>
+                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                           </padding>
+                        </VBox>
+                     </content>
+                  </ScrollPane>
+                  <AnchorPane layoutX="347.0" layoutY="113.0" prefHeight="42.0" prefWidth="386.0">
+                     <children>
+                        <Label layoutX="50.0" layoutY="14.0" text="入库时间" textFill="WHITE" />
+                        <Label layoutX="310.0" layoutY="14.0" text="所在仓库" textFill="WHITE" />
+                        <Label layoutX="255.0" layoutY="14.0" text="剩余数量" textFill="WHITE" />
+                        <Label layoutX="145.0" layoutY="14.0" text="成品名称" textFill="WHITE" />
+                        <Label layoutX="208.0" layoutY="14.0" text="保质期" textFill="WHITE" />
+                     </children>
+                  </AnchorPane>
+               </children>
+            </Pane>
             <Pane fx:id="pageStorage" prefHeight="554.0" prefWidth="545.0" style="-fx-background-color: #02030A;">
                <children>
                   <TextField fx:id="input_text1" alignment="CENTER" layoutX="147.0" layoutY="108.0" prefHeight="25.0" prefWidth="168.0" promptText="请输入成品原料编号" style="-fx-background-color: #02030A; -fx-border-color: #B7C3D7; -fx-border-radius: 2em;" />

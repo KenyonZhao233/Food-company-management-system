@@ -64,17 +64,22 @@ public class EndSection {
         return staff.Search(str);
     }
 
-    public boolean in(String id, String rm, String in) throws SQLException
+    public boolean in(String id, String rm, String in, String Uid) throws SQLException
     {
         SimpleDateFormat formatter= new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         Date date = new Date(System.currentTimeMillis());
         String t = "insert into product_ck values('" +formatter.format(date) +  "','" + id + "'," + rm + ",'" + in + "')";
         staff.Does(t);
+        t = "insert into product_rec values('" +formatter.format(date) +  "','" + id + "','入库'," + rm + ",'" + Uid + "')";
+        staff.Does(t);
         return true;
     }
 
-    public boolean destory(String id, String time) throws SQLException
+    public boolean destory(String id, String time, String rm, String Uid) throws SQLException
     {
+        SimpleDateFormat formatter= new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        Date date = new Date(System.currentTimeMillis());
+        staff.Does("insert into product_rec values('" +formatter.format(date) +  "','" + id + "','销毁'," + rm + ",'" + Uid + "')");
         staff.Does("delete from product_ck where product_id = '" + id + "' and product_date = '" + time + "'");
         return true;
     }
@@ -97,6 +102,11 @@ public class EndSection {
     public String[][] itemorder_pre() throws SQLException
     {
         return staff.Search("select DISTINCT order_id,order_custom,order_date from orders where order_zt = '待发货'");
+    }
+
+    public String[][] itemorder_end() throws SQLException
+    {
+        return staff.Search("select DISTINCT order_id,order_custom,order_date from orders where order_zt = '待收货'");
     }
 
     public String[][] itemorder(String id) throws SQLException
@@ -124,6 +134,33 @@ public class EndSection {
         }else{
             return false;
         }
+    }
+
+    public boolean Out(String id) throws SQLException
+    {
+        staff.Does("update orders set order_zt = '已完成' where order_id = '"+ id +"'");
+        return true;
+    }
+
+    public boolean Output(String name, String time, int mn,String Uid) throws SQLException
+    {
+        String ans[][] = staff.Search("select product_rm from product_ck where product_date = '"+ time +"'");
+        Integer res = Integer.parseInt(ans[1][0]) - mn;
+        SimpleDateFormat formatter= new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        Date date = new Date(System.currentTimeMillis());
+        if(res > 0){
+            String id[][] = staff.Search("select product_id from product where product_name = '"+ name +"'");
+            staff.Does("update product_ck set product_rm = " + res + " where product_date = '"+ time +"'");
+            staff.Does("insert into product_rec values('" +formatter.format(date) +  "','" + id[1][0] + "','出库'," + mn + ",'" + Uid + "')");
+        }
+        else if(res == 0){ String id[][] = staff.Search("select product_id from product where product_name = '"+ name +"'");
+        staff.Does("delete product_ck  where product_date = '"+ time +"'");
+        staff.Does("insert into product_rec values('" +formatter.format(date) +  "','" + id[1][0]  + "','出库'," + mn + ",'" + Uid + "')");
+        }
+        else{
+            return false;
+        }
+        return true;
     }
 
     public String[][] Search(String sql) throws SQLException

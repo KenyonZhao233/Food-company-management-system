@@ -181,7 +181,14 @@ public class EndproductController {
     @FXML
     private TableView<Production> pro;
 
+    @FXML
+    private Pane pageOut;
 
+    @FXML
+    private VBox raw_items_out;
+
+    @FXML
+    private VBox raw_items_out2;
 
     public EndproductController() {
     }
@@ -324,6 +331,44 @@ public class EndproductController {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+
+        try {
+            this.raw_items_out.getChildren().clear();
+            String[][] ans = endSection.itemorder_end();
+            for (int i = 1; i < ans.length; i++) {
+                FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("view/ItemOrderend.fxml"));
+                Node node = null;
+                try {
+                    node = loader.load();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                ItemOrderendController itemOrderendController = loader.<ItemOrderendController>getController();
+                itemOrderendController.setInform(ans[i][0], ans[i][1], ans[i][2].substring(0,19),endSection,this);
+                this.raw_items_out.getChildren().add(node);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        try {
+            this.raw_items_out2.getChildren().clear();
+            String[][] ans = endSection.getInform();
+            for (int i = 1; i < ans.length; i++) {
+                FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("view/ItemDepEnd_out.fxml"));
+                Node node = null;
+                try {
+                    node = loader.load();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                ItemDepEndOutController itemDepEndOutController = loader.<ItemDepEndOutController>getController();
+                itemDepEndOutController.setInform(ans[i][6].substring(0,19), ans[i][1], ans[i][5], ans[i][8], ans[i][9],endSection,this);
+                this.raw_items_out2.getChildren().add(node);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
 
@@ -399,6 +444,24 @@ public class EndproductController {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        try {
+            this.raw_items_out2.getChildren().clear();
+            String[][] ans = endSection.getInform();
+            for (int i = 1; i < ans.length; i++) {
+                FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("view/ItemDepEnd_out.fxml"));
+                Node node = null;
+                try {
+                    node = loader.load();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                ItemDepEndOutController itemDepEndOutController = loader.<ItemDepEndOutController>getController();
+                itemDepEndOutController.setInform(ans[i][6].substring(0,19), ans[i][1], ans[i][5], ans[i][8], ans[i][9],endSection,this);
+                this.raw_items_out2.getChildren().add(node);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
 
@@ -439,25 +502,7 @@ public class EndproductController {
         _alert.setContentText("是否将原料编号为" + input_text1.getText() + "入仓库编号为" + input_text2.getText() + "的仓库" + input_text3.getText() + "件");
         Optional<ButtonType> result = _alert.showAndWait();
         if (result.get() == ButtonType.OK){
-            endSection.in(input_text1.getText(),input_text3.getText(),input_text2.getText());
-            try {
-                this.raw_items2.getChildren().clear();
-                String[][] ans = endSection.getInform();
-                for (int i = 1; i < ans.length; i++) {
-                    FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("view/ItemDepEnd.fxml"));
-                    Node node = null;
-                    try {
-                        node = loader.load();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                    ItemDepEndController itemDepEndController = loader.<ItemDepEndController>getController();
-                    itemDepEndController.setInform(ans[i][6].substring(0,19), ans[i][0], ans[i][1], ans[i][5], ans[i][8], ans[i][9]);
-                    this.raw_items2.getChildren().add(node);
-                }
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
+            endSection.in(input_text1.getText(),input_text3.getText(),input_text2.getText(),endSection.getStaff().Uid);
             fresh(event);
         }
     }
@@ -535,6 +580,11 @@ public class EndproductController {
         {
             pageCall.setStyle("-fx-background-color : #02030A");
             pageCall.toFront();
+        }
+        if(event.getSource() == menuOut)
+        {
+            pageOut.setStyle("-fx-background-color : #02030A");
+            pageOut.toFront();
         }
         if(event.getSource() == menuQuit)
         {

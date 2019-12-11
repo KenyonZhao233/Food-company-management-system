@@ -15,7 +15,7 @@ import javafx.scene.paint.Color;
 
 import java.sql.SQLException;
 
-public class ItemOrderController {
+public class ItemOrderendController {
 
     @FXML
     private AnchorPane pane;
@@ -61,18 +61,18 @@ public class ItemOrderController {
     @FXML
     void click_call(MouseEvent event) throws SQLException {
         Alert _alert = new Alert(Alert.AlertType.CONFIRMATION);
-        _alert.setTitle("发货系统");
-        _alert.setHeaderText("确认通知发货");
+        _alert.setTitle("收货系统");
+        _alert.setHeaderText("确认已收货");
         _alert.setContentText(this.id.getText() + "         " + this.cus.getText() );
         _alert.showAndWait();
         if(_alert.getResult()== ButtonType.OK) {
-            if(endSection.Send(this.id.getText().substring(5))){
+            if(endSection.Out(this.id.getText().substring(5))){
                 endproductController.fresh(event);
             }else{
                 Alert _alert2 = new Alert(Alert.AlertType.WARNING);
-                _alert2.setTitle("发货系统");
+                _alert2.setTitle("收货系统");
                 _alert2.setHeaderText("错误");
-                _alert2.setContentText("成品数量不足！");
+                _alert2.setContentText("失败！");
                 _alert2.show();
             }
         }
