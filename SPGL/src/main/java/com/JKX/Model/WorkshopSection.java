@@ -57,6 +57,19 @@ public class WorkshopSection {
         return plans;
     }
 
+    public int[] SearchAdair(String id) throws SQLException
+    {
+        String sql = "SELECT * " +
+                "FROM project_status " +
+                "where project_status.project_id = '" + id + "'";
+        String[][] ans = this.staff.Search(sql);
+        int[] nums = new int[3];
+        for(int i = 0; i < 3; i++) {
+            nums[i] = Integer.parseInt(ans[1][i + 1]);
+        }
+        return nums;
+    }
+
     public Plan[] searchPlan(String id, String zt) throws SQLException      //存储过程，查询Plan返回计划编号，成品类，计划状态。
     {
         String[] a = {"string", "string"};

@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane fx:id="UserManagePane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="689.0" prefWidth="1276.0" style="-fx-background-color: #02030A;" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.JKX.Controller.WorkshopController">
+<AnchorPane fx:id="WorkshopPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="689.0" prefWidth="1276.0" style="-fx-background-color: #02030A;" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.JKX.Controller.WorkshopController">
    <children>
       <VBox alignment="TOP_CENTER" prefHeight="576.0" prefWidth="256.0" spacing="15.0" style="-fx-background-color: #05071F;" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -78,11 +78,11 @@
       </VBox>
       <StackPane layoutX="258.0" prefHeight="689.0" prefWidth="1018.0" style="-fx-background-color: #02030A;">
          <children>
-            <AnchorPane fx:id="pushPlanPane" prefHeight="200.0" prefWidth="200.0">
+            <AnchorPane fx:id="pushPlanPane" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #000000;">
                <children>
                   <ScrollPane layoutY="155.0" prefHeight="526.0" prefWidth="1018.0">
                      <content>
-                        <VBox fx:id="vbox2" prefHeight="525.0" prefWidth="1013.0" />
+                        <VBox fx:id="vBox2" prefHeight="525.0" prefWidth="1013.0" />
                      </content>
                   </ScrollPane>
                   <TextField fx:id="planId2" layoutX="354.0" layoutY="75.0" />
@@ -96,11 +96,11 @@
                      </graphic>
                   </JFXButton>
                </children></AnchorPane>
-            <AnchorPane fx:id="doPlanPane" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #000000;" visible="false">
+            <AnchorPane fx:id="doPlanPane" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #000000;">
                <children>
                   <ScrollPane layoutY="163.0" prefHeight="526.0" prefWidth="1018.0">
                      <content>
-                        <VBox fx:id="vbox1" prefHeight="525.0" prefWidth="1013.0" />
+                        <VBox fx:id="vBox1" prefHeight="525.0" prefWidth="1013.0" />
                      </content>
                   </ScrollPane>
                   <TextField fx:id="planId1" layoutX="385.0" layoutY="69.0" />

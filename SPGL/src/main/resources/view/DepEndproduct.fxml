@@ -262,6 +262,30 @@
                   </TableView>
                </children>
             </Pane>
+            <Pane fx:id="pageCall" prefHeight="554.0" prefWidth="545.0" style="-fx-background-color: #02030A;">
+               <children>
+                  <Label layoutX="325.0" layoutY="53.0" text="发货作业系统" textFill="#e7e5e5">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Label>
+                  <ScrollPane layoutX="253.0" layoutY="107.0" prefHeight="448.0" prefWidth="509.0" stylesheets="@../css/style.css">
+                     <content>
+                        <VBox fx:id="raw_items_call" prefHeight="446.0" prefWidth="507.0" spacing="5.0" style="-fx-background-color: #02030A;">
+                           <padding>
+                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                           </padding>
+                        </VBox>
+                     </content>
+                  </ScrollPane>
+                  <TableView fx:id="pro" layoutX="14.0" layoutY="129.0" prefHeight="426.0" prefWidth="210.0">
+                    <columns>
+                      <TableColumn prefWidth="102.0" text="成品名称" />
+                      <TableColumn prefWidth="107.0" text="成品可支配数量" />
+                    </columns>
+                  </TableView>
+               </children>
+            </Pane>
             <Pane fx:id="pageStorage" prefHeight="554.0" prefWidth="545.0" style="-fx-background-color: #02030A;">
                <children>
                   <TextField fx:id="input_text1" alignment="CENTER" layoutX="147.0" layoutY="108.0" prefHeight="25.0" prefWidth="168.0" promptText="请输入成品原料编号" style="-fx-background-color: #02030A; -fx-border-color: #B7C3D7; -fx-border-radius: 2em;" />

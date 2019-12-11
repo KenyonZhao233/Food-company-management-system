@@ -51,7 +51,19 @@ public class LeadContorller implements Initializable {
         Button actionBtn = (Button) event.getSource();
         if(actionBtn == btnCJ)  //生产车间
         {
+            FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("view/Workshop.fxml"));
 
+            Stage stage = new Stage(StageStyle.UNDECORATED);
+            stage.setScene(new Scene((Parent) loader.load()));
+
+            WorkshopController controller = loader.<WorkshopController>getController();
+
+            controller.initData(staff);
+
+            stage.show();
+
+            Stage index = (Stage)LeadPane.getScene().getWindow();
+            index.close();
         }
         else if (actionBtn == btnCP) //成品库
         {

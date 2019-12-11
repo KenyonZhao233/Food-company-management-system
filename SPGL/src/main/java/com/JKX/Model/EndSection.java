@@ -89,6 +89,43 @@ public class EndSection {
         return staff.Search("select * from product");
     }
 
+    public String[][] call() throws SQLException
+    {
+        return staff.Search("select product_name, IFNULL(sum,0)  from product_ck_now,product where product.product_id = product_ck_now.product_id");
+    }
+
+    public String[][] itemorder_pre() throws SQLException
+    {
+        return staff.Search("select DISTINCT order_id,order_custom,order_date from orders where order_zt = '待发货'");
+    }
+
+    public String[][] itemorder(String id) throws SQLException
+    {
+        return staff.Search("select order_product,order_num  from orders where order_id = '" + id + "'");
+    }
+
+    public boolean Send(String id) throws SQLException
+    {
+        String ans[][] = staff.Search("select count(*) - sum(order_num <= sum) from orders,product,product_ck_now where order_id = '"
+                + id + "' and orders.order_product = product.product_name and product.product_id = product_ck_now.product_id");
+        if(ans[1][0].equals("0"))
+        {
+            if(ans[1][0].equals("预付款")){
+                ans = staff.Search("select order_type,order_date,order_custom,mn_re from orders,advance where advance.order_id = '"+
+                        id
+                        +"' and advance.order_id = orders.order_id");
+                staff.Does("update orders set order_zt = '待付全款' where order_id = '"+ id +"'");
+                staff.Does("insert unpaid values('"+ id +"','"+ans[1][1].substring(0,19) + "'," + ans[1][3] + ",'" +
+                            ans[1][2] + "')");
+            }
+            else
+                staff.Does("update orders set order_zt = '待收货' where order_id = '"+ id +"'");
+            return true;
+        }else{
+            return false;
+        }
+    }
+
     public String[][] Search(String sql) throws SQLException
     {
         return staff.Search(sql);
