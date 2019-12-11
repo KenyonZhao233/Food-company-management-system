@@ -227,21 +227,24 @@ public class SalesController implements Initializable {
         try
         {
             String[][] ans=salesSection.SearchRight();
-            if(ans[1][0].equals("0"))
+            if(ans.length>1)
             {
-                menuRegister.setDisable(true);
-            }
-            if(ans[1][1].equals("0"))
-            {
-                menuCreate.setDisable(true);
-            }
-            if(ans[1][2].equals("0"))
-            {
-                menuCancel.setDisable(true);
-            }
-            if(ans[1][3].equals("0"))
-            {
-                menuReturnGoods.setDisable(true);
+                if(ans[1][0].equals("0"))
+                {
+                    menuRegister.setDisable(true);
+                }
+                if(ans[1][1].equals("0"))
+                {
+                    menuCreate.setDisable(true);
+                }
+                if(ans[1][2].equals("0"))
+                {
+                    menuCancel.setDisable(true);
+                }
+                if(ans[1][3].equals("0"))
+                {
+                    menuReturnGoods.setDisable(true);
+                }
             }
         }
         catch(SQLException e)
