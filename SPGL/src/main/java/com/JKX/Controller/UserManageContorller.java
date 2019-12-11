@@ -1,11 +1,9 @@
 package com.JKX.Controller;
 
 import com.JKX.Controller.ItemController.StaffInformController;
+import com.JKX.Model.ManageSection;
 import com.JKX.Model.Staff;
-import com.jfoenix.controls.JFXCheckBox;
-import com.jfoenix.controls.JFXComboBox;
-import com.jfoenix.controls.JFXPasswordField;
-import com.jfoenix.controls.JFXTextField;
+import com.jfoenix.controls.*;
 import com.mysql.jdbc.log.NullLogger;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -13,10 +11,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.input.InputMethodEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
@@ -35,16 +30,16 @@ import java.util.ResourceBundle;
 
 public class UserManageContorller implements Initializable {
 
-    private Staff staff;
     private String[] zw = {"系统", "财务部", "销售部", "成品库", "原料库", "生产车间", "生产计划部"};
     private String preUid, preBm, preZw;
+    private ManageSection manageSection;
 
     @FXML
     private AnchorPane UserManagePane;
 
     /*界面跳转按钮*/
     @FXML
-    private Button userChange, userAdd, userSearch, btnSignout;
+    private Button userChange, userAdd, userSearch, roleGrant, btnSignout;
 
     /*业务实现组件-人员查询*/
     @FXML
@@ -80,8 +75,36 @@ public class UserManageContorller implements Initializable {
     @FXML
     private Label pswConfirTip1, pswConfirTip2;
 
+    /*权限管理组件*/
     @FXML
-    private Pane pnlChange, pnlAdd, pnlSearch, paneEmpty;
+    private Button searchRole;
+    @FXML
+    private TextField searchRoleText;
+    @FXML
+    private VBox vboxSale, vboxFinance, vboxPro, vboxRaw, vboxPlan;
+    /*销售部权限*/
+    @FXML
+    private CheckBox zhuce, makedd, undodd, tuihuo;
+    /*财务部权限*/
+    @FXML
+    private CheckBox sk, tk, zr, zc;
+    /*成品库权限*/
+    @FXML
+    private CheckBox tzfh, sh, rk, xh;
+    /*原料库权限*/
+    @FXML
+    private CheckBox rk1, ck1, xh1;
+    /*生产计划部权限*/
+    @FXML
+    private CheckBox jhs, cps, yls;
+    @FXML
+    private Label Grantid, Grantname;
+
+    @FXML
+    private JFXButton changeRole;
+
+    @FXML
+    private Pane pnlChange, pnlAdd, pnlSearch, paneEmpty, paneGrand;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -102,6 +125,9 @@ public class UserManageContorller implements Initializable {
         {
             pnlSearch.toFront();
         }
+        if(actionBtn == roleGrant){
+            paneGrand.toFront();
+        }
         if(actionBtn == btnSignout)
         {
             FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("view/Lead.fxml"));
@@ -111,7 +137,7 @@ public class UserManageContorller implements Initializable {
 
             LeadContorller controller = loader.<LeadContorller>getController();
 
-            controller.initData(staff);
+            controller.initData(this.manageSection.getStaff());
 
             stage.show();
 
@@ -167,12 +193,9 @@ public class UserManageContorller implements Initializable {
         {
             try {
                 String[] a = {"string", "string", "string", "string", "string", "string", "string", "string"};
-                String[] b = {this.preUid, this.preBm, this.preZw,this.bmText.getValue(), this.zwText.getValue(), this.nameText.getText(), this.sexText.getValue(), this.sfzText.getText()};
-                int nums = staff.ExcuteDoes("Call Staff_Update(?, ?, ?, ?, ?, ?, ?, ?)", a, b);
-                if(nums == 1) {
-                    System.out.println("删除成功！");
-                    SearchUser(this.textInform, this.v2);
-                }
+                int nums = this.manageSection.Update_User(this.preUid, this.preBm, this.preZw,this.bmText.getValue(), this.zwText.getValue(), this.nameText.getText(), this.sexText.getValue(), this.sfzText.getText());
+                System.out.println("删除成功！");
+                SearchUser(this.textInform, this.v2);
             }
             catch (SQLException se)
             {
@@ -182,13 +205,9 @@ public class UserManageContorller implements Initializable {
         else if(actionButton == btnDelete)
         {
             try {
-                String[] a = {"string", "string", "string"};
-                String[] b = {this.uidText.getText(), this.bmText.getValue(), this.zwText.getValue()};
-                int nums = staff.ExcuteDoes("Call Delete_Staff(?, ?, ?)", a, b);
-                if(nums == 1) {
-                    System.out.println("删除成功！");
-                    SearchUser(this.textInform, this.v2);
-                }
+                int nums = this.manageSection.Delete_User(this.uidText.getText(), this.bmText.getValue(), this.zwText.getValue());
+                System.out.println("删除成功！");
+                SearchUser(this.textInform, this.v2);
              }
             catch (SQLException se)
             {
@@ -213,18 +232,16 @@ public class UserManageContorller implements Initializable {
         }
         else
         {
-            String bmm;
-            if(this.glzCheck.isSelected())
-                bmm = this.glzCheck.getText();
-            else
-                bmm = this.glyCheck.getText();
-            String[] a = {"string", "string", "string", "string", "string", "string", "string"};
-            String[] b = {this.uidAddText.getText(), this.sectionCombox.getValue(), bmm, this.nameAddText.getText(), this.sexAddText.getValue(), this.sfzAddText.getText(), this.psw.getText()};
-            String[] c = {"int"};
-            String[] ans = staff.ExcuteDoesReturn("CALL Staff_Add(?, ?, ?, ?, ?, ?, ?, ?)",a, b, c);
+            String bmm = "业务人员";
+            if(this.manageSection.getStaff().zw[0][2] == 1) {
+                if (this.glzCheck.isSelected())
+                    bmm = this.glzCheck.getText();
+                else
+                    bmm = this.glyCheck.getText();
+            }
+            String[] ans = this.manageSection.Add_User(this.uidAddText.getText(), this.sectionCombox.getValue(), bmm, this.nameAddText.getText(), this.sexAddText.getValue(), this.sfzAddText.getText(), this.psw.getText());
             System.out.println(ans[0]);
             if(ans[0].equals("1")) {
-                //this.addLogin();
                 this.clearAdd();
                 System.out.println("添加成功！");
             }
@@ -248,29 +265,12 @@ public class UserManageContorller implements Initializable {
         this.pswConfir.clear();
     }
 
-    public void addLogin(String uid, String psw, String bm, String zw)
-    {
-        //先给他建立一个登录名
-        //根据业务人员+部门赋权限
-        //根据管理员+部门赋权限
-        //根据管理者+部门赋权限
-    }
-
     public String[][] getInform(String info) throws SQLException
     {
         String[][] ans;
-        if(staff.zw[0][2] == 1)
+        if(this.manageSection.getStaff().zw[0][2] == 1)
         {
-            String[] b = {""};
-            String[] a = {"string"};
-            if(info.equals("")) {
-                b[0] = "NULL";
-                ans = staff.ExcuteSearch("Call GLY_Search(?)", a, b);
-                 }
-            else{
-                b[0] = info;
-                ans = staff.ExcuteSearch("Call GLY_Search(?)", a, b);
-            }
+            ans = this.manageSection.Search_Gly(info);
         }
         else
         {
@@ -278,28 +278,18 @@ public class UserManageContorller implements Initializable {
             boolean flag = true;
             for(int i = 1; i < 7; i++)
             {
-                if(staff.zw[i][2] == 1 && flag)
+                if(this.manageSection.getStaff().zw[i][2] == 1 && flag)
                 {
                     inform += "'" + zw[i] + "'";
                     flag = !flag;
                 }
-                else if(staff.zw[i][2] == 1)
+                else if(this.manageSection.getStaff().zw[i][2] == 1)
                 {
                     inform += ",'";
                     inform += zw[i] + "'";
                 }
             }
-            if(info.equals("")) {
-                ans = staff.Search("select staff.staff_id, staff_bm, staff_zw, staff_name, staff_sfz, staff_sex, staff_date" +
-                        " from staff, staff_job" +
-                        " where staff.staff_id = staff_job.staff_id and staff_bm in (" + inform + ") and staff_zw in ('业务人员', '员工')" +
-                        " group by staff.staff_id, staff_bm, staff_zw, staff_name, staff_sfz, staff_sex, staff_date");
-            }
-            else
-                ans = staff.Search("select staff.staff_id, staff_bm, staff_zw, staff_name, staff_sfz, staff_sex, staff_date" +
-                                        " from staff, staff_job" +
-                                        " where staff.staff_id = '" + info + "' and staff.staff_id = staff_job.staff_id and staff_bm in (" + inform + ") and staff_zw in ('业务人员', '员工')" +
-                                        " group by staff.staff_id, staff_bm, staff_zw, staff_name, staff_sfz, staff_sex, staff_date");
+            ans = this.manageSection.Search_Other(info, inform);
         }
         return ans;
     }
@@ -309,7 +299,7 @@ public class UserManageContorller implements Initializable {
 
     public void initData(Staff staff)
     {
-        this.staff = staff;
+        this.manageSection = new ManageSection(staff);
         List<String> staffBm = new ArrayList<String>();
         List<String> staffZw = new ArrayList<String>();
         List<String> staffSex = new ArrayList<String>();
@@ -325,15 +315,13 @@ public class UserManageContorller implements Initializable {
         else
         {
             staffZw.add("业务人员");
-            staffZw.add("普通员工");
-            this.glyCheck.setText("业务人员");
-            this.glzCheck.setText("普通员工");
+            this.glyCheck.setVisible(false);
+            this.glzCheck.setVisible(false);
             for(int i = 1; i < 7; i++)
             {
                 if(staff.zw[i][2] == 1)
                     staffBm.add(zw[i]);
             }
-            staffZw.add("业务人员");
         }
         this.bmText.getItems().addAll(staffBm);
         this.zwText.getItems().addAll(staffZw);
@@ -352,6 +340,18 @@ public class UserManageContorller implements Initializable {
                 this.handleCheckPSW(trimed);
             }
         });
+        if(staff.zw[1][2] == 0)
+            this.vboxFinance.setDisable(true);
+        if(staff.zw[2][2] == 0)
+            this.vboxSale.setDisable(true);
+        if(staff.zw[3][2] == 0)
+            this.vboxPro.setDisable(true);
+        if(staff.zw[4][2] == 0)
+            this.vboxRaw.setDisable(true);
+        if(staff.zw[6][2] == 0)
+            this.vboxPlan.setDisable(true);
+
+        this.changeRole.setDisable(true);
     }
 
     public void handleCheck(MouseEvent mouseEvent) {
@@ -384,7 +384,7 @@ public class UserManageContorller implements Initializable {
         this.psw.clear();
         this.pswConfir.clear();
         try {
-            String[][] ans = staff.Search("select * from staff where staff_id = '" + search + "';");
+            String[][] ans = this.manageSection.Simple_Search(search);
             if(ans.length == 2)
             {
                 this.nameAddText.setDisable(true);
@@ -426,6 +426,223 @@ public class UserManageContorller implements Initializable {
             this.pswConfirTip1.setVisible(false);
             this.pswConfirTip2.setVisible(true);
             this.addUser.setDisable(false);
+        }
+    }
+
+    public void handleSearchRole(MouseEvent mouseEvent) {
+        if(this.searchRoleText.getText().isEmpty())
+        {
+            Staff.showAlert(Alert.AlertType.ERROR, "错误", "查询失败", "请输入员工编号");
+        }
+        else
+        {
+            try {
+                String info = this.searchRoleText.getText();
+                String inform = "";
+                boolean flag = true;
+                for(int i = 1; i < 7; i++)
+                {
+                    if(this.manageSection.getStaff().zw[i][2] == 1 && flag)
+                    {
+                        inform += "'" + zw[i] + "'";
+                        flag = !flag;
+                    }
+                    else if(this.manageSection.getStaff().zw[i][2] == 1)
+                    {
+                        inform += ",'";
+                        inform += zw[i] + "'";
+                    }
+                }
+                String[][] ans = this.manageSection.Search_Other(info, inform);
+                if(ans.length > 1)
+                {
+                    this.Grantid.setText(ans[1][0]);
+                    this.Grantname.setText(ans[1][3]);
+                    int[][] zw = this.manageSection.searchZw(ans[1][0]);
+                    for(int i = 1; i <=6; i++)
+                    {
+                        for(int j = 0; j <= 2; j++)
+                        {
+                            System.out.print(zw[i][j] + " ");
+                        }
+                        System.out.println();
+                    }
+                    int[][] qx = this.manageSection.SearchQx(ans[1][0], zw);
+                    for(int i = 1; i <=5; i++)
+                    {
+                        for(int j = 1; j <= 5; j++)
+                        {
+                            System.out.print(qx[i][j] + " ");
+                        }
+                        System.out.println();
+                    }
+                    this.confirmQx(qx);
+                    this.changeRole.setDisable(false);
+                }
+                else{
+                    Staff.showAlert(Alert.AlertType.ERROR, "错误", "查询失败", "未查询到该员工");
+                }
+            }
+            catch (SQLException se)
+            {
+                se.printStackTrace();
+            }
+        }
+    }
+
+    public void confirmQx(int[][] qx)
+    {
+        this.clearQx();
+        if(qx[2][0] == 1 && this.manageSection.getStaff().zw[2][2] == 1)
+            this.vboxSale.setDisable(false);
+        else
+            this.vboxSale.setDisable(true);
+        if(qx[2][1] == 1)
+            this.zhuce.setSelected(true);
+        if(qx[2][2] == 1)
+            this.makedd.setSelected(true);
+        if(qx[2][3] == 1)
+            this.undodd.setSelected(true);
+        if(qx[2][4] == 1)
+            this.tuihuo.setSelected(true);
+
+        if(qx[1][0] == 1 && this.manageSection.getStaff().zw[1][2] == 1)
+            this.vboxFinance.setDisable(false);
+        else
+            this.vboxFinance.setDisable(true);
+        /*财务部权限*/
+        if(qx[1][1] == 1)
+            this.sk.setSelected(true);
+        if(qx[1][2] == 1)
+            this.tk.setSelected(true);
+        if(qx[1][3] == 1)
+            this.zr.setSelected(true);
+        if(qx[1][4] == 1)
+            this.zc.setSelected(true);
+
+        if(qx[3][0] == 1 && this.manageSection.getStaff().zw[3][2] == 1)
+            this.vboxPro.setDisable(false);
+        else
+            this.vboxPro.setDisable(true);
+        /*成品库权限*/
+        if(qx[3][1] == 1)
+            this.tzfh.setSelected(true);
+        if(qx[3][2] == 1)
+            this.sh.setSelected(true);
+        if(qx[3][3] == 1)
+            this.rk.setSelected(true);
+        if(qx[3][4] == 1)
+            this.xh.setSelected(true);
+
+        if(qx[4][0] == 1 && this.manageSection.getStaff().zw[4][2] == 1)
+            this.vboxRaw.setDisable(false);
+        else
+            this.vboxRaw.setDisable(true);
+        /*原料库权限*/
+        if(qx[4][1] == 1)
+            this.rk1.setSelected(true);
+        if(qx[4][2] == 1)
+            this.ck1.setSelected(true);
+        if(qx[4][3] == 1)
+            this.xh1.setSelected(true);
+
+        if(qx[5][0] == 1 && this.manageSection.getStaff().zw[6][2] == 1)
+            this.vboxPlan.setDisable(false);
+        else
+            this.vboxPlan.setDisable(true);
+        /*生产计划部权限*/
+        if(qx[5][1] == 1)
+            this.jhs.setSelected(true);
+        if(qx[5][2] == 1)
+            this.cps.setSelected(true);
+        if(qx[5][3] == 1)
+            this.yls.setSelected(true);
+    }
+
+    public void clearQx()
+    {
+        this.zhuce.setSelected(false);
+        this.makedd.setSelected(false);
+        this.undodd.setSelected(false);
+        this.tuihuo.setSelected(false);
+        /*财务部权限*/
+        this.sk.setSelected(false);
+        this.tk.setSelected(false);
+        this.zr.setSelected(false);
+        this.zc.setSelected(false);
+        /*成品库权限*/
+        this.tzfh.setSelected(false);
+        this.sh.setSelected(false);
+        this.rk.setSelected(false);
+        this.xh.setSelected(false);
+        /*原料库权限*/
+        this.rk1.setSelected(false);
+        this.ck1.setSelected(false);
+        this.xh1.setSelected(false);
+        /*生产计划部权限*/
+        this.jhs.setSelected(false);
+        this.cps.setSelected(false);
+        this.yls.setSelected(false);
+    }
+
+    public void handleChangeRole(MouseEvent mouseEvent) {
+        try {
+            int[][] qx = new int[6][8];
+            if(this.zhuce.isSelected())
+                qx[2][1] = 1;
+            else
+                qx[2][1] = 0;
+            if(this.makedd.isSelected())
+                qx[2][2] = 1;
+            if(this.undodd.isSelected())
+                qx[2][3] = 1;
+            if(this.tuihuo.isSelected())
+                qx[2][4] = 1;
+            /*财务部权限*/
+            if(this.sk.isSelected())
+                qx[1][1] = 1;
+            if(this.tk.isSelected())
+                qx[1][2] = 1;
+            if(this.zr.isSelected())
+                qx[1][3] = 1;
+            if(this.zc.isSelected())
+                qx[1][4] = 1;
+            /*成品库权限*/
+            if(this.tzfh.isSelected())
+                qx[3][1] = 1;
+            if(this.sh.isSelected())
+                qx[3][2] = 1;
+            if(this.rk.isSelected())
+                qx[3][3] = 1;
+            if(this.xh.isSelected())
+                qx[3][4] = 1;
+            /*原料库权限*/
+            if(this.rk1.isSelected())
+                qx[4][1] = 1;
+            if(this.ck1.isSelected())
+                qx[4][2] = 1;
+            if(this.xh1.isSelected())
+                qx[4][3] = 1;
+            /*生产计划部权限*/
+            if(this.jhs.isSelected())
+                qx[5][1] = 1;
+            if(this.cps.isSelected())
+                qx[5][2] = 1;
+            if(this.yls.isSelected())
+                qx[5][3] = 1;
+
+            int[][] zw = this.manageSection.searchZw(this.Grantid.getText());
+            this.manageSection.ChangeQx(this.Grantid.getText(), qx, zw);
+
+            this.clearQx();
+            this.Grantid.setText("");
+            this.Grantname.setText("");
+            this.searchRoleText.clear();
+            this.changeRole.setDisable(true);
+        }
+        catch (SQLException se)
+        {
+            se.printStackTrace();
         }
     }
 }

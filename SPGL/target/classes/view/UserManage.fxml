@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXCheckBox?>
 <?import com.jfoenix.controls.JFXComboBox?>
 <?import com.jfoenix.controls.JFXPasswordField?>
@@ -302,10 +303,10 @@
                   <Label fx:id="pswConfirTip2" layoutX="655.0" layoutY="538.0" prefHeight="20.0" prefWidth="135.0" text="输入一致！" visible="false" />
                </children>
             </Pane>
-            <Pane fx:id="paneEmpty" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #000000;">
+            <Pane fx:id="paneGrand" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #000000;">
                <children>
                   <TextField fx:id="searchRoleText" layoutX="329.0" layoutY="76.0" prefHeight="32.0" prefWidth="264.0" promptText="search" style="-fx-background-color: #02030A; -fx-border-color: #B7C3D7; -fx-border-radius: 2em;" />
-                  <Button fx:id="btnSearch1" layoutX="612.0" layoutY="75.0" mnemonicParsing="false" onMouseClicked="#handleChange" style="-fx-background-color: #000000;">
+                  <Button fx:id="searchRole" layoutX="612.0" layoutY="75.0" mnemonicParsing="false" onMouseClicked="#handleSearchRole" style="-fx-background-color: #000000;">
                      <graphic>
                         <ImageView fitHeight="27.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -314,18 +315,132 @@
                         </ImageView>
                      </graphic>
                   </Button>
-                  <VBox layoutX="74.0" layoutY="227.0" prefHeight="398.0" prefWidth="110.0">
+                  <VBox fx:id="vboxSale" layoutX="93.0" layoutY="242.0" prefHeight="295.0" prefWidth="110.0">
                      <children>
-                        <CheckBox mnemonicParsing="false" text="CheckBox" />
+                        <CheckBox fx:id="zhuce" alignment="CENTER" mnemonicParsing="false" prefHeight="21.0" prefWidth="143.0" text="客户注册" textFill="WHITE">
+                           <VBox.margin>
+                              <Insets top="20.0" />
+                           </VBox.margin></CheckBox>
+                        <CheckBox fx:id="makedd" alignment="CENTER" mnemonicParsing="false" prefHeight="21.0" prefWidth="109.0" text="生成订单" textFill="WHITE">
+                           <VBox.margin>
+                              <Insets top="50.0" />
+                           </VBox.margin>
+                        </CheckBox>
+                        <CheckBox fx:id="undodd" alignment="CENTER" mnemonicParsing="false" prefHeight="21.0" prefWidth="109.0" text="取消订单" textFill="WHITE">
+                           <VBox.margin>
+                              <Insets top="50.0" />
+                           </VBox.margin>
+                        </CheckBox>
+                        <CheckBox fx:id="tuihuo" alignment="CENTER" mnemonicParsing="false" prefHeight="21.0" prefWidth="109.0" text="客户退货" textFill="WHITE">
+                           <VBox.margin>
+                              <Insets top="50.0" />
+                           </VBox.margin>
+                        </CheckBox>
                      </children>
                   </VBox>
-                  <Label alignment="CENTER" layoutX="355.0" layoutY="136.0" prefHeight="20.0" prefWidth="210.0" textFill="WHITE">
+                  <Label fx:id="Grantname" alignment="CENTER" layoutX="507.0" layoutY="138.0" prefHeight="20.0" prefWidth="210.0" textFill="WHITE">
+                     <font>
+                        <Font size="30.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="129.0" layoutY="207.0" text="销售部" textFill="WHITE" />
+                  <VBox fx:id="vboxFinance" layoutX="274.0" layoutY="242.0" prefHeight="288.0" prefWidth="110.0">
+                     <children>
+                        <CheckBox fx:id="sk" alignment="CENTER" mnemonicParsing="false" prefHeight="21.0" prefWidth="109.0" text="收款" textFill="WHITE">
+                           <VBox.margin>
+                              <Insets top="20.0" />
+                           </VBox.margin></CheckBox>
+                        <CheckBox fx:id="tk" alignment="CENTER" mnemonicParsing="false" prefHeight="21.0" prefWidth="109.0" text="退款" textFill="WHITE">
+                           <VBox.margin>
+                              <Insets top="50.0" />
+                           </VBox.margin>
+                        </CheckBox>
+                        <CheckBox fx:id="zr" alignment="CENTER" mnemonicParsing="false" prefHeight="21.0" prefWidth="109.0" text="支入" textFill="WHITE">
+                           <VBox.margin>
+                              <Insets top="50.0" />
+                           </VBox.margin>
+                        </CheckBox>
+                        <CheckBox fx:id="zc" alignment="CENTER" mnemonicParsing="false" prefHeight="21.0" prefWidth="109.0" text="支出" textFill="WHITE">
+                           <VBox.margin>
+                              <Insets top="50.0" />
+                           </VBox.margin>
+                        </CheckBox>
+                     </children>
+                  </VBox>
+                  <Label layoutX="310.0" layoutY="207.0" text="财务部" textFill="WHITE" />
+                  <VBox fx:id="vboxPro" layoutX="454.0" layoutY="242.0" prefHeight="295.0" prefWidth="110.0">
+                     <children>
+                        <CheckBox fx:id="tzfh" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="21.0" prefWidth="138.0" text="通知发货" textFill="WHITE">
+                           <VBox.margin>
+                              <Insets top="20.0" />
+                           </VBox.margin>
+                        </CheckBox>
+                        <CheckBox fx:id="sh" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="21.0" prefWidth="138.0" text="收货" textFill="WHITE">
+                           <VBox.margin>
+                              <Insets top="50.0" />
+                           </VBox.margin>
+                        </CheckBox>
+                        <CheckBox fx:id="rk" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="21.0" prefWidth="138.0" text="入库" textFill="WHITE">
+                           <VBox.margin>
+                              <Insets top="50.0" />
+                           </VBox.margin>
+                        </CheckBox>
+                        <CheckBox alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="21.0" prefWidth="138.0" text="销毁" textFill="WHITE" fx:id="xh">
+                           <VBox.margin>
+                              <Insets top="50.0" />
+                           </VBox.margin>
+                        </CheckBox>
+                     </children>
+                  </VBox>
+                  <Label layoutX="487.0" layoutY="207.0" text="成品库" textFill="WHITE" />
+                  <VBox fx:id="vboxRaw" layoutX="634.0" layoutY="242.0" prefHeight="295.0" prefWidth="110.0">
+                     <children>
+                        <CheckBox fx:id="rk1" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="21.0" prefWidth="194.0" text="入库" textFill="WHITE">
+                           <VBox.margin>
+                              <Insets top="20.0" />
+                           </VBox.margin>
+                        </CheckBox>
+                        <CheckBox fx:id="ck1" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="21.0" prefWidth="194.0" text="出库" textFill="WHITE">
+                           <VBox.margin>
+                              <Insets top="50.0" />
+                           </VBox.margin>
+                        </CheckBox>
+                        <CheckBox alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="21.0" prefWidth="194.0" text="销毁" textFill="WHITE" fx:id="xh1">
+                           <VBox.margin>
+                              <Insets top="50.0" />
+                           </VBox.margin>
+                        </CheckBox>
+                     </children>
+                  </VBox>
+                  <Label layoutX="664.0" layoutY="207.0" text="原料库" textFill="WHITE" />
+                  <VBox fx:id="vboxPlan" layoutX="815.0" layoutY="242.0" prefHeight="295.0" prefWidth="110.0">
+                     <children>
+                        <CheckBox fx:id="jhs" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="21.0" prefWidth="165.0" text="计划管理" textFill="WHITE">
+                           <VBox.margin>
+                              <Insets top="20.0" />
+                           </VBox.margin>
+                        </CheckBox>
+                        <CheckBox fx:id="cps" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="21.0" prefWidth="165.0" text="成品管理" textFill="WHITE">
+                           <VBox.margin>
+                              <Insets top="40.0" />
+                           </VBox.margin>
+                        </CheckBox>
+                        <CheckBox fx:id="yls" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="21.0" prefWidth="165.0" text="原料管理" textFill="WHITE">
+                           <VBox.margin>
+                              <Insets top="40.0" />
+                           </VBox.margin>
+                        </CheckBox>
+                     </children>
+                  </VBox>
+                  <Label layoutX="833.0" layoutY="207.0" text="生产计划部" textFill="WHITE" />
+                  <JFXButton fx:id="changeRole" layoutX="415.0" layoutY="595.0" onMouseClicked="#handleChangeRole" prefHeight="30.0" prefWidth="144.0" text="修改" />
+                  <Label fx:id="Grantid" alignment="CENTER" layoutX="228.0" layoutY="138.0" prefHeight="20.0" prefWidth="210.0" textFill="WHITE">
                      <font>
                         <Font size="30.0" />
                      </font>
                   </Label>
                </children></Pane>
-            <Pane fx:id="paneEmpty1" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #000000;" visible="false" />
+            <Pane fx:id="paneEmpty" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #000000;" visible="false" />
          </children>
       </StackPane>
    </children>

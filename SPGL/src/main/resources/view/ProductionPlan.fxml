@@ -436,7 +436,7 @@
                   </TabPane>
                </children>
             </AnchorPane>
-            <AnchorPane fx:id="PlanSearPane" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #000000;" visible="false">
+            <AnchorPane fx:id="PlanSearPane" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #000000;">
                <children>
                   <JFXButton fx:id="searchPlanId" ellipsisString="" layoutX="396.0" layoutY="92.0" onMouseClicked="#handleSearchPlan" prefHeight="20.0" prefWidth="8.0">
                      <graphic>
@@ -465,7 +465,7 @@
                   </JFXButton>
                   <ComboBox fx:id="comboxZt" layoutX="855.0" layoutY="172.0" prefWidth="150.0" />
                </children></AnchorPane>
-            <AnchorPane fx:id="RawkcPane" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #000000;" visible="false">
+            <AnchorPane fx:id="RawkcPane" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #000000;">
                <children>
                   <JFXButton fx:id="searchRaw" ellipsisString="" layoutX="553.0" layoutY="72.0" onMouseClicked="#handleSearchRaw" prefHeight="20.0" prefWidth="8.0">
                      <graphic>
@@ -488,7 +488,7 @@
                   <ComboBox fx:id="comboxRaw" layoutX="610.0" layoutY="74.0" prefHeight="30.0" prefWidth="138.0" />
                </children>
             </AnchorPane>
-            <AnchorPane fx:id="CpkcPane" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #000000;" visible="false">
+            <AnchorPane fx:id="CpkcPane" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #000000;">
                <children>
                   <JFXButton fx:id="searchCp" ellipsisString="" layoutX="552.0" layoutY="72.0" onMouseClicked="#handleSearchCp" prefHeight="20.0" prefWidth="8.0">
                      <graphic>

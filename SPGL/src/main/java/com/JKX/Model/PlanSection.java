@@ -170,6 +170,16 @@ public class PlanSection {
         return plans;
     }
 
+    public int[] SearchQx() throws SQLException
+    {
+        String sql = "select * from right_plan where staff_id = '" + this.staff.Uid + "'";
+        String[][] ans = this.staff.Search(sql);
+        int[] qx = new int[3];
+        for(int i = 0; i < 3; i++)
+            qx[i] = Integer.parseInt(ans[1][i + 1]);
+        return qx;
+    }
+
     public int[] SearchAdair(String id) throws SQLException
     {
         String sql = "SELECT * " +

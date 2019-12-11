@@ -237,6 +237,20 @@ public class ProductionPlanController {
                 this.handleCpnameChange(trimed);
             }
         });
+        try {
+            int[] qx = this.planSection.SearchQx();
+            if(qx[0] == 0)
+                this.ChangeScjh.setDisable(true);
+            if(qx[1] == 0)
+                this.ChangeCp.setDisable(true);
+            if(qx[2] == 0)
+                this.ChangeRaw.setDisable(true);
+        }
+        catch (SQLException se)
+        {
+            se.printStackTrace();
+            Staff.showAlert(Alert.AlertType.ERROR, "错误", "权限查询失败", "系统错误");
+        }
     }
 
     public void handleAddRaw(String s)
