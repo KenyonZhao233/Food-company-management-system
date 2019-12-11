@@ -1,6 +1,5 @@
 package com.JKX.Controller;
 
-import java.awt.*;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
@@ -8,33 +7,30 @@ import java.util.Date;
 import java.util.ResourceBundle;
 
 import com.JKX.Controller.ItemController.ProductInformController;
+import com.JKX.Model.SearchTables.CreateOrder;
+import com.JKX.Model.SearchTables.WorkShop;
 import com.JKX.Model.Staff;
 import com.JKX.Model.SalesSection;
 import com.JKX.Model.Table.Custom;
 import com.JKX.Model.Table.Order;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextField;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.SingleSelectionModel;
-import javafx.scene.control.TextArea;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-import sun.awt.windows.WPrinterJob;
-
-import javax.swing.*;
 
 public class SalesController implements Initializable {
 
@@ -78,6 +74,9 @@ public class SalesController implements Initializable {
 
     @FXML
     private Pane firstPage;
+
+    @FXML
+    private Pane order_panel;
 
     @FXML
     private JFXButton RegisterButton;
@@ -155,6 +154,9 @@ public class SalesController implements Initializable {
     private ComboBox<String> CancelStage;
 
     @FXML
+    private ComboBox<String> order_com_type;
+
+    @FXML
     private JFXButton ReturnSearch;
 
     @FXML
@@ -173,6 +175,27 @@ public class SalesController implements Initializable {
     private JFXTextField ReturnMoney;
 
     @FXML
+    private TextField order_now_money;
+
+    @FXML
+    private TextField order_next_money;
+
+    @FXML
+    private TextField order_panel_ddid;
+
+    @FXML
+    private TextField order_panel_khid;
+
+    @FXML
+    private TextField order_panel_paytype;
+
+    @FXML
+    private TextField order_panel_nowmoney;
+
+    @FXML
+    private TextField order_panel_nextmoney;
+
+    @FXML
     private TextArea ReturnReason;
 
     @FXML
@@ -181,6 +204,9 @@ public class SalesController implements Initializable {
     @FXML
     private Label money_label;
 
+    @FXML
+    private TableView<CreateOrder> order_tableview;
+
     private Date date;
 
     public void initData(Staff staff)
@@ -188,6 +214,7 @@ public class SalesController implements Initializable {
         date=new Date();
         salesSection = new SalesSection(staff);
         RegisterType.getItems().addAll("零售商","批发商","代理商");
+        order_com_type.getItems().addAll("预付款","全款");
     }
 
     @Override
@@ -227,6 +254,9 @@ public class SalesController implements Initializable {
         CreateOnePrice.setText("");
         CreateOneID.setText("");
         CreateNumber.setText("");
+        order_com_type.setValue("");
+        order_now_money.setText("");
+        order_next_money.setText("");
     }
 
     public void ClearCancel()
@@ -242,31 +272,47 @@ public class SalesController implements Initializable {
         this.ReturnReason.setText("");
     }
 
+    public void ClearOrderPane()
+    {
+        order_panel_ddid.setText("");
+        order_panel_khid.setText("");
+        order_panel_paytype.setText("");
+        order_panel_nowmoney.setText("");
+        order_panel_nextmoney.setText("");
+        order_tableview.setItems(null);
+    }
+
     @FXML
     void handleClicks(MouseEvent event) throws IOException {
         if (event.getSource() == menuRegister) {
             pageRegister.setStyle("-fx-background-color : #02030A");
             pageRegister.toFront();
             ClearRegister();
+            ClearOrderPane();
         }
         if (event.getSource() == menuCreate) {
             pageCreate.setStyle("-fx-background-color : #02030A");
             pageCreate.toFront();
             ClearCreate();
+            ClearOrderPane();
         }
         if (event.getSource() == menuCancel) {
             pageCancel.setStyle("-fx-background-color : #02030A");
             pageCancel.toFront();
             ClearCancel();
+            ClearOrderPane();
         }
         if(event.getSource() == menuReturnGoods)
         {
             pageReturnGoods.setStyle("-fx-background-color : #02030A");
             pageReturnGoods.toFront();
             ClearReturn();
+            ClearOrderPane();
         }
         if(event.getSource() == menuQuit)
         {
+            ClearOrderPane();
+
             FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("view/Lead.fxml"));
 
             Stage stage = new Stage(StageStyle.UNDECORATED);
@@ -552,6 +598,11 @@ public class SalesController implements Initializable {
         }
         if(event.getSource()==CreateAddButton)
         {
+            if(order_com_type.getValue().equals(""))
+            {
+                this.salesSection.getStaff().showAlert(Alert.AlertType.ERROR, "错误", "无法添加到购物车", "请选择付款类型");
+                return;
+            }
             if(CreateOneID.getText().equals(""))
             {
                 this.salesSection.getStaff().showAlert(Alert.AlertType.ERROR, "错误", "无法添加到购物车", "请输入产品编号");
@@ -576,7 +627,7 @@ public class SalesController implements Initializable {
             {
                 if(salesSection.CheckOrders(CreateOneID.getText(),CreateName.getText())<Integer.valueOf(CreateNumber.getText()))
                 {
-                    this.salesSection.getStaff().showAlert(Alert.AlertType.INFORMATION, "提示", "购买提示", "您购买的此产品目前数量不足，供货可能不及时");
+                    this.salesSection.getStaff().showAlert(Alert.AlertType.INFORMATION, "提示", "购买提示", "您购买的此产品目前数量不足，供货可能不及时,此货物目前库存为"+Integer.valueOf(salesSection.CheckOrders(CreateOneID.getText(),CreateName.getText())));
                 }
             }
             catch (SQLException se)
@@ -600,11 +651,11 @@ public class SalesController implements Initializable {
                 int key=salesSection.InsertOrUpdate(CreateID1.getText(),CreateName.getText());
                 if(key==0)
                 {
-                    salesSection.InsertOrders(CreateID1.getText(),CreateName.getText(),CreateNumber.getText(),CreateID2.getText());
+                    salesSection.InsertOrders(CreateID1.getText(),CreateName.getText(),CreateNumber.getText(),CreateID2.getText(),order_com_type.getValue(),this.getSalesSection().getStaff().Name);
                 }
                 else if(key==1)
                 {
-                    salesSection.UpdateOrders(CreateID1.getText(),CreateName.getText(),CreateNumber.getText());
+                    salesSection.UpdateOrders(CreateID1.getText(),CreateName.getText(),CreateNumber.getText(),order_com_type.getValue());
                 }
             }
             catch (SQLException se)
@@ -618,6 +669,10 @@ public class SalesController implements Initializable {
                 GoodsBox.getChildren().clear();//清空购物车
                 String [][]goods=salesSection.GouWuChe(CreateID1.getText(),CreateID2.getText());//编号，单价，名称，总价，数量
                 int money=0;
+                if(goods==null)
+                {
+                    System.out.println("goods为空");
+                }
                 for(int i=0;i<goods.length;i++)
                 {
                     FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("view/ProductInform.fxml"));
@@ -637,6 +692,25 @@ public class SalesController implements Initializable {
             {
                 this.salesSection.getStaff().showAlert(Alert.AlertType.ERROR, "错误", "更新购物车失败", "系统错误!");
             }
+
+            if(order_com_type.getValue().equals("全款"))
+            {
+                order_now_money.setText(money_label.getText());
+                order_next_money.setText("");
+            }
+            else if(order_com_type.getValue().equals("预付款"))
+            {
+                try
+                {
+                    float part=this.salesSection.PayPart(CreateID2.getText());
+                    order_now_money.setText(String.valueOf(Integer.valueOf(money_label.getText())*part));
+                    order_next_money.setText(String.valueOf(Integer.valueOf(money_label.getText())*(1-part)));
+                }
+                catch (SQLException se)
+                {
+                    this.salesSection.getStaff().showAlert(Alert.AlertType.ERROR, "错误", "添加购物车失败", "系统错误!");
+                }
+            }
             ButtonCannotUse();
         }
         if(event.getSource() == CreateButton)
@@ -653,7 +727,57 @@ public class SalesController implements Initializable {
             }
             this.salesSection.getStaff().showAlert(Alert.AlertType.INFORMATION, "完成", "已生成订单", "您的订单编号为"+CreateID1.getText());
             GoodsBox.getChildren().clear();
+            order_panel_ddid.setText(CreateID1.getText());
+            order_panel_khid.setText(CreateID2.getText());
+            order_panel_paytype.setText(order_com_type.getValue());
+            order_panel_nowmoney.setText(order_now_money.getText());
+            order_panel_nextmoney.setText(order_next_money.getText());
+            try
+            {
+                if(order_com_type.getValue().equals("预付款"))
+                {
+                    salesSection.AddAdvance(CreateID1.getText(),order_now_money.getText(),order_next_money.getText());
+                }
+            }
+            catch(SQLException ex)
+            {
+                salesSection.getStaff().showAlert(Alert.AlertType.ERROR, "错误", "预付款处理错误", "系统错误");
+                return;
+            }
+
+            final ObservableList<CreateOrder> data = FXCollections.observableArrayList();
+            try
+            {
+                String custom_ty=salesSection.SearchCustomType(CreateID2.getText());
+                CreateOrder[] createOrders=salesSection.SearchOrderProduct(custom_ty,CreateID1.getText());
+                if(createOrders.length==0)
+                {
+                    salesSection.getStaff().showAlert(Alert.AlertType.ERROR, "错误", "查询错误", "不存在");
+                    return;
+                }
+                for(int i=0;i<createOrders.length;i++)
+                {
+                    data.add(createOrders[i]);
+                }
+            }
+            catch(SQLException ex)
+            {
+                salesSection.getStaff().showAlert(Alert.AlertType.ERROR, "错误", "查询错误", "系统错误");
+                return;
+            }
+            ObservableList<TableColumn<CreateOrder, ?>> observableList = order_tableview.getColumns();
+            observableList.get(0).setCellValueFactory(new PropertyValueFactory("product_id"));
+            observableList.get(1).setCellValueFactory(new PropertyValueFactory("product_name"));
+            observableList.get(2).setCellValueFactory(new PropertyValueFactory("product_oneprice"));
+            observableList.get(3).setCellValueFactory(new PropertyValueFactory("product_num"));
+            observableList.get(4).setCellValueFactory(new PropertyValueFactory("product_allprice"));
+
+            order_tableview.setItems(data);
+
+
+            order_panel.toFront();
             ClearCreate();
+            ButtonCanUse();
         }
         if(event.getSource()==CreateButton1)
         {
@@ -688,6 +812,24 @@ public class SalesController implements Initializable {
             ButtonCanUse();
         }
         money_label.setText(String.valueOf(Integer.valueOf(money_label.getText())-Integer.valueOf(price)));
+        if(order_com_type.getValue().equals("全款"))
+        {
+            order_now_money.setText(money_label.getText());
+            order_next_money.setText("");
+        }
+        else if(order_com_type.getValue().equals("预付款"))
+        {
+            try
+            {
+                float part=this.salesSection.PayPart(CreateID2.getText());
+                order_now_money.setText(String.valueOf(Integer.valueOf(money_label.getText())*part));
+                order_next_money.setText(String.valueOf(Integer.valueOf(money_label.getText())*(1-part)));
+            }
+            catch (SQLException se)
+            {
+                this.salesSection.getStaff().showAlert(Alert.AlertType.ERROR, "错误", "添加购物车失败", "系统错误!");
+            }
+        }
     }
 
     public SalesSection getSalesSection() {
@@ -759,5 +901,15 @@ public class SalesController implements Initializable {
         assert money_label != null : "fx:id=\"money_label\" was not injected: check your FXML file 'DepSales.fxml'.";
         assert CreateButton1 != null : "fx:id=\"CreateButton1\" was not injected: check your FXML file 'DepSales.fxml'.";
         assert firstPage != null : "fx:id=\"firstPage\" was not injected: check your FXML file 'DepSales.fxml'.";
+        assert order_com_type != null : "fx:id=\"order_com_type\" was not injected: check your FXML file 'DepSales.fxml'.";
+        assert order_now_money != null : "fx:id=\"order_now_money\" was not injected: check your FXML file 'DepSales.fxml'.";
+        assert order_next_money != null : "fx:id=\"order_next_money\" was not injected: check your FXML file 'DepSales.fxml'.";
+        assert order_panel != null : "fx:id=\"order_panel\" was not injected: check your FXML file 'DepSales.fxml'.";
+        assert order_panel_ddid != null : "fx:id=\"order_panel_ddid\" was not injected: check your FXML file 'DepSales.fxml'.";
+        assert order_panel_khid != null : "fx:id=\"order_panel_khid\" was not injected: check your FXML file 'DepSales.fxml'.";
+        assert order_panel_paytype != null : "fx:id=\"order_panel_paytype\" was not injected: check your FXML file 'DepSales.fxml'.";
+        assert order_panel_nowmoney != null : "fx:id=\"order_panel_nowmoney\" was not injected: check your FXML file 'DepSales.fxml'.";
+        assert order_panel_nextmoney != null : "fx:id=\"order_panel_nextmoney\" was not injected: check your FXML file 'DepSales.fxml'.";
+        assert order_tableview != null : "fx:id=\"order_tableview\" was not injected: check your FXML file 'DepSales.fxml'.";
     }
 }

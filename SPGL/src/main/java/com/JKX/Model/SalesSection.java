@@ -1,8 +1,10 @@
 package com.JKX.Model;
+import com.JKX.Model.SearchTables.CreateOrder;
 import com.JKX.Model.Table.Custom;
 import com.JKX.Model.Table.CustomType;
 import com.JKX.Model.Table.Order;
 import com.JKX.Model.Table.Production;
+import com.JKX.Model.SearchTables.CreateOrder;
 import com.JKX.Mysql.MysqlConnect;
 import com.sun.org.apache.xpath.internal.operations.Or;
 import javafx.scene.control.Alert;
@@ -271,16 +273,27 @@ public class SalesSection{
             return 1;//返回1是update更新操作
     }
 
-    public void InsertOrders(String order_id,String order_product,String order_num,String order_custom) throws SQLException
+    public void InsertOrders(String order_id,String order_product,String order_num,String order_custom,String order_type,String order_fzr) throws SQLException
     {
-        String sql="insert into orders(order_id,order_product,order_num,order_zt,order_custom,order_type) values('"+order_id+"','"+order_product+"',"+order_num+",'待付款','"+order_custom+"','未付款')";
+        String sql="insert into orders(order_id,order_product,order_num,order_zt,order_custom,order_type,order_fzr) values('"+order_id+"','"+order_product+"',"+order_num+",'待付款','"+order_custom+"','"+ order_type+"','"+ order_fzr +"')";
         staff.Does(sql);
     }
 
-    public void UpdateOrders(String order_id,String order_product,String order_num) throws SQLException
+    public void UpdateOrders(String order_id,String order_product,String order_num,String order_type) throws SQLException
     {
         String sql="update orders set order_num = order_num + "+order_num+" where order_id = '"+order_id+"' and order_product = '"+order_product+"'";
         staff.Does(sql);
+        sql="update orders set order_type = '"+ order_type +"' where order_id = '"+order_id+"' and order_product = '"+order_product+"'";
+        staff.Does(sql);
+    }
+
+    public float PayPart(String custom_id) throws SQLException
+    {
+        String sql="select customer_type.type_pay " +
+                "from customer,customer_type " +
+                "where customer.customer_tp = customer_type.type_id and customer.customer_id = '"+ custom_id +"'";
+        String [][]ans = staff.Search(sql);
+        return Float.valueOf(ans[1][0]);
     }
 
     public int CheckOrders(String product_id,String product_name) throws SQLException
@@ -321,6 +334,7 @@ public class SalesSection{
         ans=staff.Search(sql);
         if(ans.length>1)
         {
+            System.out.println(ans.length);
             for(int i=1;i<ans.length;i++)
             {
                 String name=ans[i][0];
@@ -342,6 +356,8 @@ public class SalesSection{
             }
             return p;
         }
+        else
+            System.out.println("无搜索结果");
         return null;
     }
 
@@ -354,6 +370,35 @@ public class SalesSection{
     public void DeleteAllProduct(String order_id) throws SQLException
     {
         String sql="delete from orders where order_id = '"+ order_id +"'";
+        staff.Does(sql);
+    }
+
+    public String SearchCustomType(String custom_id) throws SQLException
+    {
+        String sql="select customer.customer_tp " +
+                "from customer " +
+                "where customer.customer_id = '"+ custom_id +"'";
+        String ans[][] = staff.Search(sql);
+        return ans[1][0];
+    }
+
+    public CreateOrder[] SearchOrderProduct(String custom_tp,String order_id)throws SQLException
+    {
+        String sql="select product.product_id,product.product_name,product.product_p"+ custom_tp +",orders.order_num,product.product_p"+ custom_tp +"*orders.order_num " +
+                "from orders,product " +
+                "where orders.order_product = product.product_name and orders.order_id = '"+ order_id +"'";
+        String ans[][] =staff.Search(sql);
+        CreateOrder createOrders[]=new CreateOrder[ans.length-1];
+        for(int i=1;i<ans.length;i++)
+        {
+            createOrders[i-1]=new CreateOrder(ans[i][0],ans[i][1],ans[i][2],ans[i][3],ans[i][4]);
+        }
+        return createOrders;
+    }
+
+    public void AddAdvance(String order_id,String mn_ad,String mn_re)throws SQLException
+    {
+        String sql="insert into advance values('"+ order_id +"',"+ mn_ad +","+ mn_re +")";
         staff.Does(sql);
     }
 }

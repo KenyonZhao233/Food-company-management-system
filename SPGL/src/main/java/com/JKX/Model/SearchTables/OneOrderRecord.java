@@ -8,13 +8,14 @@ public class OneOrderRecord {
     private String order_zt;
     private String order_custom;
     private String order_type;
+    private String order_fzr;
 
     public OneOrderRecord()
     {
 
     }
 
-    public OneOrderRecord(String order_id,String order_date,String order_product,String order_num,String order_zt,String order_custom,String order_type)
+    public OneOrderRecord(String order_id,String order_date,String order_product,String order_num,String order_zt,String order_custom,String order_type,String order_fzr)
     {
         this.order_id=order_id;
         this.order_date=order_date;
@@ -23,6 +24,7 @@ public class OneOrderRecord {
         this.order_zt=order_zt;
         this.order_custom=order_custom;
         this.order_type=order_type;
+        this.order_fzr=order_fzr;
     }
 
     public void setOrder_id(String order_id) {
@@ -53,6 +55,10 @@ public class OneOrderRecord {
         this.order_product = order_product;
     }
 
+    public void setOrder_fzr(String order_fzr) {
+        this.order_fzr = order_fzr;
+    }
+
     public String getOrder_zt() {
         return order_zt;
     }
@@ -81,4 +87,7 @@ public class OneOrderRecord {
         return order_product;
     }
 
+    public String getOrder_fzr() {
+        return order_fzr;
+    }
 }

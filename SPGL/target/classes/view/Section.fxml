@@ -616,13 +616,14 @@
                   <TextField fx:id="bhD" layoutX="730.0" layoutY="114.0" prefHeight="30.0" prefWidth="184.0" style="-fx-background-color: #02030A; -fx-border-color: #B7C3D7; -fx-border-radius: 2em;" />
                   <TableView fx:id="dateTable" layoutY="212.0" prefHeight="477.0" prefWidth="1018.0">
                      <columns>
-                        <TableColumn prefWidth="140.0" text="订单编号" />
+                        <TableColumn prefWidth="120.0" text="订单编号" />
                         <TableColumn prefWidth="180.0" text="下单时间" />
-                        <TableColumn prefWidth="140.0" text="购买产品" />
-                        <TableColumn prefWidth="140.0" text="购买数量" />
-                        <TableColumn prefWidth="140.0" text="订单状态" />
-                        <TableColumn prefWidth="140.0" text="订单客户" />
-                        <TableColumn prefWidth="140.0" text="付款状态" />
+                        <TableColumn prefWidth="120.0" text="购买产品" />
+                        <TableColumn prefWidth="120.0" text="购买数量" />
+                        <TableColumn prefWidth="120.0" text="订单状态" />
+                        <TableColumn prefWidth="120.0" text="订单客户" />
+                        <TableColumn prefWidth="120.0" text="付款状态" />
+                        <TableColumn prefWidth="120.0" text="订单负责人" />
                      </columns></TableView>
                   <JFXButton fx:id="searchDate" layoutX="352.0" layoutY="114.0" onMouseClicked="#handleDate" text="查询时间" />
                   <JFXButton fx:id="searchIdD" layoutX="926.0" layoutY="114.0" onMouseClicked="#handleDate" text="查询编号" />
