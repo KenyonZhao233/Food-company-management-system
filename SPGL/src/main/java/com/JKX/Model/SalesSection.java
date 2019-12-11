@@ -401,4 +401,13 @@ public class SalesSection{
         String sql="insert into advance values('"+ order_id +"',"+ mn_ad +","+ mn_re +")";
         staff.Does(sql);
     }
+
+    public String[][] SearchRight()throws SQLException
+    {
+        String sql="select right_sale.right_register,right_sale.right_create,right_sale.right_cancel,right_sale.right_return " +
+                "from right_sale " +
+                "where right_sale.staff_id = '"+ staff.Uid +"'";
+        String ans[][] =staff.Search(sql);
+        return ans;
+    }
 }

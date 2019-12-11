@@ -215,10 +215,40 @@ public class SalesController implements Initializable {
         salesSection = new SalesSection(staff);
         RegisterType.getItems().addAll("零售商","批发商","代理商");
         order_com_type.getItems().addAll("预付款","全款");
+        right();
     }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+    }
+
+    public void right()
+    {
+        try
+        {
+            String[][] ans=salesSection.SearchRight();
+            if(ans[1][0].equals("0"))
+            {
+                menuRegister.setDisable(true);
+            }
+            if(ans[1][1].equals("0"))
+            {
+                menuCreate.setDisable(true);
+            }
+            if(ans[1][2].equals("0"))
+            {
+                menuCancel.setDisable(true);
+            }
+            if(ans[1][3].equals("0"))
+            {
+                menuReturnGoods.setDisable(true);
+            }
+        }
+        catch(SQLException e)
+        {
+            this.salesSection.getStaff().showAlert(Alert.AlertType.ERROR, "错误", "查询权限失败", "系统错误");
+            return;
+        }
     }
 
 
@@ -778,6 +808,7 @@ public class SalesController implements Initializable {
             order_panel.toFront();
             ClearCreate();
             ButtonCanUse();
+            right();
         }
         if(event.getSource()==CreateButton1)
         {
@@ -792,6 +823,7 @@ public class SalesController implements Initializable {
             GoodsBox.getChildren().clear();
             ClearCreate();
             ButtonCanUse();
+            right();
             money_label.setText("");
         }
     }
@@ -810,6 +842,7 @@ public class SalesController implements Initializable {
         if(GoodsBox.getChildren().isEmpty())
         {
             ButtonCanUse();
+            right();
         }
         money_label.setText(String.valueOf(Integer.valueOf(money_label.getText())-Integer.valueOf(price)));
         if(order_com_type.getValue().equals("全款"))
