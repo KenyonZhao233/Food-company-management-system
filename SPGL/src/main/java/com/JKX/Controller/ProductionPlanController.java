@@ -424,7 +424,7 @@ public class ProductionPlanController {
 
                     PlanItemController planItemController = loader.<PlanItemController>getController();
                     planItemController.setController(this);
-                    planItemController.setInform(plans[i]);
+                    planItemController.setInform(plans[i], 1);
                     planItemController.setNode(node);
                     planItemController.setConfirmDisable(true);
                     planItemController.setDeleteDisable(true);
@@ -456,7 +456,7 @@ public class ProductionPlanController {
 
                     PlanItemController planItemController = loader.<PlanItemController>getController();
                     planItemController.setController(this);
-                    planItemController.setInform(plans[i]);
+                    planItemController.setInform(plans[i], 1);
                     planItemController.setNode(node);
                     planItemController.setConfirmDisable(true);
                     planItemController.setDeleteDisable(true);
@@ -495,7 +495,7 @@ public class ProductionPlanController {
 
                         PlanItemController planItemController = loader.<PlanItemController>getController();
                         planItemController.setController(this);
-                        planItemController.setInform(plans[k][i]);
+                        planItemController.setInform(plans[k][i], 1);
                         planItemController.setNode(node);
                         planItemController.setConfirmDisable(true);
                         planItemController.setDeleteDisable(false);
@@ -536,7 +536,7 @@ public class ProductionPlanController {
 
                         PlanItemController planItemController = loader.<PlanItemController>getController();
                         planItemController.setController(this);
-                        planItemController.setInform(plans[k][i]);
+                        planItemController.setInform(plans[k][i],1);
                         planItemController.setNode(node);
                         planItemController.setConfirmDisable(true);
                         planItemController.setDeleteDisable(false);
@@ -573,7 +573,7 @@ public class ProductionPlanController {
 
                     PlanItemController planItemController = loader.<PlanItemController>getController();
                     planItemController.setController(this);
-                    planItemController.setInform(plans[i]);
+                    planItemController.setInform(plans[i], 1);
                     planItemController.setNode(node);
                     planItemController.setConfirmDisable(false);
                     planItemController.setDeleteDisable(true);

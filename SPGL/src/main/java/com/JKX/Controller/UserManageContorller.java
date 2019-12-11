@@ -289,15 +289,16 @@ public class UserManageContorller implements Initializable {
                     inform += zw[i] + "'";
                 }
             }
-            if(info.equals(""))
+            if(info.equals("")) {
                 ans = staff.Search("select staff.staff_id, staff_bm, staff_zw, staff_name, staff_sfz, staff_sex, staff_date" +
-                                        " from staff, staff_job" +
-                                        " where staff.staff_id = staff_job.staff_id and staff_zw in (" + inform + ") and  in ('业务人员', '员工')" +
-                                        " group by staff.staff_id, staff_bm, staff_zw, staff_name, staff_sfz, staff_sex, staff_date");
+                        " from staff, staff_job" +
+                        " where staff.staff_id = staff_job.staff_id and staff_bm in (" + inform + ") and staff_zw in ('业务人员', '员工')" +
+                        " group by staff.staff_id, staff_bm, staff_zw, staff_name, staff_sfz, staff_sex, staff_date");
+            }
             else
                 ans = staff.Search("select staff.staff_id, staff_bm, staff_zw, staff_name, staff_sfz, staff_sex, staff_date" +
                                         " from staff, staff_job" +
-                                        " where staff.staff_id = '" + info + "' and staff.staff_id = staff_job.staff_id and staff_zw in (" + inform + ") and staff_zw in ('业务人员', '员工')" +
+                                        " where staff.staff_id = '" + info + "' and staff.staff_id = staff_job.staff_id and staff_bm in (" + inform + ") and staff_zw in ('业务人员', '员工')" +
                                         " group by staff.staff_id, staff_bm, staff_zw, staff_name, staff_sfz, staff_sex, staff_date");
         }
         return ans;

@@ -25,7 +25,7 @@ public class MysqlConnect {
 
             // 打开链接
             System.out.println("连接数据库...");
-            conn = DriverManager.getConnection(DB_URL, USER, PASS);
+            conn = DriverManager.getConnection(DB_URL, "root", "111");
             return true;
         } catch (SQLException se) {
             return false;

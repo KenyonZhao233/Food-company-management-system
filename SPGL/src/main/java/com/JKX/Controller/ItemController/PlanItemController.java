@@ -2,6 +2,7 @@ package com.JKX.Controller.ItemController;
 
 import com.JKX.Controller.ProductionPlanController;
 import com.JKX.Controller.WorkshopController;
+import com.JKX.Model.Staff;
 import com.JKX.Model.Table.Plan;
 import com.JKX.Model.Table.Production;
 import com.JKX.Model.Table.Raw;
@@ -62,7 +63,7 @@ public class PlanItemController {
         this.node = node;
     }
 
-    public void setInform(Plan plan)
+    public void setInform(Plan plan, int flag)
     {
         try {
             this.complete.setVisible(false);
@@ -125,8 +126,17 @@ public class PlanItemController {
                 if(plan.getPlan_ddl().compareTo(date) < 0) {
                     this.outs.setVisible(true);
                 }
-                int[] nums = this.productionPlanController.getPlanSection().SearchAdair(this.plan.getPlan_id());
+                int[] nums;
+                if (flag == 1) {
+                    nums = this.productionPlanController.getPlanSection().SearchAdair(this.plan.getPlan_id());
+                    this.push.setVisible(false);
+                    this.pushNum.setVisible(false);
+                }
+                else {
+                    nums = this.workshopController.getWorkshopSection().SearchAdair(this.plan.getPlan_id());
+                }
                 this.setNumEditable(false);
+                this.doPlan.setVisible(false);
                 this.nowNum = nums[0];
                 this.aimNum = nums[1];
                 if(this.nowNum >= this.aimNum)
@@ -145,6 +155,7 @@ public class PlanItemController {
                 {
                     this.edate.setTextFill(Color.RED);
                 }
+                this.doPlan.setVisible(false);
                 this.deadline.setEditable(false);
                 this.setNumEditable(false);
                 this.progress.setProgress(0.66);
@@ -163,12 +174,23 @@ public class PlanItemController {
         catch (Exception se)
         {
             se.printStackTrace();
-            this.productionPlanController.getPlanSection().getStaff().showAlert(Alert.AlertType.ERROR, "错误", "查询失败", "系统错误");
+            Staff.showAlert(Alert.AlertType.ERROR, "错误", "查询失败", "系统错误");
         }
     }
 
+    public void setDeadlineEditable(boolean deadlineEditable)
+    {
+        this.deadline.setDisable(!deadlineEditable);
+    }
+
+
     public void setWorkshopController(WorkshopController workshopController) {
         this.workshopController = workshopController;
+    }
+
+    public void setConfirmVisable(boolean confirmVisable)
+    {
+        this.confirm.setVisible(confirmVisable);
     }
 
     public void setChangeVisable(boolean changeVisable)
@@ -189,6 +211,11 @@ public class PlanItemController {
     public void setPushNumVisable(boolean pushNumVisable)
     {
         this.pushNum.setVisible(pushNumVisable);
+    }
+
+    public void setDoPlanVisable(boolean doPlanVisable)
+    {
+        this.doPlan.setVisible(doPlanVisable);
     }
 
     public void setNumEditable(boolean numEditable){this.proNum.setEditable(numEditable);}
@@ -228,7 +255,7 @@ public class PlanItemController {
                     }
                     else
                     {
-                        this.productionPlanController.getPlanSection().getStaff().showAlert(Alert.AlertType.ERROR, "错误", "修改失败", "当前库存仅剩：" + String.valueOf(now));
+                        Staff.showAlert(Alert.AlertType.ERROR, "错误", "修改失败", "当前库存仅剩：" + String.valueOf(now));
                     }
                 }
                 this.productionPlanController.getPlanSection().changePlanOnnum(this.planId.getText(), this.proNum.getText(), this.deadline.getValue().toString());
@@ -237,7 +264,7 @@ public class PlanItemController {
             catch (SQLException se)
             {
                 se.printStackTrace();
-                this.productionPlanController.getPlanSection().getStaff().showAlert(Alert.AlertType.ERROR, "错误", "修改失败", "系统错误");
+                Staff.showAlert(Alert.AlertType.ERROR, "错误", "修改失败", "系统错误");
             }
         }
         else if(actionBtn == this.delete)
@@ -249,7 +276,7 @@ public class PlanItemController {
             catch (SQLException se)
             {
                 se.printStackTrace();
-                this.productionPlanController.getPlanSection().getStaff().showAlert(Alert.AlertType.ERROR, "错误", "删除失败", "系统错误");
+                Staff.showAlert(Alert.AlertType.ERROR, "错误", "删除失败", "系统错误");
             }
         }
         else if(actionBtn == this.confirm)
@@ -263,7 +290,7 @@ public class PlanItemController {
             catch (SQLException se)
             {
                 se.printStackTrace();
-                this.productionPlanController.getPlanSection().getStaff().showAlert(Alert.AlertType.ERROR, "错误", "删除失败", "系统错误");
+                Staff.showAlert(Alert.AlertType.ERROR, "错误", "删除失败", "系统错误");
             }
         }
     }
@@ -282,6 +309,7 @@ public class PlanItemController {
             this.edate.setText(date);
             this.plan.setPlan_zt("待审核");
             this.workshopController.getWorkshopSection().changeZtOver(this.plan.getPlan_id());
+            this.workshopController.deleteVbox2(this.node);
         }
         catch (SQLException se)
         {
@@ -302,13 +330,15 @@ public class PlanItemController {
                 this.workshopController.getWorkshopSection().updatePlan(this.plan.getPlan_id(), Math.min(this.nowNum, this.aimNum));
                 if(this.nowNum >= this.aimNum)
                 {
+                    this.zt.setText(this.aimNum + "/" + this.aimNum);
+                    this.progress.setProgress(this.nowNum * (1.0) / this.aimNum);
                     this.push.setVisible(false);
                     this.complete.setVisible(true);
                     this.pushNum.setVisible(false);
                 }
                 else
                 {
-                    this.plan.setPlan_zt(this.nowNum + "/" + this.aimNum);
+                    this.zt.setText(this.nowNum + "/" + this.aimNum);
                     this.progress.setProgress(this.nowNum * (1.0) / this.aimNum);
                 }
             }

@@ -127,7 +127,7 @@ public class Staff {
     {
         return mysqlConnect.ExcuteDoesReturn(sql, a, b, c);
     }
-    public void showAlert(Alert.AlertType alertType, String title, String head, String content)
+    static public void showAlert(Alert.AlertType alertType, String title, String head, String content)
     {
         Alert _alert = new Alert(alertType);
         _alert.setTitle(title);
