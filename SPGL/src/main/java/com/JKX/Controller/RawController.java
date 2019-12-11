@@ -1,6 +1,7 @@
 package com.JKX.Controller;
 
 import com.JKX.Controller.ItemController.ItemDepRawDestroyController;
+import com.JKX.Controller.ItemController.ItemDepRawOutController;
 import com.JKX.Model.RawSection;
 
 import java.text.DateFormat;
@@ -73,6 +74,9 @@ public class RawController {
 
     @FXML
     private Button menuDestroy;
+
+    @FXML
+    private Button menuOut;
 
     @FXML
     private Button menuQuit;
@@ -167,6 +171,21 @@ public class RawController {
     @FXML
     private Button edit;
 
+    @FXML
+    private Pane pageOut;
+
+    @FXML
+    private TextField out_text1;
+
+    @FXML
+    private TextField out_text2;
+
+    @FXML
+    private Button search_o;
+
+    @FXML
+    private VBox raw_items4;
+
     public RawController() {
     }
 
@@ -192,6 +211,7 @@ public class RawController {
         }
         click_search(event);
         click_search_d(event);
+        click_search_o(event);
         try {
             this.raw_items.getChildren().clear();
             String[][] ans = rawSection.getInform();
@@ -319,6 +339,28 @@ public class RawController {
     }
 
     @FXML
+    void click_search_o(MouseEvent event) {
+        try {
+            this.raw_items4.getChildren().clear();
+            String[][] ans = rawSection.search_o(out_text1.getText(),out_text2.getText());
+            for (int i = 1; i < ans.length; i++) {
+                FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("view/ItemDepRaw_Out.fxml"));
+                Node node = null;
+                try {
+                    node = loader.load();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                ItemDepRawOutController itemDepRawOutController = loader.<ItemDepRawOutController>getController();
+                itemDepRawOutController.setInform(ans[i][4], ans[i][0], ans[i][1], ans[i][2], ans[i][3], ans[i][6], ans[i][7],rawSection,this);
+                this.raw_items4.getChildren().add(node);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
     void click_edit(MouseEvent event) {
         if(edit.getText().equals("修改"))
         {
@@ -357,6 +399,11 @@ public class RawController {
         {
             pageManage.setStyle("-fx-background-color : #02030A");
             pageManage.toFront();
+        }
+        if(event.getSource() == menuOut)
+        {
+            pageOut.setStyle("-fx-background-color : #02030A");
+            pageOut.toFront();
         }
         if(event.getSource() == menuQuit)
         {
@@ -480,6 +527,25 @@ public class RawController {
             observableList.get(2).setCellValueFactory(new PropertyValueFactory("raw_bzq"));
             observableList.get(3).setCellValueFactory(new PropertyValueFactory("raw_price"));
             kind.setItems(data);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        try {
+            this.raw_items4.getChildren().clear();
+            String[][] ans = rawSection.getInform();
+            for (int i = 1; i < ans.length; i++) {
+                FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("view/ItemDepRaw_Out.fxml"));
+                Node node = null;
+                try {
+                    node = loader.load();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                ItemDepRawOutController itemDepRawOutController = loader.<ItemDepRawOutController>getController();
+                itemDepRawOutController.setInform(ans[i][4], ans[i][0], ans[i][1], ans[i][2], ans[i][3], ans[i][6], ans[i][7],rawSection,this);
+                this.raw_items4.getChildren().add(node);
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         }

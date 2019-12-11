@@ -30,6 +30,26 @@ public class RawSection {
 
     }
 
+    public boolean Output(String id, String time, int mn,String Uid) throws SQLException
+    {
+        String ans[][] = staff.Search("select raw_rm from raw_ck where raw_date = '"+ time +"'");
+        Integer res = Integer.parseInt(ans[1][0]) - mn;
+        SimpleDateFormat formatter= new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        Date date = new Date(System.currentTimeMillis());
+        if(res > 0){
+            staff.Does("update raw_ck set raw_rm = " + res + " where raw_date = '"+ time +"'");
+            staff.Does("insert into raw_rec values('" +formatter.format(date) +  "','" + id + "','出库'," + mn + ",'" + Uid + "')");
+        }
+        else if(res == 0){
+            staff.Does("delete raw_ck  where raw_date = '"+ time +"'");
+            staff.Does("insert into raw_rec values('" +formatter.format(date) +  "','" + id  + "','出库'," + mn + ",'" + Uid + "')");
+        }
+        else{
+            return false;
+        }
+        return true;
+    }
+
     public String[][] getInform() throws SQLException
     {
         return staff.Search("select * from raw, raw_ck where raw.raw_id = raw_ck.raw_id order by raw_date DESC");
@@ -45,6 +65,21 @@ public class RawSection {
         if(query_type.getValue() == "仓库编号" && (!query_text.getText().isEmpty() || query_text.getText() == null))
         {
             str = str + "and raw_ck.raw_in like '%" + query_text.getText() + "%' ";
+        }
+        str = str + "order by raw_date DESC";
+        return staff.Search(str);
+    }
+
+    public String[][] search_o(String out_text1, String out_text2) throws SQLException
+    {
+        String str = "select * from raw, raw_ck where raw.raw_id = raw_ck.raw_id ";
+        if(!out_text1.isEmpty() || out_text1 == null)
+        {
+            str = str + "and raw_ck.raw_id like '%" + out_text1 + "%' ";
+        }
+        if(!out_text2.isEmpty() || out_text2 == null)
+        {
+            str = str + "and raw_ck.raw_in like '%" + out_text2 + "%' ";
         }
         str = str + "order by raw_date DESC";
         return staff.Search(str);

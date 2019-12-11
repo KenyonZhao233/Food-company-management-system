@@ -1,13 +1,6 @@
 package com.JKX.Controller.ItemController;
 
-import java.net.URL;
-import java.sql.SQLException;
-import java.util.Optional;
-import java.util.ResourceBundle;
-
-import com.JKX.Controller.EndproductController;
 import com.JKX.Controller.RawController;
-import com.JKX.Model.EndSection;
 import com.JKX.Model.RawSection;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
@@ -17,7 +10,12 @@ import javafx.scene.control.TextInputDialog;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 
-public class ItemDepEndOutController {
+import java.net.URL;
+import java.sql.SQLException;
+import java.util.Optional;
+import java.util.ResourceBundle;
+
+public class ItemDepRawOutController {
 
     @FXML
     private ResourceBundle resources;
@@ -29,23 +27,29 @@ public class ItemDepEndOutController {
     private Label time;
 
     @FXML
+    private Label id;
+
+    @FXML
     private Label name;
 
     @FXML
     private Label date;
 
     @FXML
+    private Label prize;
+
+    @FXML
     private Label count;
 
     @FXML
-    private Label in;
+    private Label num;
 
     @FXML
     private AnchorPane pane;
 
-    private EndSection endSection;
+    private RawSection rawSection;
 
-    private EndproductController endproductController;
+    private RawController rawController;
 
     @FXML
     void enter(MouseEvent event) {
@@ -75,8 +79,8 @@ public class ItemDepEndOutController {
                     _alert2.show();
                     return;
                 }
-                if(endSection.Output(this.name.getText(),this.time.getText(),Integer.parseInt(result.get().toString()),this.endSection.getStaff().Uid)){
-                    endproductController.fresh(event);
+                if(rawSection.Output(this.id.getText(),this.time.getText(),Integer.parseInt(result.get().toString()),this.rawSection.getStaff().Uid)){
+                    rawController.fresh(event);
                 }else{
                     Alert _alert2 = new Alert(Alert.AlertType.WARNING);
                     _alert2.setTitle("出库系统");
@@ -95,22 +99,28 @@ public class ItemDepEndOutController {
 
         }
     }
-    public void setInform(String time, String name, String date, String count,String in, EndSection endSection, EndproductController endproductController)
+    public void setInform(String time, String id, String name, String date, String prize, String count, String num, RawSection rawSection, RawController rawController)
     {
         this.time.setText(time);
+        this.id.setText(id);
         this.name.setText(name);
         this.date.setText(date);
+        this.prize.setText(prize);
         this.count.setText(count);
-        this.in.setText(in);
-        this.endSection = endSection;
-        this.endproductController = endproductController;
+        this.num.setText(num);
+        this.rawSection = rawSection;
+        this.rawController = rawController;
     }
 
     @FXML
     void initialize() {
         assert time != null : "fx:id=\"time\" was not injected: check your FXML file 'ItemDepRaw_Destory.fxml'.";
+        assert id != null : "fx:id=\"id\" was not injected: check your FXML file 'ItemDepRaw_Destory.fxml'.";
         assert name != null : "fx:id=\"name\" was not injected: check your FXML file 'ItemDepRaw_Destory.fxml'.";
         assert date != null : "fx:id=\"date\" was not injected: check your FXML file 'ItemDepRaw_Destory.fxml'.";
+        assert prize != null : "fx:id=\"prize\" was not injected: check your FXML file 'ItemDepRaw_Destory.fxml'.";
         assert count != null : "fx:id=\"count\" was not injected: check your FXML file 'ItemDepRaw_Destory.fxml'.";
+        assert num != null : "fx:id=\"num\" was not injected: check your FXML file 'ItemDepRaw_Destory.fxml'.";
+
     }
 }
