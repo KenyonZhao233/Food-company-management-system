@@ -37,6 +37,12 @@ public class Production {
         this.production_bzq = bzq;
     }
 
+    public Production(String name, int bzq)
+    {
+        this.production_name = name;
+        this.production_bzq = bzq;
+    }
+
     public Production(String id, String name, float p1, float p2, float p3, int bzq, int kc, Raw[] raws, int nums)
     {
         this.nums = nums;

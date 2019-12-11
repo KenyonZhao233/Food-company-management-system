@@ -1,8 +1,6 @@
 package com.JKX.Controller;
 
-import com.JKX.Controller.ItemController.ItemDepEndController;
-import com.JKX.Controller.ItemController.ItemDepEndDestroyController;
-import com.JKX.Controller.ItemController.ItemDepRawDestroyController;
+import com.JKX.Controller.ItemController.*;
 import com.JKX.Model.EndSection;
 import com.JKX.Model.RawSection;
 
@@ -35,7 +33,6 @@ import javafx.scene.layout.VBox;
 import java.io.IOException;
 import java.sql.SQLException;
 
-import com.JKX.Controller.ItemController.ItemDepRawController;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Duration;
@@ -175,6 +172,16 @@ public class EndproductController {
     @FXML
     private TableView<Production> kind;
 
+    @FXML
+    private Pane pageCall;
+
+    @FXML
+    private VBox raw_items_call;
+
+    @FXML
+    private TableView<Production> pro;
+
+
 
     public EndproductController() {
     }
@@ -285,6 +292,38 @@ public class EndproductController {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        try {
+            String [][] ans = endSection.call();
+            final ObservableList<Production> data = FXCollections.observableArrayList();
+            for (int i = 1; i < ans.length; i++) {
+                data.add(new Production(ans[i][0], Integer.parseInt(ans[i][1])));
+            }
+            ObservableList<TableColumn<Production, ?>> observableList = pro.getColumns();
+            observableList.get(0).setCellValueFactory(new PropertyValueFactory("production_name"));
+            observableList.get(1).setCellValueFactory(new PropertyValueFactory("production_bzq"));
+            pro.setItems(data);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        try {
+            this.raw_items_call.getChildren().clear();
+            String[][] ans = endSection.itemorder_pre();
+            for (int i = 1; i < ans.length; i++) {
+                FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("view/ItemOrder.fxml"));
+                Node node = null;
+                try {
+                    node = loader.load();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                ItemOrderController itemOrderController = loader.<ItemOrderController>getController();
+                itemOrderController.setInform(ans[i][0], ans[i][1], ans[i][2].substring(0,19),endSection,this);
+                this.raw_items_call.getChildren().add(node);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
 
@@ -324,6 +363,38 @@ public class EndproductController {
                 ItemDepEndController itemDepEndController = loader.<ItemDepEndController>getController();
                 itemDepEndController.setInform(ans[i][6].substring(0,19), ans[i][0], ans[i][1], ans[i][5], ans[i][8], ans[i][9]);
                 this.raw_items.getChildren().add(node);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        try {
+            String [][] ans = endSection.call();
+            final ObservableList<Production> data = FXCollections.observableArrayList();
+            for (int i = 1; i < ans.length; i++) {
+                data.add(new Production(ans[i][0], Integer.parseInt(ans[i][1])));
+            }
+            ObservableList<TableColumn<Production, ?>> observableList = pro.getColumns();
+            observableList.get(0).setCellValueFactory(new PropertyValueFactory("production_name"));
+            observableList.get(1).setCellValueFactory(new PropertyValueFactory("production_bzq"));
+            pro.setItems(data);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        try {
+            this.raw_items_call.getChildren().clear();
+            String[][] ans = endSection.itemorder_pre();
+            for (int i = 1; i < ans.length; i++) {
+                FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("view/ItemOrder.fxml"));
+                Node node = null;
+                try {
+                    node = loader.load();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                ItemOrderController itemOrderController = loader.<ItemOrderController>getController();
+                itemOrderController.setInform(ans[i][0], ans[i][1], ans[i][2].substring(0,19),endSection,this);
+                this.raw_items_call.getChildren().add(node);
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -459,6 +530,11 @@ public class EndproductController {
         {
             pageManage.setStyle("-fx-background-color : #02030A");
             pageManage.toFront();
+        }
+        if(event.getSource() == menuSend)
+        {
+            pageCall.setStyle("-fx-background-color : #02030A");
+            pageCall.toFront();
         }
         if(event.getSource() == menuQuit)
         {
