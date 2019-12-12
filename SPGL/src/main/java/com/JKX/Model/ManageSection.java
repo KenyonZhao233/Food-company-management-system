@@ -55,6 +55,13 @@ public class ManageSection {
         return ans;
     }
 
+    public int getStaffs() throws SQLException
+    {
+        String sql = "select count(*) from staff;";
+        String[][] ans = this.staff.Search(sql);
+        return Integer.parseInt(ans[1][0]);
+    }
+
     public String[][] Search_Other(String info, String inform) throws SQLException
     {
         String[][] ans;

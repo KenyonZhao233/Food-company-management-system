@@ -10,9 +10,9 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 
-<ScrollPane fx:id="productPane" hbarPolicy="NEVER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#handleClick" prefHeight="176.0" prefWidth="862.0" vbarPolicy="NEVER" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.JKX.Controller.ItemController.ProductItemController">
+<ScrollPane fx:id="productPane" hbarPolicy="NEVER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#handleClick" prefHeight="176.0" prefWidth="989.0" vbarPolicy="NEVER" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.JKX.Controller.ItemController.ProductItemController">
   <content>
-    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="175.0" prefWidth="861.0">
+    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="175.0" prefWidth="988.0">
          <children>
             <ImageView fitHeight="100.0" fitWidth="96.0" layoutX="22.0" layoutY="34.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -23,28 +23,28 @@
             <Label fx:id="pro_id" layoutX="16.0" layoutY="140.0" prefHeight="20.0" prefWidth="109.0" />
             <Label layoutX="143.0" layoutY="24.0" text="食品名称：" />
             <Label fx:id="pro_name" layoutX="219.0" layoutY="24.0" prefHeight="20.0" prefWidth="120.0" />
-            <HBox layoutX="126.0" layoutY="105.0" prefHeight="25.0" prefWidth="310.0">
+            <HBox layoutX="128.0" layoutY="105.0" prefHeight="25.0" prefWidth="310.0">
                <children>
                   <Label alignment="CENTER" contentDisplay="TOP" prefHeight="20.0" prefWidth="108.0" text="零售商价格" />
                   <Label alignment="CENTER" prefHeight="20.0" prefWidth="98.0" text="批发商价格" />
                   <Label alignment="CENTER" prefHeight="20.0" prefWidth="112.0" text="代理商价格" />
                </children>
             </HBox>
-            <HBox layoutX="126.0" layoutY="130.0" prefHeight="25.0" prefWidth="310.0">
+            <HBox layoutX="128.0" layoutY="130.0" prefHeight="25.0" prefWidth="310.0">
                <children>
                   <Label fx:id="p1" alignment="CENTER" contentDisplay="TOP" prefHeight="20.0" prefWidth="108.0" text="1" />
                   <Label fx:id="p2" alignment="CENTER" prefHeight="20.0" prefWidth="98.0" text="1" />
                   <Label fx:id="p3" alignment="CENTER" prefHeight="20.0" prefWidth="112.0" text="1" />
                </children>
             </HBox>
-            <TableView fx:id="raw_table" layoutX="436.0" layoutY="19.0" prefHeight="131.0" prefWidth="372.0">
+            <TableView fx:id="raw_table" layoutX="453.0" layoutY="20.0" prefHeight="131.0" prefWidth="473.0">
               <columns>
                 <TableColumn fx:id="raw_id" prefWidth="128.0" text="原料编号" />
-                <TableColumn fx:id="raw_name" prefWidth="136.0" text="原料名称" />
-                  <TableColumn fx:id="raw_pri" prefWidth="107.0" text="原料单价" />
+                <TableColumn fx:id="raw_name" prefWidth="218.0" text="原料名称" />
+                  <TableColumn fx:id="raw_pri" prefWidth="126.0" text="原料单价" />
               </columns>
             </TableView>
-            <JFXButton fx:id="delete" layoutX="826.0" layoutY="-4.0" onMouseClicked="#handleDelete" prefHeight="183.0" prefWidth="34.0" ripplerFill="#e10a0a" style="-fx-background-color: #f85a5a;" text="删除" textFill="WHITE" wrapText="true" />
+            <JFXButton fx:id="delete" layoutX="957.0" layoutY="-6.0" onMouseClicked="#handleDelete" prefHeight="183.0" prefWidth="34.0" ripplerFill="#e10a0a" style="-fx-background-color: #f85a5a;" text="删除" textFill="WHITE" wrapText="true" />
             <Label fx:id="bzq" layoutX="203.0" layoutY="65.0" prefHeight="20.0" prefWidth="183.0" />
          </children></AnchorPane>
   </content>

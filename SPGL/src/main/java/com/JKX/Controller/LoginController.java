@@ -53,6 +53,9 @@ public class LoginController implements Initializable {
     @FXML
     private JFXCheckBox remember;
 
+    @FXML
+    private Label exits;
+
     private String ids[] = new String[50];
 
     private String pws[] = new String[50];
@@ -194,5 +197,9 @@ public class LoginController implements Initializable {
             _alert.setContentText("账号或密码错误");
             _alert.show();
         }
+    }
+
+    public void handleExit(MouseEvent mouseEvent) {
+        System.exit(0);
     }
 }

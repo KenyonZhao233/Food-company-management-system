@@ -33,5 +33,10 @@
       </ImageView>
       <Label layoutX="117.0" layoutY="204.0" style="-fx-text-fill: white;" text="XX食品公司" textAlignment="CENTER" />
       <Label layoutX="122.0" layoutY="232.0" style="-fx-text-fill: white;" text="管理系统" textAlignment="CENTER" />
+      <Label fx:id="exits" layoutX="623.0" layoutY="6.0" onMouseClicked="#handleExit" text="X" textFill="WHITE">
+         <font>
+            <Font size="29.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>
