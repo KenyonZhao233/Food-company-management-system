@@ -12,6 +12,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
@@ -25,6 +26,9 @@ import java.sql.SQLException;
 
 
 public class WorkshopController {
+
+    @FXML
+    private Label nameLable;
 
     @FXML
     private JFXButton searchPlan1, searchPlan2;
@@ -46,6 +50,7 @@ public class WorkshopController {
     public void initData(Staff staff)
     {
         this.workshopSection = new WorkshopSection(staff);
+        this.nameLable.setText(staff.Name);
     }
 
     public WorkshopSection getWorkshopSection() {

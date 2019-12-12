@@ -32,7 +32,7 @@
                <VBox.margin>
                   <Insets bottom="10.0" top="50.0" />
                </VBox.margin></ImageView>
-            <Label fx:id="nameLable" text="BOSS" textFill="#e7e5e5">
+            <Label fx:id="nameLable" alignment="CENTER" prefHeight="20.0" prefWidth="105.0" text="BOSS" textFill="#e7e5e5">
                <VBox.margin>
                   <Insets bottom="20.0" />
                </VBox.margin>
@@ -132,16 +132,16 @@
                         <Font size="24.0" />
                      </font>
                   </Label>
-                  <HBox alignment="CENTER_LEFT" layoutX="74.0" layoutY="72.0" prefHeight="92.0" prefWidth="929.0" spacing="100.0">
+                  <HBox alignment="CENTER_LEFT" layoutX="313.0" layoutY="78.0" prefHeight="92.0" prefWidth="392.0" spacing="100.0">
                      <children>
                         <VBox alignment="CENTER" prefHeight="92.0" prefWidth="136.0">
                            <children>
-                              <Label prefHeight="34.0" prefWidth="82.0" text="22000" textFill="#2a73ff">
+                              <Label fx:id="users" prefHeight="34.0" prefWidth="82.0" textFill="#2a73ff">
                                  <font>
                                     <Font name="System Bold" size="26.0" />
                                  </font>
                               </Label>
-                              <Label text="Total Staffs" textFill="#e7e5e5" />
+                              <Label text="Total Users" textFill="#e7e5e5" />
                            </children>
                         </VBox>
                         <VBox alignment="CENTER" prefHeight="92.0" prefWidth="155.0">
@@ -152,26 +152,6 @@
                                  </font>
                               </Label>
                               <Label prefHeight="20.0" prefWidth="103.0" text="Total Sections" textFill="#e7e5e5" />
-                           </children>
-                        </VBox>
-                        <VBox alignment="CENTER" prefHeight="92.0" prefWidth="125.0">
-                           <children>
-                              <Label prefHeight="34.0" prefWidth="72.0" text="1000" textFill="#fa5f7e">
-                                 <font>
-                                    <Font name="System Bold" size="26.0" />
-                                 </font>
-                              </Label>
-                              <Label alignment="CENTER" prefHeight="20.0" prefWidth="139.0" text="Total Orders" textFill="#e7e5e5" />
-                           </children>
-                        </VBox>
-                        <VBox alignment="CENTER" prefHeight="92.0" prefWidth="137.0">
-                           <children>
-                              <Label prefHeight="34.0" prefWidth="68.0" text="780" textFill="#de0000">
-                                 <font>
-                                    <Font name="System Bold" size="26.0" />
-                                 </font>
-                              </Label>
-                              <Label prefHeight="20.0" prefWidth="128.0" text="Orders on Hold" textFill="#e7e5e5" />
                            </children>
                         </VBox>
                      </children>
@@ -197,7 +177,7 @@
                   </Button>
                </children>
             </Pane>
-            <Pane fx:id="pnlChange" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #000000;">
+            <Pane fx:id="pnlChange" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #000000;" visible="false">
                <children>
                   <Label layoutX="63.0" layoutY="24.0" prefHeight="42.0" prefWidth="144.0" text="修改员工信息" textFill="#fcf8f8">
                      <font>
@@ -259,7 +239,7 @@
                   <JFXComboBox fx:id="sexText" layoutX="116.0" layoutY="626.0" prefHeight="30.0" prefWidth="307.0" />
                </children>
             </Pane>
-            <Pane fx:id="pnlAdd" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #000000;">
+            <Pane fx:id="pnlAdd" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #000000;" visible="false">
                <children>
                   <Label layoutX="63.0" layoutY="25.0" prefHeight="42.0" prefWidth="153.0" text="添加员工信息" textFill="#fcf8f8">
                      <font>
@@ -316,7 +296,7 @@
                   <Label fx:id="pswConfirTip2" layoutX="655.0" layoutY="538.0" prefHeight="20.0" prefWidth="135.0" text="输入一致！" visible="false" />
                </children>
             </Pane>
-            <Pane fx:id="paneGrand" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #000000;">
+            <Pane fx:id="paneGrand" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #000000;" visible="false">
                <children>
                   <TextField fx:id="searchRoleText" layoutX="329.0" layoutY="76.0" prefHeight="32.0" prefWidth="264.0" promptText="search" style="-fx-background-color: #02030A; -fx-border-color: #B7C3D7; -fx-border-radius: 2em;" />
                   <Button fx:id="searchRole" layoutX="612.0" layoutY="75.0" mnemonicParsing="false" onMouseClicked="#handleSearchRole" style="-fx-background-color: #000000;">
@@ -453,13 +433,13 @@
                      </font>
                   </Label>
                </children></Pane>
-            <Pane fx:id="paneCz" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #000000;">
+            <Pane fx:id="paneCz" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #000000;" visible="false">
                <children>
                   <TextField fx:id="resetText" layoutX="321.0" layoutY="329.0" prefHeight="32.0" prefWidth="264.0" promptText="search" style="-fx-background-color: #02030A; -fx-border-color: #B7C3D7; -fx-border-radius: 2em;" />
                   <JFXButton fx:id="resetPw" layoutX="600.0" layoutY="330.0" onMouseClicked="#handleReset" text="重置密码" />
                </children>
             </Pane>
-            <Pane fx:id="paneEmpty" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #000000;" />
+            <Pane fx:id="paneEmpty" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #000000;" visible="false" />
          </children>
       </StackPane>
    </children>

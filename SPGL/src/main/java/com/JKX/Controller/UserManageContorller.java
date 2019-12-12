@@ -36,7 +36,13 @@ public class UserManageContorller implements Initializable {
     private ManageSection manageSection;
 
     @FXML
+    private Label nameLable;
+
+    @FXML
     private AnchorPane UserManagePane;
+
+    @FXML
+    private Label users;
 
     /*界面跳转按钮*/
     @FXML
@@ -312,6 +318,7 @@ public class UserManageContorller implements Initializable {
 
     public void initData(Staff staff)
     {
+        this.nameLable.setText(staff.Name);
         this.manageSection = new ManageSection(staff);
         List<String> staffBm = new ArrayList<String>();
         List<String> staffZw = new ArrayList<String>();
@@ -367,6 +374,14 @@ public class UserManageContorller implements Initializable {
             this.roleCz.setDisable(false);
 
         this.changeRole.setDisable(true);
+
+        try {
+            this.users.setText(String.valueOf(this.manageSection.getStaffs()));
+        }
+        catch (SQLException se)
+        {
+            Staff.showAlert(Alert.AlertType.ERROR, "错误", "获取员工数量失败", "");
+        }
     }
 
     public void handleCheck(MouseEvent mouseEvent) {

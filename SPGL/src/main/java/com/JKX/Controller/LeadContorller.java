@@ -1,6 +1,7 @@
 package com.JKX.Controller;
 
 import com.JKX.Model.Staff;
+import com.jfoenix.controls.JFXButton;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -12,6 +13,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -45,6 +47,9 @@ public class LeadContorller implements Initializable {
 
     @FXML
     private Button btnRY;
+
+    @FXML
+    private JFXButton returns;
 
     @FXML
     void handleClick(MouseEvent event) throws Exception{
@@ -184,6 +189,8 @@ public class LeadContorller implements Initializable {
 
     }
 
+
+
     public void initData(Staff staff)
     {
         this.staff = staff;
@@ -218,5 +225,17 @@ public class LeadContorller implements Initializable {
                 btnJH.setDisable(false);
             }
         }
+    }
+
+    public void handleReturn(MouseEvent mouseEvent) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("view/Login.fxml"));
+
+        Stage stage = new Stage(StageStyle.UNDECORATED);
+        stage.setScene(new Scene((Parent) loader.load()));
+
+        stage.show();
+
+        Stage index = (Stage)LeadPane.getScene().getWindow();
+        index.close();
     }
 }

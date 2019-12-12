@@ -202,6 +202,7 @@ public class ProductionPlanController {
     public void initData(Staff staff)
     {
         this.planSection = new PlanSection(staff);
+        this.nameLable.setText(staff.Name);
         List<String> searchMethod = new ArrayList<String>();
         List<String> searchMethod2 = new ArrayList<String>();
         searchMethod.add("按编号查询");
