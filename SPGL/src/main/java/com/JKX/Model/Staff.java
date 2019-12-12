@@ -2,10 +2,8 @@ package com.JKX.Model;
 
 import com.JKX.Mysql.MysqlConnect;
 import javafx.scene.control.Alert;
-import org.omg.CORBA.PUBLIC_MEMBER;
 
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -134,5 +132,8 @@ public class Staff {
         _alert.setHeaderText(head);
         _alert.setContentText(content);
         _alert.showAndWait();
+    }
+    public int changepwd(String pwd) throws SQLException {
+        return mysqlConnect.Does("update staff set staff_pw = MD5('"+ pwd +"') where staff_id = '" + Uid + "'");
     }
 }

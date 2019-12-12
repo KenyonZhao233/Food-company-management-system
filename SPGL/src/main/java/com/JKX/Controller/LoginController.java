@@ -121,6 +121,8 @@ public class LoginController implements Initializable {
         Stage stage = new Stage(StageStyle.UTILITY);
         stage.setScene(new Scene((Parent) loader.load()));
         stage.setTitle("修改密码");
+        PwcController controller = loader.<PwcController>getController();
+        controller.initdata(uid.getValue().toString());
         stage.show();
     }
 
