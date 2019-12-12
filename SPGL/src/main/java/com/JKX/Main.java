@@ -1,5 +1,6 @@
 package com.JKX;
 
+import com.JKX.Mysql.Secret;
 import javafx.application.Application;
 
 import javafx.fxml.FXMLLoader;
