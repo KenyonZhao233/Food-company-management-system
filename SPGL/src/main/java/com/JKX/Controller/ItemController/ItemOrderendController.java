@@ -36,7 +36,9 @@ public class ItemOrderendController {
 
     private EndSection endSection;
 
-    public void setInform(String id, String cus, String time, EndSection endSection,EndproductController endproductController)
+    private int index;
+
+    public void setInform(String id, String cus, String time, EndSection endSection,EndproductController endproductController, int index)
     {
         this.time.setText("订单时间："+time);
         this.id.setText("订单编号："+id);
@@ -56,6 +58,7 @@ public class ItemOrderendController {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        this.index = index;
     }
 
     @FXML
@@ -67,7 +70,7 @@ public class ItemOrderendController {
         _alert.showAndWait();
         if(_alert.getResult()== ButtonType.OK) {
             if(endSection.Out(this.id.getText().substring(5))){
-                endproductController.fresh(event);
+                endproductController.raw_items_out.getChildren().remove(index);
             }else{
                 Alert _alert2 = new Alert(Alert.AlertType.WARNING);
                 _alert2.setTitle("收货系统");
@@ -76,7 +79,7 @@ public class ItemOrderendController {
                 _alert2.show();
             }
         }
-        endproductController.fresh(event);
+
     }
 
     @FXML

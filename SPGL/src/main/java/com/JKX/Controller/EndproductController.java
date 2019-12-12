@@ -176,7 +176,7 @@ public class EndproductController {
     private Pane pageCall;
 
     @FXML
-    private VBox raw_items_call;
+    public VBox raw_items_call;
 
     @FXML
     private TableView<Production> pro;
@@ -185,10 +185,10 @@ public class EndproductController {
     private Pane pageOut;
 
     @FXML
-    private VBox raw_items_out;
+    public VBox raw_items_out;
 
     @FXML
-    private VBox raw_items_out2;
+    public VBox raw_items_out2;
 
     public EndproductController() {
     }
@@ -325,7 +325,7 @@ public class EndproductController {
                     e.printStackTrace();
                 }
                 ItemOrderController itemOrderController = loader.<ItemOrderController>getController();
-                itemOrderController.setInform(ans[i][0], ans[i][1], ans[i][2].substring(0,19),endSection,this);
+                itemOrderController.setInform(ans[i][0], ans[i][1], ans[i][2].substring(0,19),endSection,this,i - 1);
                 this.raw_items_call.getChildren().add(node);
             }
         } catch (SQLException e) {
@@ -344,7 +344,7 @@ public class EndproductController {
                     e.printStackTrace();
                 }
                 ItemOrderendController itemOrderendController = loader.<ItemOrderendController>getController();
-                itemOrderendController.setInform(ans[i][0], ans[i][1], ans[i][2].substring(0,19),endSection,this);
+                itemOrderendController.setInform(ans[i][0], ans[i][1], ans[i][2].substring(0,19),endSection,this, i - 1);
                 this.raw_items_out.getChildren().add(node);
             }
         } catch (SQLException e) {
@@ -425,25 +425,6 @@ public class EndproductController {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
-        try {
-            this.raw_items_call.getChildren().clear();
-            String[][] ans = endSection.itemorder_pre();
-            for (int i = 1; i < ans.length; i++) {
-                FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("view/ItemOrder.fxml"));
-                Node node = null;
-                try {
-                    node = loader.load();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-                ItemOrderController itemOrderController = loader.<ItemOrderController>getController();
-                itemOrderController.setInform(ans[i][0], ans[i][1], ans[i][2].substring(0,19),endSection,this);
-                this.raw_items_call.getChildren().add(node);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
         try {
             this.raw_items_out2.getChildren().clear();
             String[][] ans = endSection.getInform();
@@ -459,7 +440,7 @@ public class EndproductController {
                 itemDepEndOutController.setInform(ans[i][6].substring(0,19), ans[i][1], ans[i][5], ans[i][8], ans[i][9],endSection,this);
                 this.raw_items_out2.getChildren().add(node);
             }
-        } catch (SQLException e) {
+      } catch (SQLException e) {
             e.printStackTrace();
         }
     }
