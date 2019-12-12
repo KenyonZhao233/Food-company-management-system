@@ -73,6 +73,14 @@ public class ManageSection {
         return ans;
     }
 
+    public void ResetPsw(String staffs) throws SQLException
+    {
+        String[] a = {"string"};
+        String[] b = {staffs};
+        String sql = "Call ResetS(?)";
+        this.staff.ExcuteDoes(sql, a, b);
+    }
+
     public String[][] Simple_Search(String search) throws SQLException
     {
         String[][] ans = this.staff.Search("select * from staff where staff_id = '" + search + "';");

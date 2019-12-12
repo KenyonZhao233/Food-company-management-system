@@ -89,7 +89,7 @@ public class RawItemController {
         catch (SQLException se)
         {
             se.printStackTrace();
-            this.productionPlanController.getPlanSection().getStaff().showAlert(Alert.AlertType.ERROR, "错误", "删除失败", "系统错误");
+            this.productionPlanController.getPlanSection().getStaff().showAlert(Alert.AlertType.ERROR, "错误", "删除失败", "不可删除");
         }
     }
 }

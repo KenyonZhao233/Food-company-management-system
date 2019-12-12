@@ -95,7 +95,20 @@
                   <Insets left="50.0" />
                </padding>
             </Button>
-            <Label prefHeight="133.0" prefWidth="14.0" />
+            <Label />
+            <Button fx:id="roleCz" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onMouseClicked="#handleClicks" prefHeight="42.0" prefWidth="259.0" stylesheets="@../css/style.css" text="密码重置">
+               <graphic>
+                  <ImageView fitHeight="23.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../icon/icons8_Search_52px.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <padding>
+                  <Insets left="50.0" />
+               </padding>
+            </Button>
+            <Label prefHeight="75.0" prefWidth="0.0" />
             <Button fx:id="btnSignout" alignment="TOP_LEFT" graphicTextGap="50.0" mnemonicParsing="false" onMouseClicked="#handleClicks" prefHeight="26.0" prefWidth="266.0" stylesheets="@../css/style.css" text="返回">
                <graphic>
                   <ImageView fitHeight="23.0" fitWidth="35.0" nodeOrientation="RIGHT_TO_LEFT" pickOnBounds="true" preserveRatio="true">
@@ -133,7 +146,7 @@
                         </VBox>
                         <VBox alignment="CENTER" prefHeight="92.0" prefWidth="155.0">
                            <children>
-                              <Label text="1500" textFill="#26bfbc">
+                              <Label text="8" textFill="#26bfbc">
                                  <font>
                                     <Font name="System Bold" size="26.0" />
                                  </font>
@@ -148,7 +161,7 @@
                                     <Font name="System Bold" size="26.0" />
                                  </font>
                               </Label>
-                              <Label prefHeight="20.0" prefWidth="139.0" text="Peding Orders" textFill="#e7e5e5" />
+                              <Label alignment="CENTER" prefHeight="20.0" prefWidth="139.0" text="Total Orders" textFill="#e7e5e5" />
                            </children>
                         </VBox>
                         <VBox alignment="CENTER" prefHeight="92.0" prefWidth="137.0">
@@ -440,7 +453,13 @@
                      </font>
                   </Label>
                </children></Pane>
-            <Pane fx:id="paneEmpty" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #000000;" visible="false" />
+            <Pane fx:id="paneCz" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #000000;">
+               <children>
+                  <TextField fx:id="resetText" layoutX="321.0" layoutY="329.0" prefHeight="32.0" prefWidth="264.0" promptText="search" style="-fx-background-color: #02030A; -fx-border-color: #B7C3D7; -fx-border-radius: 2em;" />
+                  <JFXButton fx:id="resetPw" layoutX="600.0" layoutY="330.0" onMouseClicked="#handleReset" text="重置密码" />
+               </children>
+            </Pane>
+            <Pane fx:id="paneEmpty" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #000000;" />
          </children>
       </StackPane>
    </children>

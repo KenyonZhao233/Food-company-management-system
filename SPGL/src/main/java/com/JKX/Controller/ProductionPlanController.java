@@ -9,7 +9,6 @@ import com.JKX.Model.Table.Raw;
 import com.calendarfx.view.print.TimeRangeView;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextField;
-import com.sun.javaws.util.JfxHelper;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -18,21 +17,25 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.chart.BarChart;
+import javafx.scene.chart.CategoryAxis;
+import javafx.scene.chart.NumberAxis;
+import javafx.scene.chart.XYChart;
 import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-import org.omg.CORBA.PRIVATE_MEMBER;
 
 import java.io.IOException;
-import java.net.URL;
 import java.sql.SQLException;
-import java.util.ArrayList;
+import java.util.*;
 import java.util.List;
-import java.util.ResourceBundle;
 
 public class ProductionPlanController {
 
@@ -152,6 +155,8 @@ public class ProductionPlanController {
     private JFXTextField cpId1, cpName1, p11, p21, p31, bzq1;
     @FXML
     private JFXButton addCp;
+    @FXML
+    private JFXTextField cpHead;
 
     //原料管理界面
     //查询原料界面
@@ -177,6 +182,8 @@ public class ProductionPlanController {
     private JFXTextField rawId1, rawName1, rawPri1, rawBzq1;
     @FXML
     private JFXButton addRaw1;
+    @FXML
+    private JFXTextField rawHead;
 
    //销量分析页面
     @FXML
@@ -184,7 +191,13 @@ public class ProductionPlanController {
     @FXML
     private JFXButton searchXlonDate;
     @FXML
-    private BarChart ChartXl;
+    private Pane xlPane;
+
+
+    final NumberAxis yAxis = new NumberAxis(0, 10000, 100);
+    final CategoryAxis xAxis = new CategoryAxis();
+    final BarChart<String,Number> ChartXl =
+            new BarChart<String,Number>(xAxis,yAxis);
 
     public void initData(Staff staff)
     {
@@ -224,6 +237,14 @@ public class ProductionPlanController {
         this.CrawPri.setCellValueFactory(new PropertyValueFactory<Raw, Float>("raw_price"));
         this.CrawKc.setCellValueFactory(new PropertyValueFactory<Raw, Float>("raw_kc"));
 
+        xAxis.setLabel("产品");
+        yAxis.setLabel("销量");
+
+
+        this.xlPane.getChildren().add((Node)ChartXl);
+        this.ChartXl.minWidthProperty().bind(this.xlPane.widthProperty());
+        this.ChartXl.minHeightProperty().bind(this.xlPane.heightProperty());
+
         this.cpRawName.textProperty().addListener((observable, oldValue, newValue)-> {
             String trimed = newValue.trim();
             if (trimed.length() > 0) {
@@ -237,6 +258,21 @@ public class ProductionPlanController {
                 this.handleCpnameChange(trimed);
             }
         });
+
+        this.cpHead.textProperty().addListener((observable, oldValue, newValue)-> {
+            String trimed = newValue.trim();
+            if (trimed.length() > 0) {
+                this.handleCpheadChange(trimed);
+            }
+        });
+
+        this.rawHead.textProperty().addListener((observable, oldValue, newValue)-> {
+            String trimed = newValue.trim();
+            if (trimed.length() > 0) {
+                this.handleRawheadChange(trimed);
+            }
+        });
+
         try {
             int[] qx = this.planSection.SearchQx();
             if(qx[0] == 0)
@@ -250,6 +286,36 @@ public class ProductionPlanController {
         {
             se.printStackTrace();
             Staff.showAlert(Alert.AlertType.ERROR, "错误", "权限查询失败", "系统错误");
+        }
+    }
+
+    private void handleRawheadChange(String trimed) {
+        try
+        {
+            if(this.rawHead.getText().length() != 3)
+                this.addRaw1.setDisable(true);
+            else
+                this.rawId1.setText(this.planSection.getNewRawId(this.rawHead.getText()));
+        }
+        catch (SQLException se)
+        {
+            se.printStackTrace();
+            Staff.showAlert(Alert.AlertType.ERROR, "错误", "查询失败", "系统错误");
+        }
+    }
+
+    private void handleCpheadChange(String trimed) {
+        try
+        {
+            if(this.cpHead.getText().length() != 3)
+                this.addCp.setDisable(true);
+            else
+                this.cpId1.setText(this.planSection.getNewCpId(this.cpHead.getText()));
+        }
+        catch (SQLException se)
+        {
+            se.printStackTrace();
+            Staff.showAlert(Alert.AlertType.ERROR, "错误", "查询失败", "系统错误");
         }
     }
 
@@ -284,10 +350,12 @@ public class ProductionPlanController {
             this.PlanId.setText(this.planSection.GetNumber());
             this.PlanGlpane.toFront();
         }
-        else if(actionBtn == this.ChangeCp)
+        else if(actionBtn == this.ChangeCp) {
             this.ChangeCppane.toFront();
-        else if(actionBtn == this.ChangeRaw)
+        }
+        else if(actionBtn == this.ChangeRaw) {
             this.ChangeRawPane.toFront();
+        }
         else if(actionBtn == this.SearchXl)
             this.searchXlPane.toFront();
         else if(actionBtn == this.btnSignout)
@@ -851,7 +919,7 @@ public class ProductionPlanController {
     }
 
     public void handleRaw(MouseEvent mouseEvent) {
-        if(this.rawName1.getText().isEmpty() || this.rawPri1.getText().isEmpty() || this.rawBzq1.getText().isEmpty())
+        if(this.rawHead.getText().isEmpty() || this.rawName1.getText().isEmpty() || this.rawPri1.getText().isEmpty() || this.rawBzq1.getText().isEmpty())
         {
             this.planSection.getStaff().showAlert(Alert.AlertType.ERROR, "错误", "添加失败", "请填写完整信息");
         }
@@ -869,6 +937,34 @@ public class ProductionPlanController {
     }
 
     public void handleSearchXl(MouseEvent mouseEvent) {
+        this.ChartXl.getData().clear();
+        ObservableList<XYChart.Series<String, Number>> list_data = FXCollections.observableArrayList();
+        XYChart.Series<String, Number> xy = new XYChart.Series<String, Number>();
+        ObservableList<XYChart.Data<String, Number> > data = FXCollections.observableArrayList();
+        String sates = this.timeXl.getStartDate().toString();
+        String elates = this.timeXl.getEndDate().toString();
+        try {
+            HashMap<String, Integer> hashMap = this.planSection.searchXl(sates, elates);
+            Iterator<Map.Entry<String, Integer>> iter = hashMap.entrySet().iterator();
+            int max = -1;
+            while (iter.hasNext()) {
+                Map.Entry<String, Integer> entry = iter.next();
+                Object key = entry.getKey();
+                Object val = entry.getValue();
+                System.out.println(val);
+                data.add(new XYChart.Data<String,Number>(key.toString(),(int)val));
+                max = Math.max(max, (int)val);
+            }
+            xy.setData(data);
+            list_data.add(xy);
+            this.yAxis.setUpperBound(max + 1000);
+            this.ChartXl.setData(list_data);
+        }catch (SQLException se)
+        {
+            se.printStackTrace();
+            Staff.showAlert(Alert.AlertType.ERROR, "错误", "查询失败", "系统错误");
+        }
+
     }
 
     public void handleCpnameChange(String s)
@@ -887,7 +983,7 @@ public class ProductionPlanController {
     }
 
     public void handleAddCp(MouseEvent mouseEvent) {
-        if(this.cpId1.getText().isEmpty() || this.cpName1.getText().isEmpty() || this.p11.getText().isEmpty() || this.p21.getText().isEmpty() || this.p31.getText().isEmpty() || this.bzq1.getText().isEmpty())
+        if(this.cpHead.getText().isEmpty() || this.cpId1.getText().isEmpty() || this.cpName1.getText().isEmpty() || this.p11.getText().isEmpty() || this.p21.getText().isEmpty() || this.p31.getText().isEmpty() || this.bzq1.getText().isEmpty())
         {
             this.planSection.getStaff().showAlert(Alert.AlertType.ERROR, "错误", "添加失败", "请输入完整信息");
         }

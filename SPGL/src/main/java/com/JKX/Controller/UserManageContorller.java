@@ -26,6 +26,7 @@ import java.net.URL;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class UserManageContorller implements Initializable {
@@ -39,7 +40,7 @@ public class UserManageContorller implements Initializable {
 
     /*界面跳转按钮*/
     @FXML
-    private Button userChange, userAdd, userSearch, roleGrant, btnSignout;
+    private Button userChange, userAdd, userSearch, roleGrant, btnSignout,roleCz;
 
     /*业务实现组件-人员查询*/
     @FXML
@@ -103,6 +104,14 @@ public class UserManageContorller implements Initializable {
     @FXML
     private JFXButton changeRole;
 
+    /*重置密码*/
+    @FXML
+    private Pane paneCz;
+    @FXML
+    private JFXButton resetPw;
+    @FXML
+    private TextField resetText;
+
     @FXML
     private Pane pnlChange, pnlAdd, pnlSearch, paneEmpty, paneGrand;
 
@@ -127,6 +136,10 @@ public class UserManageContorller implements Initializable {
         }
         if(actionBtn == roleGrant){
             paneGrand.toFront();
+        }
+        if(actionBtn == roleCz)
+        {
+            paneCz.toFront();
         }
         if(actionBtn == btnSignout)
         {
@@ -350,6 +363,8 @@ public class UserManageContorller implements Initializable {
             this.vboxRaw.setDisable(true);
         if(staff.zw[6][2] == 0)
             this.vboxPlan.setDisable(true);
+        if(staff.zw[0][2] == 0)
+            this.roleCz.setDisable(false);
 
         this.changeRole.setDisable(true);
     }
@@ -643,6 +658,43 @@ public class UserManageContorller implements Initializable {
         catch (SQLException se)
         {
             se.printStackTrace();
+        }
+    }
+
+    public void handleReset(MouseEvent mouseEvent) {
+        if(this.resetText.getText().isEmpty())
+        {
+            Staff.showAlert(Alert.AlertType.ERROR, "错误", "查询失败", "请填写完整信息");
+        }
+        else
+        {
+            System.out.println("sd");
+            try {
+                String[][] ans = this.manageSection.Simple_Search(this.resetText.getText());
+                if(ans.length == 1)
+                {
+                    Staff.showAlert(Alert.AlertType.ERROR, "错误", "查询失败", "未查询到该员工");
+                }
+                else
+                {
+                    Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                    alert.setContentText("确认将" + ans[1][0] + "的密码重置？");
+                    Optional result = alert.showAndWait();
+                    if (result.get() == ButtonType.OK) {
+                        try {
+                            this.manageSection.ResetPsw(ans[1][0]);
+                            Staff.showAlert(Alert.AlertType.INFORMATION, "成功", "重置成功", "密码已重置为身份证后六位,请及时修改");
+                        } catch (SQLException e) {
+                            Staff.showAlert(Alert.AlertType.ERROR, "错误", "查询失败", "系统错误");
+                        }
+                    }
+                }
+            }
+            catch (SQLException se)
+            {
+                se.printStackTrace();
+                Staff.showAlert(Alert.AlertType.ERROR, "错误", "查询失败", "系统错误");
+            }
         }
     }
 }

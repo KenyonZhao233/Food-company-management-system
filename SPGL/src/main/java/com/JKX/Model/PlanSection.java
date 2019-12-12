@@ -97,22 +97,28 @@ public class PlanSection {
         return res;
     }
 
-    public String getNewCpId() throws SQLException
+    public String getNewCpId(String head) throws SQLException
     {
-        String sql = "SELECT product_id " +
-                     "FROM product " +
-                     "ORDER BY product_id DESC LIMIT 1";
+        String sql = "SELECT SUBSTR(product.product_id FROM 3) " +
+                    "FROM product " +
+                    "WHERE SUBSTR(product.product_id FROM 1 FOR 3) = '" + head + "' " +
+                    "ORDER BY SUBSTR(product.product_id FROM 3) DESC LIMIT 1;";
         String[][] ans = this.staff.Search(sql);
-        return  String.format("%06d", Integer.parseInt(ans[1][0]) + 1);
+        if(ans.length == 1)
+            return "00000";
+        return  String.format("%05d", Integer.parseInt(ans[1][0]) + 1);
     }
 
-    public String getNewRawId() throws SQLException
+    public String getNewRawId(String head) throws SQLException
     {
-        String sql = "SELECT raw_id " +
-                     "FROM raw " +
-                     "ORDER BY raw_id DESC LIMIT 1";
+        String sql = "SELECT SUBSTR(raw.raw_id FROM 3) " +
+                "FROM raw " +
+                "WHERE SUBSTR(raw.raw_id FROM 1 FOR 3) = '" + head + "' " +
+                "ORDER BY SUBSTR(raw.raw_id FROM 3) DESC LIMIT 1;";
         String[][] ans = this.staff.Search(sql);
-        return  String.format("%05d", Integer.parseInt(ans[1][0]) + 1);
+        if(ans.length == 1)
+            return "000000";
+        return  String.format("%06d", Integer.parseInt(ans[1][0]) + 1);
     }
 
     public Raw[] searchRawOnId(String id) throws SQLException
@@ -287,15 +293,14 @@ public class PlanSection {
         return res;
     }
 
-    public void deleteCp(String id) throws SQLException
+    public int deleteCp(String id) throws SQLException
     {
         //同样是小界面来解决问题，按编号来删除
         //如果有库存，那么不能删除
-        String[] a = {"string"};
-        String[] b = {id};
-        String[] c = {"string"};
-        String sql = "Call Delete_Cp()";
-        String[] ans = staff.ExcuteDoesReturn(sql, a, b, c);
+        String sql = "DELETE FROM product " +
+                     "WHERE product.product_id = '" + id + "'";
+        int res = this.staff.Does(sql);
+        return res;
     }
 
     public void changeCp(String id, Raw[] raws) throws SQLException
@@ -343,7 +348,7 @@ public class PlanSection {
         String[] a = {"date", "date"};
         String[] b = {d1, d2};
         String[][] ans = this.staff.ExcuteSearch(sql, a, b);
-        for (int i = 1; i < ans.length; i++)
+        for (int i = 1; i < Math.min(ans.length, 50); i++)
             hashMap.put(ans[i][0], Integer.valueOf(ans[i][1]));
         return hashMap;
     }

@@ -85,7 +85,7 @@ public class ProductItemController {
         catch (SQLException se)
         {
             se.printStackTrace();
-            this.productionPlanController.getPlanSection().getStaff().showAlert(Alert.AlertType.ERROR, "失败", "删除失败", "系统错误");
+            this.productionPlanController.getPlanSection().getStaff().showAlert(Alert.AlertType.ERROR, "失败", "删除失败", "不可删除");
         }
     }
 }

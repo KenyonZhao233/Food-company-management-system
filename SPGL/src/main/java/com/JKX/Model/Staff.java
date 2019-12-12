@@ -46,7 +46,7 @@ public class Staff {
         //使用存储过程修改其登录时间
         //查询在数据库中查询该员工的其他信息，并保存在对象的变量中。
         try {
-            String userInform[][] = mysqlConnect.Search("select * from staff , staff_job where staff.staff_id = '" + this.Uid + "' and staff.staff_id = staff_job.staff_id");
+            String userInform[][] = mysqlConnect.Search("select * from staff , staff_job where staff.staff_id = '" + this.Uid + "' and staff.staff_id = staff_job.staff_id and staff.staff_pw = MD5('" + this.password + "')");
             if(userInform.length == 1)
                 return false;
             this.Name = userInform[1][1];
