@@ -1,6 +1,7 @@
 package com.JKX.Controller.ItemController;
 
 import com.JKX.Controller.ProductionPlanController;
+import com.JKX.Model.Staff;
 import com.JKX.Model.Table.Production;
 import com.JKX.Model.Table.Raw;
 import com.jfoenix.controls.JFXButton;
@@ -8,14 +9,12 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 
 import java.sql.SQLException;
+import java.util.Optional;
 
 public class ProductItemController {
 
@@ -78,14 +77,20 @@ public class ProductItemController {
     }
 
     public void handleDelete(MouseEvent mouseEvent) {
-        try {
-            this.productionPlanController.getPlanSection().deleteCp(this.production.getProduction_id());
-            this.productionPlanController.deletevboxChangeCp(this.node);
-        }
-        catch (SQLException se)
-        {
-            se.printStackTrace();
-            this.productionPlanController.getPlanSection().getStaff().showAlert(Alert.AlertType.ERROR, "失败", "删除失败", "不可删除");
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setContentText("确认删除？");
+        Optional result = alert.showAndWait();
+        if (result.get() == ButtonType.OK) {
+            try {
+                this.productionPlanController.getPlanSection().deleteCp(this.production.getProduction_id());
+                this.productionPlanController.deletevboxChangeCp(this.node);
+                Staff.showAlert(Alert.AlertType.INFORMATION, "成功", "删除成功", "");
+            }
+            catch (SQLException se)
+            {
+                se.printStackTrace();
+                Staff.showAlert(Alert.AlertType.ERROR, "失败", "删除失败", "不可删除");
+            }
         }
     }
 }

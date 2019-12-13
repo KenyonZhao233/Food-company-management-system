@@ -25,11 +25,6 @@ public class StaffInformController {
         this.date.setText(date);
     }
 
-    public void test()
-    {
-        System.out.println("可以的");
-    }
-
     public void setContorller(UserManageContorller userManageContorller)
     {
         this.userManageContorller = userManageContorller;

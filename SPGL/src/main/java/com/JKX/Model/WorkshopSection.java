@@ -95,7 +95,7 @@ public class WorkshopSection {
         String[] a = {"string", "int", "int", "string"};
         String[] b = {id, String.valueOf(now), String.valueOf(aim), fzr};
         String sql = "Call Do_Plan(?, ?, ?, ?)";
-        this.staff.Does(sql);
+        this.staff.ExcuteDoes(sql, a, b);
     }
 
     public int changeZtOver(String id) throws SQLException//将状态改为待审核,修改完成时间并删除进度。

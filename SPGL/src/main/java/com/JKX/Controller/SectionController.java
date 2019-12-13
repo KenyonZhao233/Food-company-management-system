@@ -408,9 +408,6 @@ public class SectionController implements Initializable {
             this.activePage = 13;
         else if(actionBtn == this.btnSearchDfk || actionBtn == this.btnSearchDfk2)
             this.activePage = 14;
-        else{
-            System.out.println("None");
-        }
         //销量 * 2
         //
 

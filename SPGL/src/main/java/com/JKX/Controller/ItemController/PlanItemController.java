@@ -17,12 +17,14 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
+import javafx.util.Callback;
 
 import java.sql.SQLException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.Date;
+import java.util.Optional;
 
 
 public class PlanItemController {
@@ -85,26 +87,26 @@ public class PlanItemController {
             this.edate.setText(plan.getPlan_edate());
             this.zrr.setText(plan.getZrr());
             this.fzr.setText(plan.getZrr());
-//            final Callback<DatePicker, DateCell> dayCellFactory =
-//                    new Callback<DatePicker, DateCell>() {
-//                        @Override
-//                        public DateCell call(final DatePicker datePicker) {
-//                            return new DateCell() {
-//                                @Override
-//                                public void updateItem(LocalDate item, boolean empty) {
-//                                    super.updateItem(item, empty);
-//
-//                                    if (item.isBefore(
-//                                            deadline.getValue().plusDays(1))
-//                                    ) {
-//                                        setDisable(true);
-//                                        setStyle("-fx-background-color: #ffc0cb;");
-//                                    }
-//                                }
-//                            };
-//                        }
-//                    };
-//            deadline.setDayCellFactory(dayCellFactory);
+            final Callback<DatePicker, DateCell> dayCellFactory =
+                    new Callback<DatePicker, DateCell>() {
+                        @Override
+                        public DateCell call(final DatePicker datePicker) {
+                            return new DateCell() {
+                                @Override
+                                public void updateItem(LocalDate item, boolean empty) {
+                                    super.updateItem(item, empty);
+
+                                    if (item.isBefore(
+                                            deadline.getValue().plusDays(1))
+                                    ) {
+                                        setDisable(true);
+                                        setStyle("-fx-background-color: #ffc0cb;");
+                                    }
+                                }
+                            };
+                        }
+                    };
+            deadline.setDayCellFactory(dayCellFactory);
             this.deadline.setValue(LocalDate.of(Integer.parseInt(plan.getPlan_ddl().substring(0, 4)), Integer.parseInt(plan.getPlan_ddl().substring(5, 7)), Integer.parseInt(plan.getPlan_ddl().substring(8, 10))));
             this.zt.setText(plan.getPlan_zt());
             String z = plan.getPlan_zt();
@@ -151,6 +153,7 @@ public class PlanItemController {
             }
             else if(z.equals("待审核"))
             {
+                this.deadline.setDisable(true);
                 if(plan.getPlan_ddl().compareTo(plan.getPlan_sdate()) < 0)
                 {
                     this.edate.setTextFill(Color.RED);
@@ -281,16 +284,23 @@ public class PlanItemController {
         }
         else if(actionBtn == this.confirm)
         {
-            try {
-                this.productionPlanController.getPlanSection().confirmPlan(this.planId.getText());
-                this.progress.setProgress(1.0);
-                this.zt.setText("已完成");
-                this.confirm.setDisable(true);
-            }
-            catch (SQLException se)
-            {
-                se.printStackTrace();
-                Staff.showAlert(Alert.AlertType.ERROR, "错误", "删除失败", "系统错误");
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setContentText("确认审核通过该订单？" + this.planId.getText());
+            Optional result = alert.showAndWait();
+            if (result.get() == ButtonType.OK) {
+                try {
+                    this.productionPlanController.getPlanSection().confirmPlan(this.planId.getText());
+                    this.progress.setProgress(1.0);
+                    this.zt.setText("已完成");
+                    this.confirm.setDisable(true);
+                    this.productionPlanController.deleteVboxPlanSh(this.node);
+                    Staff.showAlert(Alert.AlertType.ERROR, "成功", "审核成功", "该订单已完成");
+                }
+                catch (SQLException se)
+                {
+                    se.printStackTrace();
+                    Staff.showAlert(Alert.AlertType.ERROR, "错误", "删除失败", "系统错误");
+                }
             }
         }
     }
@@ -310,55 +320,68 @@ public class PlanItemController {
             this.plan.setPlan_zt("待审核");
             this.workshopController.getWorkshopSection().changeZtOver(this.plan.getPlan_id());
             this.workshopController.deleteVbox2(this.node);
+            Staff.showAlert(Alert.AlertType.INFORMATION, "成功", "该订单已交付审核", "完成时间：" + date);
         }
         catch (SQLException se)
         {
             se.printStackTrace();
-            this.workshopController.getWorkshopSection().getStaff().showAlert(Alert.AlertType.ERROR, "错误", "完成失败", "系统错误");
+            Staff.showAlert(Alert.AlertType.ERROR, "错误", "完成失败", "系统错误");
         }
     }
 
     public void handlePush(MouseEvent mouseEvent) {
         if(this.pushNum.getText().isEmpty() )
         {
-            this.workshopController.getWorkshopSection().getStaff().showAlert(Alert.AlertType.ERROR, "错误", "交付失败", "请填写信息");
+            Staff.showAlert(Alert.AlertType.ERROR, "错误", "交付失败", "请填写信息");
         }
         else
         {
-            try {
-                this.nowNum += Integer.parseInt(this.pushNum.getText());
-                this.workshopController.getWorkshopSection().updatePlan(this.plan.getPlan_id(), Math.min(this.nowNum, this.aimNum));
-                if(this.nowNum >= this.aimNum)
-                {
-                    this.zt.setText(this.aimNum + "/" + this.aimNum);
-                    this.progress.setProgress(this.nowNum * (1.0) / this.aimNum);
-                    this.push.setVisible(false);
-                    this.complete.setVisible(true);
-                    this.pushNum.setVisible(false);
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setContentText("确认交付" + this.pushNum.getText() + "箱？");
+            Optional result = alert.showAndWait();
+            if (result.get() == ButtonType.OK) {
+                try {
+                    this.nowNum += Integer.parseInt(this.pushNum.getText());
+                    this.workshopController.getWorkshopSection().updatePlan(this.plan.getPlan_id(), Math.min(this.nowNum, this.aimNum));
+                    if(this.nowNum >= this.aimNum)
+                    {
+                        this.zt.setText(this.aimNum + "/" + this.aimNum);
+                        this.progress.setProgress(this.nowNum * (1.0) / this.aimNum);
+                        this.push.setVisible(false);
+                        this.complete.setVisible(true);
+                        this.pushNum.setVisible(false);
+                    }
+                    else
+                    {
+                        this.zt.setText(this.nowNum + "/" + this.aimNum);
+                        this.progress.setProgress(this.nowNum * (1.0) / this.aimNum);
+                    }
+                    Staff.showAlert(Alert.AlertType.INFORMATION, "成功", "交付成功", "已交付" + this.pushNum.getText() + "箱");
                 }
-                else
+                catch (SQLException se)
                 {
-                    this.zt.setText(this.nowNum + "/" + this.aimNum);
-                    this.progress.setProgress(this.nowNum * (1.0) / this.aimNum);
+                    se.printStackTrace();
+                    Staff.showAlert(Alert.AlertType.ERROR, "错误", "交付失败", "系统错误");
                 }
-            }
-            catch (SQLException se)
-            {
-                se.printStackTrace();
-                this.workshopController.getWorkshopSection().getStaff().showAlert(Alert.AlertType.ERROR, "错误", "交付失败", "系统错误");
             }
         }
     }
 
     public void handleDo(MouseEvent mouseEvent) {
-        try {
-            this.workshopController.getWorkshopSection().changeZtDo(this.plan.getPlan_id(), 0, this.plan.getProduction().getNums(), this.workshopController.getWorkshopSection().getStaff().Name);
-            this.workshopController.deleteVbox1(this.node);
-        }
-        catch (SQLException se)
-        {
-            se.printStackTrace();
-            this.workshopController.getWorkshopSection().getStaff().showAlert(Alert.AlertType.ERROR, "错误", "执行失败", "系统错误");
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setContentText("确认执行该计划？");
+        Optional result = alert.showAndWait();
+        if (result.get() == ButtonType.OK) {
+            try {
+                this.workshopController.getWorkshopSection().changeZtDo(this.plan.getPlan_id(), 0, this.plan.getProduction().getNums(), this.workshopController.getWorkshopSection().getStaff().Name);
+                this.workshopController.deleteVbox1(this.node);
+                Staff.showAlert(Alert.AlertType.INFORMATION, "成功", "操作成功", "该订单开始执行");
+            }
+            catch (SQLException se)
+            {
+                se.printStackTrace();
+                Staff.showAlert(Alert.AlertType.ERROR, "错误", "执行失败", "系统错误");
+            }
         }
     }
 }
