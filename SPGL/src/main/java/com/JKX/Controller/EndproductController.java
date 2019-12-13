@@ -62,6 +62,9 @@ public class EndproductController {
     private AnchorPane all;
 
     @FXML
+    private Label idname;
+
+    @FXML
     private Button menuHomepage;
 
     @FXML
@@ -194,6 +197,7 @@ public class EndproductController {
     }
 
     public void initData(Staff staff) throws SQLException {
+        idname.setText(staff.Name + "\r\n" + staff.Uid);
         endSection = new EndSection(staff);
         animation.setCycleCount(Timeline.INDEFINITE);
         animation.play();

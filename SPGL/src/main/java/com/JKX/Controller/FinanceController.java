@@ -49,6 +49,9 @@ public class FinanceController {
     private AnchorPane all;
 
     @FXML
+    private Label idname;
+
+    @FXML
     private Button menuHomepage;
 
     @FXML
@@ -315,6 +318,7 @@ public class FinanceController {
     }
 
     public void initData(Staff staff) throws SQLException {
+        idname.setText(staff.Name + "\r\n" + staff.Uid);
         financeSection = new FinanceSection(staff);
         animation.setCycleCount(Timeline.INDEFINITE);
         animation.play();

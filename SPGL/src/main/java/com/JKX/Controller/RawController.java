@@ -61,6 +61,9 @@ public class RawController {
     private AnchorPane all;
 
     @FXML
+    private Label idname;
+
+    @FXML
     private Button menuHomepage;
 
     @FXML
@@ -446,6 +449,9 @@ public class RawController {
     }
 
     public void initData(Staff staff) throws SQLException {
+
+        idname.setText(staff.Name + "\r\n" + staff.Uid);
+
         rawSection = new RawSection(staff);
         animation.setCycleCount(Timeline.INDEFINITE);
         animation.play();

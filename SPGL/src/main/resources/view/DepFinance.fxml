@@ -26,7 +26,7 @@
                <VBox.margin>
                   <Insets bottom="10.0" top="50.0" />
                </VBox.margin></ImageView>
-            <Label text="李华&#10;工号：100000000" textAlignment="CENTER" textFill="#e7e5e5">
+            <Label fx:id="idname" text="李华&#10;工号：100000000" textAlignment="CENTER" textFill="#e7e5e5">
                <VBox.margin>
                   <Insets bottom="20.0" />
                </VBox.margin>
