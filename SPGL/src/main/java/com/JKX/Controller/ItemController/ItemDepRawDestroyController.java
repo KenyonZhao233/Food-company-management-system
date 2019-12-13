@@ -68,7 +68,7 @@ public class ItemDepRawDestroyController {
         _alert.setContentText("是否销毁于" + this.time.getText().substring(0,19) + "入库\n编号为" + this.id.getText() + "的原材料？");
         Optional<ButtonType> result = _alert.showAndWait();
         if (result.get() == ButtonType.OK) {
-            rawSection.destory(this.id.getText(),this.time.getText());
+            rawSection.destory(this.id.getText(),this.time.getText(),count.getText());
         }
         rawController.fresh(event);
     }

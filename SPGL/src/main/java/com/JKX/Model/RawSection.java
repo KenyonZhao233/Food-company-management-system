@@ -46,7 +46,7 @@ public class RawSection {
             staff.Does("insert into raw_rec values('" +formatter.format(date) +  "','" + id + "','出库'," + mn + ",'" + Uid + "')");
         }
         else if(res == 0){
-            staff.Does("delete raw_ck  where raw_date = '"+ time +"'");
+            staff.Does("delete from raw_ck  where raw_date = '"+ time +"'");
             staff.Does("insert into raw_rec values('" +formatter.format(date) +  "','" + id  + "','出库'," + mn + ",'" + Uid + "')");
         }
         else{
@@ -111,12 +111,16 @@ public class RawSection {
         Date date = new Date(System.currentTimeMillis());
         String t = "insert into raw_ck values('" +formatter.format(date) +  "','" + id + "'," + rm + ",'" + in + "')";
         staff.Does(t);
+        staff.Does("insert into raw_rec values('" +formatter.format(date) +  "','" + id  + "','入库'," + rm + ",'" + staff.Uid + "')");
         return true;
     }
 
-    public boolean destory(String id, String time) throws SQLException
+    public boolean destory(String id, String time,String mn) throws SQLException
     {
+        SimpleDateFormat formatter= new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        Date date = new Date(System.currentTimeMillis());
         staff.Does("delete from raw_ck where raw_id = '" + id + "' and raw_date = '" + time + "'");
+        staff.Does("insert into raw_rec values('" +formatter.format(date) +  "','" + id  + "','销毁'," + mn + ",'" + staff.Uid + "')");
         return true;
     }
 

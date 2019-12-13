@@ -159,7 +159,7 @@ public class EndSection {
             staff.Does("insert into product_rec values('" +formatter.format(date) +  "','" + id[1][0] + "','出库'," + mn + ",'" + Uid + "')");
         }
         else if(res == 0){ String id[][] = staff.Search("select product_id from product where product_name = '"+ name +"'");
-        staff.Does("delete product_ck  where product_date = '"+ time +"'");
+        staff.Does("delete from product_ck  where product_date = '"+ time +"'");
         staff.Does("insert into product_rec values('" +formatter.format(date) +  "','" + id[1][0]  + "','出库'," + mn + ",'" + Uid + "')");
         }
         else{

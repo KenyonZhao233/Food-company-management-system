@@ -258,15 +258,15 @@
             </Pane>
             <Pane fx:id="pageStorage" prefHeight="554.0" prefWidth="545.0" style="-fx-background-color: #02030A;">
                <children>
-                  <TextField fx:id="input_text11" alignment="CENTER" layoutX="172.0" layoutY="108.0" prefHeight="25.0" prefWidth="147.0" promptText="请输入入库原料编号" style="-fx-background-color: #02030A; -fx-border-color: #B7C3D7; -fx-border-radius: 2em;" />
+                  <TextField fx:id="input_text1" alignment="CENTER" layoutX="172.0" layoutY="108.0" prefHeight="25.0" prefWidth="147.0" promptText="请输入入库原料编号" style="-fx-background-color: #02030A; -fx-border-color: #B7C3D7; -fx-border-radius: 2em;" />
                   <Label layoutX="283.0" layoutY="53.0" text="原料入库作业系统" textFill="#e7e5e5">
                      <font>
                         <Font size="24.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="input_text21" alignment="CENTER" layoutX="479.0" layoutY="108.0" prefHeight="25.0" prefWidth="92.0" promptText="入库仓库编号" style="-fx-background-color: #02030A; -fx-border-color: #B7C3D7; -fx-border-radius: 2em;" />
+                  <TextField fx:id="input_text2" alignment="CENTER" layoutX="479.0" layoutY="108.0" prefHeight="25.0" prefWidth="92.0" promptText="入库仓库编号" style="-fx-background-color: #02030A; -fx-border-color: #B7C3D7; -fx-border-radius: 2em;" />
                   <Button fx:id="input1" layoutX="606.0" layoutY="107.0" mnemonicParsing="false" onMouseClicked="#click_input" prefHeight="27.0" prefWidth="72.0" style="-fx-background-color: green;" text="入库" textFill="WHITE" />
-                  <TextField fx:id="input_text31" alignment="CENTER" layoutX="335.0" layoutY="108.0" prefHeight="25.0" prefWidth="132.0" promptText="原料数量" style="-fx-background-color: #02030A; -fx-border-color: #B7C3D7; -fx-border-radius: 2em;" />
+                  <TextField fx:id="input_text3" alignment="CENTER" layoutX="335.0" layoutY="108.0" prefHeight="25.0" prefWidth="132.0" promptText="原料数量" style="-fx-background-color: #02030A; -fx-border-color: #B7C3D7; -fx-border-radius: 2em;" />
                   <HBox alignment="CENTER_LEFT" layoutX="20.0" layoutY="157.0" prefHeight="42.0" prefWidth="746.0" spacing="50.0" style="-fx-background-color: #02030A;">
                      <children>
                         <Label text="入库时间" textFill="#e7e5e5">
