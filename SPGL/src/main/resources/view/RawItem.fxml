@@ -8,21 +8,21 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<ScrollPane hbarPolicy="NEVER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="129.0" prefWidth="650.0" vbarPolicy="NEVER" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.JKX.Controller.ItemController.RawItemController">
+<ScrollPane hbarPolicy="NEVER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="129.0" prefWidth="1006.0" vbarPolicy="NEVER" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.JKX.Controller.ItemController.RawItemController">
   <content>
-    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="129.0" prefWidth="649.0">
+    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="129.0" prefWidth="1003.0">
          <children>
             <ImageView fitHeight="86.0" fitWidth="95.0" layoutX="21.0" layoutY="13.0" pickOnBounds="true" preserveRatio="true" />
-            <Label layoutX="144.0" layoutY="14.0" text="原料编号：" />
-            <Label layoutX="144.0" layoutY="46.0" text="原料名称：" />
-            <Label layoutX="381.0" layoutY="14.0" text="原料单价：" />
-            <Label layoutX="396.0" layoutY="46.0" text="保质期：" />
-            <Label fx:id="rawid" layoutX="219.0" layoutY="14.0" prefHeight="20.0" prefWidth="142.0" />
-            <JFXButton fx:id="change" layoutX="470.0" layoutY="84.0" onMouseClicked="#handleChange" text="修改" />
-            <JFXButton fx:id="delete" layoutX="573.0" layoutY="84.0" onMouseClicked="#handleDelete" text="删除" />
-            <JFXTextField fx:id="rawname" layoutX="214.0" layoutY="41.0" prefHeight="30.0" prefWidth="157.0" />
-            <JFXTextField fx:id="rawpri" layoutX="449.0" layoutY="9.0" prefHeight="30.0" prefWidth="157.0" />
-            <JFXTextField fx:id="bzq" layoutX="449.0" layoutY="41.0" prefHeight="30.0" prefWidth="157.0" />
+            <Label layoutX="772.0" layoutY="14.0" text="原料编号：" />
+            <Label layoutX="142.0" layoutY="14.0" text="原料名称：" />
+            <Label layoutX="375.0" layoutY="55.0" text="原料单价：" />
+            <Label layoutX="600.0" layoutY="89.0" text="保质期：" />
+            <Label fx:id="rawid" layoutX="847.0" layoutY="14.0" prefHeight="20.0" prefWidth="142.0" />
+            <JFXButton fx:id="change" layoutX="836.0" layoutY="84.0" onMouseClicked="#handleChange" text="修改" />
+            <JFXButton fx:id="delete" layoutX="939.0" layoutY="84.0" onMouseClicked="#handleDelete" text="删除" />
+            <JFXTextField fx:id="rawname" layoutX="212.0" layoutY="9.0" prefHeight="30.0" prefWidth="157.0" />
+            <JFXTextField fx:id="rawpri" layoutX="443.0" layoutY="50.0" prefHeight="30.0" prefWidth="157.0" />
+            <JFXTextField fx:id="bzq" layoutX="653.0" layoutY="84.0" prefHeight="30.0" prefWidth="157.0" />
             <ImageView fitHeight="94.0" fitWidth="101.0" layoutX="18.0" layoutY="18.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../icon/食物原料.png" />

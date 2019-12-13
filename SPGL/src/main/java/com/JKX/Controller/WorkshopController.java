@@ -86,8 +86,6 @@ public class WorkshopController {
 
                         PlanItemController planItemController = loader.<PlanItemController>getController();
                         planItemController.setWorkshopController(this);
-                        planItemController.setInform(plans[i], 0);
-                        planItemController.setNode(node);
                         planItemController.setConfirmVisable(false);
                         planItemController.setDeleteVisable(false);
                         planItemController.setChangeVisable(false);
@@ -96,6 +94,8 @@ public class WorkshopController {
                         planItemController.setPushVisable(false);
                         planItemController.setDoPlanVisable(true);
                         planItemController.setDeadlineEditable(false);
+                        planItemController.setInform(plans[i], 0);
+                        planItemController.setNode(node);
 
                         vBox1.getChildren().add(node);
                     }
@@ -126,14 +126,14 @@ public class WorkshopController {
 
                         PlanItemController planItemController = loader.<PlanItemController>getController();
                         planItemController.setWorkshopController(this);
-                        planItemController.setInform(plans[i], 0);
-                        planItemController.setNode(node);
                         planItemController.setConfirmVisable(false);
                         planItemController.setDeleteVisable(false);
                         planItemController.setChangeVisable(false);
                         planItemController.setNumEditable(false);
                         planItemController.setPushNumVisable(true);
                         planItemController.setPushVisable(true);
+                        planItemController.setInform(plans[i], 0);
+                        planItemController.setNode(node);
 
                         vBox2.getChildren().add(node);
                     }

@@ -393,7 +393,10 @@ public class ProductionPlanController {
 
     }
 
-
+    public void deleteVboxPlanSh(Node node)
+    {
+        this.vboxPlanSh.getChildren().remove(node);
+    }
 
     public void handleSearchRaw(MouseEvent mouseEvent) {
         Button actionBtn = (Button) mouseEvent.getSource();
@@ -709,6 +712,7 @@ public class ProductionPlanController {
             {
                 try {
                     this.planSection.changeCpInform(this.cpId.getText(), this.cpName.getText(), this.p1.getText(), this.p2.getText(), this.p3.getText(), this.bzq.getText());
+                    this.planSection.getStaff().showAlert(Alert.AlertType.INFORMATION, "提示", "修改成功！", "已修改成品基本信息");
                 }
                 catch (SQLException se)
                 {
@@ -721,7 +725,7 @@ public class ProductionPlanController {
         {
             if(this.cpRawName.getText().isEmpty() || this.cpRawPrice.getText().isEmpty() || this.cpRawNum.getText().isEmpty())
             {
-                this.planSection.getStaff().showAlert(Alert.AlertType.INFORMATION, "警告", "添加失败", "请填写完整信息");
+                Staff.showAlert(Alert.AlertType.INFORMATION, "警告", "添加失败", "请填写完整信息");
             }
             else
             {
@@ -739,6 +743,7 @@ public class ProductionPlanController {
                     productRawController.setIds(this.cpId.getText());
 
                     vboxChangeCPRaw.getChildren().add(node);
+                    Staff.showAlert(Alert.AlertType.INFORMATION, "提示", "添加成功！", "已为" + this.cpId.getText() + "添加" + this.cpRawName.getText() + this.cpRawNum.getText() + "kg");
                 }
                 catch (SQLException | IOException se)
                 {
@@ -773,7 +778,7 @@ public class ProductionPlanController {
             catch (SQLException se)
             {
                 se.printStackTrace();
-                this.planSection.getStaff().showAlert(Alert.AlertType.ERROR, "错误", "查询失败", "系统错误");
+                Staff.showAlert(Alert.AlertType.ERROR, "错误", "查询失败", "系统错误");
             }
         }
         else if(actionBtn == this.searchCp1)
@@ -887,7 +892,7 @@ public class ProductionPlanController {
             catch (SQLException | IOException se)
             {
                 se.printStackTrace();
-                this.planSection.getStaff().showAlert(Alert.AlertType.ERROR, "错误", "查询失败", "系统错误");
+                Staff.showAlert(Alert.AlertType.ERROR, "错误", "查询失败", "系统错误");
             }
         }
     }
@@ -934,18 +939,18 @@ public class ProductionPlanController {
     public void handleRaw(MouseEvent mouseEvent) {
         if(this.rawHead.getText().isEmpty() || this.rawName1.getText().isEmpty() || this.rawPri1.getText().isEmpty() || this.rawBzq1.getText().isEmpty())
         {
-            this.planSection.getStaff().showAlert(Alert.AlertType.ERROR, "错误", "添加失败", "请填写完整信息");
+            Staff.showAlert(Alert.AlertType.ERROR, "错误", "添加失败", "请填写完整信息");
         }
         else{
             try {
                 Raw raw = new Raw(this.rawHead.getText() + this.rawId1.getText(), this.rawName1.getText(), Integer.parseInt(this.rawBzq1.getText()), Float.parseFloat(this.rawPri1.getText()));
                 this.planSection.addRaw(raw);
-                this.planSection.getStaff().showAlert(Alert.AlertType.INFORMATION, "成功", "添加成功", "商品编号:" + this.cpId1.getText());
+                Staff.showAlert(Alert.AlertType.INFORMATION, "成功", "添加成功", "商品编号:" + this.cpId1.getText());
             }
             catch (SQLException se)
             {
                 se.printStackTrace();
-                this.planSection.getStaff().showAlert(Alert.AlertType.ERROR, "错误", "添加失败", "系统错误");
+                Staff.showAlert(Alert.AlertType.ERROR, "错误", "添加失败", "系统错误");
             }
         }
     }
@@ -965,7 +970,6 @@ public class ProductionPlanController {
                 Map.Entry<String, Integer> entry = iter.next();
                 Object key = entry.getKey();
                 Object val = entry.getValue();
-                System.out.println(val);
                 data.add(new XYChart.Data<String,Number>(key.toString(),(int)val));
                 max = Math.max(max, (int)val);
             }
@@ -992,26 +996,26 @@ public class ProductionPlanController {
         }
         catch (SQLException se)
         {
-            this.planSection.getStaff().showAlert(Alert.AlertType.ERROR, "错误", "查询失败", "系统错误");
+            Staff.showAlert(Alert.AlertType.ERROR, "错误", "查询失败", "系统错误");
         }
     }
 
     public void handleAddCp(MouseEvent mouseEvent) {
         if(this.cpHead.getText().isEmpty() || this.cpId1.getText().isEmpty() || this.cpName1.getText().isEmpty() || this.p11.getText().isEmpty() || this.p21.getText().isEmpty() || this.p31.getText().isEmpty() || this.bzq1.getText().isEmpty())
         {
-            this.planSection.getStaff().showAlert(Alert.AlertType.ERROR, "错误", "添加失败", "请输入完整信息");
+            Staff.showAlert(Alert.AlertType.ERROR, "错误", "添加失败", "请输入完整信息");
         }
         else
         {
             try {
                 Production production = new Production(this.cpHead.getText() + this.cpId1.getText(), this.cpName1.getText(), Float.parseFloat(this.p11.getText()), Float.parseFloat(this.p21.getText()), Float.parseFloat(this.p31.getText()), Integer.parseInt(this.bzq1.getText()), null, 0);
                 this.planSection.addCp(production);
-                this.planSection.getStaff().showAlert(Alert.AlertType.INFORMATION, "成功", "添加成功", "商品编号:" + this.cpId1.getText());
+                Staff.showAlert(Alert.AlertType.INFORMATION, "成功", "添加成功", "商品编号:" + this.cpId1.getText());
             }
             catch (Exception ex)
             {
                 ex.printStackTrace();
-                this.planSection.getStaff().showAlert(Alert.AlertType.ERROR, "错误", "添加失败", "系统错误");
+                Staff.showAlert(Alert.AlertType.ERROR, "错误", "添加失败", "系统错误");
             }
         }
     }
@@ -1025,13 +1029,17 @@ public class ProductionPlanController {
             {
                 if(this.Cpname.getText().isEmpty() || this.Cpnum.getText().isEmpty())
                 {
-                    this.planSection.getStaff().showAlert(Alert.AlertType.ERROR, "错误", "添加失败", "请填写完整信息");
+                    Staff.showAlert(Alert.AlertType.ERROR, "错误", "添加失败", "请填写完整信息");
                 }
                 else
                  {
                     Production[] production = this.planSection.searchCpOnName(this.Cpname.getText());
                     if (production.length == 0) {
-                        this.planSection.getStaff().showAlert(Alert.AlertType.ERROR, "错误", "添加失败", "未查询到该成品");
+                        Staff.showAlert(Alert.AlertType.ERROR, "错误", "添加失败", "未查询到该成品");
+                    }
+                    else if(production[0].getRaws().length == 0)
+                    {
+                        Staff.showAlert(Alert.AlertType.ERROR, "错误", "添加失败", "请先为其添加原料!");
                     }
                     else {
                         production[0].setNums(Integer.parseInt(this.Cpnum.getText()));
@@ -1045,13 +1053,12 @@ public class ProductionPlanController {
                             }
                         }
                         if (flag == 1) {
-                            this.planSection.getStaff().showAlert(Alert.AlertType.ERROR, "错误", "添加失败", "库存不足");
+                            Staff.showAlert(Alert.AlertType.ERROR, "错误", "添加失败", "库存不足");
                         }
                         else {
                             Plan plan = new Plan(this.PlanId.getText(), "待执行", production[0], "", "", this.planSection.getStaff().Name, "", this.planDdl.getValue().toString());
-                            System.out.println(this.planDdl.getValue().toString());
                             this.planSection.makePlan(plan);
-                            this.planSection.getStaff().showAlert(Alert.AlertType.INFORMATION, "成功", "添加成功", "计划编号" + this.PlanId.getText());
+                            Staff.showAlert(Alert.AlertType.INFORMATION, "成功", "添加成功", "计划编号" + this.PlanId.getText());
                         }
                     }
                 }
@@ -1059,7 +1066,7 @@ public class ProductionPlanController {
             catch (SQLException se)
             {
                 se.printStackTrace();
-                this.planSection.getStaff().showAlert(Alert.AlertType.ERROR, "错误", "添加失败", "系统错误");
+                Staff.showAlert(Alert.AlertType.ERROR, "错误", "添加失败", "系统错误");
             }
         }
     }

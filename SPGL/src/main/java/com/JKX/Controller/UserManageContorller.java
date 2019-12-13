@@ -213,7 +213,7 @@ public class UserManageContorller implements Initializable {
             try {
                 String[] a = {"string", "string", "string", "string", "string", "string", "string", "string"};
                 int nums = this.manageSection.Update_User(this.preUid, this.preBm, this.preZw,this.bmText.getValue(), this.zwText.getValue(), this.nameText.getText(), this.sexText.getValue(), this.sfzText.getText());
-                System.out.println("删除成功！");
+                Staff.showAlert(Alert.AlertType.INFORMATION, "成功", "修改成功", "员工编号为：" + this.preUid);
                 SearchUser(this.textInform, this.v2);
             }
             catch (SQLException se)
@@ -225,7 +225,7 @@ public class UserManageContorller implements Initializable {
         {
             try {
                 int nums = this.manageSection.Delete_User(this.uidText.getText(), this.bmText.getValue(), this.zwText.getValue());
-                System.out.println("删除成功！");
+                Staff.showAlert(Alert.AlertType.INFORMATION, "成功", "删除成功", "员工编号为：" + this.uidText.getText());
                 SearchUser(this.textInform, this.v2);
              }
             catch (SQLException se)
@@ -259,13 +259,12 @@ public class UserManageContorller implements Initializable {
                     bmm = this.glyCheck.getText();
             }
             String[] ans = this.manageSection.Add_User(this.uidAddText.getText(), this.sectionCombox.getValue(), bmm, this.nameAddText.getText(), this.sexAddText.getValue(), this.sfzAddText.getText(), this.psw.getText());
-            System.out.println(ans[0]);
             if(ans[0].equals("1")) {
                 this.clearAdd();
-                System.out.println("添加成功！");
+                Staff.showAlert(Alert.AlertType.INFORMATION, "成功", "添加成功", "员工编号为：" + this.uidAddText.getText());
             }
             else if(ans[0].equals("0"))
-                System.out.println("添加失败！");
+                Staff.showAlert(Alert.AlertType.INFORMATION, "失败", "添加失败", "已存在该条信息");
         }
     }
 
@@ -440,6 +439,7 @@ public class UserManageContorller implements Initializable {
         catch (SQLException se)
         {
             se.printStackTrace();
+            Staff.showAlert(Alert.AlertType.ERROR, "失败", "查询失败", "系统错误");
         }
     }
 
@@ -489,23 +489,7 @@ public class UserManageContorller implements Initializable {
                     this.Grantid.setText(ans[1][0]);
                     this.Grantname.setText(ans[1][3]);
                     int[][] zw = this.manageSection.searchZw(ans[1][0]);
-                    for(int i = 1; i <=6; i++)
-                    {
-                        for(int j = 0; j <= 2; j++)
-                        {
-                            System.out.print(zw[i][j] + " ");
-                        }
-                        System.out.println();
-                    }
                     int[][] qx = this.manageSection.SearchQx(ans[1][0], zw);
-                    for(int i = 1; i <=5; i++)
-                    {
-                        for(int j = 1; j <= 5; j++)
-                        {
-                            System.out.print(qx[i][j] + " ");
-                        }
-                        System.out.println();
-                    }
                     this.confirmQx(qx);
                     this.changeRole.setDisable(false);
                 }
@@ -669,10 +653,12 @@ public class UserManageContorller implements Initializable {
             this.Grantname.setText("");
             this.searchRoleText.clear();
             this.changeRole.setDisable(true);
+            Staff.showAlert(Alert.AlertType.ERROR, "成功", "修改权限成功", "");
         }
         catch (SQLException se)
         {
             se.printStackTrace();
+            Staff.showAlert(Alert.AlertType.ERROR, "错误", "修改权限失败", "系统错误");
         }
     }
 
@@ -683,7 +669,6 @@ public class UserManageContorller implements Initializable {
         }
         else
         {
-            System.out.println("sd");
             try {
                 String[][] ans = this.manageSection.Simple_Search(this.resetText.getText());
                 if(ans.length == 1)

@@ -42,7 +42,8 @@ public class PlanSection {
             for(int j = 1; j < ansRaw.length; j++) {
                 raws[j - 1] = new Raw(ansRaw[j][0], ansRaw[j][1], Integer.parseInt(ansRaw[j][2]), Float.parseFloat(ansRaw[j][3]), 0, Float.parseFloat(ansRaw[j][4]));
             }
-            productions[i - 1] = new Production(ans[i][0], ans[i][1], Float.parseFloat(ans[i][2]),Float.parseFloat(ans[i][3]), Float.parseFloat(ans[i][4]),Integer.parseInt(ans[i][5]), Integer.parseInt(ans[i][6]), raws, 0);
+            int rm = this.searchCpRm(ans[i][0]);
+            productions[i - 1] = new Production(ans[i][0], ans[i][1], Float.parseFloat(ans[i][2]),Float.parseFloat(ans[i][3]), Float.parseFloat(ans[i][4]),Integer.parseInt(ans[i][5]), rm, raws, 0);
         }
         return productions;
     }
@@ -64,9 +65,19 @@ public class PlanSection {
             Raw[] raws = new Raw[ansRaw.length - 1];
             for(int j = 1; j < ansRaw.length; j++)
                 raws[j - 1] = new Raw(ansRaw[j][0], ansRaw[j][1], Integer.parseInt(ansRaw[j][2]), Float.parseFloat(ansRaw[j][3]), 0,Float.parseFloat(ansRaw[j][4]));
-            productions[i - 1] = new Production(ans[i][0], ans[i][1], Float.parseFloat(ans[i][2]),Float.parseFloat(ans[i][3]), Float.parseFloat(ans[i][4]),Integer.parseInt(ans[i][5]), Integer.parseInt(ans[i][6]) ,raws, 0);
+            int rm = this.searchCpRm(ans[i][0]);
+            productions[i - 1] = new Production(ans[i][0], ans[i][1], Float.parseFloat(ans[i][2]),Float.parseFloat(ans[i][3]), Float.parseFloat(ans[i][4]),Integer.parseInt(ans[i][5]), rm ,raws, 0);
         }
         return productions;
+    }
+
+    public int searchCpRm(String cpId) throws SQLException {
+        String[] a = {"string"};
+        String[] b = {cpId};
+        String[] c = {"int"};
+        String sql = "Call Search_CpRm(?, ?)";
+        String[] ans = this.staff.ExcuteDoesReturn(sql, a, b, c);
+        return Integer.parseInt(ans[0]);
     }
 
     public Raw[] searchRawOnName(String name) throws SQLException
@@ -128,9 +139,8 @@ public class PlanSection {
         String[][] ans;
         ans = staff.ExcuteSearch("Call Search_RawId(?)", a, b);
         Raw[] raws = new Raw[ans.length - 1];
-        System.out.println("l:" + String.valueOf(ans.length - 1));
         for(int i = 1; i < ans.length; i++)
-        { System.out.println(ans[i][0]);
+        {
             float plans = this.searchPlanRawNum(ans[i][0]);
 
             raws[i - 1] = new Raw(ans[i][0], ans[i][1], Integer.parseInt(ans[i][3]), Float.parseFloat(ans[i][2]), this.searchRawRm(ans[i][0]) - plans);
@@ -150,7 +160,7 @@ public class PlanSection {
     public int makePlan(Plan plan) throws SQLException
     {
         //Plan plan = new Plan(planId, planType, production, s_date, e_date, fzr);
-        String sql = "INSERT INTO project(project.produce_id, project.produce_type, project.produce_wp, project.produce_num, project.produce_zrr, project.project_ddl) " +
+        String sql = "INSERT INTO project(project.produce_id, project.produce_type, project.produce_wp, project.produce_num, project.produce_zrr, project.produce_ddl) " +
                      "VALUES ('" + plan.getPlan_id() + "', '" + plan.getPlan_zt() + "', '" + plan.getProduction().getProduction_id() + "', " + String.valueOf(plan.getProduction().getNums()) + " , '" + plan.getFzr() + "', '" + plan.getPlan_ddl() + "')";
         int res = staff.Does(sql);
         return res;
@@ -378,7 +388,6 @@ public class PlanSection {
         //生成计划号
         //xx号生成原则：xx + 年（4位）+月（2位）+日（2位）+时（2位）+分（2位）+秒（2位）+3 位随机数
         String num = GetRandomString(3);//自动生成一个3位随机数
-        System.out.println(num);
 
         String ordernum = "PL" + String.format("%04d", Calendar.getInstance().get(Calendar.YEAR))
                 + String.format("%02d", Calendar.getInstance().get(Calendar.MONTH))
