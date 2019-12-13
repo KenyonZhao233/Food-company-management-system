@@ -25,6 +25,11 @@ public class RawSection {
         return staff;
     }
 
+    public String getRight(int i) throws SQLException {
+        String ans[][] = staff.Search("select * from right_raw where staff_id = '" + staff.Uid +"'");
+        return ans[1][i];
+    }
+
     public void getInformation()
     {
 

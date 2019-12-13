@@ -19,6 +19,11 @@ public class FinanceSection {
         return sta;
     }
 
+    public String getRight(int i) throws SQLException {
+        String ans[][] = sta.Search("select * from right_finance where staff_id = '" + sta.Uid +"'");
+        return ans[1][i];
+    }
+
     public String[][] Search() throws SQLException
     {
         return sta.Search("select * from finance order by finance_id DESC");

@@ -25,6 +25,11 @@ public class EndSection {
 
     }
 
+    public String getRight(int i) throws SQLException {
+        String ans[][] = staff.Search("select * from right_end where staff_id = '" + staff.Uid +"'");
+        return ans[1][i];
+    }
+
     public Staff getStaff() {
         return staff;
     }

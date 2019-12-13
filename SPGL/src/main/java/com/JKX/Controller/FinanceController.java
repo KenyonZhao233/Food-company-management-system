@@ -249,28 +249,45 @@ public class FinanceController {
     }
 
     @FXML
-    void handleClicks(MouseEvent event) throws IOException {
+    void handleClicks(MouseEvent event) throws IOException, SQLException {
         if (event.getSource() == menuHomepage) {
             pageHomepage.setStyle("-fx-background-color : #02030A");
             pageHomepage.toFront();
+            return;
         }
         if (event.getSource() == menuReceivables) {
-            pageReceivables.setStyle("-fx-background-color : #02030A");
-            pageReceivables.toFront();
+            if(financeSection.getRight(1).equals("1"))
+            {
+                pageReceivables.setStyle("-fx-background-color : #02030A");
+                pageReceivables.toFront();
+                return;
+            }
         }
         if (event.getSource() == menuRefund) {
-            pageRefund.setStyle("-fx-background-color : #02030A");
-            pageRefund.toFront();
+            if(financeSection.getRight(2).equals("1"))
+            {
+                pageRefund.setStyle("-fx-background-color : #02030A");
+                pageRefund.toFront();
+                return;
+            }
         }
         if(event.getSource() == menuPay)
         {
-            pagePay.setStyle("-fx-background-color : #02030A");
-            pagePay.toFront();
+            if(financeSection.getRight(4).equals("1"))
+            {
+                pagePay.setStyle("-fx-background-color : #02030A");
+                pagePay.toFront();
+                return;
+            }
         }
         if(event.getSource() == menuIncome)
         {
-            pageIncome.setStyle("-fx-background-color : #02030A");
-            pageIncome.toFront();
+            if(financeSection.getRight(3).equals("1"))
+            {
+                pageIncome.setStyle("-fx-background-color : #02030A");
+                pageIncome.toFront();
+                return;
+            }
         }
         if(event.getSource() == menuQuit)
         {
@@ -287,7 +304,14 @@ public class FinanceController {
 
             Stage index = (Stage)all.getScene().getWindow();
             index.close();
+            return;
         }
+        Alert _alert = new Alert(Alert.AlertType.WARNING);
+        _alert.setTitle("警告");
+        _alert.setHeaderText("权限受限");
+        _alert.setContentText("您没有进行这一项功能的权限，请与相关负责人联系授权！");
+        _alert.show();
+        return;
     }
 
     public void initData(Staff staff) throws SQLException {

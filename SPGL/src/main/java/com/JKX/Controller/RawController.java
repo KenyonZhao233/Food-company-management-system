@@ -377,33 +377,48 @@ public class RawController {
     }
 
     @FXML
-    void handleClicks(MouseEvent event) throws IOException {
+    void handleClicks(MouseEvent event) throws IOException,SQLException  {
         if (event.getSource() == menuHomepage) {
             pageHomepage.setStyle("-fx-background-color : #02030A");
             pageHomepage.toFront();
+            return;
         }
         if (event.getSource() == menuQuery) {
             pageQuery.setStyle("-fx-background-color : #02030A");
             pageQuery.toFront();
+            return;
         }
         if (event.getSource() == menuStorage) {
-            pageStorage.setStyle("-fx-background-color : #02030A");
-            pageStorage.toFront();
+            if(rawSection.getRight(1).equals("1"))
+            {
+                pageStorage.setStyle("-fx-background-color : #02030A");
+                pageStorage.toFront();
+                return;
+            }
         }
         if(event.getSource() == menuDestroy)
         {
-            pageDestroy.setStyle("-fx-background-color : #02030A");
-            pageDestroy.toFront();
+            if(rawSection.getRight(2).equals("1"))
+            {
+                pageDestroy.setStyle("-fx-background-color : #02030A");
+                pageDestroy.toFront();
+                return;
+            }
         }
         if(event.getSource() == menuManage)
         {
             pageManage.setStyle("-fx-background-color : #02030A");
             pageManage.toFront();
+            return;
         }
         if(event.getSource() == menuOut)
         {
-            pageOut.setStyle("-fx-background-color : #02030A");
-            pageOut.toFront();
+            if(rawSection.getRight(3).equals("1"))
+            {
+                pageOut.setStyle("-fx-background-color : #02030A");
+                pageOut.toFront();
+                return;
+            }
         }
         if(event.getSource() == menuQuit)
         {
@@ -420,7 +435,14 @@ public class RawController {
 
             Stage index = (Stage)all.getScene().getWindow();
             index.close();
+            return;
         }
+        Alert _alert = new Alert(Alert.AlertType.WARNING);
+        _alert.setTitle("警告");
+        _alert.setHeaderText("权限受限");
+        _alert.setContentText("您没有进行这一项功能的权限，请与相关负责人联系授权！");
+        _alert.show();
+        return;
     }
 
     public void initData(Staff staff) throws SQLException {
