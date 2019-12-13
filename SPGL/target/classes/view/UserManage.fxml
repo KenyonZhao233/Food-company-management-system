@@ -136,7 +136,7 @@
                      <children>
                         <VBox alignment="CENTER" prefHeight="92.0" prefWidth="136.0">
                            <children>
-                              <Label fx:id="users" prefHeight="34.0" prefWidth="82.0" textFill="#2a73ff">
+                              <Label fx:id="users" alignment="CENTER" prefHeight="34.0" prefWidth="82.0" textFill="#2a73ff">
                                  <font>
                                     <Font name="System Bold" size="26.0" />
                                  </font>

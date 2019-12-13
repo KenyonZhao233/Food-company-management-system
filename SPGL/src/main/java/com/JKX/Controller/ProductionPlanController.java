@@ -193,6 +193,8 @@ public class ProductionPlanController {
     @FXML
     private Pane xlPane;
 
+    private int[] qx;
+
 
     final NumberAxis yAxis = new NumberAxis(0, 10000, 100);
     final CategoryAxis xAxis = new CategoryAxis();
@@ -275,13 +277,7 @@ public class ProductionPlanController {
         });
 
         try {
-            int[] qx = this.planSection.SearchQx();
-            if(qx[0] == 0)
-                this.ChangeScjh.setDisable(true);
-            if(qx[1] == 0)
-                this.ChangeCp.setDisable(true);
-            if(qx[2] == 0)
-                this.ChangeRaw.setDisable(true);
+            qx = this.planSection.SearchQx();
         }
         catch (SQLException se)
         {
@@ -345,16 +341,32 @@ public class ProductionPlanController {
             this.CpkcPane.toFront();
         else if(actionBtn == this.SearchYlkc)
             this.RawkcPane.toFront();
-        else if(actionBtn == this.SearchScjh)
+        else if(actionBtn == this.SearchScjh) {
+            if(qx[0] == 0)
+            {
+                Staff.showAlert(Alert.AlertType.WARNING, "警告", "权限受限", "您没有执行这一项功能的权限，请与相关负责人联系授权！");
+                return;
+            }
             this.PlanSearPane.toFront();
+        }
         else if(actionBtn == this.ChangeScjh) {
             this.PlanId.setText(this.planSection.GetNumber());
             this.PlanGlpane.toFront();
         }
         else if(actionBtn == this.ChangeCp) {
+            if(qx[1] == 0)
+            {
+                Staff.showAlert(Alert.AlertType.WARNING, "警告", "权限受限", "您没有执行这一项功能的权限，请与相关负责人联系授权！");
+                return;
+            }
             this.ChangeCppane.toFront();
         }
         else if(actionBtn == this.ChangeRaw) {
+            if(qx[2] == 0)
+            {
+                Staff.showAlert(Alert.AlertType.WARNING, "警告", "权限受限", "您没有执行这一项功能的权限，请与相关负责人联系授权！");
+                return;
+            }
             this.ChangeRawPane.toFront();
         }
         else if(actionBtn == this.SearchXl)
@@ -926,8 +938,9 @@ public class ProductionPlanController {
         }
         else{
             try {
-                Raw raw = new Raw(this.rawId1.getText(), this.rawName1.getText(), Integer.parseInt(this.rawBzq1.getText()), Float.parseFloat(this.rawPri1.getText()));
+                Raw raw = new Raw(this.rawHead.getText() + this.rawId1.getText(), this.rawName1.getText(), Integer.parseInt(this.rawBzq1.getText()), Float.parseFloat(this.rawPri1.getText()));
                 this.planSection.addRaw(raw);
+                this.planSection.getStaff().showAlert(Alert.AlertType.INFORMATION, "成功", "添加成功", "商品编号:" + this.cpId1.getText());
             }
             catch (SQLException se)
             {
@@ -991,7 +1004,7 @@ public class ProductionPlanController {
         else
         {
             try {
-                Production production = new Production(this.cpId1.getText(), this.cpName1.getText(), Float.parseFloat(this.p11.getText()), Float.parseFloat(this.p21.getText()), Float.parseFloat(this.p31.getText()), Integer.parseInt(this.bzq1.getText()), null, 0);
+                Production production = new Production(this.cpHead.getText() + this.cpId1.getText(), this.cpName1.getText(), Float.parseFloat(this.p11.getText()), Float.parseFloat(this.p21.getText()), Float.parseFloat(this.p31.getText()), Integer.parseInt(this.bzq1.getText()), null, 0);
                 this.planSection.addCp(production);
                 this.planSection.getStaff().showAlert(Alert.AlertType.INFORMATION, "成功", "添加成功", "商品编号:" + this.cpId1.getText());
             }
