@@ -177,7 +177,7 @@
                   </Button>
                </children>
             </Pane>
-            <Pane fx:id="pnlChange" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #000000;" visible="false">
+            <Pane fx:id="pnlChange" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #000000;">
                <children>
                   <Label layoutX="63.0" layoutY="24.0" prefHeight="42.0" prefWidth="144.0" text="修改员工信息" textFill="#fcf8f8">
                      <font>
@@ -239,7 +239,7 @@
                   <JFXComboBox fx:id="sexText" layoutX="116.0" layoutY="626.0" prefHeight="30.0" prefWidth="307.0" />
                </children>
             </Pane>
-            <Pane fx:id="pnlAdd" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #000000;" visible="false">
+            <Pane fx:id="pnlAdd" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #000000;">
                <children>
                   <Label layoutX="63.0" layoutY="25.0" prefHeight="42.0" prefWidth="153.0" text="添加员工信息" textFill="#fcf8f8">
                      <font>
@@ -296,7 +296,7 @@
                   <Label fx:id="pswConfirTip2" layoutX="655.0" layoutY="538.0" prefHeight="20.0" prefWidth="135.0" text="输入一致！" visible="false" />
                </children>
             </Pane>
-            <Pane fx:id="paneGrand" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #000000;" visible="false">
+            <Pane fx:id="paneGrand" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #000000;">
                <children>
                   <TextField fx:id="searchRoleText" layoutX="329.0" layoutY="76.0" prefHeight="32.0" prefWidth="264.0" promptText="search" style="-fx-background-color: #02030A; -fx-border-color: #B7C3D7; -fx-border-radius: 2em;" />
                   <Button fx:id="searchRole" layoutX="612.0" layoutY="75.0" mnemonicParsing="false" onMouseClicked="#handleSearchRole" style="-fx-background-color: #000000;">
@@ -433,13 +433,13 @@
                      </font>
                   </Label>
                </children></Pane>
-            <Pane fx:id="paneCz" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #000000;" visible="false">
+            <Pane fx:id="paneCz" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #000000;">
                <children>
                   <TextField fx:id="resetText" layoutX="321.0" layoutY="329.0" prefHeight="32.0" prefWidth="264.0" promptText="search" style="-fx-background-color: #02030A; -fx-border-color: #B7C3D7; -fx-border-radius: 2em;" />
                   <JFXButton fx:id="resetPw" layoutX="600.0" layoutY="330.0" onMouseClicked="#handleReset" text="重置密码" />
                </children>
             </Pane>
-            <Pane fx:id="paneEmpty" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #000000;" visible="false" />
+            <Pane fx:id="paneEmpty" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #000000;" />
          </children>
       </StackPane>
    </children>

@@ -313,10 +313,18 @@ public class UserManageContorller implements Initializable {
     }
 
     public void handleCreate(MouseEvent mouseEvent) {
+        try {
+            this.uidAddText.setText(this.manageSection.getStaffUid());
+        }
+       catch (SQLException se)
+       {
+           Staff.showAlert(Alert.AlertType.ERROR, "错误", "生成员工编号失败", "系统错误");
+       }
     }
 
     public void initData(Staff staff)
     {
+        this.uidAddText.setEditable(false);
         this.nameLable.setText(staff.Name);
         this.manageSection = new ManageSection(staff);
         List<String> staffBm = new ArrayList<String>();

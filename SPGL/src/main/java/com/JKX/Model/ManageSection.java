@@ -55,6 +55,15 @@ public class ManageSection {
         return ans;
     }
 
+    public String getStaffUid() throws SQLException
+    {
+        String sql = "SELECT SUBSTR(staff.staff_id FROM 1) " +
+                    "FROM staff " +
+                    "ORDER BY SUBSTR(staff.staff_id FROM 1) DESC LIMIT 1;";
+        String[][] ans = this.staff.Search(sql);
+        return "U" + String.format("%05d", Integer.parseInt(ans[1][0] + 1));
+    }
+
     public int getStaffs() throws SQLException
     {
         String sql = "select count(*) from staff;";
