@@ -747,7 +747,7 @@ public class ProductionPlanController {
                     productRawController.setIds(this.cpId.getText());
 
                     vboxChangeCPRaw.getChildren().add(node);
-                    Staff.showAlert(Alert.AlertType.INFORMATION, "提示", "添加成功！", "已为" + this.cpId.getText() + "添加" + this.cpRawName.getText() + this.cpRawNum.getText() + "kg");
+                    Staff.showAlert(Alert.AlertType.INFORMATION, "提示", "添加成功！", "已为" + this.cpId.getText() + "添加" + this.cpRawName.getText() + this.cpRawNum.getText() + "箱");
                 }
                 catch (SQLException | IOException se)
                 {
@@ -847,7 +847,7 @@ public class ProductionPlanController {
         else if(actionBtn == this.searchCp3)
         {
             try {
-                if(this.comboxSearchCp1.getValue().equals("按编号查询"))
+                if(this.comboxSearchCp3.getValue().equals("按编号查询"))
                 {
                     String inform;
                     if(this.messageCp3.getText().isEmpty())
@@ -870,14 +870,14 @@ public class ProductionPlanController {
                         vboxChangeCp.getChildren().add(node);
                     }
                 }
-                else if(this.comboxSearchCp1.getValue().equals("按名称查询"))
+                else if(this.comboxSearchCp3.getValue().equals("按名称查询"))
                 {
                     String inform;
                     if(this.messageCp3.getText().isEmpty())
                         inform = "null";
                     else
                         inform = this.messageCp3.getText();
-                    Production[] productions = this.planSection.searchCpOnID(inform);
+                    Production[] productions = this.planSection.searchCpOnName(inform);
                     vboxChangeCp.getChildren().clear();
                     for(int i = 0; i < productions.length; i++)
                     {

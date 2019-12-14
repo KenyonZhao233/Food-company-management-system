@@ -215,7 +215,7 @@
                   </Label>
                   <Button fx:id="btnChange" layoutX="555.0" layoutY="623.0" mnemonicParsing="false" onMouseClicked="#handleChange" prefHeight="29.0" prefWidth="110.0" styleClass="button4" stylesheets="@../css/fullpackstyling2.css" text="修改基本信息" />
                   <Button fx:id="btnDelete" layoutX="863.0" layoutY="623.0" mnemonicParsing="false" onMouseClicked="#handleChange" prefHeight="30.0" prefWidth="98.0" styleClass="button4" stylesheets="@../css/fullpackstyling2.css" text="删除" />
-                  <JFXComboBox fx:id="bmText" editable="true" layoutX="654.0" layoutY="549.0" prefHeight="30.0" prefWidth="110.0" promptText="请选择" unFocusColor="WHITE" visibleRowCount="5" />
+                  <JFXComboBox fx:id="bmText" disable="true" editable="true" layoutX="654.0" layoutY="549.0" prefHeight="30.0" prefWidth="110.0" promptText="请选择" unFocusColor="WHITE" visibleRowCount="5" />
                   <ScrollPane hbarPolicy="NEVER" layoutX="14.0" layoutY="78.0" prefHeight="342.0" prefWidth="992.0" style="-fx-background-color: #000000;">
                      <content>
                         <VBox fx:id="v2" prefHeight="344.0" prefWidth="992.0" style="-fx-background-color: #000000;" />

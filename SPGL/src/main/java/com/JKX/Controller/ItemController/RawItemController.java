@@ -78,7 +78,7 @@ public class RawItemController {
         Optional result = alert.showAndWait();
         if (result.get() == ButtonType.OK) {
             try {
-                this.productionPlanController.getPlanSection().changeRaw(this.rawid.getText(), this.rawname.getText(), this.rawpri.getText(), this.bzq.getText());
+                this.productionPlanController.getPlanSection().changeRaw(this.rawid.getText(), this.rawname.getText(),  this.bzq.getText(),this.rawpri.getText());
                 Staff.showAlert(Alert.AlertType.INFORMATION, "成功", "修改成功", "");
             }
             catch (SQLException se)

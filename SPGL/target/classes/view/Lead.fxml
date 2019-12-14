@@ -23,7 +23,7 @@
                   <Font size="48.0" />
                </font>
             </Label>
-            <Label layoutX="141.0" layoutY="107.0" text="Food Mangement " textFill="WHITE">
+            <Label layoutX="141.0" layoutY="107.0" text="Food Management " textFill="WHITE">
                <font>
                   <Font size="13.0" />
                </font>
