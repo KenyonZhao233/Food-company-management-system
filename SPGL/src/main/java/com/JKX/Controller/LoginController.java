@@ -31,6 +31,7 @@ import javax.security.auth.login.LoginContext;
 import java.awt.*;
 import java.io.*;
 import java.net.URL;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 
@@ -52,6 +53,9 @@ public class LoginController implements Initializable {
 
     @FXML
     private JFXCheckBox remember;
+
+    @FXML
+    private Label clear;
 
     @FXML
     private Label exits;
@@ -127,6 +131,20 @@ public class LoginController implements Initializable {
         PwcController controller = loader.<PwcController>getController();
         controller.initdata(uid.getValue().toString());
         stage.show();
+    }
+
+    @FXML
+    void click_clear(MouseEvent event) {
+        Alert _alert = new Alert(Alert.AlertType.CONFIRMATION);
+        _alert.setTitle("提示");
+        _alert.setHeaderText("清空信息");
+        _alert.setContentText("是否清除计算机上所有存储的账户信息？");
+        Optional<ButtonType> result = _alert.showAndWait();
+        if (result.get() == ButtonType.OK) {
+            uid.getItems().clear();
+            index = 0;
+            passWord.setText("");
+        }
     }
 
     public void handleSignin(MouseEvent mouseEvent) throws Exception{
