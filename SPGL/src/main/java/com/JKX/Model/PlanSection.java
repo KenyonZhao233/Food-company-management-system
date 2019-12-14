@@ -110,10 +110,10 @@ public class PlanSection {
 
     public String getNewCpId(String head) throws SQLException
     {
-        String sql = "SELECT SUBSTR(product.product_id FROM 3) " +
+        String sql = "SELECT SUBSTR(product.product_id FROM 4) " +
                     "FROM product " +
                     "WHERE SUBSTR(product.product_id FROM 1 FOR 3) = '" + head + "' " +
-                    "ORDER BY SUBSTR(product.product_id FROM 3) DESC LIMIT 1;";
+                    "ORDER BY SUBSTR(product.product_id FROM 4) DESC LIMIT 1;";
         String[][] ans = this.staff.Search(sql);
         if(ans.length == 1)
             return "00000";
@@ -122,10 +122,10 @@ public class PlanSection {
 
     public String getNewRawId(String head) throws SQLException
     {
-        String sql = "SELECT SUBSTR(raw.raw_id FROM 3) " +
+        String sql = "SELECT SUBSTR(raw.raw_id FROM 4) " +
                 "FROM raw " +
                 "WHERE SUBSTR(raw.raw_id FROM 1 FOR 3) = '" + head + "' " +
-                "ORDER BY SUBSTR(raw.raw_id FROM 3) DESC LIMIT 1;";
+                "ORDER BY SUBSTR(raw.raw_id FROM 4) DESC LIMIT 1;";
         String[][] ans = this.staff.Search(sql);
         if(ans.length == 1)
             return "000000";
@@ -166,25 +166,7 @@ public class PlanSection {
         return res;
     }
 
-    public Plan[] searchPlan(String id, String zt) throws SQLException      //存储过程，查询Plan返回计划编号，成品类，计划状态。
-    {
-        String[] a = {"string", "string"};
-        String[] b = {id, zt};
-        String[][] ans;
-        ans = staff.ExcuteSearch("Call Search_Plan_IdZt(?, ?) ", a, b);
-        Plan[] plans = new Plan[ans.length - 1];
-        for(int i = 1; i < ans.length; i++)
-        {
-            Production[] production = this.searchCpOnID(ans[i][2]);
-            production[0].setNums(Integer.parseInt(ans[i][3]));
-            for(int j = 0; j < production[0].getRaws().length; j++)
-            {
-                production[0].getRaws()[j].setRaw_num(production[0].getRaws()[j].getRaw_num() * production[0].getNums());
-            }
-            plans[i - 1] = new Plan(ans[i][0], ans[i][1], production[0], ans[i][4], ans[i][5], ans[i][6], ans[i][7], ans[i][8]);
-        }
-        return plans;
-    }
+
 
     public int[] SearchQx() throws SQLException
     {
@@ -220,6 +202,30 @@ public class PlanSection {
         {
             Production[] production = this.searchCpOnID(ans[i][2]);
             production[0].setNums(Integer.parseInt(ans[i][3]));
+            for(int j = 0; j < production[0].getRaws().length; j++)
+            {
+                production[0].getRaws()[j].setRaw_num(production[0].getRaws()[j].getRaw_num() * production[0].getNums());
+            }
+            plans[i - 1] = new Plan(ans[i][0], ans[i][1], production[0], ans[i][4], ans[i][5], ans[i][6], ans[i][7], ans[i][8]);
+        }
+        return plans;
+    }
+
+    public Plan[] searchPlan(String id, String zt) throws SQLException      //存储过程，查询Plan返回计划编号，成品类，计划状态。
+    {
+        String[] a = {"string", "string"};
+        String[] b = {id, zt};
+        String[][] ans;
+        ans = staff.ExcuteSearch("Call Search_Plan_IdZt(?, ?) ", a, b);
+        Plan[] plans = new Plan[ans.length - 1];
+        for(int i = 1; i < ans.length; i++)
+        {
+            Production[] production = this.searchCpOnID(ans[i][2]);
+            production[0].setNums(Integer.parseInt(ans[i][3]));
+            for(int j = 0; j < production[0].getRaws().length; j++)
+            {
+                production[0].getRaws()[j].setRaw_num(production[0].getRaws()[j].getRaw_num() * production[0].getNums());
+            }
             plans[i - 1] = new Plan(ans[i][0], ans[i][1], production[0], ans[i][4], ans[i][5], ans[i][6], ans[i][7], ans[i][8]);
         }
         return plans;

@@ -97,7 +97,7 @@ public class PlanItemController {
                                     super.updateItem(item, empty);
 
                                     if (item.isBefore(
-                                            deadline.getValue().plusDays(1))
+                                            LocalDate.now().plusDays(1))
                                     ) {
                                         setDisable(true);
                                         setStyle("-fx-background-color: #ffc0cb;");
@@ -245,41 +245,45 @@ public class PlanItemController {
         JFXButton actionBtn = (JFXButton)mouseEvent.getSource();
         if(actionBtn == this.change)
         {
-            try {
-                int prenums = this.plan.getProduction().getNums();
-                int nums = Integer.parseInt(this.proNum.getText());
-                this.plan.getProduction().setNums(nums);
-                for(int i = 0; i < this.plan.getProduction().getRaws().length; i++) {
-                    float vae = this.plan.getProduction().getRaws()[i].getRaw_num() / prenums * nums;
-                    float now = this.productionPlanController.getPlanSection().searchRawOnId(this.plan.getProduction().getRaws()[i].getRaw_id())[0].getRaw_kc()+ this.productionPlanController.getPlanSection().searchPlanRawNum(this.plan.getProduction().getRaws()[i].getRaw_id());
-                    if(now >= vae)
-                    {
-                        this.plan.getProduction().getRaws()[i].setRaw_num(vae);
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setContentText("确认修改？");
+            Optional result = alert.showAndWait();
+            if (result.get() == ButtonType.OK) {
+                try {
+                    int prenums = this.plan.getProduction().getNums();
+                    int nums = Integer.parseInt(this.proNum.getText());
+                    this.plan.getProduction().setNums(nums);
+                    for (int i = 0; i < this.plan.getProduction().getRaws().length; i++) {
+                        float vae = this.plan.getProduction().getRaws()[i].getRaw_num() / prenums * nums;
+                        float now = this.productionPlanController.getPlanSection().searchRawOnId(this.plan.getProduction().getRaws()[i].getRaw_id())[0].getRaw_kc() + this.productionPlanController.getPlanSection().searchPlanRawNum(this.plan.getProduction().getRaws()[i].getRaw_id());
+                        if (now >= vae) {
+                            this.plan.getProduction().getRaws()[i].setRaw_num(vae);
+                        } else {
+                            Staff.showAlert(Alert.AlertType.ERROR, "错误", "修改失败", "当前库存仅剩：" + String.valueOf(now));
+                        }
                     }
-                    else
-                    {
-                        Staff.showAlert(Alert.AlertType.ERROR, "错误", "修改失败", "当前库存仅剩：" + String.valueOf(now));
-                    }
+                    this.productionPlanController.getPlanSection().changePlanOnnum(this.planId.getText(), this.proNum.getText(), this.deadline.getValue().toString());
+                    Staff.showAlert(Alert.AlertType.INFORMATION, "成功", "修改成功", "该计划已修改");
+                    this.rawView.refresh();
+                } catch (SQLException se) {
+                    se.printStackTrace();
+                    Staff.showAlert(Alert.AlertType.ERROR, "错误", "修改失败", "系统错误");
                 }
-                this.productionPlanController.getPlanSection().changePlanOnnum(this.planId.getText(), this.proNum.getText(), this.deadline.getValue().toString());
-                this.rawView.refresh();
-            }
-            catch (SQLException se)
-            {
-                se.printStackTrace();
-                Staff.showAlert(Alert.AlertType.ERROR, "错误", "修改失败", "系统错误");
             }
         }
         else if(actionBtn == this.delete)
         {
-            try {
-                this.productionPlanController.getPlanSection().deletePlan(this.planId.getText());
-                this.productionPlanController.deletevboxPlannode(this.node);
-            }
-            catch (SQLException se)
-            {
-                se.printStackTrace();
-                Staff.showAlert(Alert.AlertType.ERROR, "错误", "删除失败", "系统错误");
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setContentText("确认删除该计划？");
+            Optional result = alert.showAndWait();
+            if (result.get() == ButtonType.OK) {
+                try {
+                    this.productionPlanController.getPlanSection().deletePlan(this.planId.getText());
+                    this.productionPlanController.deletevboxPlannode(this.node);
+                } catch (SQLException se) {
+                    se.printStackTrace();
+                    Staff.showAlert(Alert.AlertType.ERROR, "错误", "删除失败", "系统错误");
+                }
             }
         }
         else if(actionBtn == this.confirm)
@@ -294,7 +298,7 @@ public class PlanItemController {
                     this.zt.setText("已完成");
                     this.confirm.setDisable(true);
                     this.productionPlanController.deleteVboxPlanSh(this.node);
-                    Staff.showAlert(Alert.AlertType.ERROR, "成功", "审核成功", "该订单已完成");
+                    Staff.showAlert(Alert.AlertType.INFORMATION, "成功", "审核成功", "该订单已完成");
                 }
                 catch (SQLException se)
                 {
@@ -341,6 +345,11 @@ public class PlanItemController {
             Optional result = alert.showAndWait();
             if (result.get() == ButtonType.OK) {
                 try {
+                    if(Integer.parseInt(this.pushNum.getText()) > this.aimNum - this.nowNum)
+                    {
+                        Staff.showAlert(Alert.AlertType.ERROR, "失败", "交付失败", "交付过多！");
+                        return;
+                    }
                     this.nowNum += Integer.parseInt(this.pushNum.getText());
                     this.workshopController.getWorkshopSection().updatePlan(this.plan.getPlan_id(), Math.min(this.nowNum, this.aimNum));
                     if(this.nowNum >= this.aimNum)

@@ -36,10 +36,21 @@ public class WorkshopSection {
             for(int j = 1; j < ansRaw.length; j++) {
                 raws[j - 1] = new Raw(ansRaw[j][0], ansRaw[j][1], Integer.parseInt(ansRaw[j][2]), Float.parseFloat(ansRaw[j][3]), 0, Float.parseFloat(ansRaw[j][4]));
             }
-            productions[i - 1] = new Production(ans[i][0], ans[i][1], Float.parseFloat(ans[i][2]),Float.parseFloat(ans[i][3]), Float.parseFloat(ans[i][4]),Integer.parseInt(ans[i][5]), Integer.parseInt(ans[i][6]), raws, 0);
+            int rm = this.searchCpRm(ans[i][0]);
+            productions[i - 1] = new Production(ans[i][0], ans[i][1], Float.parseFloat(ans[i][2]),Float.parseFloat(ans[i][3]), Float.parseFloat(ans[i][4]),Integer.parseInt(ans[i][5]), rm, raws, 0);
         }
         return productions;
     }
+
+    public int searchCpRm(String cpId) throws SQLException {
+        String[] a = {"string"};
+        String[] b = {cpId};
+        String[] c = {"int"};
+        String sql = "Call Search_CpRm(?, ?)";
+        String[] ans = this.staff.ExcuteDoesReturn(sql, a, b, c);
+        return Integer.parseInt(ans[0]);
+    }
+
 
     public Plan[] searchPlan(String id, String sdate, String edate, String zt) throws SQLException      //存储过程，查询Plan返回计划编号，成品类，计划状态。
     {

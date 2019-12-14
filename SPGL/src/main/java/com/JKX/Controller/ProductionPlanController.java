@@ -203,6 +203,8 @@ public class ProductionPlanController {
 
     public void initData(Staff staff)
     {
+        this.cpId1.setEditable(false);
+        this.rawId1.setEditable(false);
         this.planSection = new PlanSection(staff);
         this.nameLable.setText(staff.Name);
         List<String> searchMethod = new ArrayList<String>();
@@ -291,8 +293,10 @@ public class ProductionPlanController {
         {
             if(this.rawHead.getText().length() != 3)
                 this.addRaw1.setDisable(true);
-            else
+            else {
+                this.addRaw1.setDisable(false);
                 this.rawId1.setText(this.planSection.getNewRawId(this.rawHead.getText()));
+            }
         }
         catch (SQLException se)
         {
@@ -748,6 +752,7 @@ public class ProductionPlanController {
                 catch (SQLException | IOException se)
                 {
                     se.printStackTrace();
+                    Staff.showAlert(Alert.AlertType.ERROR, "错误", "添加失败", "原料已存在， 请先删除后再添加");
                 }
             }
         }
@@ -945,7 +950,7 @@ public class ProductionPlanController {
             try {
                 Raw raw = new Raw(this.rawHead.getText() + this.rawId1.getText(), this.rawName1.getText(), Integer.parseInt(this.rawBzq1.getText()), Float.parseFloat(this.rawPri1.getText()));
                 this.planSection.addRaw(raw);
-                Staff.showAlert(Alert.AlertType.INFORMATION, "成功", "添加成功", "商品编号:" + this.cpId1.getText());
+                Staff.showAlert(Alert.AlertType.INFORMATION, "成功", "添加成功", "商品编号:" + this.rawHead.getText() + this.rawId1.getText());
             }
             catch (SQLException se)
             {
@@ -1010,7 +1015,7 @@ public class ProductionPlanController {
             try {
                 Production production = new Production(this.cpHead.getText() + this.cpId1.getText(), this.cpName1.getText(), Float.parseFloat(this.p11.getText()), Float.parseFloat(this.p21.getText()), Float.parseFloat(this.p31.getText()), Integer.parseInt(this.bzq1.getText()), null, 0);
                 this.planSection.addCp(production);
-                Staff.showAlert(Alert.AlertType.INFORMATION, "成功", "添加成功", "商品编号:" + this.cpId1.getText());
+                Staff.showAlert(Alert.AlertType.INFORMATION, "成功", "添加成功", "商品编号:" + this.cpHead.getText() + this.cpId1.getText());
             }
             catch (Exception ex)
             {

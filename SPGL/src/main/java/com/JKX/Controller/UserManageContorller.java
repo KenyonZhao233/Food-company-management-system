@@ -274,7 +274,7 @@ public class UserManageContorller implements Initializable {
         this.nameAddText.clear();
         this.sexAddText.setValue("");
         this.sectionCombox.setValue("");
-        this.glyCheck.setDisable(false);
+        this.glzCheck.setDisable(false);
         this.glyCheck.setDisable(true);
         this.glyCheck.setSelected(true);
         this.glzCheck.setSelected(false);
@@ -662,7 +662,7 @@ public class UserManageContorller implements Initializable {
             this.Grantname.setText("");
             this.searchRoleText.clear();
             this.changeRole.setDisable(true);
-            Staff.showAlert(Alert.AlertType.ERROR, "成功", "修改权限成功", "");
+            Staff.showAlert(Alert.AlertType.INFORMATION, "成功", "修改权限成功", "");
         }
         catch (SQLException se)
         {

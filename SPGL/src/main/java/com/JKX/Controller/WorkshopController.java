@@ -77,7 +77,6 @@ public class WorkshopController {
                         inform = "全部";
                     else
                         inform = this.planId1.getText();
-                    System.out.println(inform);
                     Plan[] plans = this.workshopSection.searchPlan(inform, "待执行");
                     for(int i = 0; i < plans.length; i++)
                     {
@@ -118,7 +117,6 @@ public class WorkshopController {
                 String name = this.workshopSection.getStaff().Name;
                 for(int i = 0; i < plans.length; i++)
                 {
-                    System.out.println(plans[i].getZrr() + "    " + name);
                     if(plans[i].getZrr().equals(name))
                     {
                         FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("view/PlanItem.fxml"));
