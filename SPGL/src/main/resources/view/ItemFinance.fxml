@@ -3,12 +3,12 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane fx:id="pane" onMouseEntered="#enter" onMouseExited="#exit" prefHeight="23.0" prefWidth="712.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.JKX.Controller.ItemController.ItemFinanceController">
+<AnchorPane fx:id="pane" onMouseEntered="#enter" onMouseExited="#exit" prefHeight="23.0" prefWidth="1016.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.JKX.Controller.ItemController.ItemFinanceController">
    <children>
-      <Label fx:id="id" alignment="CENTER" layoutX="19.0" layoutY="4.0" prefHeight="15.0" prefWidth="90.0" text="财务编号" textFill="#e7e5e5" />
-      <Label fx:id="user" alignment="CENTER" contentDisplay="CENTER" layoutX="120.0" layoutY="4.0" prefHeight="15.0" prefWidth="80.0" text="责任人" textFill="#e7e5e5" />
-      <Label fx:id="money" alignment="CENTER" contentDisplay="CENTER" layoutX="229.0" layoutY="4.0" prefHeight="15.0" prefWidth="90.0" text="金额" textAlignment="CENTER" textFill="#e7e5e5" />
-      <Label fx:id="time" alignment="CENTER" layoutX="325.0" layoutY="4.0" prefHeight="15.0" prefWidth="137.0" text="时间" textFill="#e7e5e5" textOverrun="CLIP" />
-      <Label fx:id="inf" alignment="CENTER" layoutX="469.0" layoutY="4.0" prefHeight="15.0" prefWidth="224.0" text="备注" textFill="#e7e5e5" />
+      <Label fx:id="id" alignment="CENTER" layoutX="61.0" layoutY="2.0" prefHeight="15.0" prefWidth="90.0" text="财务编号" textFill="#e7e5e5" />
+      <Label fx:id="user" alignment="CENTER" contentDisplay="CENTER" layoutX="214.0" layoutY="2.0" prefHeight="20.0" prefWidth="119.0" text="责任人" textFill="#e7e5e5" />
+      <Label fx:id="money" alignment="CENTER" contentDisplay="CENTER" layoutX="393.0" layoutY="2.0" prefHeight="15.0" prefWidth="90.0" text="金额" textAlignment="CENTER" textFill="#e7e5e5" />
+      <Label fx:id="time" alignment="CENTER" layoutX="534.0" layoutY="2.0" prefHeight="20.0" prefWidth="192.0" text="时间" textFill="#e7e5e5" textOverrun="CLIP" />
+      <Label fx:id="inf" alignment="CENTER" layoutX="742.0" layoutY="2.0" prefHeight="15.0" prefWidth="224.0" text="备注" textFill="#e7e5e5" />
    </children>
 </AnchorPane>
