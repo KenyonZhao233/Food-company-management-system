@@ -140,7 +140,7 @@
       </VBox>
       <StackPane layoutX="258.0" prefHeight="576.0" prefWidth="793.0" style="-fx-background-color: #02030A;">
          <children>
-            <Pane fx:id="pageQuery" prefHeight="554.0" prefWidth="793.0" style="-fx-background-color: #02030A;">
+            <Pane fx:id="pageQuery" prefHeight="554.0" prefWidth="793.0" style="-fx-background-color: #000000;">
                <children>
                   <HBox alignment="CENTER" layoutY="86.0" prefHeight="92.0" prefWidth="793.0" spacing="50.0">
                      <children>
@@ -235,7 +235,7 @@
                   </ScrollPane>
                </children>
             </Pane>
-            <Pane fx:id="pageManage" prefHeight="554.0" prefWidth="545.0" style="-fx-background-color: #02030A;">
+            <Pane fx:id="pageManage" prefHeight="554.0" prefWidth="545.0" style="-fx-background-color: #000000;">
                <children>
                   <Label layoutX="93.0" layoutY="99.0" text="成品库仓库信息" textFill="#e7e5e5">
                      <font>
@@ -262,7 +262,7 @@
                   </TableView>
                </children>
             </Pane>
-            <Pane fx:id="pageCall" prefHeight="554.0" prefWidth="545.0" style="-fx-background-color: #02030A;">
+            <Pane fx:id="pageCall" prefHeight="554.0" prefWidth="545.0" style="-fx-background-color: #000000;">
                <children>
                   <Label layoutX="325.0" layoutY="53.0" text="发货作业系统" textFill="#e7e5e5">
                      <font>
@@ -286,7 +286,7 @@
                   </TableView>
                </children>
             </Pane>
-            <Pane fx:id="pageOut" prefHeight="554.0" prefWidth="545.0" style="-fx-background-color: #02030A;">
+            <Pane fx:id="pageOut" prefHeight="554.0" prefWidth="545.0" style="-fx-background-color: #000000;">
                <children>
                   <Label layoutX="325.0" layoutY="53.0" text="收货作业系统" textFill="#e7e5e5">
                      <font>
@@ -322,7 +322,7 @@
                   </AnchorPane>
                </children>
             </Pane>
-            <Pane fx:id="pageStorage" prefHeight="554.0" prefWidth="545.0" style="-fx-background-color: #02030A;">
+            <Pane fx:id="pageStorage" prefHeight="554.0" prefWidth="545.0" style="-fx-background-color: #000000;">
                <children>
                   <TextField fx:id="input_text1" alignment="CENTER" layoutX="147.0" layoutY="108.0" prefHeight="25.0" prefWidth="168.0" promptText="请输入成品原料编号" style="-fx-background-color: #02030A; -fx-border-color: #B7C3D7; -fx-border-radius: 2em;" />
                   <Label layoutX="283.0" layoutY="53.0" text="成品入库作业系统" textFill="#e7e5e5">
@@ -366,7 +366,7 @@
                   </ScrollPane>
                </children>
             </Pane>
-            <Pane fx:id="pageDestroy" prefHeight="554.0" prefWidth="545.0" style="-fx-background-color: #02030A;">
+            <Pane fx:id="pageDestroy" prefHeight="554.0" prefWidth="545.0" style="-fx-background-color: #000000;">
                <children>
                   <TextField fx:id="destroy_text1" alignment="CENTER" layoutX="185.0" layoutY="108.0" prefHeight="25.0" prefWidth="177.0" promptText="请输入销毁成品编号" style="-fx-background-color: #02030A; -fx-border-color: #B7C3D7; -fx-border-radius: 2em;" />
                   <Label layoutX="283.0" layoutY="53.0" text="成品销毁作业系统" textFill="#e7e5e5">
@@ -409,7 +409,7 @@
                   <TextField fx:id="destroy_text2" alignment="CENTER" layoutX="381.0" layoutY="108.0" prefHeight="25.0" prefWidth="184.0" promptText="请输入销毁成品所在仓库编号" style="-fx-background-color: #02030A; -fx-border-color: #B7C3D7; -fx-border-radius: 2em;" />
                </children>
             </Pane>
-            <Pane fx:id="pageHomepage" prefHeight="554.0" prefWidth="793.0" style="-fx-background-color: #02030A;">
+            <Pane fx:id="pageHomepage" prefHeight="554.0" prefWidth="793.0" style="-fx-background-color: #000000;">
                <children>
                   <Label layoutX="351.0" layoutY="45.0" text="成品库" textFill="#e7e5e5">
                      <font>

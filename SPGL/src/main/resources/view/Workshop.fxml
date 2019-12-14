@@ -62,7 +62,7 @@
             </Button>
             <Label prefHeight="28.0" prefWidth="8.0" />
             <Label prefHeight="162.0" prefWidth="14.0" />
-            <Button fx:id="btnSignout" alignment="TOP_LEFT" graphicTextGap="50.0" mnemonicParsing="false" onMouseClicked="#handleClicks" prefHeight="26.0" prefWidth="266.0" stylesheets="@../css/style.css" text="返回">
+            <Button fx:id="btnSignout" alignment="BASELINE_LEFT" graphicTextGap="50.0" mnemonicParsing="false" onMouseClicked="#handleClicks" prefHeight="22.0" prefWidth="256.0" stylesheets="@../css/style.css" text="返回">
                <graphic>
                   <ImageView fitHeight="23.0" fitWidth="35.0" nodeOrientation="RIGHT_TO_LEFT" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -71,7 +71,7 @@
                   </ImageView>
                </graphic>
                <padding>
-                  <Insets bottom="40.0" left="50.0" />
+                  <Insets left="50.0" />
                </padding>
             </Button>
          </children>

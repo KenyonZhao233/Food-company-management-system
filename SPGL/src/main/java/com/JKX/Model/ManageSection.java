@@ -57,11 +57,39 @@ public class ManageSection {
 
     public String getStaffUid() throws SQLException
     {
-        String sql = "SELECT SUBSTR(staff.staff_id FROM 1) " +
+        String sql = "SELECT SUBSTR(staff.staff_id FROM 2) " +
                     "FROM staff " +
-                    "ORDER BY SUBSTR(staff.staff_id FROM 1) DESC LIMIT 1;";
+                    "ORDER BY SUBSTR(staff.staff_id FROM 2) DESC LIMIT 1;";
         String[][] ans = this.staff.Search(sql);
-        return "U" + String.format("%05d", Integer.parseInt(ans[1][0] + 1));
+        return "U" + String.format("%05d", Integer.parseInt(ans[1][0]) + 1);
+    }
+
+    public void Add_Qx(String id, String bm) throws SQLException
+    {
+        String sql = "";
+        if(bm.equals("销售部"))
+        {
+            sql = "insert into right_sale(staff_id) values ('" + id + "')";
+        }
+        else if(bm.equals("财务部"))
+        {
+            sql = "insert into right_finance(staff_id) values ('" + id + "')";
+        }
+        else if(bm.equals("原料库"))
+        {
+            sql = "insert into right_raw(staff_id) values ('" + id + "')";
+        }
+        else if(bm.equals("成品库"))
+        {
+            sql = "insert into right_end(staff_id) values ('" + id + "')";
+        }
+        else if(bm.equals("生产计划部"))
+        {
+            sql = "insert into right_plan(staff_id) values ('" + id + "')";
+        }
+        else
+            return;
+        this.staff.Does(sql);
     }
 
     public int getStaffs() throws SQLException

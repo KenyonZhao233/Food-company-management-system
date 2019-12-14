@@ -241,7 +241,7 @@ public class SalesSection{
     {
         String sql="select max(order_id) from orders";
         String[][] num=staff.Search(sql);
-        int n=Integer.valueOf(num[1][0])+1;
+        int n = Integer.valueOf(num[1][0])+1;
         return String.valueOf(String.format("%05d",n));
     }
 

@@ -14,11 +14,9 @@ public class EndSection {
 
     private Staff staff;
 
-    public EndSection(Staff s) throws SQLException
+    public EndSection(Staff s)
     {
         this.staff = s;
-        if(!staff.Login())
-            throw new SQLException();
     }
     public void getInformation()
     {

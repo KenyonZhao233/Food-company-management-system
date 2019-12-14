@@ -11,8 +11,6 @@ public class FinanceSection {
     public FinanceSection(Staff s) throws SQLException
     {
         this.sta = s;
-        if(!sta.Login())
-            throw new SQLException();
     }
 
     public Staff getStaff() {

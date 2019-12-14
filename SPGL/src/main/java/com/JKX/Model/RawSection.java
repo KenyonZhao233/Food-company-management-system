@@ -17,8 +17,6 @@ public class RawSection {
     public RawSection(Staff s) throws SQLException
     {
         this.staff = s;
-        if(!staff.Login())
-            throw new SQLException();
     }
 
     public Staff getStaff() {

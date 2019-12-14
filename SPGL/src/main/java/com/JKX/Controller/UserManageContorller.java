@@ -260,8 +260,8 @@ public class UserManageContorller implements Initializable {
             }
             String[] ans = this.manageSection.Add_User(this.uidAddText.getText(), this.sectionCombox.getValue(), bmm, this.nameAddText.getText(), this.sexAddText.getValue(), this.sfzAddText.getText(), this.psw.getText());
             if(ans[0].equals("1")) {
-                this.clearAdd();
                 Staff.showAlert(Alert.AlertType.INFORMATION, "成功", "添加成功", "员工编号为：" + this.uidAddText.getText());
+                this.clearAdd();
             }
             else if(ans[0].equals("0"))
                 Staff.showAlert(Alert.AlertType.INFORMATION, "失败", "添加失败", "已存在该条信息");
@@ -324,7 +324,6 @@ public class UserManageContorller implements Initializable {
 
     public void initData(Staff staff)
     {
-        this.uidAddText.setEditable(false);
         this.nameLable.setText(staff.Name);
         this.manageSection = new ManageSection(staff);
         List<String> staffBm = new ArrayList<String>();
@@ -379,6 +378,8 @@ public class UserManageContorller implements Initializable {
             this.vboxPlan.setDisable(true);
         if(staff.zw[0][2] == 0)
             this.roleCz.setDisable(false);
+        else
+            this.roleGrant.setDisable(true);
 
         this.changeRole.setDisable(true);
 

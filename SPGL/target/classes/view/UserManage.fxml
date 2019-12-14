@@ -61,7 +61,7 @@
                <graphic>
                   <ImageView fitHeight="23.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../icon/icons8_Search_52px.png" />
+                        <Image url="@../icon/员工管理.png" />
                      </image>
                   </ImageView>
                </graphic>
@@ -74,7 +74,7 @@
                <graphic>
                   <ImageView fitHeight="23.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../icon/icons8_Search_52px.png" />
+                        <Image url="@../icon/员工管理(1).png" />
                      </image>
                   </ImageView>
                </graphic>
@@ -87,7 +87,7 @@
                <graphic>
                   <ImageView fitHeight="23.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../icon/icons8_Search_52px.png" />
+                        <Image url="@../icon/权限.png" />
                      </image>
                   </ImageView>
                </graphic>
@@ -100,7 +100,7 @@
                <graphic>
                   <ImageView fitHeight="23.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../icon/icons8_Search_52px.png" />
+                        <Image url="@../icon/密码重置.png" />
                      </image>
                   </ImageView>
                </graphic>
@@ -185,9 +185,9 @@
                      </font>
                   </Label>
                   <TextField fx:id="textInform" layoutX="469.0" layoutY="29.0" prefHeight="32.0" prefWidth="465.0" promptText="search" style="-fx-background-color: #02030A; -fx-border-color: #B7C3D7; -fx-border-radius: 2em;" />
-                  <JFXTextField fx:id="uidText" editable="false" layoutX="116.0" layoutY="468.0" prefHeight="30.0" prefWidth="307.0" />
-                  <JFXTextField fx:id="nameText" layoutX="116.0" layoutY="549.0" prefHeight="30.0" prefWidth="307.0" />
-                  <JFXTextField fx:id="sfzText" layoutX="654.0" layoutY="475.0" prefHeight="30.0" prefWidth="307.0" />
+                  <JFXTextField fx:id="uidText" editable="false" layoutX="116.0" layoutY="468.0" prefHeight="30.0" prefWidth="307.0" unFocusColor="WHITE" />
+                  <JFXTextField fx:id="nameText" layoutX="116.0" layoutY="549.0" prefHeight="30.0" prefWidth="307.0" unFocusColor="WHITE" />
+                  <JFXTextField fx:id="sfzText" layoutX="654.0" layoutY="475.0" prefHeight="30.0" prefWidth="307.0" unFocusColor="WHITE" />
                   <Label layoutX="57.0" layoutY="478.0" text="工号：" textFill="#e4e4e4">
                      <font>
                         <Font size="18.0" />
@@ -213,10 +213,10 @@
                         <Font size="18.0" />
                      </font>
                   </Label>
-                  <Button fx:id="btnChange" layoutX="555.0" layoutY="623.0" mnemonicParsing="false" onMouseClicked="#handleChange" prefHeight="30.0" prefWidth="98.0" styleClass="button4" stylesheets="@../css/fullpackstyling2.css" text="修改" />
+                  <Button fx:id="btnChange" layoutX="555.0" layoutY="623.0" mnemonicParsing="false" onMouseClicked="#handleChange" prefHeight="29.0" prefWidth="110.0" styleClass="button4" stylesheets="@../css/fullpackstyling2.css" text="修改基本信息" />
                   <Button fx:id="btnDelete" layoutX="863.0" layoutY="623.0" mnemonicParsing="false" onMouseClicked="#handleChange" prefHeight="30.0" prefWidth="98.0" styleClass="button4" stylesheets="@../css/fullpackstyling2.css" text="删除" />
-                  <JFXComboBox fx:id="bmText" editable="true" layoutX="654.0" layoutY="549.0" prefHeight="30.0" prefWidth="110.0" promptText="请选择" visibleRowCount="5" />
-                  <ScrollPane layoutX="14.0" layoutY="78.0" prefHeight="347.0" prefWidth="992.0" style="-fx-background-color: #000000;">
+                  <JFXComboBox fx:id="bmText" editable="true" layoutX="654.0" layoutY="549.0" prefHeight="30.0" prefWidth="110.0" promptText="请选择" unFocusColor="WHITE" visibleRowCount="5" />
+                  <ScrollPane hbarPolicy="NEVER" layoutX="14.0" layoutY="78.0" prefHeight="342.0" prefWidth="992.0" style="-fx-background-color: #000000;">
                      <content>
                         <VBox fx:id="v2" prefHeight="344.0" prefWidth="992.0" style="-fx-background-color: #000000;" />
                      </content>
@@ -235,11 +235,11 @@
                         <Font size="18.0" />
                      </font>
                   </Label>
-                  <JFXComboBox fx:id="zwText" layoutX="852.0" layoutY="549.0" prefHeight="30.0" prefWidth="110.0" />
-                  <JFXComboBox fx:id="sexText" layoutX="116.0" layoutY="626.0" prefHeight="30.0" prefWidth="307.0" />
+                  <JFXComboBox fx:id="zwText" disable="true" layoutX="852.0" layoutY="549.0" prefHeight="30.0" prefWidth="110.0" />
+                  <JFXComboBox fx:id="sexText" layoutX="116.0" layoutY="626.0" prefHeight="30.0" prefWidth="307.0" unFocusColor="WHITE" />
                </children>
             </Pane>
-            <Pane fx:id="pnlAdd" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #000000;" visible="false">
+            <Pane fx:id="pnlAdd" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #000000;">
                <children>
                   <Label layoutX="63.0" layoutY="25.0" prefHeight="42.0" prefWidth="153.0" text="添加员工信息" textFill="#fcf8f8">
                      <font>
@@ -296,7 +296,7 @@
                   <Label fx:id="pswConfirTip2" layoutX="655.0" layoutY="538.0" prefHeight="20.0" prefWidth="135.0" text="输入一致！" visible="false" />
                </children>
             </Pane>
-            <Pane fx:id="paneGrand" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #000000;" visible="false">
+            <Pane fx:id="paneGrand" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #000000;">
                <children>
                   <TextField fx:id="searchRoleText" layoutX="329.0" layoutY="76.0" prefHeight="32.0" prefWidth="264.0" promptText="search" style="-fx-background-color: #02030A; -fx-border-color: #B7C3D7; -fx-border-radius: 2em;" />
                   <Button fx:id="searchRole" layoutX="612.0" layoutY="75.0" mnemonicParsing="false" onMouseClicked="#handleSearchRole" style="-fx-background-color: #000000;">
@@ -433,13 +433,13 @@
                      </font>
                   </Label>
                </children></Pane>
-            <Pane fx:id="paneCz" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #000000;" visible="false">
+            <Pane fx:id="paneCz" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #000000;">
                <children>
                   <TextField fx:id="resetText" layoutX="321.0" layoutY="329.0" prefHeight="32.0" prefWidth="264.0" promptText="search" style="-fx-background-color: #02030A; -fx-border-color: #B7C3D7; -fx-border-radius: 2em;" />
                   <JFXButton fx:id="resetPw" layoutX="600.0" layoutY="330.0" onMouseClicked="#handleReset" text="重置密码" />
                </children>
             </Pane>
-            <Pane fx:id="paneEmpty" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #000000;" visible="false" />
+            <Pane fx:id="paneEmpty" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #000000;" />
          </children>
       </StackPane>
    </children>

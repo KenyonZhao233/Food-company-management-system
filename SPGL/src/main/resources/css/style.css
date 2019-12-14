@@ -40,3 +40,7 @@
 .scroll-pane > .corner {
     -fx-background-color: black;
 }
+
+.text-field{
+    -fx-text-fill:white;
+}
