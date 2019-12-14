@@ -15,7 +15,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="all" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="689.0" prefWidth="1276.0" style="-fx-background-color: #02030A;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.JKX.Controller.FinanceController">
+<AnchorPane fx:id="all" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="689.0" prefWidth="1276.0" style="-fx-background-color: #02030A;" stylesheets="@../css/change.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.JKX.Controller.FinanceController">
    <children>
       <VBox alignment="TOP_CENTER" prefHeight="576.0" prefWidth="256.0" style="-fx-background-color: #05071F;" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -146,9 +146,9 @@
                         </Label>
                      </children>
                   </HBox>
-                  <ScrollPane hbarPolicy="NEVER" layoutX="273.0" layoutY="190.0" prefHeight="497.0" prefWidth="511.0" stylesheets="@../css/style.css">
+                  <ScrollPane hbarPolicy="NEVER" layoutX="273.0" layoutY="190.0" prefHeight="479.0" prefWidth="511.0" stylesheets="@../css/style.css">
                      <content>
-                        <VBox fx:id="ItemsRefund" prefHeight="500.0" prefWidth="510.0" spacing="5.0" style="-fx-background-color: #02030A;">
+                        <VBox fx:id="ItemsRefund" prefHeight="477.0" prefWidth="510.0" spacing="5.0" style="-fx-background-color: #02030A;">
                            <padding>
                               <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                            </padding>
@@ -188,9 +188,9 @@
                         </Label>
                      </children>
                   </HBox>
-                  <ScrollPane hbarPolicy="NEVER" layoutX="273.0" layoutY="190.0" prefHeight="497.0" prefWidth="511.0" stylesheets="@../css/style.css">
+                  <ScrollPane hbarPolicy="NEVER" layoutX="273.0" layoutY="190.0" prefHeight="479.0" prefWidth="511.0" stylesheets="@../css/style.css">
                      <content>
-                        <VBox fx:id="ItemsReceive" prefHeight="499.0" prefWidth="509.0" spacing="5.0" style="-fx-background-color: #02030A;">
+                        <VBox fx:id="ItemsReceive" prefHeight="477.0" prefWidth="509.0" spacing="5.0" style="-fx-background-color: #02030A;">
                            <padding>
                               <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                            </padding>
@@ -345,9 +345,9 @@
                         <Insets />
                      </opaqueInsets>
                   </HBox>
-                  <ScrollPane hbarPolicy="NEVER" layoutX="1.0" layoutY="232.0" prefHeight="457.0" prefWidth="1017.0" stylesheets="@../css/style.css">
+                  <ScrollPane hbarPolicy="NEVER" layoutX="1.0" layoutY="232.0" prefHeight="432.0" prefWidth="1017.0" stylesheets="@../css/style.css">
                      <content>
-                        <VBox fx:id="ItemsHome" prefHeight="457.0" prefWidth="1016.0" spacing="5.0" style="-fx-background-color: #02030A;">
+                        <VBox fx:id="ItemsHome" prefHeight="430.0" prefWidth="1016.0" spacing="5.0" style="-fx-background-color: #02030A;">
                            <padding>
                               <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                            </padding>

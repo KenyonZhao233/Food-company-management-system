@@ -65,7 +65,7 @@ public class ItemUnpaidController {
         Alert _alert = new Alert(Alert.AlertType.CONFIRMATION);
         _alert.setTitle("收款系统");
         _alert.setHeaderText("确认收到货款");
-        _alert.setContentText("订单编号：" + this.id.getText() + "         缴费" + this.mn.getText() + "元");
+        _alert.setContentText("订单编号：" + this.no.getText() + "         缴费" + this.mn.getText() + "元");
         _alert.showAndWait();
         if(_alert.getResult()==ButtonType.OK) {
             financeSection.unpaid(this.no.getText(),this.mn.getText());

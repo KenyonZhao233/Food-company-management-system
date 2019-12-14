@@ -3,11 +3,11 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane fx:id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#click" onMouseEntered="#enter" onMouseExited="#exit" prefHeight="36.0" prefWidth="464.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.JKX.Controller.ItemController.ItemRefundController">
+<AnchorPane fx:id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#click" onMouseEntered="#enter" onMouseExited="#exit" prefHeight="36.0" prefWidth="521.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.JKX.Controller.ItemController.ItemRefundController">
    <children>
       <Label fx:id="no" layoutX="25.0" layoutY="11.0" prefHeight="15.0" prefWidth="76.0" text="订单编号" textFill="#e7e5e5" />
-      <Label fx:id="time" layoutX="122.0" layoutY="11.0" prefHeight="15.0" prefWidth="122.0" text="出单时间" textFill="#e7e5e5" />
-      <Label fx:id="mn" layoutX="282.0" layoutY="11.0" prefHeight="15.0" prefWidth="76.0" text="待付金额" textFill="#e7e5e5" />
-      <Label fx:id="id" layoutX="398.0" layoutY="11.0" prefHeight="15.0" prefWidth="52.0" text="客户编号" textFill="#e7e5e5" />
+      <Label fx:id="time" layoutX="104.0" layoutY="11.0" prefHeight="20.0" prefWidth="148.0" text="出单时间" textFill="#e7e5e5" />
+      <Label fx:id="mn" layoutX="303.0" layoutY="12.0" prefHeight="15.0" prefWidth="76.0" text="待付金额" textFill="#e7e5e5" />
+      <Label fx:id="id" layoutX="438.0" layoutY="12.0" prefHeight="20.0" prefWidth="82.0" text="客户编号" textFill="#e7e5e5" />
    </children>
 </AnchorPane>

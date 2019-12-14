@@ -18,7 +18,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="all" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="576.0" prefWidth="1050.0" style="-fx-background-color: #02030A;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.JKX.Controller.EndproductController">
+<AnchorPane fx:id="all" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="576.0" prefWidth="1050.0" style="-fx-background-color: #02030A;" stylesheets="@../css/change.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.JKX.Controller.EndproductController">
    <children>
       <VBox alignment="TOP_CENTER" prefHeight="576.0" prefWidth="256.0" style="-fx-background-color: #05071F;" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -186,7 +186,7 @@
                         </VBox>
                      </children>
                   </HBox>
-                  <HBox alignment="CENTER_LEFT" layoutX="61.0" layoutY="178.0" prefHeight="42.0" prefWidth="672.0" spacing="50.0" style="-fx-background-color: #02030A;">
+                  <HBox alignment="CENTER_LEFT" layoutX="31.0" layoutY="178.0" prefHeight="42.0" prefWidth="731.0" spacing="50.0" style="-fx-background-color: #02030A;">
                      <children>
                         <Label text="入库时间" textFill="#e7e5e5">
                            <HBox.margin>
@@ -223,10 +223,10 @@
                         <Image url="@../icon/icons8_Search_52px.png" />
                      </image>
                   </ImageView>
-                  <ComboBox fx:id="query_type" cache="true" layoutX="168.0" layoutY="51.0" prefHeight="23.0" prefWidth="92.0" />
-                  <ScrollPane layoutX="34.0" layoutY="220.0" prefHeight="320.0" prefWidth="672.0" stylesheets="@../css/style.css">
+                  <ComboBox fx:id="query_type" cache="true" layoutX="116.0" layoutY="51.0" prefHeight="30.0" prefWidth="144.0" />
+                  <ScrollPane layoutX="34.0" layoutY="220.0" prefHeight="320.0" prefWidth="749.0" stylesheets="@../css/style.css">
                      <content>
-                        <VBox fx:id="raw_items1" prefHeight="318.0" prefWidth="670.0" spacing="5.0" style="-fx-background-color: #02030A;">
+                        <VBox fx:id="raw_items1" prefHeight="318.0" prefWidth="747.0" spacing="5.0" style="-fx-background-color: #02030A;">
                            <padding>
                               <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                            </padding>
@@ -269,9 +269,9 @@
                         <Font size="24.0" />
                      </font>
                   </Label>
-                  <ScrollPane layoutX="253.0" layoutY="107.0" prefHeight="448.0" prefWidth="509.0" stylesheets="@../css/style.css">
+                  <ScrollPane layoutX="253.0" layoutY="107.0" prefHeight="448.0" prefWidth="535.0" stylesheets="@../css/style.css">
                      <content>
-                        <VBox fx:id="raw_items_call" prefHeight="446.0" prefWidth="507.0" spacing="5.0" style="-fx-background-color: #02030A;">
+                        <VBox fx:id="raw_items_call" prefHeight="446.0" prefWidth="534.0" spacing="5.0" style="-fx-background-color: #02030A;">
                            <padding>
                               <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                            </padding>
@@ -280,8 +280,8 @@
                   </ScrollPane>
                   <TableView fx:id="pro" layoutX="14.0" layoutY="129.0" prefHeight="426.0" prefWidth="210.0">
                     <columns>
-                      <TableColumn prefWidth="102.0" text="成品名称" />
-                      <TableColumn prefWidth="107.0" text="成品可支配数量" />
+                      <TableColumn prefWidth="91.0" text="成品名称" />
+                      <TableColumn prefWidth="118.0" text="成品可支配数量" />
                     </columns>
                   </TableView>
                </children>
@@ -293,31 +293,31 @@
                         <Font size="24.0" />
                      </font>
                   </Label>
-                  <ScrollPane layoutX="21.0" layoutY="95.0" prefHeight="448.0" prefWidth="256.0" stylesheets="@../css/style.css">
+                  <ScrollPane layoutX="21.0" layoutY="95.0" prefHeight="448.0" prefWidth="308.0" stylesheets="@../css/style.css">
                      <content>
-                        <VBox fx:id="raw_items_out" prefHeight="446.0" prefWidth="254.0" spacing="5.0" style="-fx-background-color: #02030A;">
+                        <VBox fx:id="raw_items_out" prefHeight="446.0" prefWidth="306.0" spacing="5.0" style="-fx-background-color: #02030A;">
                            <padding>
                               <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                            </padding>
                         </VBox>
                      </content>
                   </ScrollPane>
-                  <ScrollPane layoutX="325.0" layoutY="155.0" prefHeight="388.0" prefWidth="429.0" stylesheets="@../css/style.css">
+                  <ScrollPane layoutX="325.0" layoutY="155.0" prefHeight="388.0" prefWidth="445.0" stylesheets="@../css/style.css">
                      <content>
-                        <VBox fx:id="raw_items_out2" prefHeight="386.0" prefWidth="427.0" spacing="5.0" style="-fx-background-color: #02030A;">
+                        <VBox fx:id="raw_items_out2" prefHeight="386.0" prefWidth="443.0" spacing="5.0" style="-fx-background-color: #02030A;">
                            <padding>
                               <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                            </padding>
                         </VBox>
                      </content>
                   </ScrollPane>
-                  <AnchorPane layoutX="347.0" layoutY="113.0" prefHeight="42.0" prefWidth="386.0">
+                  <AnchorPane layoutX="337.0" layoutY="113.0" prefHeight="42.0" prefWidth="445.0">
                      <children>
-                        <Label layoutX="50.0" layoutY="14.0" text="入库时间" textFill="WHITE" />
-                        <Label layoutX="310.0" layoutY="14.0" text="所在仓库" textFill="WHITE" />
-                        <Label layoutX="255.0" layoutY="14.0" text="剩余数量" textFill="WHITE" />
-                        <Label layoutX="145.0" layoutY="14.0" text="成品名称" textFill="WHITE" />
-                        <Label layoutX="208.0" layoutY="14.0" text="保质期" textFill="WHITE" />
+                        <Label layoutX="35.0" layoutY="14.0" text="入库时间" textFill="WHITE" />
+                        <Label layoutX="332.0" layoutY="14.0" text="仓库" textFill="WHITE" />
+                        <Label layoutX="264.0" layoutY="14.0" text="剩余数量" textFill="WHITE" />
+                        <Label layoutX="147.0" layoutY="14.0" text="成品名称" textFill="WHITE" />
+                        <Label layoutX="214.0" layoutY="14.0" text="保质期" textFill="WHITE" />
                      </children>
                   </AnchorPane>
                </children>
@@ -332,8 +332,8 @@
                   </Label>
                   <Button fx:id="input1" layoutX="606.0" layoutY="107.0" mnemonicParsing="false" onMouseClicked="#click_input" prefHeight="27.0" prefWidth="72.0" style="-fx-background-color: green;" text="入库" textFill="WHITE" />
                   <TextField fx:id="input_text3" alignment="CENTER" layoutX="333.0" layoutY="108.0" prefHeight="25.0" prefWidth="130.0" promptText="成品数量" style="-fx-background-color: #02030A; -fx-border-color: #B7C3D7; -fx-border-radius: 2em;" />
-                  <TextField fx:id="input_text2" alignment="CENTER" layoutX="478.0" layoutY="108.0" prefHeight="25.0" prefWidth="100.0" promptText="所在仓库编号" style="-fx-background-color: #02030A; -fx-border-color: #B7C3D7; -fx-border-radius: 2em;" />
-                  <HBox alignment="CENTER_LEFT" layoutX="61.0" layoutY="155.0" prefHeight="42.0" prefWidth="672.0" spacing="50.0" style="-fx-background-color: #02030A;">
+                  <TextField fx:id="input_text2" alignment="CENTER" layoutX="478.0" layoutY="108.0" prefHeight="25.0" prefWidth="100.0" promptText="仓库编号" style="-fx-background-color: #02030A; -fx-border-color: #B7C3D7; -fx-border-radius: 2em;" />
+                  <HBox alignment="CENTER_LEFT" layoutX="31.0" layoutY="155.0" prefHeight="42.0" prefWidth="731.0" spacing="50.0" style="-fx-background-color: #02030A;">
                      <children>
                         <Label text="入库时间" textFill="#e7e5e5">
                            <HBox.margin>
@@ -375,7 +375,7 @@
                      </font>
                   </Label>
                   <Button fx:id="search_d" layoutX="586.0" layoutY="109.0" mnemonicParsing="false" onMouseClicked="#click_search_d" text="查询" />
-                  <HBox alignment="CENTER_LEFT" layoutX="71.0" layoutY="155.0" prefHeight="42.0" prefWidth="672.0" spacing="50.0" style="-fx-background-color: #02030A;">
+                  <HBox alignment="CENTER_LEFT" layoutX="7.0" layoutY="155.0" prefHeight="42.0" prefWidth="731.0" spacing="50.0" style="-fx-background-color: #02030A;">
                      <children>
                         <Label text="入库时间" textFill="#e7e5e5">
                            <HBox.margin>
@@ -397,16 +397,16 @@
                         <Label text="所在仓库编号" textFill="#e7e5e5" />
                      </children>
                   </HBox>
-                  <ScrollPane layoutX="34.0" layoutY="197.0" prefHeight="320.0" prefWidth="749.0" stylesheets="@../css/style.css">
+                  <ScrollPane layoutX="7.0" layoutY="197.0" prefHeight="320.0" prefWidth="783.0" stylesheets="@../css/style.css">
                      <content>
-                        <VBox fx:id="raw_items3" prefHeight="318.0" prefWidth="747.0" spacing="5.0" style="-fx-background-color: #02030A;">
+                        <VBox fx:id="raw_items3" prefHeight="318.0" prefWidth="781.0" spacing="5.0" style="-fx-background-color: #02030A;">
                            <padding>
                               <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                            </padding>
                         </VBox>
                      </content>
                   </ScrollPane>
-                  <TextField fx:id="destroy_text2" alignment="CENTER" layoutX="381.0" layoutY="108.0" prefHeight="25.0" prefWidth="184.0" promptText="请输入销毁成品所在仓库编号" style="-fx-background-color: #02030A; -fx-border-color: #B7C3D7; -fx-border-radius: 2em;" />
+                  <TextField fx:id="destroy_text2" alignment="CENTER" layoutX="381.0" layoutY="108.0" prefHeight="25.0" prefWidth="184.0" promptText="所在仓库编号" style="-fx-background-color: #02030A; -fx-border-color: #B7C3D7; -fx-border-radius: 2em;" />
                </children>
             </Pane>
             <Pane fx:id="pageHomepage" prefHeight="554.0" prefWidth="793.0" style="-fx-background-color: #000000;">
@@ -460,7 +460,7 @@
                         </VBox>
                      </children>
                   </HBox>
-                  <HBox alignment="CENTER_LEFT" layoutX="61.0" layoutY="178.0" prefHeight="42.0" prefWidth="672.0" spacing="50.0" style="-fx-background-color: #02030A;">
+                  <HBox alignment="CENTER_LEFT" layoutX="31.0" layoutY="178.0" prefHeight="42.0" prefWidth="731.0" spacing="50.0" style="-fx-background-color: #02030A;">
                      <children>
                         <Label text="入库时间" textFill="#e7e5e5">
                            <HBox.margin>
@@ -482,9 +482,9 @@
                         <Label text="所在仓库编号" textFill="#e7e5e5" />
                      </children>
                   </HBox>
-                  <ScrollPane layoutX="34.0" layoutY="220.0" prefHeight="320.0" prefWidth="682.0" stylesheets="@../css/style.css">
+                  <ScrollPane layoutX="34.0" layoutY="220.0" prefHeight="320.0" prefWidth="743.0" stylesheets="@../css/style.css">
                      <content>
-                        <VBox fx:id="raw_items" prefHeight="318.0" prefWidth="680.0" spacing="5.0" style="-fx-background-color: #02030A;">
+                        <VBox fx:id="raw_items" prefHeight="318.0" prefWidth="741.0" spacing="5.0" style="-fx-background-color: #02030A;">
                            <padding>
                               <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                            </padding>
