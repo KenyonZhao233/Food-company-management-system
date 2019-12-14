@@ -559,7 +559,7 @@ public class EndproductController {
         }
         if(event.getSource() == menuDestroy)
         {
-            if(endSection.getRight(2).equals("1"))
+            if(endSection.getRight(4).equals("1"))
             {
                 pageDestroy.setStyle("-fx-background-color : #02030A");
                 pageDestroy.toFront();

@@ -141,7 +141,7 @@
                                     <Font name="System Bold" size="26.0" />
                                  </font>
                               </Label>
-                              <Label text="Total Users" textFill="#e7e5e5" />
+                              <Label text="员工总数" textFill="#e7e5e5" />
                            </children>
                         </VBox>
                         <VBox alignment="CENTER" prefHeight="92.0" prefWidth="155.0">
@@ -151,7 +151,7 @@
                                     <Font name="System Bold" size="26.0" />
                                  </font>
                               </Label>
-                              <Label prefHeight="20.0" prefWidth="103.0" text="Total Sections" textFill="#e7e5e5" />
+                              <Label alignment="CENTER" prefHeight="20.0" prefWidth="103.0" text="部门总数" textFill="#e7e5e5" />
                            </children>
                         </VBox>
                      </children>
@@ -165,7 +165,7 @@
                         </VBox>
                      </content>
                   </ScrollPane>
-                  <TextField fx:id="uidSearch" layoutX="794.0" layoutY="29.0" prefHeight="27.0" prefWidth="183.0" promptText="search" style="-fx-background-color: #02030A; -fx-border-color: #B7C3D7; -fx-border-radius: 2em;" />
+                  <TextField fx:id="uidSearch" layoutX="794.0" layoutY="29.0" prefHeight="27.0" prefWidth="183.0" promptText="查询" style="-fx-background-color: #02030A; -fx-border-color: #B7C3D7; -fx-border-radius: 2em;" />
                   <Button fx:id="doSearch1" layoutX="977.0" layoutY="30.0" mnemonicParsing="false" onMouseClicked="#handleSearch" style="-fx-background-color: #000000;">
                      <graphic>
                         <ImageView fitHeight="17.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
@@ -184,7 +184,7 @@
                         <Font size="24.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="textInform" layoutX="469.0" layoutY="29.0" prefHeight="32.0" prefWidth="465.0" promptText="search" style="-fx-background-color: #02030A; -fx-border-color: #B7C3D7; -fx-border-radius: 2em;" />
+                  <TextField fx:id="textInform" layoutX="469.0" layoutY="29.0" prefHeight="32.0" prefWidth="465.0" promptText="查询" style="-fx-background-color: #02030A; -fx-border-color: #B7C3D7; -fx-border-radius: 2em;" />
                   <JFXTextField fx:id="uidText" editable="false" layoutX="116.0" layoutY="468.0" prefHeight="30.0" prefWidth="307.0" unFocusColor="WHITE" />
                   <JFXTextField fx:id="nameText" layoutX="116.0" layoutY="549.0" prefHeight="30.0" prefWidth="307.0" unFocusColor="WHITE" />
                   <JFXTextField fx:id="sfzText" layoutX="654.0" layoutY="475.0" prefHeight="30.0" prefWidth="307.0" unFocusColor="WHITE" />
@@ -298,7 +298,7 @@
             </Pane>
             <Pane fx:id="paneGrand" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #000000;">
                <children>
-                  <TextField fx:id="searchRoleText" layoutX="329.0" layoutY="76.0" prefHeight="32.0" prefWidth="264.0" promptText="search" style="-fx-background-color: #02030A; -fx-border-color: #B7C3D7; -fx-border-radius: 2em;" />
+                  <TextField fx:id="searchRoleText" layoutX="329.0" layoutY="76.0" prefHeight="32.0" prefWidth="264.0" promptText="查询" style="-fx-background-color: #02030A; -fx-border-color: #B7C3D7; -fx-border-radius: 2em;" />
                   <Button fx:id="searchRole" layoutX="612.0" layoutY="75.0" mnemonicParsing="false" onMouseClicked="#handleSearchRole" style="-fx-background-color: #000000;">
                      <graphic>
                         <ImageView fitHeight="27.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
@@ -435,7 +435,7 @@
                </children></Pane>
             <Pane fx:id="paneCz" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #000000;">
                <children>
-                  <TextField fx:id="resetText" layoutX="321.0" layoutY="329.0" prefHeight="32.0" prefWidth="264.0" promptText="search" style="-fx-background-color: #02030A; -fx-border-color: #B7C3D7; -fx-border-radius: 2em;" />
+                  <TextField fx:id="resetText" layoutX="321.0" layoutY="329.0" prefHeight="32.0" prefWidth="264.0" promptText="查询" style="-fx-background-color: #02030A; -fx-border-color: #B7C3D7; -fx-border-radius: 2em;" />
                   <JFXButton fx:id="resetPw" layoutX="600.0" layoutY="330.0" onMouseClicked="#handleReset" text="重置密码" />
                </children>
             </Pane>

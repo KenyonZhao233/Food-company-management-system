@@ -34,7 +34,7 @@
                <graphic>
                   <ImageView fitHeight="23.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../icon/icons8_Search_52px.png" />
+                        <Image url="@../icon/执行.png" />
                      </image>
                   </ImageView>
                </graphic>
@@ -52,7 +52,7 @@
                <graphic>
                   <ImageView fitHeight="23.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../icon/icons8_Search_52px.png" />
+                        <Image url="@../icon/pushs.png" />
                      </image>
                   </ImageView>
                </graphic>
