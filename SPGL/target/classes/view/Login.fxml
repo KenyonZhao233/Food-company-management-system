@@ -48,5 +48,6 @@
             <Image url="@../icon/密码.png" />
          </image>
       </ImageView>
+      <Label fx:id="clear" layoutX="577.0" layoutY="116.0" onMouseClicked="#click_clear" prefHeight="18.0" prefWidth="36.0" text="清空" textFill="#f84008" underline="true" />
    </children>
 </AnchorPane>
