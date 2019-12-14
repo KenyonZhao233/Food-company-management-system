@@ -20,19 +20,19 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="SalePanel" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="689.0" prefWidth="1276.0" style="-fx-background-color: #02030A;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.JKX.Controller.SalesController">
+<AnchorPane fx:id="SalePanel" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="689.0" prefWidth="1276.0" style="-fx-background-color: #02030A;" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.JKX.Controller.SalesController">
    <children>
-      <VBox alignment="TOP_CENTER" prefHeight="576.0" prefWidth="256.0" style="-fx-background-color: #05071F;" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <VBox alignment="TOP_CENTER" prefHeight="576.0" prefWidth="256.0" spacing="15.0" style="-fx-background-color: #05071F;" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <ImageView fitHeight="73.0" fitWidth="67.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="138.0" fitWidth="143.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../img/jimmy-fallon.png" />
                </image>
                <VBox.margin>
                   <Insets bottom="10.0" top="50.0" />
                </VBox.margin></ImageView>
-            <Label text="李华&#10;工号：100000000" textAlignment="CENTER" textFill="#e7e5e5" />
-            <JFXButton fx:id="menuRegister" onMouseClicked="#handleClicks" text="客户注册" textFill="WHITE">
+            <Label alignment="CENTER" prefHeight="50.0" prefWidth="142.0" text="李华&#10;工号：100000000" textAlignment="CENTER" textFill="#e7e5e5" />
+            <JFXButton fx:id="menuRegister" alignment="BASELINE_LEFT" graphicTextGap="35.0" onMouseClicked="#handleClicks" prefHeight="42.0" prefWidth="265.0" stylesheets="@../css/style.css" text="客户注册" textFill="WHITE">
                <graphic>
                   <ImageView fitHeight="23.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -40,8 +40,11 @@
                      </image>
                   </ImageView>
                </graphic>
+               <padding>
+                  <Insets left="50.0" />
+               </padding>
             </JFXButton>
-            <JFXButton fx:id="menuCreate" onMouseClicked="#handleClicks" text="生成订单" textFill="WHITE">
+            <JFXButton fx:id="menuCreate" alignment="BASELINE_LEFT" graphicTextGap="35.0" onMouseClicked="#handleClicks" prefHeight="42.0" prefWidth="286.0" stylesheets="@../css/style.css" text="生成订单" textFill="WHITE">
                <graphic>
                   <ImageView fitHeight="23.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -49,8 +52,11 @@
                      </image>
                   </ImageView>
                </graphic>
+               <padding>
+                  <Insets left="50.0" />
+               </padding>
             </JFXButton>
-            <JFXButton fx:id="menuCancel" onMouseClicked="#handleClicks" text="取消订单" textFill="WHITE">
+            <JFXButton fx:id="menuCancel" alignment="BASELINE_LEFT" graphicTextGap="35.0" onMouseClicked="#handleClicks" prefHeight="42.0" prefWidth="329.0" stylesheets="@../css/style.css" text="取消订单" textFill="WHITE">
                <graphic>
                   <ImageView fitHeight="23.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -58,8 +64,11 @@
                      </image>
                   </ImageView>
                </graphic>
+               <padding>
+                  <Insets left="50.0" />
+               </padding>
             </JFXButton>
-            <JFXButton fx:id="menuReturnGoods" onMouseClicked="#handleClicks" text="客户退货" textFill="WHITE">
+            <JFXButton fx:id="menuReturnGoods" alignment="BASELINE_LEFT" graphicTextGap="35.0" onMouseClicked="#handleClicks" prefHeight="42.0" prefWidth="278.0" stylesheets="@../css/style.css" text="客户退货" textFill="WHITE">
                <graphic>
                   <ImageView fitHeight="23.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -67,8 +76,12 @@
                      </image>
                   </ImageView>
                </graphic>
+               <padding>
+                  <Insets left="50.0" />
+               </padding>
             </JFXButton>
-            <JFXButton fx:id="menuQuit" onMouseClicked="#handleClicks" text="退出" textFill="WHITE">
+            <Label prefHeight="86.0" prefWidth="12.0" />
+            <JFXButton fx:id="menuQuit" alignment="BASELINE_LEFT" graphicTextGap="48.0" onMouseClicked="#handleClicks" prefHeight="42.0" prefWidth="343.0" stylesheets="@../css/style.css" text="退出" textFill="WHITE">
                <graphic>
                   <ImageView fitHeight="23.0" fitWidth="27.0" onMouseClicked="#handleClicks" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -76,6 +89,9 @@
                      </image>
                   </ImageView>
                </graphic>
+               <padding>
+                  <Insets left="50.0" />
+               </padding>
             </JFXButton>
          </children>
       </VBox>
@@ -214,7 +230,7 @@
                         <Font size="24.0" />
                      </font>
                   </Label>
-                  <HBox alignment="CENTER" layoutX="213.0" layoutY="140.0" prefHeight="92.0" prefWidth="661.0" spacing="50.0">
+                  <HBox alignment="CENTER" layoutX="213.0" layoutY="160.0" prefHeight="92.0" prefWidth="661.0" spacing="50.0">
                      <children>
                         <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
                            <children>
@@ -262,16 +278,16 @@
                      <content>
                         <Pane prefHeight="368.0" prefWidth="994.0" style="-fx-background-color: #05071F;">
                            <children>
-                              <Label layoutX="385.0" layoutY="112.0" text="订单编号：" textFill="#e7e5e5" />
-                              <Label layoutX="385.0" layoutY="203.0" text="返还金额：" textFill="#e7e5e5" />
-                              <JFXTextField fx:id="CancelID" focusColor="RED" layoutX="537.0" layoutY="107.0" prefHeight="30.0" prefWidth="203.0" style="-fx-background-color: white;" />
-                              <JFXTextField fx:id="CancelMoney" focusColor="RED" layoutX="537.0" layoutY="198.0" prefHeight="30.0" prefWidth="203.0" style="-fx-background-color: white;" />
+                              <Label layoutX="359.0" layoutY="96.0" text="订单编号：" textFill="#e7e5e5" />
+                              <Label layoutX="359.0" layoutY="187.0" text="返还金额：" textFill="#e7e5e5" />
+                              <JFXTextField fx:id="CancelID" focusColor="RED" layoutX="511.0" layoutY="91.0" prefHeight="30.0" prefWidth="203.0" style="-fx-background-color: white;" />
+                              <JFXTextField fx:id="CancelMoney" focusColor="RED" layoutX="511.0" layoutY="182.0" prefHeight="30.0" prefWidth="203.0" style="-fx-background-color: white;" />
                            </children>
                         </Pane>
                      </content>
                   </ScrollPane>
-                  <JFXButton fx:id="CancelSearch" layoutX="611.0" layoutY="76.0" onMouseClicked="#handleClicks" style="-fx-background-color: white;" text="查询" />
-                  <JFXTextField fx:id="CancelTextSearch" focusColor="RED" layoutX="226.0" layoutY="76.0" prefHeight="30.0" prefWidth="293.0" promptText="输入客户编号查询可取消的订单" style="-fx-background-color: white;" />
+                  <JFXButton fx:id="CancelSearch" layoutX="620.0" layoutY="98.0" onMouseClicked="#handleClicks" style="-fx-background-color: white;" text="查询" />
+                  <JFXTextField fx:id="CancelTextSearch" focusColor="RED" layoutX="235.0" layoutY="98.0" prefHeight="30.0" prefWidth="293.0" promptText="输入客户编号查询可取消的订单" style="-fx-background-color: white;" />
                   <JFXButton fx:id="CancelButton" layoutX="850.0" layoutY="628.0" onMouseClicked="#handleClicks" prefHeight="30.0" prefWidth="112.0" style="-fx-background-color: red;" text="取消订单" textFill="WHITE" />
                </children>
             </Pane>
@@ -296,7 +312,7 @@
                         </Pane>
                      </content>
                   </ScrollPane>
-                  <HBox alignment="CENTER" layoutX="225.0" layoutY="130.0" prefHeight="92.0" prefWidth="661.0" spacing="50.0">
+                  <HBox alignment="CENTER" layoutX="215.0" layoutY="140.0" prefHeight="92.0" prefWidth="661.0" spacing="50.0">
                      <children>
                         <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
                            <children>
@@ -341,15 +357,15 @@
                      </children>
                   </HBox>
                   <JFXButton fx:id="ReturnSearch" layoutX="607.0" layoutY="97.0" onMouseClicked="#handleClicks" style="-fx-background-color: white;" text="查询" />
-                  <JFXTextField fx:id="ReturnTextSearch" focusColor="RED" layoutX="232.0" layoutY="97.0" prefHeight="30.0" prefWidth="293.0" promptText="输入客户编号查询可退货的订单" style="-fx-background-color: white;" unFocusColor="WHITE" />
+                  <JFXTextField fx:id="ReturnTextSearch" focusColor="RED" layoutX="252.0" layoutY="97.0" prefHeight="30.0" prefWidth="293.0" promptText="输入客户编号查询可退货的订单" style="-fx-background-color: white;" unFocusColor="WHITE" />
                   <JFXButton fx:id="ReturnButton" layoutX="840.0" layoutY="622.0" onMouseClicked="#handleClicks" prefHeight="30.0" prefWidth="107.0" style="-fx-background-color: red;" text="退货" textFill="WHITE" />
                </children>
             </Pane>
             <Pane fx:id="order_panel" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #02030A;">
                <children>
-                  <Label layoutX="35.0" layoutY="84.0" text="您生成的订单信息：" textFill="#e7e5e5">
+                  <Label layoutX="58.0" layoutY="86.0" prefHeight="60.0" prefWidth="264.0" text="您生成的订单信息：" textFill="#e7e5e5">
                      <font>
-                        <Font size="53.0" />
+                        <Font size="24.0" />
                      </font>
                   </Label>
                   <TextField fx:id="order_panel_ddid" editable="false" layoutX="161.0" layoutY="201.0" prefHeight="30.0" prefWidth="225.0" />
@@ -373,20 +389,7 @@
                   </TableView>
                </children>
             </Pane>
-            <Pane fx:id="firstPage" prefHeight="614.0" prefWidth="858.0" style="-fx-background-color: #02030A;">
-               <children>
-                  <Label layoutX="178.0" layoutY="96.0" text="欢迎使用销售部" textFill="#e7e5e5">
-                     <font>
-                        <Font name="Bodoni MT" size="96.0" />
-                     </font>
-                  </Label>
-                  <ImageView fitHeight="355.0" fitWidth="355.0" layoutX="333.0" layoutY="292.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../icon/Pet_Store.png" />
-                     </image>
-                  </ImageView>
-               </children>
-            </Pane>
+            <Pane fx:id="firstPage" prefHeight="614.0" prefWidth="858.0" style="-fx-background-color: #02030A;" />
          </children>
       </StackPane>
    </children>

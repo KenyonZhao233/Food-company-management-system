@@ -716,12 +716,12 @@ public class ProductionPlanController {
             {
                 try {
                     this.planSection.changeCpInform(this.cpId.getText(), this.cpName.getText(), this.p1.getText(), this.p2.getText(), this.p3.getText(), this.bzq.getText());
-                    this.planSection.getStaff().showAlert(Alert.AlertType.INFORMATION, "提示", "修改成功！", "已修改成品基本信息");
+                    Staff.showAlert(Alert.AlertType.INFORMATION, "提示", "修改成功！", "已修改成品基本信息");
                 }
                 catch (SQLException se)
                 {
                     se.printStackTrace();
-                    this.planSection.getStaff().showAlert(Alert.AlertType.INFORMATION, "警告", "修改失败", "系统错误");
+                    Staff.showAlert(Alert.AlertType.INFORMATION, "警告", "修改失败", "系统错误");
                 }
             }
         }
@@ -841,7 +841,7 @@ public class ProductionPlanController {
             catch (SQLException | IOException se)
             {
                 se.printStackTrace();
-                this.planSection.getStaff().showAlert(Alert.AlertType.ERROR, "错误", "查询失败", "系统错误");
+                Staff.showAlert(Alert.AlertType.ERROR, "错误", "查询失败", "系统错误");
             }
         }
         else if(actionBtn == this.searchCp3)
