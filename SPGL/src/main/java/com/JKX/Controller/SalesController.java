@@ -455,7 +455,7 @@ public class SalesController implements Initializable {
             if (event.getSource() == CancelSearch) {
                 try {
                     Order[] orders = salesSection.searchOrderOnId(ReturnTextSearch.getText());
-                    if (orders.length == 0) {
+                    if (orders == null) {
                         this.salesSection.getStaff().showAlert(Alert.AlertType.ERROR, "错误", "查询失败", "此客户编号不存在，请输入正确的客户编号");
                     } else {
                         String str_id = "";
@@ -470,10 +470,12 @@ public class SalesController implements Initializable {
                     this.salesSection.getStaff().showAlert(Alert.AlertType.ERROR, "错误", "查询失败", "系统错误0");
                 }
             }
-            if (event.getSource() == ReturnSearch) {
-                try {
+            if (event.getSource() == ReturnSearch)
+            {
+                try
+                {
                     Order[] orders = salesSection.searchOrderOnId(ReturnTextSearch.getText());
-                    if (orders.length == 0) {
+                    if (orders == null) {
                         this.salesSection.getStaff().showAlert(Alert.AlertType.ERROR, "错误", "查询失败", "此客户编号不存在，请输入正确的客户编号");
                     } else {
                         String str_id = "";
@@ -484,7 +486,9 @@ public class SalesController implements Initializable {
                         }
                         this.salesSection.getStaff().showAlert(Alert.AlertType.INFORMATION, "完成", "查询完成", "此客户可以退货的订单编号：\n" + str_id);
                     }
-                } catch (SQLException se) {
+                }
+                catch (SQLException se)
+                {
                     this.salesSection.getStaff().showAlert(Alert.AlertType.ERROR, "错误", "查询失败", "系统错误0");
                 }
             }

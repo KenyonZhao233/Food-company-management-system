@@ -75,6 +75,8 @@ public class SalesSection{
             orders[i - 1] = new Order(temp[i][0], temp[i][2], temp[i][3], temp[i][1], customs[0], productions);
         }
         System.out.println(orders.length);
+        if(orders.length==0)
+            return null;
         orders[0].getProductions()[0].getProduction_id();
         return orders;
     }
