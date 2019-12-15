@@ -313,9 +313,14 @@ public class SalesSection{
 
     public void InsertOrders(String order_id,String order_product,String order_num,String order_custom,String order_type,String order_fzr) throws SQLException
     {
-        String sql="insert into orders(order_id,order_zt,order_custom,order_type,order_fzr) values('"+order_id+"',"+"'待付款','"+order_custom+"','"+ order_type+"','"+ order_fzr +"')";
-        System.out.println(sql);
-        staff.Does(sql);
+        String sql="select * from orders where order_id = '"+order_id+"' ";
+        String [][]ans=staff.Search(sql);
+        if(ans.length==1)
+        {
+            sql="insert into orders(order_id,order_zt,order_custom,order_type,order_fzr) values('"+order_id+"',"+"'待付款','"+order_custom+"','"+ order_type+"','"+ order_fzr +"')";
+            System.out.println(sql);
+            staff.Does(sql);
+        }
         sql="insert into order_product(order_id,product_name,product_num) values('"+order_id+"','"+order_product+"',"+order_num+")";
         System.out.println(sql);
         staff.Does(sql);

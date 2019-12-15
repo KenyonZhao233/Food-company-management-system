@@ -603,14 +603,18 @@ public class SalesController implements Initializable {
                 /*数据库操作*/
                 try {
                     int key = salesSection.InsertOrUpdate(CreateID1.getText(), CreateName.getText());
-                    if (key == 0) {
+                    if (key == 0)
+                    {
                         salesSection.InsertOrders(CreateID1.getText(), CreateName.getText(), CreateNumber.getText(), CreateID2.getText(), order_com_type.getValue(), this.getSalesSection().getStaff().Name);
-                    } else if (key == 1) {
+                    } else if (key == 1)
+                    {
                         salesSection.InsertOrderProduct(CreateID1.getText(), CreateName.getText(), CreateNumber.getText(), order_com_type.getValue());
-                    } else if (key == 2) {
+                    } else if (key == 2)
+                    {
                         salesSection.UpdateOrderProduct(CreateID1.getText(), CreateName.getText(), CreateNumber.getText(), order_com_type.getValue());
                     }
                 } catch (SQLException se) {
+                    se.printStackTrace();
                     this.salesSection.getStaff().showAlert(Alert.AlertType.ERROR, "错误", "操作数据库失败", "系统错误!");
                 }
 
@@ -621,6 +625,7 @@ public class SalesController implements Initializable {
                     float money = 0;
                     if (goods == null) {
                         System.out.println("goods为空");
+                        return;
                     }
                     for (int i = 0; i < goods.length; i++) {
                         FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("view/ProductInform.fxml"));
