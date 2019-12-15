@@ -660,7 +660,10 @@ public class ProductionPlanController {
                         planItemController.setConfirmDisable(true);
                         planItemController.setDeleteDisable(false);
                         planItemController.setChangeDisable(false);
-                        planItemController.setNumEditable(true);
+                        if(plans[k][i].getPlan_zt().equals("待执行"))
+                            planItemController.setNumEditable(true);
+                        else
+                            planItemController.setNumEditable(false);
                         planItemController.setPushNumVisable(false);
                         planItemController.setPushVisable(false);
                         if(!plans[k][i].getPlan_zt().equals("审核中"))
@@ -707,7 +710,10 @@ public class ProductionPlanController {
                         planItemController.setConfirmDisable(true);
                         planItemController.setDeleteDisable(false);
                         planItemController.setChangeDisable(false);
-                        planItemController.setNumEditable(true);
+                        if(plans[k][i].getPlan_zt().equals("待执行"))
+                            planItemController.setNumEditable(true);
+                        else
+                            planItemController.setNumEditable(false);
                         planItemController.setPushNumVisable(false);
                         planItemController.setPushVisable(false);
                         if(!plans[k][i].getPlan_zt().equals("审核中"))

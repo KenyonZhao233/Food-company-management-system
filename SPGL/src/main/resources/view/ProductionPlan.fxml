@@ -245,16 +245,16 @@
                            <content>
                               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                  <children>
-                                    <Label layoutX="397.0" layoutY="189.0" text="原料编号：" />
+                                    <Label layoutX="397.0" layoutY="189.0" text="原料编号：" textFill="WHITE" />
                                     <JFXTextField fx:id="rawId1" layoutX="472.0" layoutY="184.0" />
-                                    <Label layoutX="397.0" layoutY="243.0" text="原料名称：" />
+                                    <Label layoutX="397.0" layoutY="243.0" text="原料名称：" textFill="WHITE" />
                                     <JFXTextField fx:id="rawName1" layoutX="472.0" layoutY="238.0" />
-                                    <Label layoutX="397.0" layoutY="298.0" text="原料价格：" />
+                                    <Label layoutX="397.0" layoutY="298.0" text="原料价格：" textFill="WHITE" />
                                     <JFXTextField fx:id="rawPri1" layoutX="472.0" layoutY="293.0" />
-                                    <Label layoutX="412.0" layoutY="354.0" text="保质期：" />
+                                    <Label layoutX="412.0" layoutY="354.0" text="保质期：" textFill="WHITE" />
                                     <JFXTextField fx:id="rawBzq1" layoutX="472.0" layoutY="349.0" />
                                     <JFXButton fx:id="addRaw1" disable="true" layoutX="522.0" layoutY="432.0" onMouseClicked="#handleRaw" text="添加" />
-                                    <Label layoutX="397.0" layoutY="137.0" text="原料前缀：" />
+                                    <Label layoutX="397.0" layoutY="137.0" text="原料前缀：" textFill="WHITE" />
                                     <JFXTextField fx:id="rawHead" layoutX="472.0" layoutY="132.0" />
                                  </children>
                               </AnchorPane>
@@ -306,23 +306,23 @@
                                        </graphic>
                                     </JFXButton>
                                     <TextField fx:id="messageCp3" layoutX="687.0" layoutY="300.0" prefHeight="32.0" prefWidth="145.0" style="-fx-border-color: #B7C3D7; -fx-background-color: #02030A; -fx-border-radius: 2em;" />
-                                    <Label layoutX="61.0" layoutY="42.0" prefHeight="20.0" prefWidth="83.0" text="成品编号：" />
-                                    <Label layoutX="61.0" layoutY="82.0" prefHeight="20.0" prefWidth="83.0" text="成品名称：" />
-                                    <Label layoutX="54.0" layoutY="121.0" prefHeight="20.0" prefWidth="97.0" text="零售商价格：" />
-                                    <Label layoutX="54.0" layoutY="161.0" prefHeight="20.0" prefWidth="98.0" text="批发商价格：" />
-                                    <Label layoutX="54.0" layoutY="200.0" prefHeight="20.0" prefWidth="98.0" text="代理商价格：" />
-                                    <Label layoutX="83.0" layoutY="238.0" prefHeight="20.0" prefWidth="61.0" text="保质期：" />
+                                    <Label layoutX="61.0" layoutY="42.0" prefHeight="20.0" prefWidth="83.0" text="成品编号：" textFill="WHITE" />
+                                    <Label layoutX="61.0" layoutY="82.0" prefHeight="20.0" prefWidth="83.0" text="成品名称：" textFill="WHITE" />
+                                    <Label layoutX="54.0" layoutY="121.0" prefHeight="20.0" prefWidth="97.0" text="零售商价格：" textFill="WHITE" />
+                                    <Label layoutX="54.0" layoutY="161.0" prefHeight="20.0" prefWidth="98.0" text="批发商价格：" textFill="WHITE" />
+                                    <Label layoutX="54.0" layoutY="200.0" prefHeight="20.0" prefWidth="98.0" text="代理商价格：" textFill="WHITE" />
+                                    <Label layoutX="83.0" layoutY="238.0" prefHeight="20.0" prefWidth="61.0" text="保质期：" textFill="WHITE" />
                                     <JFXTextField fx:id="cpId" editable="false" layoutX="145.0" layoutY="37.0" />
                                     <JFXTextField fx:id="cpName" layoutX="145.0" layoutY="77.0" />
                                     <JFXTextField fx:id="p1" layoutX="145.0" layoutY="116.0" />
                                     <JFXTextField fx:id="p2" layoutX="145.0" layoutY="156.0" />
                                     <JFXTextField fx:id="p3" layoutX="145.0" layoutY="195.0" />
                                     <JFXTextField fx:id="bzq" layoutX="145.0" layoutY="233.0" />
-                                    <Label layoutX="376.0" layoutY="193.0" prefHeight="20.0" prefWidth="83.0" text="原料名称：" />
-                                    <Label layoutX="699.0" layoutY="193.0" prefHeight="20.0" prefWidth="97.0" text="原料价格：" />
+                                    <Label layoutX="376.0" layoutY="193.0" prefHeight="20.0" prefWidth="83.0" text="原料名称：" textFill="WHITE" />
+                                    <Label layoutX="699.0" layoutY="193.0" prefHeight="20.0" prefWidth="97.0" text="原料价格：" textFill="WHITE" />
                                     <JFXTextField fx:id="cpRawName" layoutX="459.0" layoutY="187.0" />
                                     <JFXTextField fx:id="cpRawPrice" editable="false" layoutX="782.0" layoutY="188.0" />
-                                    <Label layoutX="376.0" layoutY="238.0" prefHeight="20.0" prefWidth="83.0" text="原料数量：" />
+                                    <Label layoutX="376.0" layoutY="238.0" prefHeight="20.0" prefWidth="83.0" text="原料数量：" textFill="WHITE" />
                                     <JFXTextField fx:id="cpRawNum" layoutX="459.0" layoutY="233.0" />
                                     <ScrollPane layoutX="349.0" layoutY="10.0" prefHeight="157.0" prefWidth="663.0">
                                        <content>
@@ -345,12 +345,12 @@
                           <content>
                             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                  <children>
-                                    <Label layoutX="371.0" layoutY="170.0" prefHeight="20.0" prefWidth="83.0" text="成品编号：" />
-                                    <Label layoutX="370.0" layoutY="227.0" prefHeight="20.0" prefWidth="83.0" text="成品名称：" />
-                                    <Label layoutX="354.0" layoutY="284.0" prefHeight="20.0" prefWidth="97.0" text="零售商价格：" />
-                                    <Label layoutX="354.0" layoutY="343.0" prefHeight="20.0" prefWidth="98.0" text="批发商价格：" />
-                                    <Label layoutX="354.0" layoutY="402.0" prefHeight="20.0" prefWidth="98.0" text="代理商价格：" />
-                                    <Label layoutX="379.0" layoutY="461.0" prefHeight="20.0" prefWidth="61.0" text="保质期：" />
+                                    <Label layoutX="371.0" layoutY="170.0" prefHeight="20.0" prefWidth="83.0" text="成品编号：" textFill="WHITE" />
+                                    <Label layoutX="370.0" layoutY="227.0" prefHeight="20.0" prefWidth="83.0" text="成品名称：" textFill="WHITE" />
+                                    <Label layoutX="354.0" layoutY="284.0" prefHeight="20.0" prefWidth="97.0" text="零售商价格：" textFill="WHITE" />
+                                    <Label layoutX="354.0" layoutY="343.0" prefHeight="20.0" prefWidth="98.0" text="批发商价格：" textFill="WHITE" />
+                                    <Label layoutX="354.0" layoutY="402.0" prefHeight="20.0" prefWidth="98.0" text="代理商价格：" textFill="WHITE" />
+                                    <Label layoutX="379.0" layoutY="461.0" prefHeight="20.0" prefWidth="61.0" text="保质期：" textFill="WHITE" />
                                     <JFXTextField fx:id="cpId1" layoutX="451.0" layoutY="165.0" />
                                     <JFXTextField fx:id="cpName1" layoutX="451.0" layoutY="222.0" />
                                     <JFXTextField fx:id="p11" layoutX="451.0" layoutY="279.0" />
@@ -359,7 +359,7 @@
                                     <JFXTextField fx:id="bzq1" layoutX="449.0" layoutY="456.0" />
                                     <JFXButton fx:id="addCp" disable="true" layoutX="494.0" layoutY="554.0" onMouseClicked="#handleAddCp" text="添加成品" />
                                     <JFXTextField fx:id="cpHead" layoutX="452.0" layoutY="112.0" />
-                                    <Label layoutX="371.0" layoutY="117.0" prefHeight="20.0" prefWidth="83.0" text="成品前缀：" />
+                                    <Label layoutX="371.0" layoutY="117.0" prefHeight="20.0" prefWidth="83.0" text="成品前缀：" textFill="WHITE" />
                                  </children>
                               </AnchorPane>
                           </content>
@@ -375,16 +375,16 @@
                         <content>
                           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                  <children>
-                                    <Label layoutX="376.0" layoutY="166.0" text="计划编号：" />
-                                    <Label layoutX="376.0" layoutY="235.0" text="成品名称：" />
+                                    <Label layoutX="376.0" layoutY="166.0" text="计划编号：" textFill="WHITE" />
+                                    <Label layoutX="376.0" layoutY="235.0" text="成品名称：" textFill="WHITE" />
                                     <JFXTextField fx:id="PlanId" editable="false" layoutX="456.0" layoutY="156.0" />
                                     <JFXTextField fx:id="Cpname" layoutX="456.0" layoutY="225.0" />
-                                    <Label layoutX="376.0" layoutY="295.0" text="制作数量：" />
+                                    <Label layoutX="376.0" layoutY="295.0" text="制作数量：" textFill="WHITE" />
                                     <JFXTextField fx:id="Cpnum" layoutX="456.0" layoutY="288.0" />
                                     <JFXButton fx:id="makePlan" layoutX="509.0" layoutY="482.0" onMouseClicked="#handleMakePlan" text="制定" />
                                     <DatePicker fx:id="planDdl" layoutX="456.0" layoutY="354.0" />
-                                    <Label layoutX="376.0" layoutY="360.0" text="截止日期：" />
-                                    <Label layoutX="346.0" layoutY="435.0" text="负责车间编号:" />
+                                    <Label layoutX="376.0" layoutY="360.0" text="截止日期：" textFill="WHITE" />
+                                    <Label layoutX="346.0" layoutY="435.0" text="负责车间编号:" textFill="WHITE" />
                                     <JFXTextField fx:id="workshops" layoutX="447.0" layoutY="430.0" prefHeight="30.0" prefWidth="212.0" />
                                  </children></AnchorPane>
                         </content>
@@ -407,7 +407,7 @@
                                           </ImageView>
                                        </graphic>
                                     </JFXButton>
-                                    <TextField fx:id="messagePlan1" layoutX="96.0" layoutY="85.0" prefHeight="32.0" prefWidth="267.0" style="-fx-border-color: #B7C3D7; -fx-background-color: #02030A; -fx-border-radius: 2em;" />
+                                    <TextField fx:id="messagePlan1" layoutX="96.0" layoutY="85.0" prefHeight="32.0" prefWidth="267.0" promptText="请输入计划编号" style="-fx-border-color: #B7C3D7; -fx-background-color: #02030A; -fx-border-radius: 2em;" />
                                     <TimeRangeView fx:id="searchPlanPicker1" layoutX="520.0" layoutY="51.0" prefHeight="100.0" prefWidth="289.0" />
                                     <JFXButton fx:id="searchPlanDate1" ellipsisString="" layoutX="823.0" layoutY="84.0" onMouseClicked="#handleSearchPlan" prefHeight="20.0" prefWidth="8.0">
                                        <graphic>
@@ -434,7 +434,7 @@
                                           </ImageView>
                                        </graphic>
                                     </JFXButton>
-                                    <TextField fx:id="messagePlan2" layoutX="318.0" layoutY="72.0" prefHeight="32.0" prefWidth="267.0" style="-fx-border-color: #B7C3D7; -fx-background-color: #02030A; -fx-border-radius: 2em;" />
+                                    <TextField fx:id="messagePlan2" layoutX="318.0" layoutY="72.0" prefHeight="32.0" prefWidth="267.0" promptText="请输入计划编号" style="-fx-border-color: #B7C3D7; -fx-background-color: #02030A; -fx-border-radius: 2em;" />
                                     <ScrollPane layoutY="196.0" prefHeight="454.0" prefWidth="1018.0">
                                        <content>
                                           <VBox fx:id="vboxPlanSh" prefHeight="453.0" prefWidth="1015.0" />
@@ -459,7 +459,7 @@
                         </ImageView>
                      </graphic>
                   </JFXButton>
-                  <TextField fx:id="messagePlan" layoutX="114.0" layoutY="93.0" prefHeight="32.0" prefWidth="267.0" style="-fx-border-color: #B7C3D7; -fx-background-color: #02030A; -fx-border-radius: 2em;" />
+                  <TextField fx:id="messagePlan" layoutX="114.0" layoutY="93.0" prefHeight="32.0" prefWidth="267.0" promptText="请输入计划编号" style="-fx-border-color: #B7C3D7; -fx-background-color: #02030A; -fx-border-radius: 2em;" />
                   <ScrollPane hbarPolicy="NEVER" layoutX="-1.0" layoutY="210.0" prefHeight="480.0" prefWidth="1018.0" vbarPolicy="ALWAYS">
                      <content>
                         <VBox fx:id="vboxSearchPlan" prefHeight="479.0" prefWidth="998.0" />

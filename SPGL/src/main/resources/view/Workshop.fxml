@@ -85,7 +85,7 @@
                         <VBox fx:id="vBox2" prefHeight="525.0" prefWidth="1013.0" />
                      </content>
                   </ScrollPane>
-                  <TextField fx:id="planId2" layoutX="354.0" layoutY="75.0" />
+                  <TextField fx:id="planId2" layoutX="354.0" layoutY="75.0" promptText="请输入计划编号" />
                   <JFXButton fx:id="searchPlan2" ellipsisString="" layoutX="597.0" layoutY="68.0" onMouseClicked="#handleSearch" prefHeight="42.0" prefWidth="42.0" text="Button">
                      <graphic>
                         <ImageView fitHeight="34.0" fitWidth="34.0" pickOnBounds="true" preserveRatio="true">
@@ -103,7 +103,7 @@
                         <VBox fx:id="vBox1" prefHeight="525.0" prefWidth="1013.0" />
                      </content>
                   </ScrollPane>
-                  <TextField fx:id="planId1" layoutX="385.0" layoutY="69.0" />
+                  <TextField fx:id="planId1" layoutX="385.0" layoutY="69.0" promptText="请输入计划编号" />
                   <JFXButton fx:id="searchPlan1" ellipsisString="" layoutX="600.0" layoutY="62.0" onMouseClicked="#handleSearch" prefHeight="42.0" prefWidth="42.0" text="Button">
                      <graphic>
                         <ImageView fitHeight="34.0" fitWidth="34.0" pickOnBounds="true" preserveRatio="true">
