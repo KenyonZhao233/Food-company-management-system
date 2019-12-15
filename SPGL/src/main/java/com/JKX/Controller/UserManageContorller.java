@@ -411,10 +411,6 @@ public class UserManageContorller implements Initializable {
             this.vboxPlan.setDisable(true);
         if(staff.zw[0][2] == 0)
             this.roleCz.setDisable(true);
-        else {
-            this.roleGrant.setDisable(true);
-        }
-
         this.changeRole.setDisable(true);
 
         try {
