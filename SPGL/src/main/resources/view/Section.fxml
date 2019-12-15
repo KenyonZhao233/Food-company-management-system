@@ -170,7 +170,18 @@
                               <Insets left="50.0" />
                            </padding>
                         </Button>
-                        <Label prefHeight="62.0" prefWidth="0.0" />
+                        <Button fx:id="btnSearchDfk3" alignment="BASELINE_LEFT" graphicTextGap="22.0" layoutX="10.0" layoutY="238.0" mnemonicParsing="false" onMouseClicked="#handleClicks" prefHeight="57.0" prefWidth="256.0" stylesheets="@../css/style.css" text="成品记录查询">
+                           <graphic>
+                              <ImageView fitHeight="23.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../icon/icons8_Search_52px.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                           <padding>
+                              <Insets left="50.0" />
+                           </padding>
+                        </Button>
                         <Button fx:id="btnCpReturn" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onMouseClicked="#handleClicks" prefHeight="57.0" prefWidth="256.0" stylesheets="@../css/style.css" text="返回">
                            <graphic>
                               <ImageView fitHeight="23.0" fitWidth="35.0" nodeOrientation="RIGHT_TO_LEFT" pickOnBounds="true" preserveRatio="true">
@@ -862,17 +873,33 @@
                <children>
                   <TableView fx:id="chejian_table" layoutX="5.0" layoutY="197.0" prefHeight="491.0" prefWidth="1011.0">
                      <columns>
-                        <TableColumn prefWidth="200.0" text="车间编号" />
-                        <TableColumn prefWidth="210.0" text="车间负责人" />
-                        <TableColumn prefWidth="200.0" text="生产产品编号" />
-                        <TableColumn prefWidth="200.0" text="生产产品名称" />
-                        <TableColumn prefWidth="200.0" text="员工数量" />
+                        <TableColumn prefWidth="350.0" text="车间编号" />
+                        <TableColumn prefWidth="350.0" text="车间负责人" />
+                        <TableColumn prefWidth="310.0" text="员工数量" />
                      </columns>
                   </TableView>
                   <TextField fx:id="chejian_cj_id_text" layoutX="32.0" layoutY="80.0" prefHeight="30.0" prefWidth="272.0" promptText="请输入车间编号" />
-                  <TextField fx:id="chejian_cp_id_text" layoutX="547.0" layoutY="80.0" prefHeight="30.0" prefWidth="272.0" promptText="请输入生产产品编号" />
+                  <TextField fx:id="chejian_cp_id_text" layoutX="547.0" layoutY="80.0" prefHeight="30.0" prefWidth="272.0" promptText="请输入生产产品编号" visible="false" />
                   <JFXButton fx:id="chejian_cj_id_btn" layoutX="348.0" layoutY="80.0" onMouseClicked="#handleClicks" text="查询" />
-                  <JFXButton fx:id="chejian_cp_id_btn" layoutX="872.0" layoutY="80.0" onMouseClicked="#handleClicks" text="查询" />
+                  <JFXButton fx:id="chejian_cp_id_btn" layoutX="872.0" layoutY="80.0" onMouseClicked="#handleClicks" text="查询" visible="false" />
+               </children>
+            </Pane>
+            <Pane fx:id="ylkccx_pane" layoutX="10.0" layoutY="10.0" prefHeight="689.0" prefWidth="1046.0" style="-fx-background-color: #000000;">
+               <children>
+                  <TableView fx:id="ylkccx_table" layoutX="14.0" layoutY="197.0" prefHeight="491.0" prefWidth="1002.0">
+                     <columns>
+                        <TableColumn prefWidth="200.0" text="操作时间" />
+                        <TableColumn prefWidth="160.0" text="成品编号" />
+                        <TableColumn prefWidth="160.0" text="成品名称" />
+                        <TableColumn prefWidth="160.0" text="操作属性" />
+                        <TableColumn prefWidth="160.0" text="成品数量" />
+                        <TableColumn prefWidth="160.0" text="负责人编号" />
+                     </columns>
+                  </TableView>
+                  <TimeRangeView fx:id="cpkccx_time" layoutX="24.0" layoutY="50.0" />
+                  <TextField fx:id="cpkccxid_text" layoutX="611.0" layoutY="70.0" prefHeight="30.0" prefWidth="217.0" promptText="请输入成品编号" />
+                  <JFXButton fx:id="cpkccxid_btn1" layoutX="356.0" layoutY="70.0" onMouseClicked="#handleClicks" text="查询" />
+                  <JFXButton fx:id="cpkccxid_btn2" layoutX="865.0" layoutY="70.0" onMouseClicked="#handleClicks" text="查询" />
                </children>
             </Pane>
             <Pane fx:id="emptyPane" layoutX="10.0" layoutY="10.0" prefHeight="689.0" prefWidth="1046.0" style="-fx-background-color: #000000;" />

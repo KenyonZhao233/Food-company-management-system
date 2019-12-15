@@ -22,35 +22,34 @@ public class SearchSection {
         WorkShop workShops[]=new WorkShop[ans.length-1];
         for(int i=1;i<ans.length;i++)
         {
-            workShops[i-1]=new WorkShop(ans[i][0],ans[i][1],ans[i][2],ans[i][3],ans[i][4]);
+            workShops[i-1]=new WorkShop(ans[i][0],ans[i][1],ans[i][2]);
         }
         return workShops;
     }
 
     public WorkShop[] SearchWorkShopByCheJianId(String cj_id) throws SQLException
     {
-        String sql="select workshop.cj_id,workshop.cj_fzr,workshop.cj_productid,product.product_name,workshop.cj_num " +
-                "from workshop,product " +
-                "where workshop.cj_productid = product.product_id and workshop.cj_id = '"+cj_id+"' ";
+        String sql="select * " +
+                "from workshop " +
+                "where workshop.cj_id = '"+cj_id+"' ";
         String ans[][] =staff.Search(sql);
         WorkShop workShops[]=new WorkShop[ans.length-1];
         for(int i=1;i<ans.length;i++)
         {
-            workShops[i-1]=new WorkShop(ans[i][0],ans[i][1],ans[i][2],ans[i][3],ans[i][4]);
+            workShops[i-1]=new WorkShop(ans[i][0],ans[i][1],ans[i][2]);
         }
         return workShops;
     }
 
     public WorkShop[] SearchAllWorkShop() throws SQLException
     {
-        String sql="select workshop.cj_id,workshop.cj_fzr,workshop.cj_productid,product.product_name,workshop.cj_num " +
-                "from workshop,product " +
-                "where workshop.cj_productid = product.product_id";
+        String sql="select * " +
+                "from workshop ";
         String ans[][] =staff.Search(sql);
         WorkShop workShops[]=new WorkShop[ans.length-1];
         for(int i=1;i<ans.length;i++)
         {
-            workShops[i-1]=new WorkShop(ans[i][0],ans[i][1],ans[i][2],ans[i][3],ans[i][4]);
+            workShops[i-1]=new WorkShop(ans[i][0],ans[i][1],ans[i][2]);
         }
         return workShops;
     }
@@ -275,7 +274,7 @@ public class SearchSection {
 
     public Unpaid[] SearchUnpaidByCustomId(String custom_id)throws SQLException
     {
-        String sql="select unpaid.order_id,unpaid.order_date,unpaid.oreder_mn,customer.customer_id,customer.customer_name,customer.customer_tele " +
+        String sql="select unpaid.order_id,unpaid.order_date,unpaid.order_mn,customer.customer_id,customer.customer_name,customer.customer_tele " +
                 "from unpaid,customer " +
                 "where unpaid.order_custom = customer.customer_id and customer.customer_id = '"+custom_id+"' ";
         String ans[][] =staff.Search(sql);
@@ -289,7 +288,7 @@ public class SearchSection {
 
     public Unpaid[] SearchUnpaidByOrderId(String order_id)throws SQLException
     {
-        String sql="select unpaid.order_id,unpaid.order_date,unpaid.oreder_mn,customer.customer_id,customer.customer_name,customer.customer_tele " +
+        String sql="select unpaid.order_id,unpaid.order_date,unpaid.order_mn,customer.customer_id,customer.customer_name,customer.customer_tele " +
                 "from unpaid,customer " +
                 "where unpaid.order_custom = customer.customer_id and unpaid.order_id = '"+order_id+"' ";
         String ans[][] =staff.Search(sql);
@@ -303,7 +302,7 @@ public class SearchSection {
 
     public Unpaid[] SearchUnpaidByDate(String start,String end)throws SQLException
     {
-        String sql="select unpaid.order_id,unpaid.order_date,unpaid.oreder_mn,customer.customer_id,customer.customer_name,customer.customer_tele " +
+        String sql="select unpaid.order_id,unpaid.order_date,unpaid.order_mn,customer.customer_id,customer.customer_name,customer.customer_tele " +
                 "from unpaid,customer " +
                 "where unpaid.order_custom = customer.customer_id and unpaid.order_date between '"+start+"' and '"+end+"' ";
         String ans[][] =staff.Search(sql);
@@ -317,7 +316,7 @@ public class SearchSection {
 
     public Unpaid[] SearchAllUnpaid()throws SQLException
     {
-        String sql="select unpaid.order_id,unpaid.order_date,unpaid.oreder_mn,customer.customer_id,customer.customer_name,customer.customer_tele " +
+        String sql="select unpaid.order_id,unpaid.order_date,unpaid.order_mn,customer.customer_id,customer.customer_name,customer.customer_tele " +
                 "from unpaid,customer " +
                 "where unpaid.order_custom = customer.customer_id";
         String ans[][] =staff.Search(sql);
@@ -541,7 +540,9 @@ public class SearchSection {
 
     public OneOrderRecord[] SearchAllOrders() throws SQLException
     {
-        String sql="select * from orders";
+        String sql="select orders.order_id,orders.order_date,order_product.product_name,order_product.product_num,orders.order_zt,orders.order_custom,orders.order_type,orders.order_fzr " +
+                   "from orders,order_product " +
+                   "where orders.order_id = order_product.order_id ";
         String ans[][] =staff.Search(sql);
         OneOrderRecord orders[]=new OneOrderRecord[ans.length-1];
         for(int i=1;i<ans.length;i++)
@@ -553,7 +554,9 @@ public class SearchSection {
 
     public OneOrderRecord[] SearchOrdersById(String order_id) throws SQLException
     {
-        String sql="select * from orders where order_id = '"+order_id+"'";
+        String sql="select orders.order_id,orders.order_date,order_product.product_name,order_product.product_num,orders.order_zt,orders.order_custom,orders.order_type,orders.order_fzr " +
+                   "from orders,order_product " +
+                   "where orders.order_id = order_product.order_id and orders.order_id = '"+order_id+"' ";
         String ans[][] =staff.Search(sql);
         OneOrderRecord orders[]=new OneOrderRecord[ans.length-1];
         for(int i=1;i<ans.length;i++)
@@ -565,7 +568,9 @@ public class SearchSection {
 
     public OneOrderRecord[] SearchOrdersByDate(String start,String end) throws SQLException
     {
-        String sql="select * from orders where order_date between '"+ start +"' and '"+ end +"'";
+        String sql="select orders.order_id,orders.order_date,order_product.product_name,order_product.product_num,orders.order_zt,orders.order_custom,orders.order_type,orders.order_fzr " +
+                   "from orders,order_product " +
+                   "where orders.order_id = order_product.order_id and orders.order_date between '"+ start +"' and '"+ end +"'";
         String ans[][] =staff.Search(sql);
         OneOrderRecord orders[]=new OneOrderRecord[ans.length-1];
         for(int i=1;i<ans.length;i++)
@@ -577,9 +582,9 @@ public class SearchSection {
 
     public ProductSales[] SearchAllSales() throws SQLException
     {
-        String sql="SELECT product.product_name,product.product_id, SUM(orders.order_num) AS sums,product.product_p1,product.product_p2,product.product_p3 " +
-                "FROM product, orders " +
-                "where product.product_name = orders.order_product AND orders.order_type != '已取消' " +
+        String sql="SELECT product.product_name,product.product_id, SUM(order_product.product_num) AS sums,product.product_p1,product.product_p2,product.product_p3 " +
+                "FROM product, orders,order_product " +
+                "where product.product_name = order_product.product_name and orders.order_id = order_product.order_id and orders.order_type != '已取消' " +
                 "GROUP BY product.product_name,product.product_id,product.product_p1,product.product_p2,product.product_p3 " +
                 "ORDER BY sums DESC;";
         String ans[][] =staff.Search(sql);
@@ -593,9 +598,9 @@ public class SearchSection {
 
     public ProductSales[] SearchSalesById(String product_id) throws SQLException
     {
-        String sql="SELECT product.product_name,product.product_id, SUM(orders.order_num) AS sums,product.product_p1,product.product_p2,product.product_p3 " +
-                "FROM product, orders " +
-                "where product.product_name = orders.order_product AND orders.order_type != '已取消' and product.product_id = '"+product_id+"' "+
+        String sql="SELECT product.product_name,product.product_id, SUM(order_product.product_num) AS sums,product.product_p1,product.product_p2,product.product_p3 " +
+                "FROM product, orders,order_product " +
+                "where product.product_name = order_product.product_name and orders.order_id = order_product.order_id and orders.order_type != '已取消' and product.product_id = '" + product_id+"' " +
                 "GROUP BY product.product_name,product.product_id,product.product_p1,product.product_p2,product.product_p3 " +
                 "ORDER BY sums DESC;";
         String ans[][] =staff.Search(sql);
@@ -609,9 +614,9 @@ public class SearchSection {
 
     public ProductSales[] SearchSalesByName(String product_name) throws SQLException
     {
-        String sql="SELECT product.product_name,product.product_id, SUM(orders.order_num) AS sums,product.product_p1,product.product_p2,product.product_p3 " +
-                "FROM product, orders " +
-                "where product.product_name = orders.order_product AND orders.order_type != '已取消' and product.product_name = '"+product_name+"' "+
+        String sql="SELECT product.product_name,product.product_id, SUM(order_product.product_num) AS sums,product.product_p1,product.product_p2,product.product_p3 " +
+                "FROM product, orders,order_product " +
+                "where product.product_name = order_product.product_name and orders.order_id = order_product.order_id and orders.order_type != '已取消' and product.product_name = '" + product_name+"' " +
                 "GROUP BY product.product_name,product.product_id,product.product_p1,product.product_p2,product.product_p3 " +
                 "ORDER BY sums DESC;";
         String ans[][] =staff.Search(sql);
@@ -621,5 +626,47 @@ public class SearchSection {
             sales[i-1]=new ProductSales(ans[i][0],ans[i][1],ans[i][2],ans[i][3],ans[i][4],ans[i][5]);
         }
         return sales;
+    }
+
+    public ProductRec[] SearchAllProductRec() throws SQLException
+    {
+        String sql="select product_rec.product_date,product_rec.product_id,product.product_name,product_rec.product_lx,product_rec.product_num,product_rec.product_fzrid " +
+                "from product,product_rec " +
+                "where product.product_id = product_rec.product_id";
+        String ans[][] =staff.Search(sql);
+        ProductRec productRecs[]=new ProductRec[ans.length-1];
+        for(int i=1;i<ans.length;i++)
+        {
+            productRecs[i-1]=new ProductRec(ans[i][0],ans[i][1],ans[i][2],ans[i][3],ans[i][4],ans[i][5]);
+        }
+        return productRecs;
+    }
+
+    public ProductRec[] SearchProductRecByDate(String start,String end) throws SQLException
+    {
+        String sql="select product_rec.product_date,product_rec.product_id,product.product_name,product_rec.product_lx,product_rec.product_num,product_rec.product_fzrid " +
+                "from product,product_rec " +
+                "where product.product_id = product_rec.product_id and product_rec.product_date between '"+start+"' and '"+end+"'";
+        String ans[][] =staff.Search(sql);
+        ProductRec productRecs[]=new ProductRec[ans.length-1];
+        for(int i=1;i<ans.length;i++)
+        {
+            productRecs[i-1]=new ProductRec(ans[i][0],ans[i][1],ans[i][2],ans[i][3],ans[i][4],ans[i][5]);
+        }
+        return productRecs;
+    }
+
+    public ProductRec[] SearchProductRecId(String product_id) throws SQLException
+    {
+        String sql="select product_rec.product_date,product_rec.product_id,product.product_name,product_rec.product_lx,product_rec.product_num,product_rec.product_fzrid " +
+                "from product,product_rec " +
+                "where product.product_id = product_rec.product_id and product_rec.product_id = '"+product_id+"'";
+        String ans[][] =staff.Search(sql);
+        ProductRec productRecs[]=new ProductRec[ans.length-1];
+        for(int i=1;i<ans.length;i++)
+        {
+            productRecs[i-1]=new ProductRec(ans[i][0],ans[i][1],ans[i][2],ans[i][3],ans[i][4],ans[i][5]);
+        }
+        return productRecs;
     }
 }

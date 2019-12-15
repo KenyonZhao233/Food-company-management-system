@@ -479,13 +479,15 @@ public class SalesController implements Initializable {
             }
             try
             {
-                int money=salesSection.cancelGoods(CancelID.getText(),CancelMoney.getText(),this.salesSection.CanCancel(CancelID.getText()));
+                float money=salesSection.cancelGoods(CancelID.getText(),CancelMoney.getText(),this.salesSection.CanCancel(CancelID.getText()));
                 this.salesSection.getStaff().showAlert(Alert.AlertType.INFORMATION, "成功取消订单", "已取消订单", "此订单已取消，按规定退款"+String.valueOf(money)+"元");
             }
             catch (SQLException se)
             {
+                se.printStackTrace();
                 this.salesSection.getStaff().showAlert(Alert.AlertType.ERROR, "错误", "取消订单失败", "系统错误2");
             }
+
         }
         if(event.getSource()==CancelSearch)
         {
@@ -688,7 +690,11 @@ public class SalesController implements Initializable {
                 }
                 else if(key==1)
                 {
-                    salesSection.UpdateOrders(CreateID1.getText(),CreateName.getText(),CreateNumber.getText(),order_com_type.getValue());
+                    salesSection.InsertOrderProduct(CreateID1.getText(),CreateName.getText(),CreateNumber.getText(),order_com_type.getValue());
+                }
+                else if(key==2)
+                {
+                    salesSection.UpdateOrderProduct(CreateID1.getText(),CreateName.getText(),CreateNumber.getText(),order_com_type.getValue());
                 }
             }
             catch (SQLException se)
@@ -701,7 +707,7 @@ public class SalesController implements Initializable {
             {
                 GoodsBox.getChildren().clear();//清空购物车
                 String [][]goods=salesSection.GouWuChe(CreateID1.getText(),CreateID2.getText());//编号，单价，名称，总价，数量
-                int money=0;
+                float money=0;
                 if(goods==null)
                 {
                     System.out.println("goods为空");
@@ -717,7 +723,7 @@ public class SalesController implements Initializable {
                     productInformController.setContorller(this);
                     GoodsBox.getChildren().add(node);
 
-                    money=money+Integer.valueOf(goods[i][3]);
+                    money=money+Float.valueOf(goods[i][3]);
                 }
                 money_label.setText(String.valueOf(money));
             }
@@ -736,8 +742,8 @@ public class SalesController implements Initializable {
                 try
                 {
                     float part=this.salesSection.PayPart(CreateID2.getText());
-                    order_now_money.setText(String.valueOf(Integer.valueOf(money_label.getText())*part));
-                    order_next_money.setText(String.valueOf(Integer.valueOf(money_label.getText())*(1-part)));
+                    order_now_money.setText(String.valueOf(Float.valueOf(money_label.getText())*part));
+                    order_next_money.setText(String.valueOf(Float.valueOf(money_label.getText())*(1-part)));
                 }
                 catch (SQLException se)
                 {
@@ -758,18 +764,23 @@ public class SalesController implements Initializable {
                 this.salesSection.getStaff().showAlert(Alert.AlertType.ERROR, "错误", "无法生成订单", "请添加购物车");
                 return;
             }
-            this.salesSection.getStaff().showAlert(Alert.AlertType.INFORMATION, "完成", "已生成订单", "您的订单编号为"+CreateID1.getText());
-            GoodsBox.getChildren().clear();
-            order_panel_ddid.setText(CreateID1.getText());
-            order_panel_khid.setText(CreateID2.getText());
-            order_panel_paytype.setText(order_com_type.getValue());
-            order_panel_nowmoney.setText(order_now_money.getText());
-            order_panel_nextmoney.setText(order_next_money.getText());
             try
             {
                 if(order_com_type.getValue().equals("预付款"))
                 {
+                    String custom_id=CreateID2.getText();
+                    if(salesSection.SearchCustomType(custom_id).equals("1"))
+                    {
+                        salesSection.ChangePayType(custom_id);
+                        this.salesSection.getStaff().showAlert(Alert.AlertType.INFORMATION, "提示", "零售商无法预付款", "请选择全款支付");
+                        return;
+                    }
                     salesSection.AddAdvance(CreateID1.getText(),order_now_money.getText(),order_next_money.getText());
+                    salesSection.InsertUnpaid(CreateID1.getText(),order_now_money.getText(),CreateID2.getText());
+                }
+                else
+                {
+                    salesSection.InsertUnpaid(CreateID1.getText(),order_now_money.getText(),CreateID2.getText());
                 }
             }
             catch(SQLException ex)
@@ -777,6 +788,22 @@ public class SalesController implements Initializable {
                 salesSection.getStaff().showAlert(Alert.AlertType.ERROR, "错误", "预付款处理错误", "系统错误");
                 return;
             }
+            try
+            {
+                salesSection.ChangePayTime(CreateID1.getText());
+            }
+            catch(SQLException ex)
+            {
+                salesSection.getStaff().showAlert(Alert.AlertType.ERROR, "错误", "修改订单时间错误", "系统错误");
+                return;
+            }
+            GoodsBox.getChildren().clear();
+            order_panel_ddid.setText(CreateID1.getText());
+            order_panel_khid.setText(CreateID2.getText());
+            order_panel_paytype.setText(order_com_type.getValue());
+            order_panel_nowmoney.setText(order_now_money.getText());
+            order_panel_nextmoney.setText(order_next_money.getText());
+            this.salesSection.getStaff().showAlert(Alert.AlertType.INFORMATION, "完成", "已生成订单", "您的订单编号为"+CreateID1.getText());
 
             final ObservableList<CreateOrder> data = FXCollections.observableArrayList();
             try
@@ -847,7 +874,7 @@ public class SalesController implements Initializable {
             ButtonCanUse();
             right();
         }
-        money_label.setText(String.valueOf(Integer.valueOf(money_label.getText())-Integer.valueOf(price)));
+        money_label.setText(String.valueOf(Float.valueOf(money_label.getText())-Float.valueOf(price)));
         if(order_com_type.getValue().equals("全款"))
         {
             order_now_money.setText(money_label.getText());
@@ -858,8 +885,8 @@ public class SalesController implements Initializable {
             try
             {
                 float part=this.salesSection.PayPart(CreateID2.getText());
-                order_now_money.setText(String.valueOf(Integer.valueOf(money_label.getText())*part));
-                order_next_money.setText(String.valueOf(Integer.valueOf(money_label.getText())*(1-part)));
+                order_now_money.setText(String.valueOf(Float.valueOf(money_label.getText())*part));
+                order_next_money.setText(String.valueOf(Float.valueOf(money_label.getText())*(1-part)));
             }
             catch (SQLException se)
             {

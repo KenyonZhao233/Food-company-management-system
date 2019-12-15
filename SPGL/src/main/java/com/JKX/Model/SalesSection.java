@@ -81,9 +81,9 @@ public class SalesSection{
 
     public Production[] searchCpOnOrder(String order_id) throws SQLException
     {
-        String sql = "SELECT orders.order_custom, orders.order_num " +
-                    "FROM orders " +
-                    "WHERE orders.order_id = '" + order_id + "'";
+        String sql = "SELECT orders.order_custom, order_product.product_num " +
+                    "FROM orders,order_product " +
+                    "WHERE orders.order_id = '" + order_id + "' and orders.order_id = order_product.order_id";
         String[][] ans = staff.Search(sql);
         Production[] productions = new Production[ans.length - 1];
         for(int i = 1; i < productions.length; i++)
@@ -123,9 +123,11 @@ public class SalesSection{
 
     public int insertOrderItem(String id, String pro, String num, String custom, String type) throws SQLException
     {
-        String sql = "INSERT INTO orders(orders.order_id, orders.order_product, orders.order_num, orders.order_zt, orders.order_custom, orders.order_type) " +
-                     "VALUES('" + id + "', '" + pro + "', " + num + ", '待付款', '" + custom + "', '" + type + "');";
+        String sql = "INSERT INTO orders(orders.order_id,  orders.order_zt, orders.order_custom, orders.order_type) " +
+                     "VALUES('" + id + "', " + " '待付款', '" + custom + "', '" + type + "');";
         int res = this.staff.Does(sql);
+        sql="insert into order_product(order_id,product_name,product_num) values('"+id+"','"+pro+"',"+num+")";
+        staff.Does(sql);
         return res;
     }
 
@@ -167,15 +169,9 @@ public class SalesSection{
         return ans[1][0];
     }
 
-    public int cancelGoods(String id,String money,String zt) throws SQLException
+    public float cancelGoods(String id,String money,String zt) throws SQLException
     {
-        if(zt.equals("未付款"))
-        {
-            String sql="update orders set order_zt = '已取消' where order_id = '"+id+"'";
-            this.staff.Does(sql);
-            return 0;
-        }
-        else if(zt.equals("预付款"))
+        if(zt.equals("预付款"))
         {
             String sql="update orders set order_zt = '已取消' where order_id = '"+id+"'";//修改订单表
             this.staff.Does(sql);
@@ -189,9 +185,28 @@ public class SalesSection{
         {
             String sql="update orders set order_zt = '已取消' where order_id = '"+id+"'";//修改订单表
             this.staff.Does(sql);
-            sql="delete pick where order_id = '"+id+"'";
+
+            sql="select max(return_id) from refund";
+            String[][] num=staff.Search(sql);
+            int n;
+            try
+            {
+                n=Integer.valueOf(num[1][0])+1;
+            }
+            catch (Exception e)
+            {
+                n=1;
+            }
+            String s=String.valueOf(n);
+
+            sql="insert into refund(return_id,order_money,order_id,return_reason,return_state) values('"+ s +"',"+ money +",'"+ id +"','取消订单','待退款')";
+            staff.Does(sql);
+
+            sql="delete from pick where order_id = '"+id+"'";
             this.staff.Does(sql);//修改提货单表
-            return Integer.valueOf(money);
+            sql="delete from unpaid where order_id = '"+id+"'";//修改待付款表
+            this.staff.Does(sql);
+            return Float.valueOf(money);
         }
         return 0;
     }
@@ -200,7 +215,15 @@ public class SalesSection{
     {
         String sql="select max(return_id) from refund";
         String[][] num=staff.Search(sql);
-        int n=Integer.valueOf(num[1][0])+1;
+        int n;
+        try
+        {
+            n=Integer.valueOf(num[1][0])+1;
+        }
+        catch (Exception e)
+        {
+            n=1;
+        }
         String s=String.valueOf(n);
         sql="insert into refund(return_id,order_money,order_id,return_reason,return_state) values('"+s+"',"+money+",'"+id+"','"+reason+"','待退款')";
         int res = this.staff.Does(sql);
@@ -241,7 +264,15 @@ public class SalesSection{
     {
         String sql="select max(order_id) from orders";
         String[][] num=staff.Search(sql);
-        int n = Integer.valueOf(num[1][0])+1;
+        int n;
+        try
+        {
+            n = Integer.valueOf(num[1][0])+1;
+        }
+        catch(Exception ex)
+        {
+            n=1;
+        }
         return String.valueOf(String.format("%05d",n));
     }
 
@@ -263,27 +294,50 @@ public class SalesSection{
         return "";
     }
 
-    public int InsertOrUpdate(String order_id,String Product_name) throws SQLException
+    public int InsertOrUpdate(String order_id,String product_name) throws SQLException
     {
-        String sql="select * from orders where order_id = '"+order_id+"' and order_product = '"+Product_name+"'";
+        String sql="select * from orders,order_product where orders.order_id = order_product.order_id and order_product.order_id = '"+order_id+"' ";
         String [][]ans=staff.Search(sql);
+        System.out.println(sql);
+        System.out.println(ans.length);
         if(ans.length==1)
-            return 0;//返回0是insert插入操作
+            return 0;//返回0执行InsertOrders
+        sql="select * from order_product where order_id = '"+order_id+"' and product_name = '"+product_name+"' ";
+        ans=staff.Search(sql);
+        System.out.println(ans.length);
+        if(ans.length==1)
+            return 1;//返回1执行InsertOrderProduct
         else
-            return 1;//返回1是update更新操作
+            return 2;//返回2执行UpdateOrderProduct
     }
 
     public void InsertOrders(String order_id,String order_product,String order_num,String order_custom,String order_type,String order_fzr) throws SQLException
     {
-        String sql="insert into orders(order_id,order_product,order_num,order_zt,order_custom,order_type,order_fzr) values('"+order_id+"','"+order_product+"',"+order_num+",'待付款','"+order_custom+"','"+ order_type+"','"+ order_fzr +"')";
+        String sql="insert into orders(order_id,order_zt,order_custom,order_type,order_fzr) values('"+order_id+"',"+"'待付款','"+order_custom+"','"+ order_type+"','"+ order_fzr +"')";
+        System.out.println(sql);
+        staff.Does(sql);
+        sql="insert into order_product(order_id,product_name,product_num) values('"+order_id+"','"+order_product+"',"+order_num+")";
+        System.out.println(sql);
         staff.Does(sql);
     }
 
-    public void UpdateOrders(String order_id,String order_product,String order_num,String order_type) throws SQLException
+    public void InsertOrderProduct(String order_id,String product_name,String product_num,String order_type)throws SQLException
     {
-        String sql="update orders set order_num = order_num + "+order_num+" where order_id = '"+order_id+"' and order_product = '"+order_product+"'";
+        String sql="insert into order_product(order_id,product_name,product_num) values('"+order_id+"','"+product_name+"',"+product_num+")";
+        System.out.println(sql);
         staff.Does(sql);
-        sql="update orders set order_type = '"+ order_type +"' where order_id = '"+order_id+"' and order_product = '"+order_product+"'";
+        sql="update orders set order_type = '"+ order_type +"' where order_id = '"+order_id+"'";
+        System.out.println(sql);
+        staff.Does(sql);
+    }
+
+    public void UpdateOrderProduct(String order_id,String order_product,String order_num,String order_type) throws SQLException
+    {
+        String sql="update order_product set product_num = product_num + "+order_num+" where order_id = '"+order_id+"' and product_name = '"+order_product+"'";
+        System.out.println(sql);
+        staff.Does(sql);
+        sql="update orders set order_type = '"+ order_type +"' where order_id = '"+order_id+"'";
+        System.out.println(sql);
         staff.Does(sql);
     }
 
@@ -298,8 +352,12 @@ public class SalesSection{
 
     public int CheckOrders(String product_id,String product_name) throws SQLException
     {
-        String sql="select SUM(product_rm) from product_ck where product_id = '"+ product_id +"'";//仓库查总量
+        String sql="select * from product_ck where product_id = '"+ product_id +"'";
         String [][]ans = staff.Search(sql);
+        if(ans.length==1)
+            return 0;
+        sql="select SUM(product_rm) from product_ck where product_id = '"+ product_id +"'";//仓库查总量
+        ans = staff.Search(sql);
         int sum1=Integer.valueOf(ans[1][0]);
         sql="select order_id from pick";//待提货库查待提货量
         ans=staff.Search(sql);
@@ -308,7 +366,7 @@ public class SalesSection{
             int num=0;
             for(int i=1;i<ans.length;i++)
             {
-                sql="select order_num from orders where order_id = '"+ ans[i][0] +"' and order_product = '"+ product_name +"'";
+                sql="select product_num from order_product where order_id = '"+ ans[i][0] +"' and product_name = '"+ product_name +"'";
                 String [][]s=staff.Search(sql);
                 if(s.length>1)
                 {
@@ -330,8 +388,9 @@ public class SalesSection{
         String type=ans[1][0];
         String [][]r=new String[3000][5];
         int t=0;
-        sql="select order_product,order_num from orders where order_id = '"+ order_id +"'";
+        sql="select product_name,product_num from order_product where order_id = '"+ order_id +"'";
         ans=staff.Search(sql);
+        System.out.println(sql);
         if(ans.length>1)
         {
             System.out.println(ans.length);
@@ -345,7 +404,7 @@ public class SalesSection{
                 q[1]=temp[1][1];
                 q[2]=name;
                 q[4]=ans[i][1];
-                q[3]=String.valueOf(Integer.valueOf(q[4])*Integer.valueOf(q[1]));
+                q[3]=String.valueOf(Float.valueOf(q[4])*Float.valueOf(q[1]));
                 r[t]=q;
                 t++;
             }
@@ -363,7 +422,7 @@ public class SalesSection{
 
     public void DeleteProduct(String order_id,String product_name) throws SQLException
     {
-        String sql="delete from orders where order_id = '"+ order_id +"' and order_product = '"+ product_name +"'";
+        String sql="delete from order_product where order_id = '"+ order_id +"' and product_name = '"+ product_name +"'";
         staff.Does(sql);
     }
 
@@ -384,9 +443,9 @@ public class SalesSection{
 
     public CreateOrder[] SearchOrderProduct(String custom_tp,String order_id)throws SQLException
     {
-        String sql="select product.product_id,product.product_name,product.product_p"+ custom_tp +",orders.order_num,product.product_p"+ custom_tp +"*orders.order_num " +
-                "from orders,product " +
-                "where orders.order_product = product.product_name and orders.order_id = '"+ order_id +"'";
+        String sql="select product.product_id,product.product_name,product.product_p"+ custom_tp +",order_product.product_num,product.product_p"+ custom_tp +"*order_product.product_num " +
+                "from orders,product,order_product " +
+                "where order_product.product_name = product.product_name and orders.order_id = '"+ order_id +"' and orders.order_id = order_product.order_id";
         String ans[][] =staff.Search(sql);
         CreateOrder createOrders[]=new CreateOrder[ans.length-1];
         for(int i=1;i<ans.length;i++)
@@ -409,5 +468,23 @@ public class SalesSection{
                 "where right_sale.staff_id = '"+ staff.Uid +"'";
         String ans[][] =staff.Search(sql);
         return ans;
+    }
+
+    public void InsertUnpaid(String order_id,String order_mn,String order_custom)throws SQLException
+    {
+        String sql="insert into unpaid(order_id,order_mn,order_custom) values('"+ order_id +"',"+ order_mn +",'"+ order_custom +"')";
+        staff.Does(sql);
+    }
+
+    public void ChangePayType(String custom_id)throws SQLException
+    {
+        String sql="update orders set orders.order_type = '全款' where orders.order_custom = '"+ custom_id +"'";
+        staff.Does(sql);
+    }
+
+    public void ChangePayTime(String order_id)throws SQLException
+    {
+        String sql="update orders set orders.order_date = CURRENT_TIME where orders.order_id = '"+ order_id +"'";
+        staff.Does(sql);
     }
 }

@@ -80,6 +80,9 @@ public class SectionController implements Initializable {
     private Pane chejian_panel;
 
     @FXML
+    private Pane ylkccx_pane;
+
+    @FXML
     private AnchorPane SectionPane;
 
     /*跳转按钮*/
@@ -98,9 +101,18 @@ public class SectionController implements Initializable {
     @FXML
     private Button btnCccjReturn, btnCpReturn, btnCwReturn, btnScjhReturn, btnXsReturn, btnYlReturn;
 
+    @FXML
+    private Button btnSearchDfk3;
+
     /*时间界面组件*/
     @FXML
     private JFXButton searchDate, searchIdD;
+
+    @FXML
+    private JFXButton cpkccxid_btn1;
+
+    @FXML
+    private JFXButton cpkccxid_btn2;
 
     @FXML
     private TimeRangeView datePick;
@@ -119,6 +131,9 @@ public class SectionController implements Initializable {
 
     @FXML
     private TimeRangeView project_dateview1;
+
+    @FXML
+    private TimeRangeView cpkccx_time;
 
     @FXML
     private TextField finance_inf_text;
@@ -143,6 +158,9 @@ public class SectionController implements Initializable {
 
     @FXML
     private TextField product_name_text1;
+
+    @FXML
+    private TextField cpkccxid_text;
 
     @FXML
     private JFXButton yl_cz_date_btn;
@@ -324,6 +342,9 @@ public class SectionController implements Initializable {
 
     @FXML
     private TableView<WorkShop> chejian_table;
+
+    @FXML
+    private TableView<ProductRec> ylkccx_table;
 
     @FXML
     public void handleClicks(MouseEvent event) throws IOException
@@ -984,6 +1005,7 @@ public class SectionController implements Initializable {
             }
             catch(SQLException ex)
             {
+                ex.printStackTrace();
                 staff.showAlert(Alert.AlertType.ERROR, "错误", "查询错误", "系统错误");
                 return;
             }
@@ -1083,6 +1105,7 @@ public class SectionController implements Initializable {
             }
             catch(SQLException ex)
             {
+
                 staff.showAlert(Alert.AlertType.ERROR, "错误", "查询错误", "系统错误");
                 return;
             }
@@ -1714,9 +1737,7 @@ public class SectionController implements Initializable {
             ObservableList<TableColumn<WorkShop, ?>> observableList = chejian_table.getColumns();
             observableList.get(0).setCellValueFactory(new PropertyValueFactory("cj_id"));
             observableList.get(1).setCellValueFactory(new PropertyValueFactory("cj_fzr"));
-            observableList.get(2).setCellValueFactory(new PropertyValueFactory("cj_productid"));
-            observableList.get(3).setCellValueFactory(new PropertyValueFactory("product_name"));
-            observableList.get(4).setCellValueFactory(new PropertyValueFactory("cj_num"));
+            observableList.get(2).setCellValueFactory(new PropertyValueFactory("cj_num"));
 
             chejian_table.setItems(data);
 
@@ -1747,16 +1768,14 @@ public class SectionController implements Initializable {
             ObservableList<TableColumn<WorkShop, ?>> observableList = chejian_table.getColumns();
             observableList.get(0).setCellValueFactory(new PropertyValueFactory("cj_id"));
             observableList.get(1).setCellValueFactory(new PropertyValueFactory("cj_fzr"));
-            observableList.get(2).setCellValueFactory(new PropertyValueFactory("cj_productid"));
-            observableList.get(3).setCellValueFactory(new PropertyValueFactory("product_name"));
-            observableList.get(4).setCellValueFactory(new PropertyValueFactory("cj_num"));
+            observableList.get(2).setCellValueFactory(new PropertyValueFactory("cj_num"));
 
             chejian_table.setItems(data);
 
             chejian_panel.toFront();
         }
 
-        if(actionBtn==chejian_cp_id_btn)
+        /*if(actionBtn==chejian_cp_id_btn)
         {
             final ObservableList<WorkShop> data = FXCollections.observableArrayList();
             try
@@ -1787,6 +1806,108 @@ public class SectionController implements Initializable {
             chejian_table.setItems(data);
 
             chejian_panel.toFront();
+        }*/
+
+        if(actionBtn==btnSearchDfk3)
+        {
+            final ObservableList<ProductRec> data = FXCollections.observableArrayList();
+            try
+            {
+                ProductRec[] productRecs=searchSection.SearchAllProductRec();
+                if(productRecs.length==0)
+                {
+                    staff.showAlert(Alert.AlertType.ERROR, "错误", "查询错误", "不存在");
+                    return;
+                }
+                for(int i=0;i<productRecs.length;i++)
+                {
+                    data.add(productRecs[i]);
+                }
+            }
+            catch(SQLException ex)
+            {
+                staff.showAlert(Alert.AlertType.ERROR, "错误", "查询错误", "系统错误");
+                return;
+            }
+            ObservableList<TableColumn<ProductRec, ?>> observableList = ylkccx_table.getColumns();
+            observableList.get(0).setCellValueFactory(new PropertyValueFactory("product_date"));
+            observableList.get(1).setCellValueFactory(new PropertyValueFactory("product_id"));
+            observableList.get(2).setCellValueFactory(new PropertyValueFactory("product_name"));
+            observableList.get(3).setCellValueFactory(new PropertyValueFactory("product_lx"));
+            observableList.get(4).setCellValueFactory(new PropertyValueFactory("product_num"));
+            observableList.get(5).setCellValueFactory(new PropertyValueFactory("product_fzrid"));
+
+            ylkccx_table.setItems(data);
+
+            ylkccx_pane.toFront();
+        }
+
+        if(actionBtn==cpkccxid_btn1)
+        {
+            final ObservableList<ProductRec> data = FXCollections.observableArrayList();
+            try
+            {
+                ProductRec[] productRecs=searchSection.SearchProductRecByDate(cpkccx_time.getStartDate().toString(),cpkccx_time.getEndDate().toString());
+                if(productRecs.length==0)
+                {
+                    staff.showAlert(Alert.AlertType.ERROR, "错误", "查询错误", "不存在");
+                    return;
+                }
+                for(int i=0;i<productRecs.length;i++)
+                {
+                    data.add(productRecs[i]);
+                }
+            }
+            catch(SQLException ex)
+            {
+                staff.showAlert(Alert.AlertType.ERROR, "错误", "查询错误", "系统错误");
+                return;
+            }
+            ObservableList<TableColumn<ProductRec, ?>> observableList = ylkccx_table.getColumns();
+            observableList.get(0).setCellValueFactory(new PropertyValueFactory("product_date"));
+            observableList.get(1).setCellValueFactory(new PropertyValueFactory("product_id"));
+            observableList.get(2).setCellValueFactory(new PropertyValueFactory("product_name"));
+            observableList.get(3).setCellValueFactory(new PropertyValueFactory("product_lx"));
+            observableList.get(4).setCellValueFactory(new PropertyValueFactory("product_num"));
+            observableList.get(5).setCellValueFactory(new PropertyValueFactory("product_fzrid"));
+
+            ylkccx_table.setItems(data);
+
+            ylkccx_pane.toFront();
+        }
+
+        if(actionBtn==cpkccxid_btn2)
+        {
+            final ObservableList<ProductRec> data = FXCollections.observableArrayList();
+            try
+            {
+                ProductRec[] productRecs=searchSection.SearchProductRecId(cpkccxid_text.getText());
+                if(productRecs.length==0)
+                {
+                    staff.showAlert(Alert.AlertType.ERROR, "错误", "查询错误", "不存在");
+                    return;
+                }
+                for(int i=0;i<productRecs.length;i++)
+                {
+                    data.add(productRecs[i]);
+                }
+            }
+            catch(SQLException ex)
+            {
+                staff.showAlert(Alert.AlertType.ERROR, "错误", "查询错误", "系统错误");
+                return;
+            }
+            ObservableList<TableColumn<ProductRec, ?>> observableList = ylkccx_table.getColumns();
+            observableList.get(0).setCellValueFactory(new PropertyValueFactory("product_date"));
+            observableList.get(1).setCellValueFactory(new PropertyValueFactory("product_id"));
+            observableList.get(2).setCellValueFactory(new PropertyValueFactory("product_name"));
+            observableList.get(3).setCellValueFactory(new PropertyValueFactory("product_lx"));
+            observableList.get(4).setCellValueFactory(new PropertyValueFactory("product_num"));
+            observableList.get(5).setCellValueFactory(new PropertyValueFactory("product_fzrid"));
+
+            ylkccx_table.setItems(data);
+
+            ylkccx_pane.toFront();
         }
     }
 
@@ -2057,5 +2178,12 @@ public class SectionController implements Initializable {
         assert chejian_cj_id_btn != null : "fx:id=\"chejian_cj_id_btn\" was not injected: check your FXML file 'Section.fxml'.";
         assert chejian_cp_id_text != null : "fx:id=\"chejian_cp_id_text\" was not injected: check your FXML file 'Section.fxml'.";
         assert chejian_cp_id_btn != null : "fx:id=\"chejian_cp_id_btn\" was not injected: check your FXML file 'Section.fxml'.";
+        assert btnSearchDfk3 != null : "fx:id=\"btnSearchDfk3\" was not injected: check your FXML file 'Section.fxml'.";
+        assert ylkccx_table != null : "fx:id=\"ylkccx_table\" was not injected: check your FXML file 'Section.fxml'.";
+        assert ylkccx_pane != null : "fx:id=\"ylkccx_pane\" was not injected: check your FXML file 'Section.fxml'.";
+        assert cpkccx_time != null : "fx:id=\"cpkccx_time\" was not injected: check your FXML file 'Section.fxml'.";
+        assert cpkccxid_btn1 != null : "fx:id=\"cpkccxid_btn1\" was not injected: check your FXML file 'Section.fxml'.";
+        assert cpkccxid_text != null : "fx:id=\"cpkccxid_text\" was not injected: check your FXML file 'Section.fxml'.";
+        assert cpkccxid_btn2 != null : "fx:id=\"cpkccxid_btn2\" was not injected: check your FXML file 'Section.fxml'.";
     }
 }
