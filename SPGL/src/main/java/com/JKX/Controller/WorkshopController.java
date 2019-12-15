@@ -47,10 +47,19 @@ public class WorkshopController {
 
     private WorkshopSection workshopSection;
 
+    private String workshops;
+
     public void initData(Staff staff)
     {
         this.workshopSection = new WorkshopSection(staff);
         this.nameLable.setText(staff.Name);
+        try {
+            workshops = this.workshopSection.findWorkShop(staff.Uid);
+        }
+        catch (SQLException se)
+        {
+            Staff.showAlert(Alert.AlertType.ERROR, "错误", "查询失败", "获取车间信息错误!");
+        }
     }
 
     public WorkshopSection getWorkshopSection() {
@@ -80,23 +89,25 @@ public class WorkshopController {
                     Plan[] plans = this.workshopSection.searchPlan(inform, "待执行");
                     for(int i = 0; i < plans.length; i++)
                     {
-                        FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("view/PlanItem.fxml"));
-                        Node node = loader.load();
+                        if(plans[i].getFzr().equals(workshops)) {
+                            FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("view/PlanItem.fxml"));
+                            Node node = loader.load();
 
-                        PlanItemController planItemController = loader.<PlanItemController>getController();
-                        planItemController.setWorkshopController(this);
-                        planItemController.setConfirmVisable(false);
-                        planItemController.setDeleteVisable(false);
-                        planItemController.setChangeVisable(false);
-                        planItemController.setNumEditable(false);
-                        planItemController.setPushNumVisable(false);
-                        planItemController.setPushVisable(false);
-                        planItemController.setDoPlanVisable(true);
-                        planItemController.setDeadlineEditable(false);
-                        planItemController.setInform(plans[i], 0);
-                        planItemController.setNode(node);
+                            PlanItemController planItemController = loader.<PlanItemController>getController();
+                            planItemController.setWorkshopController(this);
+                            planItemController.setConfirmVisable(false);
+                            planItemController.setDeleteVisable(false);
+                            planItemController.setChangeVisable(false);
+                            planItemController.setNumEditable(false);
+                            planItemController.setPushNumVisable(false);
+                            planItemController.setPushVisable(false);
+                            planItemController.setDoPlanVisable(true);
+                            planItemController.setDeadlineEditable(false);
+                            planItemController.setInform(plans[i], 0);
+                            planItemController.setNode(node);
 
-                        vBox1.getChildren().add(node);
+                            vBox1.getChildren().add(node);
+                        }
                     }
                 }
                 catch (SQLException | IOException se)
@@ -114,10 +125,9 @@ public class WorkshopController {
                 else
                     inform = this.planId2.getText();
                 Plan[] plans = this.workshopSection.searchPlan(inform, "执行中");
-                String name = this.workshopSection.getStaff().Name;
                 for(int i = 0; i < plans.length; i++)
                 {
-                    if(plans[i].getZrr().equals(name))
+                    if(plans[i].getFzr().equals(workshops))
                     {
                         FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("view/PlanItem.fxml"));
                         Node node = loader.load();

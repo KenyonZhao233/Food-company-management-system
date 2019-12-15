@@ -18,7 +18,7 @@ public class Plan {
 
     }
 
-    public Plan(String plan_id, String plan_zt, Production production , String plan_sdate, String plan_edate, String fzr, String zrr, String ddl)
+    public Plan(String plan_id, String plan_zt, Production production , String plan_sdate, String plan_edate, String zrr, String fzr, String ddl)
     {
         this.plan_id = plan_id;
         this.plan_zt = plan_zt;

@@ -5,6 +5,7 @@ import com.JKX.Model.PlanSection;
 import com.JKX.Model.Staff;
 import com.JKX.Model.Table.Plan;
 import com.JKX.Model.Table.Production;
+import com.JKX.Model.Table.Projectrec;
 import com.JKX.Model.Table.Raw;
 import com.calendarfx.view.print.TimeRangeView;
 import com.jfoenix.controls.JFXButton;
@@ -49,11 +50,11 @@ public class ProductionPlanController {
 
     //跳转界面
     @FXML
-    private javafx.scene.control.Button SearchCpkc, SearchYlkc, SearchScjh ,ChangeScjh, ChangeCp, ChangeRaw, SearchXl, btnSignout;
+    private javafx.scene.control.Button SearchCpkc, SearchYlkc, SearchScjh ,ChangeScjh, ChangeCp, ChangeRaw, SearchXl, btnSignout,SearchRec;
 
     //各种界面
     @FXML
-    private AnchorPane RawkcPane, PlanSearPane, PlanGlpane, ChangeCppane, ChangeRawPane, searchXlPane, CpkcPane;
+    private AnchorPane Recsearch, RawkcPane, PlanSearPane, PlanGlpane, ChangeCppane, ChangeRawPane, searchXlPane, CpkcPane;
 
     //成品库存查询
     @FXML
@@ -103,7 +104,7 @@ public class ProductionPlanController {
     //计划管理
     //新建计划页面
     @FXML
-    private JFXTextField PlanId, Cpname, Cpnum;
+    private JFXTextField PlanId, Cpname, Cpnum, workshops;
     @FXML
     private JFXButton makePlan;
     @FXML
@@ -193,6 +194,14 @@ public class ProductionPlanController {
     @FXML
     private Pane xlPane;
 
+    //记录查询界面
+    @FXML
+    private TextField recId;
+    @FXML
+    private JFXButton btnRec;
+    @FXML
+    private TableView<Projectrec> tableRec;
+
     private int[] qx;
 
 
@@ -241,6 +250,13 @@ public class ProductionPlanController {
         this.CrawBzq.setCellValueFactory(new PropertyValueFactory<Raw, Integer>("raw_bzq"));
         this.CrawPri.setCellValueFactory(new PropertyValueFactory<Raw, Float>("raw_price"));
         this.CrawKc.setCellValueFactory(new PropertyValueFactory<Raw, Float>("raw_kc"));
+
+        ObservableList<TableColumn<Projectrec, ?>> observableList = tableRec.getColumns();
+        observableList.get(0).setCellValueFactory(new PropertyValueFactory("planId"));
+        observableList.get(1).setCellValueFactory(new PropertyValueFactory("zt"));
+        observableList.get(2).setCellValueFactory(new PropertyValueFactory("num"));
+        observableList.get(3).setCellValueFactory(new PropertyValueFactory("fzr"));
+        observableList.get(4).setCellValueFactory(new PropertyValueFactory("date"));
 
         xAxis.setLabel("产品");
         yAxis.setLabel("销量");
@@ -341,7 +357,9 @@ public class ProductionPlanController {
 
     public void handleJump(MouseEvent mouseEvent) throws IOException {
         Button actionBtn = (Button) mouseEvent.getSource();
-        if(actionBtn == this.SearchCpkc)
+        if(actionBtn == this.SearchRec)
+            this.Recsearch.toFront();
+        else if(actionBtn == this.SearchCpkc)
             this.CpkcPane.toFront();
         else if(actionBtn == this.SearchYlkc)
             this.RawkcPane.toFront();
@@ -534,6 +552,8 @@ public class ProductionPlanController {
                     planItemController.setNumEditable(false);
                     planItemController.setPushNumVisable(false);
                     planItemController.setPushVisable(false);
+                    planItemController.setDeadlineEditable(false);
+                    planItemController.setWorkshopEditable(false);
 
                     vboxSearchPlan.getChildren().add(node);
                 }
@@ -566,6 +586,8 @@ public class ProductionPlanController {
                     planItemController.setNumEditable(false);
                     planItemController.setPushNumVisable(false);
                     planItemController.setPushVisable(false);
+                    planItemController.setDeadlineEditable(false);
+                    planItemController.setWorkshopEditable(false);
 
                     vboxSearchPlan.getChildren().add(node);
                 }
@@ -605,6 +627,8 @@ public class ProductionPlanController {
                         planItemController.setNumEditable(true);
                         planItemController.setPushNumVisable(false);
                         planItemController.setPushVisable(false);
+                        if(!plans[k][i].getPlan_zt().equals("审核中"))
+                            planItemController.setWorkshopEditable(true);
 
                         vboxPlan.getChildren().add(node);
                     }
@@ -646,6 +670,8 @@ public class ProductionPlanController {
                         planItemController.setNumEditable(true);
                         planItemController.setPushNumVisable(false);
                         planItemController.setPushVisable(false);
+                        if(!plans[k][i].getPlan_zt().equals("审核中"))
+                            planItemController.setWorkshopEditable(true);
 
                         vboxPlan.getChildren().add(node);
                     }
@@ -667,7 +693,7 @@ public class ProductionPlanController {
                 else
                     infom = this.messagePlan2.getText();
                 Plan[] plans = this.planSection.searchPlan(infom, "待审核");
-                this.vboxSearchPlan.getChildren().clear();
+                this.vboxPlanSh.getChildren().clear();
                 for(int i = 0; i < plans.length; i++)
                 {
                     FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("view/PlanItem.fxml"));
@@ -683,6 +709,8 @@ public class ProductionPlanController {
                     planItemController.setNumEditable(false);
                     planItemController.setPushNumVisable(false);
                     planItemController.setPushVisable(false);
+                    planItemController.setDeadlineEditable(false);
+                    planItemController.setWorkshopEditable(false);
 
                     vboxPlanSh.getChildren().add(node);
                 }
@@ -1032,7 +1060,7 @@ public class ProductionPlanController {
         {
             try
             {
-                if(this.Cpname.getText().isEmpty() || this.Cpnum.getText().isEmpty())
+                if(this.Cpname.getText().isEmpty() || this.Cpnum.getText().isEmpty() || this.planDdl.getValue().equals("") || this.workshops.getText().isEmpty())
                 {
                     Staff.showAlert(Alert.AlertType.ERROR, "错误", "添加失败", "请填写完整信息");
                 }
@@ -1061,7 +1089,7 @@ public class ProductionPlanController {
                             Staff.showAlert(Alert.AlertType.ERROR, "错误", "添加失败", "库存不足");
                         }
                         else {
-                            Plan plan = new Plan(this.PlanId.getText(), "待执行", production[0], "", "", this.planSection.getStaff().Name, "", this.planDdl.getValue().toString());
+                            Plan plan = new Plan(this.PlanId.getText(), "待执行", production[0], "", "", this.planSection.getStaff().Name, this.workshops.getText(), this.planDdl.getValue().toString());
                             this.planSection.makePlan(plan);
                             Staff.showAlert(Alert.AlertType.INFORMATION, "成功", "添加成功", "计划编号" + this.PlanId.getText());
                         }
@@ -1078,5 +1106,33 @@ public class ProductionPlanController {
 
     public void deletevboxYl(Node node) {
         this.vboxYl.getChildren().remove(node);
+    }
+
+    public void handleSearchRec(MouseEvent mouseEvent) {
+        if(this.recId.getText().isEmpty()) {
+            Staff.showAlert(Alert.AlertType.ERROR, "错误", "查询失败", "请输入计划编号！");
+        }
+        else
+        {
+            try {
+                Projectrec[] projectrecs = this.planSection.searchRec(this.recId.getText());
+                if(projectrecs.length == 0)
+                    Staff.showAlert(Alert.AlertType.ERROR, "失败", "查询失败", "未查询到该信息");
+                else
+                {
+                    tableRec.getItems().clear();
+                    tableRec.refresh();
+                    ObservableList<Projectrec> list = FXCollections.observableArrayList();
+                    for(int i = 0; i < projectrecs.length; i++)
+                        list.add(projectrecs[i]);
+                    tableRec.getItems().addAll(list);
+                }
+            }
+           catch (SQLException se)
+           {
+               se.printStackTrace();
+               Staff.showAlert(Alert.AlertType.ERROR, "错误", "查询失败", "系统错误");
+           }
+        }
     }
 }

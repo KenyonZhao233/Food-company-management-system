@@ -81,6 +81,16 @@ public class WorkshopSection {
         return nums;
     }
 
+    public String findWorkShop(String staffid) throws SQLException
+    {
+        String sql = "select * from staff_job where staff_id = '" + staffid + "' and staff_bm = '生产车间' and staff_zw = '业务人员'";
+        String[][] ans = this.staff.Search(sql);
+        if(ans.length == 1)
+            return "";
+        else
+            return ans[1][3];
+    }
+
     public Plan[] searchPlan(String id, String zt) throws SQLException      //存储过程，查询Plan返回计划编号，成品类，计划状态。
     {
         String[] a = {"string", "string"};
@@ -109,20 +119,20 @@ public class WorkshopSection {
         this.staff.ExcuteDoes(sql, a, b);
     }
 
-    public int changeZtOver(String id) throws SQLException//将状态改为待审核,修改完成时间并删除进度。
+    public int changeZtOver(String id, String fzr) throws SQLException//将状态改为待审核,修改完成时间并删除进度。
     {
-        String[] a = {"string"};
-        String[] b = {id};
-        String sql = "Call Over_Plan(?)";
+        String[] a = {"string", "string"};
+        String[] b = {id, fzr};
+        String sql = "Call Over_Plan(?, ?)";
         int res = staff.ExcuteDoes(sql, a, b);
         return res;
     }
 
-    public int updatePlan(String id, int now) throws SQLException  //将ID的now值改为now， 然后判断每次update判断是否超过了AIM，超过了改订单状态；
+    public int updatePlan(String id, int now, int punum,String fzr) throws SQLException  //将ID的now值改为now， 然后判断每次update判断是否超过了AIM，超过了改订单状态；
     {
-        String[] a = {"string", "int"};
-        String[] b = {id, String.valueOf(now)};
-        String sql = "Call Push_Plan(?, ?)";
+        String[] a = {"string", "int", "int", "string"};
+        String[] b = {id, String.valueOf(now), String.valueOf(punum), fzr};
+        String sql = "Call Push_Plan(?, ?, ?, ?)";
         int res = this.staff.ExcuteDoes(sql, a, b);
         return res;
     }

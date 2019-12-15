@@ -3,6 +3,7 @@ package com.JKX.Model;
 import com.JKX.Controller.ItemController.StaffInformController;
 import com.JKX.Model.Table.Plan;
 import com.JKX.Model.Table.Production;
+import com.JKX.Model.Table.Projectrec;
 import com.JKX.Model.Table.Raw;
 import javafx.scene.control.Alert;
 
@@ -160,8 +161,8 @@ public class PlanSection {
     public int makePlan(Plan plan) throws SQLException
     {
         //Plan plan = new Plan(planId, planType, production, s_date, e_date, fzr);
-        String sql = "INSERT INTO project(project.produce_id, project.produce_type, project.produce_wp, project.produce_num, project.produce_zrr, project.produce_ddl) " +
-                     "VALUES ('" + plan.getPlan_id() + "', '" + plan.getPlan_zt() + "', '" + plan.getProduction().getProduction_id() + "', " + String.valueOf(plan.getProduction().getNums()) + " , '" + plan.getFzr() + "', '" + plan.getPlan_ddl() + "')";
+        String sql = "INSERT INTO project(project.produce_id, project.produce_type, project.produce_wp, project.produce_num, project.produce_zrr, project.produce_ddl, project.produce_fzr) " +
+                     "VALUES ('" + plan.getPlan_id() + "', '" + plan.getPlan_zt() + "', '" + plan.getProduction().getProduction_id() + "', " + String.valueOf(plan.getProduction().getNums()) + " , '" + plan.getZrr() + "', '" + plan.getPlan_ddl() + "', '" + plan.getFzr() + "')";
         int res = staff.Does(sql);
         return res;
     }
@@ -231,13 +232,14 @@ public class PlanSection {
         return plans;
     }
 
-    public int changePlanOnnum(String id, String num, String ddl) throws SQLException
+    public int changePlanOnnum(String id, String num, String ddl, String workshop) throws SQLException
     {
         //修改待执行的计划的成品数量
         //直接写个存储过程
         String sql = "UPDATE project " +
                      "SET project.produce_num = " + num + ", " +
-                     "project.produce_ddl = '" + ddl + "' " +
+                     "project.produce_ddl = '" + ddl + "', " +
+                     "produce_fzr = '" + workshop + "'" +
                      " WHERE project.produce_id = '" + id + "'";
         int res = staff.Does(sql);
         return res;
@@ -251,6 +253,13 @@ public class PlanSection {
                      "WHERE project.produce_id = '" + id +  "'";
         int res = staff.Does(sql);
         return res;
+    }
+
+    public String[][] searchWorkshop(String cjid) throws SQLException
+    {
+        String sql = "select * from workshop where cj_id = '" + cjid + "'";
+        String[][] ans = this.staff.Search(sql);
+        return ans;
     }
 
     public int confirmPlan(String id) throws SQLException
@@ -280,6 +289,18 @@ public class PlanSection {
                      "VALUES ('" + id + "', '" + raw.getRaw_id() + "', " + String.valueOf(raw.getRaw_num()) + ");";
         int res = staff.Does(sql);
         return res;
+    }
+
+    public Projectrec[] searchRec(String id) throws SQLException
+    {
+        String sql = "select * from project_rec where project_id = '" + id + "'";
+        String[][] ans = this.staff.Search(sql);
+        Projectrec[] projectrecs = new Projectrec[ans.length - 1];
+        for(int i = 1; i < ans.length; i++)
+        {
+            projectrecs[i - 1] = new Projectrec(ans[i][0], ans[i][1], Integer.parseInt(ans[i][2]), ans[i][3], ans[i][4]);
+        }
+        return projectrecs;
     }
 
     public int changeCpInform(String id, String name, String p1, String p2, String p3, String bzq) throws SQLException

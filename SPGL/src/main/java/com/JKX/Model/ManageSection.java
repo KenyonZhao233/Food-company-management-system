@@ -31,12 +31,17 @@ public class ManageSection {
         return nums;
     }
 
-    public String[] Add_User(String uidAddText, String sectionCombox, String bmm, String nameAddText, String sexAddText, String sfzAddText, String psw) throws SQLException
+    public String[] Add_User(String uidAddText, String sectionCombox, String bmm, String nameAddText, String sexAddText, String sfzAddText, String psw, String workshop) throws SQLException
     {
         String[] a = {"string", "string", "string", "string", "string", "string", "string"};
         String[] b = {uidAddText, sectionCombox, bmm, nameAddText, sexAddText, sfzAddText, psw};
         String[] c = {"int"};
         String[] ans = this.staff.ExcuteDoesReturn("CALL Staff_Add(?, ?, ?, ?, ?, ?, ?, ?)",a, b, c);
+        if(sectionCombox.equals("生产车间") && bmm.equals("业务人员"))
+        {
+            String sql = "Update staff_job Set staff_job.staff_workshop = '" + workshop + "' where staff_id = '" + uidAddText + "' and staff_bm = '生产车间' and staff_zw = '业务人员'";
+            this.staff.Does(sql);
+        }
         return ans;
     }
 
@@ -114,6 +119,13 @@ public class ManageSection {
                     " where staff.staff_id = '" + info + "' and staff.staff_id = staff_job.staff_id and staff_bm in (" + inform + ") and staff_zw in ('业务人员')" +
                     " group by staff.staff_id, staff_bm, staff_zw, staff_name, staff_sfz, staff_sex, staff_date");
         }
+        return ans;
+    }
+
+    public String[][] searchWorkshop(String cjid) throws SQLException
+    {
+        String sql = "select * from workshop where cj_id = '" + cjid + "'";
+        String[][] ans = this.staff.Search(sql);
         return ans;
     }
 

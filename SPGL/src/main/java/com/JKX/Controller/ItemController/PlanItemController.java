@@ -44,7 +44,7 @@ public class PlanItemController {
     final ObservableList<Raw> data = FXCollections.observableArrayList();
 
     @FXML
-    private Label proId, planId, proName, sdate, edate, zt, wait, zrr, fzr, outs;
+    private Label proId, proName, sdate, edate, zt, wait, zrr, outs;
 
     @FXML
     private DatePicker deadline;
@@ -59,7 +59,7 @@ public class PlanItemController {
     private ProgressBar progress;
 
     @FXML
-    private JFXTextField proNum, pushNum;
+    private JFXTextField proNum, pushNum, workshop,  planId;
 
     public void setNode(Node node) {
         this.node = node;
@@ -86,7 +86,7 @@ public class PlanItemController {
             this.sdate.setText(plan.getPlan_sdate());
             this.edate.setText(plan.getPlan_edate());
             this.zrr.setText(plan.getZrr());
-            this.fzr.setText(plan.getZrr());
+            this.workshop.setText(plan.getFzr());
             final Callback<DatePicker, DateCell> dayCellFactory =
                     new Callback<DatePicker, DateCell>() {
                         @Override
@@ -153,6 +153,7 @@ public class PlanItemController {
             }
             else if(z.equals("待审核"))
             {
+                this.workshop.setEditable(false);
                 this.deadline.setDisable(true);
                 if(plan.getPlan_ddl().compareTo(plan.getPlan_sdate()) < 0)
                 {
@@ -165,6 +166,7 @@ public class PlanItemController {
             }
             else if(z.equals("已完成"))
             {
+                this.workshop.setEditable(false);
                 if(plan.getPlan_ddl().compareTo(plan.getPlan_sdate()) < 0)
                 {
                     this.edate.setTextFill(Color.RED);
@@ -179,6 +181,11 @@ public class PlanItemController {
             se.printStackTrace();
             Staff.showAlert(Alert.AlertType.ERROR, "错误", "查询失败", "系统错误");
         }
+    }
+
+    public void setWorkshopEditable(boolean workshopEditable)
+    {
+        this.workshop.setEditable(workshopEditable);
     }
 
     public void setDeadlineEditable(boolean deadlineEditable)
@@ -262,9 +269,15 @@ public class PlanItemController {
                             Staff.showAlert(Alert.AlertType.ERROR, "错误", "修改失败", "当前库存仅剩：" + String.valueOf(now));
                         }
                     }
-                    this.productionPlanController.getPlanSection().changePlanOnnum(this.planId.getText(), this.proNum.getText(), this.deadline.getValue().toString());
-                    Staff.showAlert(Alert.AlertType.INFORMATION, "成功", "修改成功", "该计划已修改");
-                    this.rawView.refresh();
+                    String[][] ans = this.productionPlanController.getPlanSection().searchWorkshop(this.workshop.getText());
+                    if(ans.length == 1) {
+                        Staff.showAlert(Alert.AlertType.ERROR, "失败", "修改失败", "请输入正确的生产车间编号！");
+                    }
+                    else {
+                        this.productionPlanController.getPlanSection().changePlanOnnum(this.planId.getText(), this.proNum.getText(), this.deadline.getValue().toString(), this.workshop.getText());
+                        Staff.showAlert(Alert.AlertType.INFORMATION, "成功", "修改成功", "该计划已修改");
+                        this.rawView.refresh();
+                    }
                 } catch (SQLException se) {
                     se.printStackTrace();
                     Staff.showAlert(Alert.AlertType.ERROR, "错误", "修改失败", "系统错误");
@@ -322,7 +335,7 @@ public class PlanItemController {
             this.plan.setPlan_edate(date);
             this.edate.setText(date);
             this.plan.setPlan_zt("待审核");
-            this.workshopController.getWorkshopSection().changeZtOver(this.plan.getPlan_id());
+            this.workshopController.getWorkshopSection().changeZtOver(this.plan.getPlan_id(), this.workshopController.getWorkshopSection().getStaff().Name );
             this.workshopController.deleteVbox2(this.node);
             Staff.showAlert(Alert.AlertType.INFORMATION, "成功", "该订单已交付审核", "完成时间：" + date);
         }
@@ -351,7 +364,7 @@ public class PlanItemController {
                         return;
                     }
                     this.nowNum += Integer.parseInt(this.pushNum.getText());
-                    this.workshopController.getWorkshopSection().updatePlan(this.plan.getPlan_id(), Math.min(this.nowNum, this.aimNum));
+                    this.workshopController.getWorkshopSection().updatePlan(this.plan.getPlan_id(), Math.min(this.nowNum, this.aimNum), Integer.parseInt(this.pushNum.getText()), this.workshopController.getWorkshopSection().getStaff().Name);
                     if(this.nowNum >= this.aimNum)
                     {
                         this.zt.setText(this.aimNum + "/" + this.aimNum);

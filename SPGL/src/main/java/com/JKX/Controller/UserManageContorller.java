@@ -258,7 +258,32 @@ public class UserManageContorller implements Initializable {
                 else
                     bmm = this.glyCheck.getText();
             }
-            String[] ans = this.manageSection.Add_User(this.uidAddText.getText(), this.sectionCombox.getValue(), bmm, this.nameAddText.getText(), this.sexAddText.getValue(), this.sfzAddText.getText(), this.psw.getText());
+            String ws = "";
+            if(bmm.equals("业务人员") && this.sectionCombox.getValue().equals("生产车间"))
+            {
+                TextInputDialog dialog = new TextInputDialog("");
+                dialog.setTitle("车间管理");
+                dialog.setHeaderText(this.uidText.getText());
+                dialog.setContentText("请输入该员工所在的车间编号：");
+                Optional result = dialog.showAndWait();
+                if (result.isPresent()) {
+                    try{
+                        String[][] ans = this.manageSection.searchWorkshop(result.get().toString());
+                        if(ans.length == 1)
+                        {
+                            Staff.showAlert(Alert.AlertType.ERROR, "错误", "查询失败", "未查询到该车间!");
+                            return;
+                        }
+                        ws = result.get().toString();
+                    }catch(SQLException se)
+                    {
+                        se.printStackTrace();
+                        Staff.showAlert(Alert.AlertType.ERROR, "错误", "查询失败", "系统错误");
+                        return;
+                    }
+                }
+            }
+            String[] ans = this.manageSection.Add_User(this.uidAddText.getText(), this.sectionCombox.getValue(), bmm, this.nameAddText.getText(), this.sexAddText.getValue(), this.sfzAddText.getText(), this.psw.getText(), ws);
             if(ans[0].equals("1")) {
                 Staff.showAlert(Alert.AlertType.INFORMATION, "成功", "添加成功", "员工编号为：" + this.uidAddText.getText());
                 this.clearAdd();
