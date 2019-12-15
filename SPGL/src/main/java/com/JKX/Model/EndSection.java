@@ -123,6 +123,7 @@ public class EndSection {
                 + id + "' and order_product.product_name = product.product_name and product.product_id = product_ck_now.product_id");
         if(ans[1][0].equals("0"))
         {
+            ans = staff.Search("select order_type from orders where order_id = '" + id + "'");
             if(ans[1][0].equals("预付款")){
                 ans = staff.Search("select order_type,order_date,order_custom,mn_re from orders,advance where advance.order_id = '"+
                         id
