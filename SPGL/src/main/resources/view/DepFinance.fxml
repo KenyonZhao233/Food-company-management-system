@@ -227,8 +227,8 @@
                         <Font size="24.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="out_text1" layoutX="451.0" layoutY="168.0" prefHeight="23.0" prefWidth="215.0" />
-                  <TextField fx:id="out_text2" alignment="TOP_LEFT" layoutX="451.0" layoutY="233.0" prefHeight="237.0" prefWidth="215.0">
+                  <TextField fx:id="out_text1" layoutX="451.0" layoutY="168.0" prefHeight="23.0" prefWidth="215.0" style="-fx-background-color: black; -fx-border-color: white;" />
+                  <TextField fx:id="out_text2" alignment="TOP_LEFT" layoutX="451.0" layoutY="233.0" prefHeight="237.0" prefWidth="215.0" style="-fx-background-color: black; -fx-border-color: white;">
                      <font>
                         <Font size="15.0" />
                      </font></TextField>
@@ -252,8 +252,8 @@
                         <Font size="24.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="in_text1" layoutX="451.0" layoutY="168.0" prefHeight="23.0" prefWidth="215.0" />
-                  <TextField fx:id="in_text2" alignment="TOP_LEFT" layoutX="451.0" layoutY="233.0" prefHeight="237.0" prefWidth="215.0">
+                  <TextField fx:id="in_text1" layoutX="451.0" layoutY="168.0" prefHeight="23.0" prefWidth="215.0" style="-fx-background-color: black; -fx-border-color: white;" />
+                  <TextField fx:id="in_text2" alignment="TOP_LEFT" layoutX="451.0" layoutY="233.0" prefHeight="237.0" prefWidth="215.0" style="-fx-background-color: black; -fx-border-color: white;">
                      <font>
                         <Font size="15.0" />
                      </font>
