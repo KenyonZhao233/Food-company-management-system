@@ -375,6 +375,27 @@ public class EndproductController {
         }
     }
 
+    public void update()
+    {
+        try {
+            this.raw_items_out2.getChildren().clear();
+            String[][] ans = endSection.getInform();
+            for (int i = 1; i < ans.length; i++) {
+                FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("view/ItemDepEnd_out.fxml"));
+                Node node = null;
+                try {
+                    node = loader.load();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                ItemDepEndOutController itemDepEndOutController = loader.<ItemDepEndOutController>getController();
+                itemDepEndOutController.setInform(ans[i][6].substring(0,19), ans[i][1], ans[i][5], ans[i][8], ans[i][9],endSection,this);
+                this.raw_items_out2.getChildren().add(node);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 
     public void fresh(MouseEvent event)
     {
@@ -486,9 +507,19 @@ public class EndproductController {
         _alert.setHeaderText("");
         _alert.setContentText("是否将原料编号为" + input_text1.getText() + "入仓库编号为" + input_text2.getText() + "的仓库" + input_text3.getText() + "件");
         Optional<ButtonType> result = _alert.showAndWait();
-        if (result.get() == ButtonType.OK){
-            endSection.in(input_text1.getText(),input_text3.getText(),input_text2.getText(),endSection.getStaff().Uid);
-            fresh(event);
+
+        try {
+            if (result.get() == ButtonType.OK){
+                endSection.in(input_text1.getText(),input_text3.getText(),input_text2.getText(),endSection.getStaff().Uid);
+                fresh(event);
+            }
+        }
+        catch(Exception e){
+            Alert _alert2 = new Alert(Alert.AlertType.CONFIRMATION);
+            _alert2.setTitle("入库失败");
+            _alert2.setHeaderText("");
+            _alert2.setContentText("请填写正确的信息");
+            _alert2.showAndWait();
         }
     }
 

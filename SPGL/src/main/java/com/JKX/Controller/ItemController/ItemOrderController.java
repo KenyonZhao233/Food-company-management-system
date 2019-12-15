@@ -71,6 +71,7 @@ public class ItemOrderController {
         if(_alert.getResult()== ButtonType.OK) {
             if (endSection.Send(this.id.getText().substring(5))) {
                 endproductController.raw_items_call.getChildren().remove(index);
+                endproductController.update();
             } else {
                 Alert _alert2 = new Alert(Alert.AlertType.WARNING);
                 _alert2.setTitle("发货系统");

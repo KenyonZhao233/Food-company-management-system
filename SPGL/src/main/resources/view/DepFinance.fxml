@@ -203,7 +203,7 @@
                         <Font size="24.0" />
                      </font>
                   </Label>
-                  <ImageView fitHeight="15.0" fitWidth="24.0" layoutX="622.0" layoutY="111.0" onMouseClicked="#click_receive" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="15.0" fitWidth="24.0" layoutX="622.0" layoutY="114.0" onMouseClicked="#click_receive" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../icon/icons8_Search_52px.png" />
                      </image>
