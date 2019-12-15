@@ -176,10 +176,14 @@ public class PlanItemController {
                 this.progress.setProgress(1.0);
             }
         }
-        catch (Exception se)
+        catch (SQLException se)
         {
             se.printStackTrace();
             Staff.showAlert(Alert.AlertType.ERROR, "错误", "查询失败", "系统错误");
+        }
+        catch (NumberFormatException ie)
+        {
+            Staff.showAlert(Alert.AlertType.WARNING, "警告", "请输入正确格式！", "");
         }
     }
 
@@ -282,6 +286,10 @@ public class PlanItemController {
                     se.printStackTrace();
                     Staff.showAlert(Alert.AlertType.ERROR, "错误", "修改失败", "系统错误");
                 }
+                catch (NumberFormatException ie)
+                {
+                    Staff.showAlert(Alert.AlertType.WARNING, "警告", "请输入正确格式！", "");
+                }
             }
         }
         else if(actionBtn == this.delete)
@@ -296,6 +304,10 @@ public class PlanItemController {
                 } catch (SQLException se) {
                     se.printStackTrace();
                     Staff.showAlert(Alert.AlertType.ERROR, "错误", "删除失败", "系统错误");
+                }
+                catch (NumberFormatException ie)
+                {
+                    Staff.showAlert(Alert.AlertType.WARNING, "警告", "请输入正确格式！", "");
                 }
             }
         }
@@ -317,6 +329,10 @@ public class PlanItemController {
                 {
                     se.printStackTrace();
                     Staff.showAlert(Alert.AlertType.ERROR, "错误", "删除失败", "系统错误");
+                }
+                catch (NumberFormatException ie)
+                {
+                    Staff.showAlert(Alert.AlertType.WARNING, "警告", "请输入正确格式！", "");
                 }
             }
         }
@@ -343,6 +359,10 @@ public class PlanItemController {
         {
             se.printStackTrace();
             Staff.showAlert(Alert.AlertType.ERROR, "错误", "完成失败", "系统错误");
+        }
+        catch (NumberFormatException ie)
+        {
+            Staff.showAlert(Alert.AlertType.WARNING, "警告", "请输入正确格式！", "");
         }
     }
 
@@ -385,6 +405,10 @@ public class PlanItemController {
                     se.printStackTrace();
                     Staff.showAlert(Alert.AlertType.ERROR, "错误", "交付失败", "系统错误");
                 }
+                catch (NumberFormatException ie)
+                {
+                    Staff.showAlert(Alert.AlertType.WARNING, "警告", "请输入正确格式！", "");
+                }
             }
         }
     }
@@ -403,6 +427,10 @@ public class PlanItemController {
             {
                 se.printStackTrace();
                 Staff.showAlert(Alert.AlertType.ERROR, "错误", "执行失败", "系统错误");
+            }
+            catch (NumberFormatException ie)
+            {
+                Staff.showAlert(Alert.AlertType.WARNING, "警告", "请输入正确格式！", "");
             }
         }
     }

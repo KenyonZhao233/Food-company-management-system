@@ -68,6 +68,10 @@ public class ProductRawController {
                 se.printStackTrace();
                  Staff.showAlert(Alert.AlertType.ERROR, "失败", "删除失败", "系统错误");
             }
+            catch (NumberFormatException ie)
+            {
+                Staff.showAlert(Alert.AlertType.WARNING, "警告", "请输入正确格式！", "");
+            }
         }
     }
 }
