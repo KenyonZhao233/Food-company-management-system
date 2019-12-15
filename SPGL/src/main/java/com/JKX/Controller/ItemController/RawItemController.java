@@ -86,6 +86,10 @@ public class RawItemController {
                 se.printStackTrace();
                 this.productionPlanController.getPlanSection().getStaff().showAlert(Alert.AlertType.ERROR, "错误", "修改失败", "系统错误");
             }
+            catch (NumberFormatException ie)
+            {
+                Staff.showAlert(Alert.AlertType.WARNING, "警告", "请输入正确格式！", "");
+            }
         }
     }
 
@@ -103,6 +107,10 @@ public class RawItemController {
             {
                 se.printStackTrace();
                 Staff.showAlert(Alert.AlertType.ERROR, "错误", "删除失败", "不可删除");
+            }
+            catch (NumberFormatException ie)
+            {
+                Staff.showAlert(Alert.AlertType.WARNING, "警告", "请输入正确格式！", "");
             }
         }
     }

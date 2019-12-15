@@ -91,6 +91,10 @@ public class ProductItemController {
                 se.printStackTrace();
                 Staff.showAlert(Alert.AlertType.ERROR, "失败", "删除失败", "不可删除");
             }
+            catch (NumberFormatException ie)
+            {
+                Staff.showAlert(Alert.AlertType.WARNING, "警告", "请输入正确格式！", "");
+            }
         }
     }
 }

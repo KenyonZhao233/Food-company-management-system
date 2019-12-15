@@ -302,6 +302,10 @@ public class ProductionPlanController {
             se.printStackTrace();
             Staff.showAlert(Alert.AlertType.ERROR, "错误", "权限查询失败", "系统错误");
         }
+        catch (NumberFormatException ie)
+        {
+            Staff.showAlert(Alert.AlertType.WARNING, "警告", "请输入正确格式！", "");
+        }
     }
 
     private void handleRawheadChange(String trimed) {
@@ -319,6 +323,10 @@ public class ProductionPlanController {
             se.printStackTrace();
             Staff.showAlert(Alert.AlertType.ERROR, "错误", "查询失败", "系统错误");
         }
+        catch (NumberFormatException ie)
+        {
+            Staff.showAlert(Alert.AlertType.WARNING, "警告", "请输入正确格式！", "");
+        }
     }
 
     private void handleCpheadChange(String trimed) {
@@ -333,6 +341,10 @@ public class ProductionPlanController {
         {
             se.printStackTrace();
             Staff.showAlert(Alert.AlertType.ERROR, "错误", "查询失败", "系统错误");
+        }
+        catch (NumberFormatException ie)
+        {
+            Staff.showAlert(Alert.AlertType.WARNING, "警告", "请输入正确格式！", "");
         }
     }
 
@@ -352,6 +364,10 @@ public class ProductionPlanController {
         {
             se.printStackTrace();
             this.planSection.getStaff().showAlert(Alert.AlertType.ERROR, "错误", "查询失败", "系统错误");
+        }
+        catch (NumberFormatException ie)
+        {
+            Staff.showAlert(Alert.AlertType.WARNING, "警告", "请输入正确格式！", "");
         }
     }
 
@@ -447,6 +463,10 @@ public class ProductionPlanController {
                 se.printStackTrace();
                 this.planSection.getStaff().showAlert(Alert.AlertType.ERROR, "错误", "查询失败", "系统错误");
             }
+            catch (NumberFormatException ie)
+            {
+                Staff.showAlert(Alert.AlertType.WARNING, "警告", "请输入正确格式！", "");
+            }
         }
         else if(actionBtn == this.searchRaw1)
         {
@@ -484,6 +504,10 @@ public class ProductionPlanController {
                 se.printStackTrace();
                 this.planSection.getStaff().showAlert(Alert.AlertType.ERROR, "错误", "查询失败", "系统错误");
             }
+            catch (NumberFormatException ie)
+            {
+                Staff.showAlert(Alert.AlertType.WARNING, "警告", "请输入正确格式！", "");
+            }
         }
         else if(actionBtn == this.searchRaw2)
         {
@@ -520,6 +544,10 @@ public class ProductionPlanController {
             {
                 se.printStackTrace();
                 this.planSection.getStaff().showAlert(Alert.AlertType.ERROR, "错误", "查询失败", "系统错误");
+            }
+            catch (NumberFormatException ie)
+            {
+                Staff.showAlert(Alert.AlertType.WARNING, "警告", "请输入正确格式！", "");
             }
         }
     }
@@ -563,6 +591,10 @@ public class ProductionPlanController {
                 se.printStackTrace();
                 this.planSection.getStaff().showAlert(Alert.AlertType.ERROR, "错误", "查询失败", "系统错误");
             }
+            catch (NumberFormatException ie)
+            {
+                Staff.showAlert(Alert.AlertType.WARNING, "警告", "请输入正确格式！", "");
+            }
         }
         else if(actionBtn == this.searchPlanDate)
         {
@@ -596,6 +628,10 @@ public class ProductionPlanController {
             {
                 se.printStackTrace();
                 this.planSection.getStaff().showAlert(Alert.AlertType.ERROR, "错误", "查询失败", "系统错误");
+            }
+            catch (NumberFormatException ie)
+            {
+                Staff.showAlert(Alert.AlertType.WARNING, "警告", "请输入正确格式！", "");
             }
         }
         else if(actionBtn == this.searchPlanId1)
@@ -638,6 +674,10 @@ public class ProductionPlanController {
             {
                 se.printStackTrace();
                 this.planSection.getStaff().showAlert(Alert.AlertType.ERROR, "错误", "查询失败", "系统错误");
+            }
+            catch (NumberFormatException ie)
+            {
+                Staff.showAlert(Alert.AlertType.WARNING, "警告", "请输入正确格式！", "");
             }
         }
         else if(actionBtn == this.searchPlanDate1)
@@ -682,6 +722,10 @@ public class ProductionPlanController {
                 se.printStackTrace();
                 this.planSection.getStaff().showAlert(Alert.AlertType.ERROR, "错误", "查询失败", "系统错误");
             }
+            catch (NumberFormatException ie)
+            {
+                Staff.showAlert(Alert.AlertType.WARNING, "警告", "请输入正确格式！", "");
+            }
         }
         else if(actionBtn == searchPlanId2)
         {
@@ -720,6 +764,10 @@ public class ProductionPlanController {
                 se.printStackTrace();
                 this.planSection.getStaff().showAlert(Alert.AlertType.ERROR, "错误", "查询失败", "系统错误");
             }
+            catch (NumberFormatException ie)
+            {
+                Staff.showAlert(Alert.AlertType.WARNING, "警告", "请输入正确格式！", "");
+            }
         }
     }
 
@@ -750,6 +798,10 @@ public class ProductionPlanController {
                 {
                     se.printStackTrace();
                     Staff.showAlert(Alert.AlertType.INFORMATION, "警告", "修改失败", "系统错误");
+                }
+                catch (NumberFormatException ie)
+                {
+                    Staff.showAlert(Alert.AlertType.WARNING, "警告", "请输入正确格式！", "");
                 }
             }
         }
@@ -782,6 +834,10 @@ public class ProductionPlanController {
                     se.printStackTrace();
                     Staff.showAlert(Alert.AlertType.ERROR, "错误", "添加失败", "原料已存在， 请先删除后再添加");
                 }
+                catch (NumberFormatException ie)
+                {
+                    Staff.showAlert(Alert.AlertType.WARNING, "警告", "请输入正确格式！", "");
+                }
             }
         }
     }
@@ -812,6 +868,10 @@ public class ProductionPlanController {
             {
                 se.printStackTrace();
                 Staff.showAlert(Alert.AlertType.ERROR, "错误", "查询失败", "系统错误");
+            }
+            catch (NumberFormatException ie)
+            {
+                Staff.showAlert(Alert.AlertType.WARNING, "警告", "请输入正确格式！", "");
             }
         }
         else if(actionBtn == this.searchCp1)
@@ -871,6 +931,10 @@ public class ProductionPlanController {
                 se.printStackTrace();
                 Staff.showAlert(Alert.AlertType.ERROR, "错误", "查询失败", "系统错误");
             }
+            catch (NumberFormatException ie)
+            {
+                Staff.showAlert(Alert.AlertType.WARNING, "警告", "请输入正确格式！", "");
+            }
         }
         else if(actionBtn == this.searchCp3)
         {
@@ -927,6 +991,10 @@ public class ProductionPlanController {
                 se.printStackTrace();
                 Staff.showAlert(Alert.AlertType.ERROR, "错误", "查询失败", "系统错误");
             }
+            catch (NumberFormatException ie)
+            {
+                Staff.showAlert(Alert.AlertType.WARNING, "警告", "请输入正确格式！", "");
+            }
         }
     }
 
@@ -957,6 +1025,10 @@ public class ProductionPlanController {
         {
             ie.printStackTrace();
         }
+        catch (NumberFormatException ie)
+        {
+            Staff.showAlert(Alert.AlertType.WARNING, "警告", "请输入正确格式！", "");
+        }
     }
 
     public void deleteChangeCpRawbox(Node node)
@@ -984,6 +1056,10 @@ public class ProductionPlanController {
             {
                 se.printStackTrace();
                 Staff.showAlert(Alert.AlertType.ERROR, "错误", "添加失败", "系统错误");
+            }
+            catch (NumberFormatException ie)
+            {
+                Staff.showAlert(Alert.AlertType.WARNING, "警告", "请输入正确格式！", "");
             }
         }
     }
@@ -1015,6 +1091,10 @@ public class ProductionPlanController {
             se.printStackTrace();
             Staff.showAlert(Alert.AlertType.ERROR, "错误", "查询失败", "系统错误");
         }
+        catch (NumberFormatException ie)
+        {
+            Staff.showAlert(Alert.AlertType.WARNING, "警告", "请输入正确格式！", "");
+        }
 
     }
 
@@ -1031,6 +1111,10 @@ public class ProductionPlanController {
         {
             Staff.showAlert(Alert.AlertType.ERROR, "错误", "查询失败", "系统错误");
         }
+        catch (NumberFormatException ie)
+        {
+            Staff.showAlert(Alert.AlertType.WARNING, "警告", "请输入正确格式！", "");
+        }
     }
 
     public void handleAddCp(MouseEvent mouseEvent) {
@@ -1045,10 +1129,14 @@ public class ProductionPlanController {
                 this.planSection.addCp(production);
                 Staff.showAlert(Alert.AlertType.INFORMATION, "成功", "添加成功", "商品编号:" + this.cpHead.getText() + this.cpId1.getText());
             }
-            catch (Exception ex)
+            catch (SQLException ex)
             {
                 ex.printStackTrace();
                 Staff.showAlert(Alert.AlertType.ERROR, "错误", "添加失败", "系统错误");
+            }
+            catch (NumberFormatException ie)
+            {
+                Staff.showAlert(Alert.AlertType.WARNING, "警告", "请输入正确格式！", "");
             }
         }
     }
@@ -1101,6 +1189,10 @@ public class ProductionPlanController {
                 se.printStackTrace();
                 Staff.showAlert(Alert.AlertType.ERROR, "错误", "添加失败", "系统错误");
             }
+            catch (NumberFormatException ie)
+            {
+                Staff.showAlert(Alert.AlertType.WARNING, "警告", "请输入正确格式！", "");
+            }
         }
     }
 
@@ -1133,6 +1225,10 @@ public class ProductionPlanController {
                se.printStackTrace();
                Staff.showAlert(Alert.AlertType.ERROR, "错误", "查询失败", "系统错误");
            }
+            catch (NumberFormatException ie)
+            {
+                Staff.showAlert(Alert.AlertType.WARNING, "警告", "请输入正确格式！", "");
+            }
         }
     }
 }

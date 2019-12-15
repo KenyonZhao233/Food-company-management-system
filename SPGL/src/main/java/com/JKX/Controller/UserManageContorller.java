@@ -203,6 +203,10 @@ public class UserManageContorller implements Initializable {
         catch (SQLException se){
             se.printStackTrace();
         }
+        catch (NumberFormatException ie)
+        {
+            Staff.showAlert(Alert.AlertType.WARNING, "警告", "请输入正确格式！", "");
+        }
     }
 
     public void handleChange(MouseEvent mouseEvent) throws IOException
@@ -345,6 +349,10 @@ public class UserManageContorller implements Initializable {
        {
            Staff.showAlert(Alert.AlertType.ERROR, "错误", "生成员工编号失败", "系统错误");
        }
+        catch (NumberFormatException ie)
+        {
+            Staff.showAlert(Alert.AlertType.WARNING, "警告", "请输入正确格式！", "");
+        }
     }
 
     public void initData(Staff staff)
@@ -416,6 +424,10 @@ public class UserManageContorller implements Initializable {
         {
             Staff.showAlert(Alert.AlertType.ERROR, "错误", "获取员工数量失败", "");
         }
+        catch (NumberFormatException ie)
+        {
+            Staff.showAlert(Alert.AlertType.WARNING, "警告", "请输入正确格式！", "");
+        }
     }
 
     public void handleCheck(MouseEvent mouseEvent) {
@@ -476,6 +488,10 @@ public class UserManageContorller implements Initializable {
             se.printStackTrace();
             Staff.showAlert(Alert.AlertType.ERROR, "失败", "查询失败", "系统错误");
         }
+        catch (NumberFormatException ie)
+        {
+            Staff.showAlert(Alert.AlertType.WARNING, "警告", "请输入正确格式！", "");
+        }
     }
 
     public void handleCheckPSW(String search)
@@ -535,6 +551,10 @@ public class UserManageContorller implements Initializable {
             catch (SQLException se)
             {
                 se.printStackTrace();
+            }
+            catch (NumberFormatException ie)
+            {
+                Staff.showAlert(Alert.AlertType.WARNING, "警告", "请输入正确格式！", "");
             }
         }
     }
@@ -695,6 +715,10 @@ public class UserManageContorller implements Initializable {
             se.printStackTrace();
             Staff.showAlert(Alert.AlertType.ERROR, "错误", "修改权限失败", "系统错误");
         }
+        catch (NumberFormatException ie)
+        {
+            Staff.showAlert(Alert.AlertType.WARNING, "警告", "请输入正确格式！", "");
+        }
     }
 
     public void handleReset(MouseEvent mouseEvent) {
@@ -729,6 +753,10 @@ public class UserManageContorller implements Initializable {
             {
                 se.printStackTrace();
                 Staff.showAlert(Alert.AlertType.ERROR, "错误", "查询失败", "系统错误");
+            }
+            catch (NumberFormatException ie)
+            {
+                Staff.showAlert(Alert.AlertType.WARNING, "警告", "请输入正确格式！", "");
             }
         }
     }
