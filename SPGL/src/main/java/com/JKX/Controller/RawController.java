@@ -272,28 +272,38 @@ public class RawController {
         _alert.setHeaderText("");
         _alert.setContentText("是否将原料编号为" + input_text1.getText() + "入仓库编号为" + input_text2.getText() + "的仓库" + input_text3.getText() + "件");
         Optional<ButtonType> result = _alert.showAndWait();
-        if (result.get() == ButtonType.OK){
-            rawSection.in(input_text1.getText(),input_text3.getText(),input_text2.getText());
-            try {
-                this.raw_items2.getChildren().clear();
-                String[][] ans = rawSection.getInform();
-                for (int i = 1; i < ans.length; i++) {
-                    FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("view/ItemDepRaw.fxml"));
-                    Node node = null;
-                    try {
-                        node = loader.load();
-                    } catch (IOException e) {
-                        e.printStackTrace();
+        try{
+            if (result.get() == ButtonType.OK){
+                rawSection.in(input_text1.getText(),input_text3.getText(),input_text2.getText());
+                try {
+                    this.raw_items2.getChildren().clear();
+                    String[][] ans = rawSection.getInform();
+                    for (int i = 1; i < ans.length; i++) {
+                        FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("view/ItemDepRaw.fxml"));
+                        Node node = null;
+                        try {
+                            node = loader.load();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                        ItemDepRawController itemDepRawController = loader.<ItemDepRawController>getController();
+                        itemDepRawController.setInform(ans[i][4], ans[i][0], ans[i][1], ans[i][2], ans[i][3], ans[i][6], ans[i][7]);
+                        this.raw_items2.getChildren().add(node);
                     }
-                    ItemDepRawController itemDepRawController = loader.<ItemDepRawController>getController();
-                    itemDepRawController.setInform(ans[i][4], ans[i][0], ans[i][1], ans[i][2], ans[i][3], ans[i][6], ans[i][7]);
-                    this.raw_items2.getChildren().add(node);
+                } catch (SQLException e) {
+                    e.printStackTrace();
                 }
-            } catch (SQLException e) {
-                e.printStackTrace();
+                fresh(event);
             }
-            fresh(event);
+
+        }catch(Exception e){
+            Alert _alert2 = new Alert(Alert.AlertType.CONFIRMATION);
+            _alert2.setTitle("入库失败");
+            _alert2.setHeaderText("");
+            _alert2.setContentText("请填写正确的信息");
+            _alert2.showAndWait();
         }
+
     }
 
     @FXML

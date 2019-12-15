@@ -119,7 +119,7 @@
                         </Pane>
                      </content>
                   </ScrollPane>
-                  <JFXButton fx:id="RegisterButton" layoutX="467.0" layoutY="625.0" onMouseClicked="#handleClicks" prefHeight="30.0" prefWidth="91.0" style="-fx-background-color: white;" text="注册" />
+                  <JFXButton fx:id="RegisterButton" layoutX="467.0" layoutY="625.0" onMouseClicked="#handleClicks" prefHeight="30.0" prefWidth="91.0" style="-fx-background-color: blue;" text="注册" />
                </children>
             </Pane>
             <Pane fx:id="pageCreate" layoutX="10.0" layoutY="10.0" prefHeight="554.0" prefWidth="793.0" style="-fx-background-color: #02030A;">
@@ -173,9 +173,9 @@
                      </font>
                   </Label>
                   <Label fx:id="all_money" layoutX="625.0" layoutY="618.0" text="产品总金额（单位：元）：" textFill="#e7e5e5" />
-                  <JFXButton fx:id="CreateButton" layoutX="370.0" layoutY="638.0" onMouseClicked="#handleClicks" prefHeight="30.0" prefWidth="107.0" style="-fx-background-color: white;" text="生成订单" />
+                  <JFXButton fx:id="CreateButton" layoutX="370.0" layoutY="638.0" onMouseClicked="#handleClicks" prefHeight="30.0" prefWidth="107.0" style="-fx-background-color: blue;" text="生成订单" />
                   <Label fx:id="money_label" layoutX="813.0" layoutY="618.0" prefHeight="20.0" prefWidth="131.0" textFill="#e7e5e5" />
-                  <JFXButton fx:id="CreateButton1" layoutX="518.0" layoutY="638.0" onMouseClicked="#handleClicks" prefHeight="30.0" prefWidth="107.0" style="-fx-background-color: white;" text="取消订单" />
+                  <JFXButton fx:id="CreateButton1" layoutX="518.0" layoutY="638.0" onMouseClicked="#handleClicks" prefHeight="30.0" prefWidth="107.0" style="-fx-background-color: blue;" text="取消订单" />
                </children>
             </Pane>
             <Pane fx:id="pageCancel" layoutX="10.0" layoutY="10.0" prefHeight="554.0" prefWidth="793.0" style="-fx-background-color: #02030A;">
