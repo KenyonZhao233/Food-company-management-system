@@ -114,13 +114,13 @@ public class EndSection {
 
     public String[][] itemorder(String id) throws SQLException
     {
-        return staff.Search("select order_product,order_num  from orders where order_id = '" + id + "'");
+        return staff.Search("select product_name,product_num  from order_product where order_id = '" + id + "'");
     }
 
     public boolean Send(String id) throws SQLException
     {
-        String ans[][] = staff.Search("select count(*) - sum(order_num <= sum) from orders,product,product_ck_now where order_id = '"
-                + id + "' and orders.order_product = product.product_name and product.product_id = product_ck_now.product_id");
+        String ans[][] = staff.Search("select count(*) - sum(product_num <= sum) from order_product,product,product_ck_now where order_id = '"
+                + id + "' and order_product.product_name = product.product_name and product.product_id = product_ck_now.product_id");
         if(ans[1][0].equals("0"))
         {
             if(ans[1][0].equals("预付款")){

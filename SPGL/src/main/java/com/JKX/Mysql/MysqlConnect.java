@@ -14,6 +14,7 @@ public class MysqlConnect {
     public String PASS;
 
     public MysqlConnect(String USER, String PASS) {
+        // 测试
         this.PASS = PASS;
         this.USER = USER;
         this.conn = null;

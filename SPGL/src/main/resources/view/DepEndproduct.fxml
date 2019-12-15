@@ -261,9 +261,9 @@
                         <Font size="24.0" />
                      </font>
                   </Label>
-                  <ScrollPane layoutX="391.0" layoutY="129.0" prefHeight="448.0" prefWidth="536.0" stylesheets="@../css/style.css">
+                  <ScrollPane layoutX="391.0" layoutY="129.0" prefHeight="448.0" prefWidth="600.0" stylesheets="@../css/style.css">
                      <content>
-                        <VBox fx:id="raw_items_call" prefHeight="446.0" prefWidth="534.0" spacing="5.0" style="-fx-background-color: #02030A;">
+                        <VBox fx:id="raw_items_call" prefHeight="446.0" prefWidth="598.0" spacing="5.0" style="-fx-background-color: #02030A;">
                            <padding>
                               <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                            </padding>
