@@ -70,7 +70,8 @@ public class ItemOrderendController {
         _alert.showAndWait();
         if(_alert.getResult()== ButtonType.OK) {
             if(endSection.Out(this.id.getText().substring(5))){
-                endproductController.raw_items_out.getChildren().remove(index);
+                //endproductController.raw_items_out.getChildren().remove(index);
+                endproductController.update();
             }else{
                 Alert _alert2 = new Alert(Alert.AlertType.WARNING);
                 _alert2.setTitle("收货系统");

@@ -374,7 +374,27 @@ public class EndproductController {
             e.printStackTrace();
         }
     }
-
+    public void update2()
+    {
+        try {
+            this.raw_items_call.getChildren().clear();
+            String[][] ans = endSection.itemorder_pre();
+            for (int i = 1; i < ans.length; i++) {
+                FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("view/ItemOrder.fxml"));
+                Node node = null;
+                try {
+                    node = loader.load();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                ItemOrderController itemOrderController = loader.<ItemOrderController>getController();
+                itemOrderController.setInform(ans[i][0], ans[i][1], ans[i][2].substring(0,19),endSection,this,i - 1);
+                this.raw_items_call.getChildren().add(node);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
     public void update()
     {
         try {
