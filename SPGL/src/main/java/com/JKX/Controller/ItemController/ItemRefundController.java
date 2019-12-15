@@ -65,7 +65,7 @@ public class ItemRefundController {
         Alert _alert = new Alert(Alert.AlertType.CONFIRMATION);
         _alert.setTitle("退款系统");
         _alert.setHeaderText("确认退款信息");
-        _alert.setContentText("退款编号：" + this.id.getText() + "         退款" + this.mn.getText() + "元");
+        _alert.setContentText("退款编号：" + this.no.getText() + "         退款" + this.mn.getText() + "元");
         _alert.showAndWait();
         if(_alert.getResult()==ButtonType.OK) {
             financeSection.refund(this.no.getText(),this.mn.getText());
