@@ -378,19 +378,19 @@ public class EndproductController {
     public void update()
     {
         try {
-            this.raw_items_out2.getChildren().clear();
-            String[][] ans = endSection.getInform();
+            this.raw_items_out.getChildren().clear();
+            String[][] ans = endSection.itemorder_end();
             for (int i = 1; i < ans.length; i++) {
-                FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("view/ItemDepEnd_out.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("view/ItemOrderend.fxml"));
                 Node node = null;
                 try {
                     node = loader.load();
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-                ItemDepEndOutController itemDepEndOutController = loader.<ItemDepEndOutController>getController();
-                itemDepEndOutController.setInform(ans[i][6].substring(0,19), ans[i][1], ans[i][5], ans[i][8], ans[i][9],endSection,this);
-                this.raw_items_out2.getChildren().add(node);
+                ItemOrderendController itemOrderendController = loader.<ItemOrderendController>getController();
+                itemOrderendController.setInform(ans[i][0], ans[i][1], ans[i][2].substring(0,19),endSection,this, i - 1);
+                this.raw_items_out.getChildren().add(node);
             }
         } catch (SQLException e) {
             e.printStackTrace();
