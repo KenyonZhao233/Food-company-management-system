@@ -428,7 +428,8 @@ public class SalesSection{
 
     public void DeleteAllProduct(String order_id) throws SQLException
     {
-        String sql="delete from orders where order_id = '"+ order_id +"'";
+        String sql="delete from orders where order_id = '"+ order_id +"' ";
+        System.out.println(sql);
         staff.Does(sql);
     }
 
