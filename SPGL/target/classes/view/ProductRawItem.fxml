@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<ScrollPane fx:id="prorawPane" hbarPolicy="NEVER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#handleClick" prefHeight="42.0" prefWidth="631.0" vbarPolicy="NEVER" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.JKX.Controller.ItemController.ProductRawController">
+  <content>
+    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="40.0" prefWidth="629.0">
+         <children>
+            <Label fx:id="raw_name" layoutX="222.0" layoutY="9.0" prefHeight="20.0" prefWidth="145.0" />
+            <Label fx:id="raw_num" layoutX="374.0" layoutY="9.0" prefHeight="20.0" prefWidth="116.0" />
+            <Label fx:id="raw_id" layoutX="34.0" layoutY="9.0" prefHeight="20.0" prefWidth="133.0" />
+            <JFXButton fx:id="delete" layoutX="514.0" layoutY="5.0" onMouseClicked="#handleDelete" prefHeight="30.0" prefWidth="101.0" text="删除" />
+         </children></AnchorPane>
+  </content>
+</ScrollPane>

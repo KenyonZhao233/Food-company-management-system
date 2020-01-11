@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane fx:id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseEntered="#enter" onMouseExited="#exit" prefHeight="40.0" prefWidth="1006.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.JKX.Controller.ItemController.ItemDepRawController">
+   <children>
+      <Label fx:id="time" alignment="CENTER" layoutX="42.0" layoutY="13.0" prefHeight="20.0" prefWidth="172.0" text="入库时间" textFill="#e7e5e5" />
+      <Label fx:id="id" alignment="CENTER" layoutX="225.0" layoutY="13.0" prefHeight="20.0" prefWidth="85.0" text="原料编号" textFill="#e7e5e5" />
+      <Label fx:id="name" alignment="CENTER" layoutX="325.0" layoutY="13.0" prefHeight="20.0" prefWidth="113.0" text="原料名称" textFill="#e7e5e5" />
+      <Label fx:id="date" alignment="CENTER" layoutX="471.0" layoutY="13.0" text="原料保质期" textFill="#e7e5e5" />
+      <Label fx:id="prize" alignment="CENTER" layoutX="589.0" layoutY="13.0" text="原料单价" textFill="#e7e5e5" />
+      <Label fx:id="count" alignment="CENTER" layoutX="707.0" layoutY="13.0" text="剩余数量" textFill="#e7e5e5" />
+      <Label fx:id="num" alignment="CENTER" layoutX="794.0" layoutY="13.0" prefHeight="20.0" prefWidth="120.0" text="所在仓库编号" textFill="#e7e5e5" />
+   </children>
+</AnchorPane>

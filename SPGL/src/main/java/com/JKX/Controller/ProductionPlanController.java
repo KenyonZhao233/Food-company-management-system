@@ -48,6 +48,7 @@ public class ProductionPlanController {
     @FXML
     private Label nameLable;
 
+
     //跳转界面
     @FXML
     private javafx.scene.control.Button SearchCpkc, SearchYlkc, SearchScjh ,ChangeScjh, ChangeCp, ChangeRaw, SearchXl, btnSignout,SearchRec;

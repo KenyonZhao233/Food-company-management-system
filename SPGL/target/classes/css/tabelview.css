@@ -1,0 +1,14 @@
+/*设置表格头靠左、字体大小，字体颜色*/
+.table-view .column-header .label{
+    -fx-alignment: center;
+    //-fx-text-fill: rgba(68,68,68,0.96);
+}
+
+.table-column{
+    -fx-alignment: center;
+}
+
+/*设置每一列内容居中，每一行高度*/
+.table-row-cell{
+    -fx-alignment: CENTER;
+}
