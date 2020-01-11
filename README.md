@@ -32,10 +32,10 @@ MySQL（相关数据库生成文件已上传：[FoodManage.sql](https://github.c
 
 ## 示例
 
-<img src="D:\code\SPGL\image\1.jpg" style="zoom:75%;" />
+<img src="image\1.jpg" style="zoom:75%;" />
 
-<img src="D:\code\SPGL\image\2.jpg" style="zoom:50%;" />
+<img src="image\2.jpg" style="zoom:50%;" />
 
-<img src="D:\code\SPGL\image\3.jpg" style="zoom:50%;" />
+<img src="image\3.jpg" style="zoom:50%;" />
 
-<img src="D:\code\SPGL\image\4.jpg" style="zoom:50%;" />
+<img src="image\4.jpg" style="zoom:50%;" />
