@@ -17,6 +17,7 @@ https://github.com/k33ptoo/RestaurantMgtSampleUI
 ## 版本更改记录
 
 v1.0 初始版本
+v1.1 修复多个已知BUG
 
 ## 生产环境
 
